@@ -1,0 +1,182 @@
+<!-- top-nav -->
+<div class="adminnavbar col-xl-10 col-lg-9 col-md-8 ml-auto bg-white fixed-top py-4 top-navbar">
+    <div class="d-flex justify-content-md-end justify-content-between">
+        <!-- <div class="col-xl-3 col-lg-4 col-md-5">
+            <form>
+                <div class="input-group search-bar">
+                    <button type="button" class="btn btn-white search-button"><i
+                        class="fas fa-search text-danger"></i></button>
+                    <input type="text" class="form-control search-input" placeholder="Search something here">
+                </div>
+            </form>
+        </div> -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="row adminnav m-0 justify-content-end">
+            <ul class="navbar-nav m-0">
+                <li class="nav-item icon-parent theme">
+                    <a href="#" class="nav-link">
+                        <img src="../../../../assets/images/sun.png" alt="theme" />
+                    </a>
+                </li>
+                <li class="nav-item icon-parent notification">
+                    <button class="nav-link icon-bullet notibtn" (click)="openNotification()">
+                        <!-- <i class="fas fa-comments text-muted fa-lg"></i> -->
+                        <img src="../../../../assets/images/notification.png" alt="notification" />
+                        <span class="badge">3</span>
+                    </button>
+                    
+                    <div id="notificationContainer" class="notification-container">
+                        <div class="termsandcondition">
+                            <div class="termsandcon d-flex justify-content-between">
+                                <h3 class="m-0">Notifications</h3>
+                                <div class="closebtn">
+                                    <button class="">Clear All</button>
+                                </div>
+                            </div>
+                            <div class="scrollable-content scroll-text">
+                                        <ul class="p-0">
+                                            <li class="d-flex">
+                                                <span>
+                                                    <svg width="50" height="50" viewBox="0 0 50 50" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <rect width="50" height="50" rx="25" fill="#F8F5FF" />
+                                                        <path
+                                                            d="M12.9567 13.1642H9.03369L15.944 32.9103H19.2268L21.0324 28.4785L22.6574 32.9103H25.9402L32.1444 18.4965C32.2843 18.1715 32.046 17.8094 31.6921 17.8094H28.4259C28.1545 17.8094 27.9111 17.9763 27.8134 18.2295L24.3316 27.2475L23.064 23.7696C23.0558 23.7472 23.0561 23.7226 23.0647 23.7004L25.0188 18.6442C25.2017 18.171 24.8525 17.6616 24.3451 17.6616H21.536C21.1166 17.6616 20.7432 17.9273 20.6056 18.3235L17.5526 27.1162L12.9567 13.1642Z"
+                                                            fill="#7976FF" />
+                                                        <path
+                                                            d="M32.5878 17.8916L30.1421 23.6365V37.6706H34.0158V28.134H38.7595C39.1221 28.134 39.4161 27.84 39.4161 27.4774V25.2944C39.4161 24.9317 39.1221 24.6378 38.7595 24.6378H34.18V21.7653C34.18 21.584 34.3269 21.437 34.5082 21.437H40.5158C40.8784 21.437 41.1724 21.1431 41.1724 20.7805V18.5482C41.1724 18.1856 40.8784 17.8916 40.5158 17.8916H32.5878Z"
+                                                            fill="#D18EF1" />
+                                                    </svg>
+                                                </span>
+                                                <span><b>Notification heading</b> will come here Lorem Ipsum is simply dummy text of the
+                                                    printing and typesetting industry</span>
+                                            </li>
+                                            <div class="bottonborder"></div>
+                                            <li class="d-flex">
+                                                <span>
+                                                    <svg width="50" height="50" viewBox="0 0 50 50" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <rect width="50" height="50" rx="25" fill="#F8F5FF" />
+                                                        <path
+                                                            d="M12.9567 13.1642H9.03369L15.944 32.9103H19.2268L21.0324 28.4785L22.6574 32.9103H25.9402L32.1444 18.4965C32.2843 18.1715 32.046 17.8094 31.6921 17.8094H28.4259C28.1545 17.8094 27.9111 17.9763 27.8134 18.2295L24.3316 27.2475L23.064 23.7696C23.0558 23.7472 23.0561 23.7226 23.0647 23.7004L25.0188 18.6442C25.2017 18.171 24.8525 17.6616 24.3451 17.6616H21.536C21.1166 17.6616 20.7432 17.9273 20.6056 18.3235L17.5526 27.1162L12.9567 13.1642Z"
+                                                            fill="#7976FF" />
+                                                        <path
+                                                            d="M32.5878 17.8916L30.1421 23.6365V37.6706H34.0158V28.134H38.7595C39.1221 28.134 39.4161 27.84 39.4161 27.4774V25.2944C39.4161 24.9317 39.1221 24.6378 38.7595 24.6378H34.18V21.7653C34.18 21.584 34.3269 21.437 34.5082 21.437H40.5158C40.8784 21.437 41.1724 21.1431 41.1724 20.7805V18.5482C41.1724 18.1856 40.8784 17.8916 40.5158 17.8916H32.5878Z"
+                                                            fill="#D18EF1" />
+                                                    </svg>
+                                                </span>
+                                                <span><b>Notification heading</b> will come here Lorem Ipsum is simply dummy text of the
+                                                    printing and typesetting industry</span>
+                                            </li>
+                                            <div class="bottonborder"></div>
+                                            <li class="d-flex">
+                                                <span>
+                                                    <svg width="50" height="50" viewBox="0 0 50 50" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <rect width="50" height="50" rx="25" fill="#F8F5FF" />
+                                                        <path
+                                                            d="M12.9567 13.1642H9.03369L15.944 32.9103H19.2268L21.0324 28.4785L22.6574 32.9103H25.9402L32.1444 18.4965C32.2843 18.1715 32.046 17.8094 31.6921 17.8094H28.4259C28.1545 17.8094 27.9111 17.9763 27.8134 18.2295L24.3316 27.2475L23.064 23.7696C23.0558 23.7472 23.0561 23.7226 23.0647 23.7004L25.0188 18.6442C25.2017 18.171 24.8525 17.6616 24.3451 17.6616H21.536C21.1166 17.6616 20.7432 17.9273 20.6056 18.3235L17.5526 27.1162L12.9567 13.1642Z"
+                                                            fill="#7976FF" />
+                                                        <path
+                                                            d="M32.5878 17.8916L30.1421 23.6365V37.6706H34.0158V28.134H38.7595C39.1221 28.134 39.4161 27.84 39.4161 27.4774V25.2944C39.4161 24.9317 39.1221 24.6378 38.7595 24.6378H34.18V21.7653C34.18 21.584 34.3269 21.437 34.5082 21.437H40.5158C40.8784 21.437 41.1724 21.1431 41.1724 20.7805V18.5482C41.1724 18.1856 40.8784 17.8916 40.5158 17.8916H32.5878Z"
+                                                            fill="#D18EF1" />
+                                                    </svg>
+                                                </span>
+                                                <span><b>Notification heading</b> will come here Lorem Ipsum is simply dummy text of the
+                                                    printing and typesetting industry</span>
+                                            </li>
+                                            <div class="bottonborder"></div>
+                                            <li class="d-flex">
+                                                <span>
+                                                    <svg width="50" height="50" viewBox="0 0 50 50" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <rect width="50" height="50" rx="25" fill="#F8F5FF" />
+                                                        <path
+                                                            d="M12.9567 13.1642H9.03369L15.944 32.9103H19.2268L21.0324 28.4785L22.6574 32.9103H25.9402L32.1444 18.4965C32.2843 18.1715 32.046 17.8094 31.6921 17.8094H28.4259C28.1545 17.8094 27.9111 17.9763 27.8134 18.2295L24.3316 27.2475L23.064 23.7696C23.0558 23.7472 23.0561 23.7226 23.0647 23.7004L25.0188 18.6442C25.2017 18.171 24.8525 17.6616 24.3451 17.6616H21.536C21.1166 17.6616 20.7432 17.9273 20.6056 18.3235L17.5526 27.1162L12.9567 13.1642Z"
+                                                            fill="#7976FF" />
+                                                        <path
+                                                            d="M32.5878 17.8916L30.1421 23.6365V37.6706H34.0158V28.134H38.7595C39.1221 28.134 39.4161 27.84 39.4161 27.4774V25.2944C39.4161 24.9317 39.1221 24.6378 38.7595 24.6378H34.18V21.7653C34.18 21.584 34.3269 21.437 34.5082 21.437H40.5158C40.8784 21.437 41.1724 21.1431 41.1724 20.7805V18.5482C41.1724 18.1856 40.8784 17.8916 40.5158 17.8916H32.5878Z"
+                                                            fill="#D18EF1" />
+                                                    </svg>
+                                                </span>
+                                                <span><b>Notification heading</b> will come here Lorem Ipsum is simply dummy text of the
+                                                    printing and typesetting industry</span>
+                                            </li>
+                                        </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <!-- <li class="nav-item icon-parent">
+                    <a href="#" class="nav-link icon-bullet">
+                        <i class="fas fa-bell text-muted fa-lg"></i>
+                    </a>
+                </li>
+                <li class="nav-item ml-md-auto">
+                    <a href="#" class="nav-link" data-toggle="modal" data-target="#sign-out">
+                        <i class="fas fa-sign-out-alt text-danger fa-lg"></i>
+                    </a>
+                </li> -->
+            </ul>
+            <div class="dropdown mr-0">
+                <button class="dropbtn profile row mx-md-auto mx-0 px-0">
+                    <img src="../../../../assets/images/cust3.jpeg" />
+                    <div class="profile-name">
+                        <span>{{this.username}}</span>
+                        <p>{{this.rolename}}</p>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" height="24"
+                        width="24" class="dropdownicon">
+                        <path
+                            d="M11.9999 13.1714L16.9497 8.22168L18.3639 9.63589L11.9999 15.9999L5.63599 9.63589L7.0502 8.22168L11.9999 13.1714Z">
+                        </path>
+                    </svg>
+                </button>
+                <div class="dropdown-content">
+                    <li>
+                        <a href="#">My Account</a>
+                    </li>
+                    <li>
+                        <a (click)="onLogout()">Logout</a>
+                    </li>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end of top-nav -->
+
+<!-- logout popup -->
+<div id="termpopupContainer" class="logpopup-container">
+    <div class="popupmaincontain">
+        <div class="logoutcontainer">
+            <div class="contain text-center">
+                <div class="logicon">
+                    <svg width="121" height="120" viewBox="0 0 121 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="0.5" width="120" height="120" rx="60" fill="#F8F5FF" />
+                        <path
+                            d="M63.4 38.3333H57.7667C50.8333 38.3333 46.5 42.6666 46.5 49.5999V58.3749H60.0417C60.93 58.3749 61.6667 59.1116 61.6667 59.9999C61.6667 60.8883 60.93 61.6249 60.0417 61.6249H46.5V70.3999C46.5 77.3333 50.8333 81.6666 57.7667 81.6666H63.3783C70.3117 81.6666 74.645 77.3333 74.645 70.3999V49.5999C74.6667 42.6666 70.3333 38.3333 63.4 38.3333Z"
+                            fill="#FB5B83" />
+                        <path
+                            d="M36.8801 58.375L41.3651 53.89C41.6901 53.565 41.8418 53.1533 41.8418 52.7417C41.8418 52.33 41.6901 51.8967 41.3651 51.5933C40.7368 50.965 39.6968 50.965 39.0685 51.5933L31.8101 58.8517C31.1818 59.48 31.1818 60.52 31.8101 61.1483L39.0685 68.4067C39.6968 69.035 40.7368 69.035 41.3651 68.4067C41.9935 67.7783 41.9935 66.7383 41.3651 66.11L36.8801 61.625H46.5001V58.375H36.8801Z"
+                            fill="#FB5B83" />
+                    </svg>
+                </div>
+                <div class="logoutcontain">
+                    <h4>Logout</h4>
+                    <span>Are you sure you want to logout your account?</span>
+                </div>
+                <div class="logpopupbtn">
+                    <div class="cancelbtn">
+                        <button (click)="cancelPopup()">Cancel</button>
+                    </div>
+                    <div class="logoutbtn">
+                        <button (click)="closePopup()">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

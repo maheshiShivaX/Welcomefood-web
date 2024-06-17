@@ -1,0 +1,96 @@
+<div class="storeentryform">
+    <div class="store-heading">
+        <h4 class="">Manage Login Details</h4>
+    </div>
+
+    <div class="commontable">
+        <div class="search-field d-sm-flex justify-content-between my-3">
+            <div class="pageoption d-flex align-items-center">
+                <select class="pagecounting" id="pagecount" (change)="onPageSizeChange($event)">
+                    <option value="50">50</option>
+                    <option value="200">200</option>
+                    <option value='all'>All</option>
+                </select>
+            </div>
+            <div class="d-flex gap-2 mt-sm-auto mt-3">
+                <input class="searchfield" type="text" placeholder="Search..." [(ngModel)]="filterValue"
+                    (input)="applyFilter()">
+            </div>
+        </div>
+        <div class="table-container">
+            <table class="table" *ngIf="visibleRows!=null">
+                <thead class="thead text-white">
+                    <tr>
+                        <th scope="col">S.N.</th>
+                        <th scope="col">User Id</th>
+                        <th scope="col">Role Name</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Contact No</th>
+                        <th scope="col">Created Date</th>
+                        <th scope="col">Approval Status</th>
+                        <th scope="col">Lock Status</th>
+                        <th scope="col">Active Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of visibleRows; let idx=index;" class="whitebg-row"
+                        [style.display]="item.visible ? 'table-row' : 'none'">
+                        <td>{{(currentPage - 1)*pageSize +idx +1}}</td>
+                        <td>{{item.userId}}</td>
+                        <td>{{item.roleName}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.emailId}}</td>
+                        <td>{{item.mobileNo}}</td>
+                        <td>{{item.createdDate | date : 'dd-MM-yyyy :hh.mm.ss'}}</td>
+                        <td [ngClass]="item.isApproved ? 'approvebtn' : 'approvebtnna'">
+                        <!-- <td class="approvebtn"> -->
+                            <button type="button"
+                                (click)="ApprovedLoginDetailById(item.loginId)">{{item.isApproved==true ? "Approved"
+                                :"Not Approved"}}</button>
+                             </td>
+                             <td [ngClass]="item.isLocked ? 'lockbtn' : 'lockbtnu'">
+                        <!-- <td class="lockbtn"> -->
+                            <button type="button" (click)="LockedLoginDetailById(item.loginId)">{{item.isLocked==true ?
+                                "User Locked" :"Un Locked" }}</button> 
+                            </td>
+                        <!-- <td class="statusbtn"> -->
+                            <td [ngClass]="item.isActive ? 'statusbtngreen' : 'statusbtn'">
+                            <button type="button" (click)="ActiveLoginDetailById(item.loginId)"> {{item.isActive==true ?
+                                "Active" :"Deactive" }}</button>
+                            </td>
+
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="pagination-container my-0">
+        <button class="btn" (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1">
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                    d="M7.82843 10.9999H20V12.9999H7.82843L13.1924 18.3638L11.7782 19.778L4 11.9999L11.7782 4.22168L13.1924 5.63589L7.82843 10.9999Z">
+                </path>
+            </svg> -->
+            < </button>
+                <ng-container *ngFor="let page of getPageNumbers()">
+                    <button class="btn" [ngClass]="{ 'active': page === currentPage }"
+                        *ngIf="page !== '...' && page !== currentPage" (click)="onPageChange(page)">
+                        {{ page }}
+                    </button>
+                    <button class="btn btn-primary active" *ngIf="page === currentPage" disabled>
+                        {{ page }}
+                    </button>
+                    <span class="ellipsiss" *ngIf="page === '...'">...</span>
+                </ng-container>
+                <button class="btn" (click)="onPageChange(currentPage + 1)" [disabled]="currentPage === totalPages">
+                    <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                    d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z">
+                </path>
+            </svg> -->
+                    >
+                </button>
+    </div>
+</div>

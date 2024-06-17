@@ -1,0 +1,313 @@
+<main class="modelmain">
+
+
+
+
+
+
+    <!-- <div class="model-logo mt-md-5 row justify-content-center conteiner">
+        <div class="">
+            <img src="../../../../assets/images/welcomeflogo.png" alt="wflogo" />
+        </div>
+        <div class="cross-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7.75735 7.75757L16.2426 16.2428" stroke="#080433" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                <path d="M7.75736 16.2428L16.2426 7.75757" stroke="#080433" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+        </div>
+    </div> -->
+    <!-- <div class="process-line row justify-content-center w-100">
+        <div class="process-line1">
+            <img src="../../../../assets/images/redline.png" />
+        </div>
+        <div class="process-line2">
+            <img src="../../../../assets/images/grayline.png" />
+        </div>
+        <div class="process-line3">
+            <img src="../../../../assets/images/grayline.png" />
+        </div>
+    </div> -->
+    <div class="heading d-flex justify-content-between">
+        <div class="departmenttitle">
+            <h6 class="mb-4">{{this.storename}}</h6>
+        </div>
+        <!-- <div class="stepbtn">
+            <button>Step 1/3</button>
+        </div> -->
+        <div class="previousdate">
+            <span>Date :</span>
+            <span class="dateicon">
+                <!-- <img src="../../../../assets/images/calendar-2.png" /> -->
+                <!-- <p class="mb-0">7 Dec 2023</p> -->
+                <input type="date" id="entrydate" [(ngModel)]="entryDate" (change)="onDateChange($event)">
+            </span>
+        </div>
+    </div>
+    <div class="cashsection d-lg-flex d-md-block d-sm-flex justify-content-between mx-0">
+        <div class="cashdata d-flex">
+            <div class="cashicon">
+                <img src="../../../../assets/images/cashicon.png" alt="cash" />
+            </div>
+            <div class="cashcontent">
+                <p class="mb-0">Previous Day Total Cash Inhand</p>
+                <span>
+                    ${{ this.previousdayAmount }} <span
+                        style="font-size: 14px;;">({{this.previousDateFromSelected}})</span>
+                </span>
+                <!-- ng-template for the else condition -->
+            </div>
+        </div> <div class="cashdata d-flex">
+            <div class="cashicon">
+                <img src="../../../../assets/images/cashicon.png" alt="cash" />
+            </div>
+            <div class="cashcontent">
+                <p class="mb-0">Total Expense</p>
+                <span>
+                    ${{ this.previousdayAmount }} <span
+                        style="font-size: 14px;;">({{this.previousDateFromSelected}})</span>
+                </span>
+
+                <!-- ng-template for the else condition -->
+
+            </div>
+        </div>
+       
+    </div>
+    
+    <div >
+
+    <!-- <div class="productcategory row mx-0">
+        <div class="productdata d-flex col-xl-3 col-lg-4 col-sm-6 pl-0" (click)="onGroup(item.groupId)"
+            *ngFor="let item of productgrouplist">
+            <div class="gcategoryicon categoryicon">
+                <img src="../../../../assets/images/{{item.icon}}" alt="cash"
+                    [style.background-color]="item.iconColor" />
+            </div>
+            <div class="productcontent">
+                <p class="mb-0">{{item.groupName}}</p>
+                <span>${{item.groupAmount}}</span>
+            </div>
+        </div>
+    </div> -->
+
+    <div class="productcategory mx-0 mt-4 ">
+
+        <owl-carousel-o [options]="videoslide" style="width: 100%!important;">
+            <ng-container *ngFor="let item of productgrouplist ; let i = index" class="custom-slide">
+                <ng-template class="" carouselSlide [id]="item.groupId" class="custom-slide">
+                    <!-- <div class="productdata d-flex pl-0"  (click)="onGroup(items.groupId)">
+                        <div class="gcategoryicon categoryicon">
+                            <img src="../../../../assets/images/{{items.icon}}" alt="cash"
+                                [style.background-color]="items.iconColor" />
+                        </div>
+                        <div class="productcontent">
+                            <p class="mb-0">{{items.groupName}}</p>
+                            <span>${{items.groupAmount}}</span>
+                        </div>
+                    </div> -->
+                    <div class="productdata d-flex" 
+                   
+                    (click)="onGroup(item.groupId,i)"  
+                    [class.active]="activeIndex === i" 
+                    [style.border]="activeIndex === i ? '1px solid ' + item.iconColor : null" 
+                    [style.border-radius.px]="activeIndex === i ? 10 : null"
+                    [style.padding.px]="activeIndex === i ? 8 : null"
+                    [style.background]="activeIndex === i ? '#ed6c3c1a' : null"
+                    [style.box-shadow]="activeIndex === i ? 'rgba(237, 108, 60, 0.15) 0px 20px 40px 0px' : null">    
+                         <div class="gcategoryicon categoryicon" >
+                             <img src="../../../../assets/images/{{item.icon}}" alt="cash" [style.background-color]="item.iconColor" />
+                         </div>
+                         <div class="productcontent">
+                             <p class="mb-0">{{item.groupName}}</p>
+                             <span>${{item.groupAmount}}</span>
+                         </div>
+                     </div>
+             
+
+
+
+                </ng-template>
+            </ng-container>
+        </owl-carousel-o>
+    </div>
+
+    <div class="selectform py-0 px-0">
+        <form class="row align-items-end px-0 col-12 justify-content-between" [formGroup]="form" (submit)="onSubmit()">
+            <div class="col-xl-3 col-lg-6 pl-0 pr-sm-auto pr-0">
+
+                <div class="form-group mb-0">
+                    <label for="exampleFormControlSelect1">Select Department</label>
+                    <ng-select formControlName="productCategoryId" id="productCategoryId" #SelectSizeDefault
+                        [items]="productcategorylist" [searchable]="true" bindLabel="productCategoryName"
+                        (ngModelChange)="GetProductDetailbyCategoryId($event)" bindValue="productCategoryId">
+                    </ng-select>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-lg-6 pl-0 pr-sm-auto pr-0">
+                <div class="form-group mb-0">
+                    <label for="exampleFormControlSelect1">Sub Category</label>
+                    <ng-select formControlName="productId" id="productId" #SelectSizeDefault [items]="productlist"
+                        [searchable]="true" bindLabel="productName" bindValue="productId">
+                    </ng-select>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-lg-6 pl-0 mt-xl-auto mt-4 pr-sm-auto pr-0">
+                <div class="form-group mb-0">
+                    <label for="FormControlInput1" class="form-label">Amount</label>
+                    <input type="text" class="form-control" id="amount" formControlName="amount"
+                        placeholder="Enter Amount">
+                </div>
+            </div>
+            <div class="addbtn mt-lg-auto mt-4">
+                <button>Add to Total</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="resultsec">
+        <div class="results">
+            <!-- <h4 class="mb-0">Results</h4> -->
+            <h4 class="mb-0">Store Reports</h4>
+        </div>
+        
+        <!-- <div class="d-flex justify-content-end">
+            <div class="d-flex align-items-center">
+                <div class="filter">
+                    <img src="../../../../assets/images/filter.png" />
+                    <span>Filter by:</span>
+                </div>
+                <div class="ml-2">
+                    <div class="dropdown mr-1" style="float:left;">
+                        <select class="form-control" id="exampleFormControlSelect1">
+                            <option>All Department</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </div>
+
+    <div class="commontable">
+        <div class="search-field d-sm-flex justify-content-between my-3">
+            <div class="pageoption d-flex align-items-center">
+                <select class="pagecounting" id="pagecount" (change)="onPageSizeChange($event)">
+                    <option value="50">50</option>
+                    <option value="200">200</option>
+                    <option value='all'>All</option>
+                </select>
+            </div>
+            <div class="d-flex gap-2 pt-sm-auto">
+                <input class="searchfield" type="text" placeholder="Search..." [(ngModel)]="filterValue"
+                    (input)="applyFilter()">
+            </div>
+        </div>
+        <div class="table-container">
+            <table class="table mb-0" *ngIf="visibleRows!=null">
+                <thead class="thead text-white">
+                    <tr>
+                        <th>Sr.No.</th>
+                        <th scope="col" class="">Department Name</th>
+                        <th scope="col">Sub Category</th>
+                        <th scope="col">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="" *ngFor="let item of visibleRows; let idx=index;" class="whitebg-row"
+                        [style.display]="item.visible ? 'table-row' : 'none'">
+                        <td class="tablefirstdata">{{(currentPage - 1)*pageSize +idx +1}}</td>
+                        <td>
+                            <div class="d-flex storename-add">
+                                <!-- <div>
+                                    <input type="checkbox" />
+                                </div> -->
+                                <div class="teblestorename">
+                                    <span>{{item.propductCategory}}</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>{{item.propductName}}</td>
+                        <td>{{item.amount}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="pagination-container my-0">
+        <button class="btn" (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1">
+            < </button>
+                <ng-container *ngFor="let page of getPageNumbers()">
+                    <button class="btn" [ngClass]="{ 'active': page === currentPage }"
+                        *ngIf="page !== '...' && page !== currentPage" (click)="onPageChange(page)">
+                        {{ page }}
+                    </button>
+                    <button class="btn btn-primary active" *ngIf="page === currentPage" disabled>
+                        {{ page }}
+                    </button>
+                    <span class="ellipsiss" *ngIf="page === '...'">...</span>
+                </ng-container>
+                <button class="btn" (click)="onPageChange(currentPage + 1)" [disabled]="currentPage === totalPages">
+                    >
+                </button>
+    </div>
+    <!-- <div class="scashsection d-lg-flex justify-content-between mx-0 mb-4 px-3">
+        <div class="d-sm-flex sales justify-content-lg-start justify-content-between">
+            <div class="saledata d-flex">
+                <div class="saleicon">
+                    <img src="../../../../assets/images/cashicon.png" alt="cash" />
+                </div>
+                <div class="salecontent">
+                    <p class="mb-0">Total Inside Sales</p>
+                    <span>$100</span>
+                </div>
+            </div>
+            <div class="scashdata d-flex mt-sm-auto mt-4">
+                <div class="scashicon">
+                    <img src="../../../../assets/images/cashicon.png" alt="cash" />
+                </div>
+                <div class="scashcontent">
+                    <p class="mb-0">Total Cash Inhand</p>
+                    <span>$100</span>
+                </div>
+            </div>
+        </div>
+      
+    </div> -->
+
+</div>
+
+<div style="display: none;">
+     <div class="productcategory row mx-0">
+        <div class="productdata d-flex col-xl-3 col-lg-4 col-sm-6 pl-0" (click)="onGroup(0,0)"
+           >
+            <div class="gcategoryicon categoryicon">
+                <img src="../../../../assets/images/insidesaledb.png" alt="cash"
+                    style="background-color:#FB5B83;" />
+            </div>
+            <div class="productcontent">
+                <p class="mb-0">Purchase Register</p>1
+                <span>$0</span>
+            </div>
+        </div>
+        <div class="productdata d-flex col-xl-3 col-lg-4 col-sm-6 pl-0" (click)="onGroup(0,0)"
+        >
+         <div class="gcategoryicon categoryicon">
+             <img src="../../../../assets/images/insidesaledb.png" alt="cash"
+                 style="background-color:#FB5B83;" />
+         </div>
+         <div class="productcontent">
+             <p class="mb-0">Expense Register</p>
+             <span>$0</span>
+         </div>
+     </div>
+    </div>
+</div>
+
+</main>

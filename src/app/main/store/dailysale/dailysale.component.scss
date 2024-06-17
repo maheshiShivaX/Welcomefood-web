@@ -1,0 +1,690 @@
+.policytitle {
+    gap: 15px;
+    align-items: center;
+}
+
+.backbtn {
+    gap: 12px;
+}
+
+.backbtn span {
+    font-size: 14px;
+    line-height: 21px;
+    font-weight: 500;
+    color: #080433;
+}
+
+.back-menubtn {
+    gap: 20px;
+}
+
+.add-dailysalesbtn {
+    gap: 10px;
+}
+
+.add-dailysalesbtn .menubtn button {
+    padding: 12px 10px;
+    border: 3px solid #CCD5FF;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 1);
+    font-size: 14px;
+    line-height: 16.94px;
+    font-weight: 400;
+    color: #080433;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.daily button {
+    padding: 12px 10px;
+    border: none;
+    border-radius: 12px;
+    background-color: #7976FF;
+    font-size: 14px;
+    line-height: 16.94px;
+    font-weight: 400;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid #7976FF;
+    gap: 5px;
+}
+
+.previousdate .dateicon input {
+    border: none;
+    background-color: transparent;
+}
+
+.previousdate {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.previousdate span {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+}
+
+.previousdate .dateicon {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+// .dailyheading {
+//     padding-top: 24px;
+// }
+
+.dailyheading h4 {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 28.6px;
+    color: #080433;
+}
+
+.dailyform {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 20px 70px;
+}
+
+.category-heading span {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14.52px;
+    color: #080433;
+}
+
+.dailyform .category .form label {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 19.6px;
+    color: #080433;
+    text-align: right;
+}
+
+.dailyform .category .form {
+    padding: auto 20px;
+}
+
+.dailyform .category .form .inputfield {
+    height: 41px;
+    border-radius: 8px;
+    border: 1px solid #ECF1F5;
+}
+
+.dailyform .category .form input {
+    border: none;
+}
+
+.totalamount span {
+    background: #ecf1f5;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.form-control[_ngcontent-ng-c3035368179]:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: none;
+    border: none !important;
+}
+
+.form-control:focus {
+    // color: #495057;
+    background-color: transparent;
+    border-color: transparent;
+    outline: 0;
+    box-shadow: none;
+}
+
+.dailyform .category .form span {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 19.6px;
+    color: #080433;
+}
+
+.calenderdate-desktop {
+    display: block;
+}
+
+.calenderdate-mobile {
+    display: none;
+}
+
+@media (min-width:992px) and (max-width:1200px) {
+
+    .add-dailysalesbtn .menubtn button {
+        padding: 12px 10px;
+        border: 3px solid #CCD5FF;
+        border-radius: 12px;
+        background-color: rgba(255, 255, 255, 1);
+        font-size: 14px;
+        line-height: 16.94px;
+        font-weight: 400;
+        color: #080433;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+    }
+    
+    .daily button {
+        padding: 12px 10px;
+        border: none;
+        border-radius: 12px;
+        background-color: #7976FF;
+        font-size: 14px;
+        line-height: 16.94px;
+        font-weight: 400;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 3px solid #7976FF;
+        gap: 5px;
+    }
+
+    .calenderdate-desktop {
+        display: none;
+    }
+
+    .calenderdate-mobile {
+        display: block;
+    }
+}
+
+@media (min-width:768px) and (max-width:992px) {
+
+    .add-dailysalesbtn {
+        column-count: 3;
+    }
+
+    .daily button {
+        padding: 12px 6px;
+        border: none;
+        border-radius: 12px;
+        background-color: #7976FF;
+        font-size: 12px;
+        line-height: 14.94px;
+        font-weight: 400;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 3px solid #7976FF;
+        gap: 4px;
+        width: 100%;
+    }
+
+    .add-dailysalesbtn .menubtn button {
+        padding: 12px 6px;
+        border: 3px solid #CCD5FF;
+        border-radius: 12px;
+        background-color: rgba(255, 255, 255, 1);
+        font-size: 12px;
+        line-height: 14.94px;
+        font-weight: 400;
+        color: #080433;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 4px;
+        width: 100%;
+    }
+
+    .paddingbtn {
+        padding-top: 10px;
+    }
+
+    .calenderdate-desktop {
+        display: none;
+    }
+
+    .calenderdate-mobile {
+        display: block;
+    }
+}
+
+@media (min-width:572px) and (max-width:768px) {
+
+    .daily button {
+        padding: 10px 5px;
+        border: none;
+        border-radius: 12px;
+        background-color: #7976FF;
+        font-size: 11px;
+        line-height: 14.94px;
+        font-weight: 400;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 3px solid #7976FF;
+        gap: 3px;
+    }
+
+    .add-dailysalesbtn .menubtn button {
+        padding: 10px 5px;
+        border: 3px solid #CCD5FF;
+        border-radius: 12px;
+        background-color: rgba(255, 255, 255, 1);
+        font-size: 11px;
+        line-height: 14.94px;
+        font-weight: 400;
+        color: #080433;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 3px;
+    }
+
+    .calenderdate-desktop {
+        display: none;
+    }
+
+    .calenderdate-mobile {
+        display: block;
+    }
+}
+
+@media only screen and (max-width:572px) {
+    .dailyheading h4 {
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 16.6px;
+        color: #080433;
+    }
+
+    .calenderdate-desktop {
+        display: none;
+    }
+
+    .calenderdate-mobile {
+        display: block;
+    }
+
+    .purchases .store-heading h4 {
+        font-size: 18px;
+        font-weight: bold;
+        line-height: 18.6px;
+        color: #080433;
+        margin-bottom: 24px;
+    }
+
+}
+
+@media (min-width: 1024px) {
+    .columncountsection {
+        column-count: 2;
+        column-gap: 20px;
+        /* Adjust column gap as needed */
+    }
+
+    .category {
+        display: inline-block;
+        width: 100%;
+        break-inside: avoid;
+        margin-bottom: 10px;
+        /* Adjust spacing between categories */
+    }
+}
+
+
+@media (min-width:1400px) and (max-width:1700px) {
+    .dailyform {
+        padding: 30px;
+    }
+}
+
+@media (min-width:1200px) and (max-width:1400px) {
+    .dailyform {
+        padding: 20px;
+    }
+}
+
+@media (min-width:1200px) and (max-width:1300px) {
+    .dailyform {
+        padding: 20px;
+    }
+
+    .dailyform .category .form label {
+        font-size: 13px;
+    }
+}
+
+@media only screen and (max-width:1200px) {
+    .dailyform .category .form label {
+        font-size: 13px;
+    }
+
+    .dailyform {
+        padding: 16px;
+    }
+}
+
+
+// gas inventory css
+.gasinventory {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 12px 16px;
+}
+
+.gasinventory .inputfield {
+    min-width: 100px;
+}
+
+.topsection {
+    gap: 9.5px;
+}
+
+.topsection .gasicon {
+    height: 44px;
+    width: 44px;
+    border-radius: 60px;
+    background-color: #023088;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.topsection .gallon-text span {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.94px;
+    color: #747684;
+}
+
+.topsection .gallon-text span b {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 25.2px;
+    color: #080433;
+}
+
+.bottomsection {
+    background-color: #ECF1F5;
+    border-radius: 8px;
+    padding: 12px;
+    margin-top: 10px;
+}
+
+.bottomsection .gallon-text span {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.94px;
+    color: #747684;
+}
+
+.bottomsection .gallon-text span b {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 19.2px;
+    color: #080433;
+}
+
+.dailytabledata .forminput input {
+    border: none;
+    background-color: transparent;
+}
+
+.dailytabledata .forminput .inputfield {
+    background-color: #fff;
+    height: 41px;
+    border-radius: 8px;
+    border: 1px solid #ECF1F5;
+}
+
+.readonly {
+    background-color: #ece7e7;
+    cursor: not-allowed;
+    border-radius: 8px;
+}
+
+.form-control[readonly] {
+    background-color: #e9ecef;
+    opacity: 1;
+    cursor: not-allowed;
+}
+
+.dailytabledata .forminput .inputfield span {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 19.2px;
+    color: #080433;
+}
+
+
+
+.dailytabledata form .inputfield span {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 19.2px;
+    color: #080433;
+}
+
+.retail-price {
+    background-color: #ECF1F5;
+    border-radius: 8px;
+    padding: 12px;
+    margin-top: 10px;
+}
+
+.retail-price .retail-text span {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.94px;
+    color: #747684;
+}
+
+.retail-price .retail-text span b {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 19.2px;
+    color: #080433;
+}
+
+
+// purchases ==================
+
+// .purchasesection {
+//     background-color: #fff;
+//     border-radius: 12px;
+//     padding: 12px 16px;
+// }
+
+.store-heading h4 {
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 33.6px;
+    color: #080433;
+    margin-bottom: 10px;
+}
+
+.purchases .storeformdata form input {
+    height: 41px;
+    border-radius: 12px;
+    border: 1px solid #ECF1F5;
+}
+
+.purchases .storeformdata form label {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 21px;
+    color: #474A65;
+}
+
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #80bdff;
+    outline: 0;
+    // box-shadow: 0 0 0 .2rem #023088;
+    box-shadow: none;
+    // border: 1px solid #023088 !important;
+}
+
+//   .paytype {
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     gap: 15px;
+//     margin-bottom: 15px;
+//   }
+
+.paytype {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.paytype-option {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 16px;
+    /* Adjust as necessary */
+}
+
+// .paytype input {
+//     height: 20px;
+// }
+
+.paytype label {
+    border-radius: 56px;
+    background-color: #fff;
+    font-size: 14px;
+    list-style: 16.94px;
+    border: 1px solid #747684;
+    padding: 0px 15px;
+    gap: 4px;
+}
+
+.radio-input {
+    /* display: none; */
+    /* Hide the default radio button */
+}
+
+.custom-radio {
+    width: 0;
+    /* Hide the custom radio circle */
+    height: 0;
+    /* Hide the custom radio circle */
+    margin-right: 8px;
+    /* Space between the custom radio and text */
+    display: inline-block;
+}
+
+.paytype-option input:checked+.custom-radio {
+    background-color: #7976FF;
+    /* Add this if you want a visual indicator */
+}
+
+//   .paytype button {
+//     border-radius: 56px;
+//     background-color: #fff;
+//     font-size: 14px;
+//     list-style: 16.94px;
+//     border: 1px solid #747684;
+//     padding: 5px 15px;
+//   }
+
+.submit-btn {
+    display: flex;
+    // background-color: #ffffff;
+    border-radius: 20px;
+    text-align: end;
+    // margin-bottom: 24px;
+    justify-content: end;
+}
+
+.allbtn {
+    gap: 15px;
+    // background: #fff;
+    width: 100%;
+    // padding: 15px;
+    border-radius: 12px;
+}
+
+.submit-btn .resetbtn button {
+    display: inline-block;
+    background-color: #FFFFFF;
+    color: #080433;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 140px;
+    height: 50px;
+    font-size: 18px;
+    line-height: 18px;
+    font-weight: 600;
+    border: 1px solid #ECF1F5;
+}
+
+.submit-btn .savebtn button,
+.termspopup-container .popup-submit button {
+    display: inline-block;
+    background-color: #023088;
+    color: white;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 140px;
+    height: 50px;
+    font-size: 18px;
+    line-height: 18px;
+    font-weight: 600;
+    border: none;
+}
+
+@media only screen and (max-width:640px) {
+    .submit-btn {
+        // background-color: #ffffff;
+        border-radius: 20px;
+        text-align: end;
+        margin-bottom: 24px;
+        gap: 15px;
+        justify-content: end;
+    }
+
+    .submit-btn .resetbtn button {
+        display: inline-block;
+        background-color: #FFFFFF;
+        color: #080433;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        width: 105px;
+        height: 50px;
+        font-size: 18px;
+        line-height: 18px;
+        font-weight: 600;
+        border: 1px solid #ECF1F5;
+    }
+
+    .submit-btn .savebtn button {
+        display: inline-block;
+        background-color: #023088;
+        color: white;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        width: 105px;
+        height: 50px;
+        font-size: 18px;
+        line-height: 18px;
+        font-weight: 600;
+        border: none;
+    }
+}

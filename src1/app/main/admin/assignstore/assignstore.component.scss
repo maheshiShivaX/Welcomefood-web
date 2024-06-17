@@ -1,0 +1,127 @@
+.store-heading h4{
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 33.6px;
+    color: #080433;
+    margin-bottom: 24px;
+}
+
+.storeentryform .storeformdata form input {
+    height: 50px;
+    border-radius: 12px;
+    border: 1px solid #ECF1F5;
+}
+
+.storeentryform .storeformdata form label {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 21px;
+    color: #474A65;
+}
+
+.submit-btn  {
+    display: flex;
+    // background-color: #ffffff;
+    border-radius: 20px;
+    text-align: end;
+    margin-bottom: 15px;
+    gap: 15px;
+    justify-content: end;
+}
+
+.submit-btn  .resetbtn button{
+    display: inline-block;
+    background-color: #FFFFFF;
+    color: #080433;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 140px;
+    height: 50px;
+    font-size: 18px;
+    line-height: 18px;
+    font-weight: 600;
+    border: 1px solid #ECF1F5;
+}
+
+.submit-btn  .savebtn button{
+    display: inline-block;
+    background-color: #023088;
+    color: white;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 140px;
+    height: 50px;
+    font-size: 18px;
+    line-height: 18px;
+    font-weight: 600;
+    border: none;
+}
+
+.statusbtn, .statusbtngreen {
+    width: 120px;
+}
+
+.statusbtngreen button {
+    background: #1DBA401F;
+    border: 1.5px solid #1DBA40;
+    padding: 10px 30px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    color: #1DBA40;
+}
+
+.statusbtn button {
+    background: #C82D311C;
+    border: 1.5px solid #C82D31;
+    padding: 10px 30px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    color: #C82D31;
+}
+
+@media only screen and (max-width:640px) {
+    .submit-btn  {
+        // background-color: #ffffff;
+        border-radius: 20px;
+        text-align: end;
+        margin-bottom: 24px;
+        gap: 15px;
+        justify-content: end;
+    }
+    
+    .submit-btn  .resetbtn button{
+        display: inline-block;
+        background-color: #FFFFFF;
+        color: #080433;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        width: 105px;
+        height: 50px;
+        font-size: 18px;
+        line-height: 18px;
+        font-weight: 600;
+        border: 1px solid #ECF1F5;
+    }
+    
+    .submit-btn  .savebtn button{
+        display: inline-block;
+        background-color: #023088;
+        color: white;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        width: 105px;
+        height: 50px;
+        font-size: 18px;
+        line-height: 18px;
+        font-weight: 600;
+        border: none;
+    }
+}

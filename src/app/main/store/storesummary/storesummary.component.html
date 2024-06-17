@@ -1,0 +1,434 @@
+<div class="row">
+  <div class="col-lg-12 col-md-12 col-sm-12 mb-3">
+    <div class="summaryheading">
+      <h4>Store Summary</h4>
+    </div>
+    <div class="mt-2">
+      <div class="pagedatatable d-flex">
+        <div class="">
+          <table>
+            <tr class="text-center">
+              <th>Description
+              </th>
+              <th>Amount</th>
+            </tr>
+            <tr *ngFor="let item of insaidesaledata" class="productcategory">
+              <td>{{item.propductCategory}}</td>
+              <td>{{item.amount}}</td>
+            </tr>
+            <tr class="total productcategory">
+              <td>Total Inside Sale</td>
+              <td>{{this.totalinsideamount}}</td>
+            </tr>
+            <tr class="productcategory">
+              <td>Opening Cash In hand</td>
+              <td>0</td>
+            </tr>
+            <tr class="tabledatasort productcategory">
+              <td>Coin-Up</td>
+              <td>{{this.coninup}}</td>
+            </tr>
+            <tr class="tabledatasort productcategory">
+              <td>OTHER AMOUNT</td>
+              <td>{{this.otheramount}}</td>
+            </tr>
+            <tr class="tabledatasort productcategory">
+              <td>Lottery</td>
+              <td>{{this.lottery}}</td>
+            </tr>
+            <tr class="tabledatasort productcategory">
+              <td>Sales Tax</td>
+              <td>{{this.salestax}}</td>
+            </tr>
+            <tr class="tabledatasort productcategory">
+              <td>Gas Sales Amount</td>
+              <td>{{this.gessale}}</td>
+            </tr>
+            <tr class=" total productcategory">
+              <td>Total IN </td>
+              <td>{{this.totalinputcase}}</td>
+            </tr>
+
+            <tr class="productcategory">
+              <td>LOTO PAYOUT </td>
+              <td>{{this.lotterypyaoutdataCashamount}}</td>
+            </tr>
+            <tr class="productcategory">
+              <td>Store Expenses </td>
+              <td>{{this.expanseamountcase}}</td>
+            </tr>
+            <tr class="productcategory">
+              <td>Pay Out Purchases </td>
+              <td>{{this.totalamountpurchasecash}}</td>
+            </tr>
+            <tr class="productcategory">
+              <td>Coin-Up </td>
+              <td>{{this.arcadeamounts}}</td>
+            </tr>
+            <tr class="productcategory">
+              <td>PAYROLL </td>
+              <td>{{this.payrollpyaoutdataCashamount}}</td>
+            </tr>
+            <tr class="productcategory">
+              <td>OTHER AMOUNT </td>
+              <td>{{this.otheramounts}}</td>
+            </tr>
+            <tr class="productcategory">
+              <td>CREDIT CARD </td>
+              <td>{{this.creditcardamounts}}</td>
+            </tr>
+            <tr class=" total productcategory">
+              <td>Total Out </td>
+              <td>{{this.totaloutamount}}</td>
+            </tr>
+            <tr class=" total productcategory">
+              <td>Total In-Total Out </td>
+              <td>{{this.totaldiffrence}}</td>
+            </tr>
+            <tr>
+              <td>Closing Cash</td>
+              <td>{{this.storeclosingcash}}</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Total Deposit</td>
+              <td>{{this.storeclosingcash}}</td>
+            </tr>
+            <tr>
+              <td> Over/Short</td>
+              <td>{{this.overshortamount}}</td>
+            </tr>
+
+
+
+          </table>
+
+
+
+          <table class="mt-3">
+            <tr class="text-center">
+              <th>LOTTERY DETAILS
+              </th>
+              <th>Amount</th>
+            </tr>
+            <tr *ngFor="let item of this.lotteryData " class="productcategory">
+              <td>{{item.productName}}</td>
+              <td>{{item.amount}}</td>
+            </tr>
+
+            <tr class="expensetext">
+              <td class="total">Total Amount</td>
+              <td class="total">{{this.lotteryamountsale}}</td>
+            </tr>
+            <tr>
+              <td>- Pay Out</td>
+              <td>{{this.lotterypyaoutdataCashamount}}</td>
+            </tr>
+            <tr>
+              <td> - Commission</td>
+              <td> {{(this.lotteryamountsale * 6 )/100 }}</td>
+            </tr>
+            <tr>
+              <td>Total Due</td>
+              <td> {{this.lotteryamountsale -(this.lotterypyaoutdataCashamount + ((this.lotteryamountsale * 6 )/100) )
+                }} </td>
+            </tr>
+
+
+          </table>
+        </div>
+        <div>
+          <div class="vendorcategory">
+            <table class="tablewidth">
+              <thead>
+                <tr class="text-center">
+                  <th colspan="8" class="headbackcolor">Purchases (CASH)</th>
+                </tr>
+                <tr>
+                  <th>Vendor Name</th>
+                  <th *ngFor="let category of categories">{{ category }}</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of vendorCategoryAmountscase" class="purchasetext">
+                  <td>{{ item.vendorName }}</td>
+                  <td *ngFor="let category of categories">{{ item.amounts[category] || 0 }}</td>
+
+                  <td class="total">{{ getTotalAmountForVendor(item) }}</td>
+
+                </tr>
+                <tr class="purchasetext">
+                  <td class="total">Total</td>
+                  <td *ngFor="let category of categories" class="total">{{ totalAmounts[category] || 0 }}</td>
+                  <td class="total">{{this.totalamountpurchasecash }}</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr class="text-center">
+                  <th colspan="8" class="headbackcolor">Purchases (Cheque)</th>
+                </tr>
+                <tr>
+                  <th>Vendor Name</th>
+                  <th *ngFor="let category of categories">{{ category }}</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of vendorCategoryAmountscheque" class="purchasetext">
+                  <td>{{ item.vendorName }}</td>
+                  <td *ngFor="let category of categories">{{ item.amounts[category] || 0 }}</td>
+                  <td class="total">{{ getTotalAmountForVendor(item) }}</td>
+                </tr>
+                <tr class="purchasetext">
+                  <td class="total">Total</td>
+                  <td *ngFor="let category of categories" class="total">{{ totalAmountscheque[category] || 0 }}</td>
+                  <td class="total">{{this.totalamountpurchasecheque }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="mt-3 d-flex">
+            <div style="width:50%;">
+              <table class="w-100">
+                <thead>
+                  <tr class="theading">
+                    <th colspan="2" class="headbackcolor">STORE EXPENSES (CASH)</th>
+                  </tr>
+                  <tr>
+                    <th>Description</th>
+                    <th>Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of expensecase" class="expensetext">
+                    <td>{{item.categoryName}}</td>
+                    <td>{{item.amount}}</td>
+                  </tr>
+                  <tr class="expensetext">
+                    <td class="total">Total Amount</td>
+                    <td class="total">{{this.expanseamountcase}}</td>
+                  </tr>
+                </tbody>
+
+              </table>
+            </div>
+            <div style="width:50%;">
+              <table class="w-100">
+                <thead>
+                  <tr class="theading">
+                    <th colspan="2" class="headbackcolor">STORE EXPENSES (Cheque)</th>
+                  </tr>
+                  <tr>
+                    <th>Description</th>
+                    <th>Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of expensecheque" class="expensetext">
+                    <td>{{item.categoryName}}</td>
+                    <td>{{item.amount}}</td>
+                  </tr>
+                  <tr class="expensetext">
+                    <td class="total">Total Amount</td>
+                    <td>{{this.expanseamountcheque}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div>
+            <table class="tablewidth mt-3">
+              <thead>
+                <tr>
+                  <th class="headbackcolor" colspan="6">Gasoline Inventory</th>
+                </tr>
+                <tr class="">
+                  <th class="px-3 pb-2"></th>
+                  <th class="px-3 pb-2">Regular</th>
+                  <th class="px-3 pb-2">Plus</th>
+                  <th class="px-3 pb-2">Premium</th>
+                  <th class="px-3 pb-2">Diesel</th>
+                  <th class="px-3 pb-2">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of gesinventory">
+                  <td class="pr-4">{{ item.name }}</td>
+                  <td>
+                    <span>${{item.regular}}</span>
+                  </td>
+                  <td>
+                    <span>${{item.plus}}</span>
+                  </td>
+                  <td>
+                    <span>${{item.premium}}</span>
+                  </td>
+                  <td>
+                    <span>${{item.diesel}}</span>
+                  </td>
+                  <td class="total">{{ item.total | currency }}</td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+          <div class="d-flex mt-3">
+            <div style="width:50%;">
+              <table class="w-100">
+                <thead>
+                  <tr class="theading">
+                    <th colspan="2" class="headbackcolor">Other Payouts(CASH)</th>
+                  </tr>
+                  <tr>
+                    <th>Description</th>
+                    <th>Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of otherpyaoutdataCash " class="expensetext">
+                    <td>{{item.categoryName}}</td>
+                    <td>{{item.amount}}</td>
+                  </tr>
+                  <tr class="expensetext">
+                    <td class="total">Total Amount</td>
+                    <td>{{this.otherpyaoutdataCashamount}}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+            <div style="width:50%;">
+              <table class="w-100">
+                <thead>
+                  <tr class="theading">
+                    <th colspan="2" class="headbackcolor">Other Payouts(Cheque)</th>
+                  </tr>
+                  <tr>
+                    <th>Description</th>
+                    <th>Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of otherpyaoutdataCheque " class="expensetext">
+                    <td>{{item.categoryName}}</td>
+                    <td>{{item.amount}}</td>
+                  </tr>
+                  <tr class="expensetext">
+                    <td class="total">Total Amount</td>
+                    <td>{{this.otherpyaoutdataCashamount}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+
+
+
+          </div>
+          <div class="d-flex mt-3">
+            <div style="width:50%;">
+              <table class="w-100">
+                <thead>
+                  <tr class="theading">
+                    <th colspan="2" class="headbackcolor">Payroll(CASH)</th>
+                  </tr>
+                  <tr>
+                    <th>Description</th>
+                    <th>Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of payrollpyaoutdataCash" class="expensetext">
+                    <td>{{item.description}}</td>
+                    <td>{{item.amount}}</td>
+                  </tr>
+                  <tr class="expensetext">
+                    <td class="total">Total Amount</td>
+                    <td>{{this.payrollpyaoutdataCashamount}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div style="width:50%;">
+              <table class="w-100">
+                <thead>
+                  <tr class="theading">
+                    <th colspan="2" class="headbackcolor">Payroll(Cheque)</th>
+                  </tr>
+                  <tr>
+                    <th>Description</th>
+                    <th>Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of payrollpyaoutdataCheque" class="expensetext">
+                    <td>{{item.description}}</td>
+                    <td>{{item.amount}}</td>
+                  </tr>
+                  <tr class="expensetext">
+                    <td class="total">Total Amount</td>
+                    <td>{{this.payrollpyaoutdataChequeamount}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="d-flex mt-3">
+            <div style="width:50%;">
+              <table class="w-100">
+                <thead>
+                  <tr class="theading">
+                    <th colspan="2" class="headbackcolor">Lottery Payouts(CASH)</th>
+                  </tr>
+                  <tr>
+                    <th>Description</th>
+                    <th>Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of lotterypyaoutdataCash" class="expensetext">
+                    <td>{{item.categoryName}}</td>
+                    <td>{{item.amount}}</td>
+                  </tr>
+                  <tr class="expensetext">
+                    <td class="total">Total Amount</td>
+                    <td>{{this.lotterypyaoutdataCashamount}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div style="width:50%;">
+              <table class="w-100">
+                <thead>
+                  <tr class="theading">
+                    <th colspan="2" class="headbackcolor">Lottery Payouts(Cheque)</th>
+                  </tr>
+                  <tr>
+                    <th>Description</th>
+                    <th>Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of lotterypyaoutdataCheque" class="expensetext">
+                    <td>{{item.categoryName}}</td>
+                    <td>{{item.amount}}</td>
+                  </tr>
+                  <tr class="expensetext">
+                    <td class="total">Total Amount</td>
+                    <td>{{this.lotterypyaoutdataChequeamount}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

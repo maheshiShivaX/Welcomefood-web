@@ -1,0 +1,214 @@
+.wflogo {
+  background-color: #023088;
+  height: 96px;
+}
+
+.sidebar-menu h6 {
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+.submenu a {
+  font-size: 16px !important;
+  line-height: 25.8px !important;
+  font-weight: 600 !important;
+  color: #747684 !important;
+}
+
+
+/* Dropdown Title */
+.sidebar .nav-links .dropdown-title {
+  transition: all 0.52s ease;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.nav-links li {
+  list-style: none;
+}
+
+/* Dropdown Button */
+
+.sidebar .nav-links .dropdown-title a:hover,
+.sidebar .nav-links .dropdown-title a.active {
+  background-color: #C82D31;
+  border-radius: 7px;
+  // box-shadow: 1px 1px 8px #111;
+  transform: translateY(-1px);
+  color: #fff !important;
+}
+
+.sidebar .nav-links .dropdown-title a:hover svg path,
+.sidebar .nav-links .dropdown-title a.active svg path {
+  fill: #fff;
+} 
+
+.sidebar .nav-links li.showMenu i.arrow {
+  transform: rotate(-180deg);
+}
+
+/* Sub Menu */
+.sidebar .nav-links li .sub-menu {
+  padding: 6px 6px 14px 8px;
+  background: white;
+  display: none;
+  transition: all 0.4s ease;
+}
+
+.sidebar .nav-links li.showMenu .sub-menu {
+  display: block;
+}
+
+.sidebar .nav-links li .sub-menu li {
+  list-style: none;
+}
+
+.sidebar .nav-links li .sub-menu li a:hover,
+.sidebar .nav-links li .sub-menu li a.active {
+  color: #C82D31 !important;
+  text-decoration: none;
+}
+
+.sidebar.sidebar-close .nav-links li .sub-menu .link_name {
+  font-size: 16px;
+  font-weight: 600;
+  display: block;
+}
+
+.sidebar .nav-links li .sub-menu.blank {
+  pointer-events: auto;
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (min-width:1120px) and (max-width:1200px) {
+  .submenu a {
+    font-size: 16px !important;
+    line-height: 18.8px !important;
+    font-weight: 600 !important;
+    color: #747684 !important;
+  }
+}
+
+@media (min-width:1030px) and (max-width:1120px) {
+  .submenu a {
+    font-size: 12px !important;
+    line-height: 32.8px !important;
+    font-weight: 600 !important;
+    color: #747684 !important;
+  }
+}
+
+@media (min-width:992px) and (max-width:1030px) {
+  .submenu a {
+    font-size: 11px !important;
+    line-height: 32.8px !important;
+    font-weight: 600 !important;
+    color: #747684 !important;
+  }
+}
+
+@media (min-width:872px) and (max-width:992px) {
+  .submenu a {
+    font-size: 14px !important;
+    line-height: 32.8px !important;
+    font-weight: 600 !important;
+    color: #747684 !important;
+  }
+}
+
+
+@media (min-width:768px) and (max-width:872px) {
+  .submenu a {
+    font-size: 12px !important;
+    line-height: 32.8px !important;
+    font-weight: 600 !important;
+    color: #747684 !important;
+  }
+}
+
+
+
+
+@media only screen and (max-width:768px) {
+  .sidebar {
+    position: absolute;
+    top: 90%;
+    height: 100vh;
+  }
+}
+
+// .sub-menu {
+//   list-style: none;
+// }
+// .sub-menu >li {
+//   position: relative;
+// }
+// .sub-menu>li:before {
+//   content: '\25CF';
+//   margin-right: 10px;
+//   font-size: 20px;
+//   color: rgba(200, 45, 49, 1);
+// }
+// .sub-menu>li:after {
+//   position: absolute;
+//   left: 0;
+//   top: 0;
+//   content: '';
+//   border-left: 2px solid rgba(200, 45, 49, 1);
+//   margin-left: 5px;
+//   height: 100%;
+// }
+// .sub-menu >li:first-of-type:after {
+//   top: 50%;
+// }
+// .sub-menu >li:last-of-type:after {
+//   top: -50%;
+// }
+
+
+.sub-menu {
+  list-style: none;
+}
+.sub-menu >li {
+  position: relative;
+}
+.sub-menu > li:before {
+  content: '\2500\2022';
+  margin-right: 5px;
+  font-size: 20px;
+  color: rgba(200, 45, 49, 1);
+}
+
+// .sub-menu > li:before {
+//   content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="8" viewBox="0 0 8 5" fill="none"><path d="M4.00012 0.74955L7.18213 3.9315L6.12146 4.99219L4.00012 2.87085L1.87882 4.99219L0.81817 3.9315L4.00012 0.74955Z" fill="rgba(200, 45, 49, 1)" /></svg>');
+//   margin-right: 5px;
+//   font-size: 20px;
+// }
+
+.sub-menu>li:after {
+  position: absolute;
+  left: 0;
+  top: 0;
+  content: '';
+  border-left: 2px solid rgba(200, 45, 49, 1);
+  // margin-left: 5px;
+  height: 100%;
+}
+.sub-menu >li:first-of-type:after {
+  top: 0%;
+}
+.sub-menu >li:last-of-type:after {
+  top: -50%;
+}
+
+.rotate-icon {
+  transition: transform 0.3s ease; /* Add smooth transition */
+}
+
+.showMenu .rotate-icon {
+  transform: rotate(180deg); /* Rotate icon by 180 degrees when showMenu class is applied */
+}
