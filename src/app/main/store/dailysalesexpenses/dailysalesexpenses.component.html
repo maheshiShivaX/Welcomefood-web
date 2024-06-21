@@ -147,7 +147,8 @@
                         <div class="col-lg-4 col-sm-5 mt-lg-auto mt-3 pl-lg-0">
                             <div class="form-group mb-0">
                                 <label for="FormControlInput1" class="form-label">Amount</label>
-                                <input type="text" class="form-control" id="amount" formControlName="amount"
+                                <input type="text" class="form-control" id="amount" formControlName="amount" (keypress)="validateNumber($event)"
+                                (input)="validateDecimalPlaces($event)"
                                     placeholder="Enter Amount">
                             </div>
                         </div>
@@ -276,7 +277,8 @@
                                             <div class="inputfield px-2 d-flex align-items-center">
                                                 <span>$</span>
 
-                                                <input type="text" class="form-control"
+                                                <input type="text" class="form-control" (keypress)="validateNumber($event)"
+                                                (input)="validateDecimalPlaces($event)"
                                                     [ngModelOptions]="{standalone: true}" [(ngModel)]="row.amount">
                                             </div>
                                         </div>
@@ -315,7 +317,7 @@
                 <div class="data-container pt-4" *ngIf="expenseitem != null">
                     <div class="paytype">
                         <label class="paytype-option">
-                            <input type="radio" name="payMode" [ngModelOptions]="{standalone: true}"
+                            <input type="radio" name="payMode" [ngModelOptions]="{standalone: true}" 
                                 [(ngModel)]="selectedOption" (ngModelChange)="onPayModeChange('1')" value="1"
                                 class="radio-input" />
                             <span class="custom-radio"></span>
@@ -348,7 +350,8 @@
                                             <div class="inputfield px-2 d-flex align-items-center">
                                                 <span>$</span>
 
-                                                <input type="text" class="form-control"
+                                                <input type="text" class="form-control" (keypress)="validateNumber($event)"
+                                                (input)="validateDecimalPlaces($event)"
                                                     [ngModelOptions]="{standalone: true}" [(ngModel)]="row.amount">
                                             </div>
                                         </div>
@@ -420,7 +423,8 @@
                                                 <div class="inputfield px-2 d-flex align-items-center">
                                                     <span>$</span>
     
-                                                    <input type="text" class="form-control"
+                                                    <input type="text" class="form-control" (keypress)="validateNumber($event)"
+                                                    (input)="validateDecimalPlaces($event)"
                                                         [ngModelOptions]="{standalone: true}" [(ngModel)]="row.amount">
                                                 </div>
                                             </div>
@@ -492,7 +496,8 @@
                                                 <div class="inputfield px-2 d-flex align-items-center">
                                                     <span>$</span>
     
-                                                    <input type="text" class="form-control"
+                                                    <input type="text" class="form-control" (keypress)="validateNumber($event)"
+                                                    (input)="validateDecimalPlaces($event)"
                                                         [ngModelOptions]="{standalone: true}" [(ngModel)]="row.amount">
                                                 </div>
                                             </div>
@@ -559,7 +564,8 @@
                             <div class="col-lg col-sm-6">
                                 <div class="form-group mb-0">
                                     <label for="FormControlInput1" class="form-label">Amount</label>
-                                    <input type="text" class="form-control" id="amount" formControlName="amount"
+                                    <input type="text" class="form-control" id="amount" formControlName="amount" (keypress)="validateNumber($event)"
+                                    (input)="validateDecimalPlaces($event)"
                                         placeholder="Enter Amount">
                                 </div>
                             </div>

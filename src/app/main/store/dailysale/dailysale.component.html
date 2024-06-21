@@ -133,8 +133,9 @@
                                                 style="font-weight:600">{{row.productName}}</b></label>
                                         <div class="inputfield col-xl-9 col-md-8 d-flex align-items-center">
                                             <span>$</span>
-                                            <input type="text" class="form-control" [(ngModel)]="row.amount"
-                                                (blur)="onTextboxLeave($event,row )" id="grocery" placeholder="">
+                                            <input type="text" class="form-control" [(ngModel)]="row.amount"   (keypress)="validateNumber($event)"
+                                            (input)="validateDecimalPlaces($event)"
+                                                (blur)="onTextboxLeave($event,row)" id="grocery" placeholder="">
                                         </div>
                                     </div>
                                 </ng-container>
@@ -162,7 +163,7 @@
                                                     style="font-weight:600">{{row.productName}}</b></label>
                                             <div class="inputfield col-xl-9 col-md-8 d-flex align-items-center">
                                                 <span>$</span>
-                                                <input type="text" class="form-control" [(ngModel)]="row.amount"
+                                                <input type="text" class="form-control" [(ngModel)]="row.amount" (keypress)="validateNumber($event)"  (input)="validateDecimalPlaces($event)"
                                                     (blur)="onTextboxLeave($event,row )" id="grocery" placeholder="">
                                             </div>
                                         </div>
@@ -184,7 +185,7 @@
                                     style="font-weight:600">Closing Cash</b></label>
                             <div class="inputfield col-xl-9 col-md-8 d-flex align-items-center">
                                 <span>$</span>
-                                <input type="text" class="form-control" [(ngModel)]="this.storeclosingcash"
+                                <input type="text" class="form-control" [(ngModel)]="this.storeclosingcash" (keypress)="validateNumber($event)"  (input)="validateDecimalPlaces($event)"
                                     (blur)="onTextboxLeaveClosing($event )" id="grocery" placeholder="">
                             </div>
                         </div>
@@ -259,7 +260,8 @@
                     </div>
                     <div class="mb-3 col-xl-4 col-lg-6">
                         <label for="FormControlInput1" class="form-label">Amount</label>
-                        <input type="text" class="form-control" formControlName="amount" id="amount" placeholder="$">
+                        <input type="text" class="form-control" formControlName="amount" id="amount"  (keypress)="validateNumber($event)"
+                        (input)="validateDecimalPlaces($event)" placeholder="$">
                     </div>
                     <div class="mb-3 col-xl-4 col-lg-6" *ngIf="this.selectedOption=='2'">
                         <label for="FormControlInput1" class="form-label">Cheque Number</label>
@@ -412,8 +414,9 @@
                                     <td>
                                         <div class="forminput ">
                                             <div class="inputfield px-2 mx-3 d-flex align-items-center">
-                                                <span>$</span>
-                                                <input type="text" [(ngModel)]="item.regular" (input)="updateTotals()"
+                                                <span></span>
+                                                <input type="text" [(ngModel)]="item.regular" (input)="updateTotals()"  (keypress)="validateNumber($event)"
+                                                (input)="validateDecimalPlaces($event)"
                                                     [readonly]="isReadonly(item.name)" class="form-control">
                                             </div>
                                         </div>
@@ -421,8 +424,9 @@
                                     <td>
                                         <div class="forminput">
                                             <div class="inputfield px-2 mx-3 d-flex align-items-center">
-                                                <span>$</span>
-                                                <input type="text" [(ngModel)]="item.plus" (input)="updateTotals()"
+                                                <span></span>
+                                                <input type="text" [(ngModel)]="item.plus" (input)="updateTotals()"  (keypress)="validateNumber($event)"
+                                                (input)="validateDecimalPlaces($event)"
                                                     [readonly]="isReadonly(item.name)" class="form-control">
                                             </div>
                                         </div>
@@ -430,8 +434,9 @@
                                     <td>
                                         <div class="forminput">
                                             <div class="inputfield px-2 mx-3 d-flex align-items-center">
-                                                <span>$</span>
-                                                <input type="text" [(ngModel)]="item.premium" (input)="updateTotals()"
+                                                <span></span>
+                                                <input type="text" [(ngModel)]="item.premium" (input)="updateTotals()"  (keypress)="validateNumber($event)"
+                                                (input)="validateDecimalPlaces($event)"
                                                     [readonly]="isReadonly(item.name)" class="form-control">
                                             </div>
                                         </div>
@@ -439,8 +444,9 @@
                                     <td>
                                         <div class="forminput">
                                             <div class="inputfield px-2 mx-3 d-flex align-items-center">
-                                                <span>$</span>
-                                                <input type="text" [(ngModel)]="item.diesel" (input)="updateTotals()"
+                                                <span></span>
+                                                <input type="text" [(ngModel)]="item.diesel" (input)="updateTotals()"  (keypress)="validateNumber($event)"
+                                                (input)="validateDecimalPlaces($event)"
                                                     [readonly]="isReadonly(item.name)" class="form-control">
                                             </div>
                                         </div>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -21,6 +21,27 @@ interface InventoryItem {
   styleUrls: ['./dailysale.component.scss']
 })
 export class DailysaleComponent {
+
+  validateNumber(event: KeyboardEvent) {
+    const charCode = event.which ? event.which : event.keyCode;
+    const inputChar = String.fromCharCode(charCode);
+    const pattern = /[0-9]|\./;
+
+    if (!pattern.test(inputChar) && charCode > 31) {
+      event.preventDefault();
+    }
+  
+  }
+  validateDecimalPlaces(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    const value = inputElement.value;
+
+    if (value.includes('.') && value.split('.')[1].length > 2) {
+      inputElement.value = value.substring(0, value.length - 1);
+    }
+  }
+
+  
   //today: string;
   insideList: any
   storeId: any;
@@ -214,6 +235,11 @@ closingdata:any;
     })
   }
   onTextboxLeave(event: Event, row: any): void {
+
+
+    
+
+
     const inputElement = event.target as HTMLInputElement;
     console.log('Textbox value on leave:', inputElement.value);
 

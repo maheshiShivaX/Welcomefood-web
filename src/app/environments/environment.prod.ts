@@ -2,13 +2,13 @@ export const environment = {
   production: true,
   hmr: false,
   config: {
-    apiUrl:"https://www.indianfilms.in/wfapi/api/",
+   // apiUrl:"https://www.indianfilms.in/wfapi/api/",
     //apiUrl:"http://stage.ishivaxservices.com/admin_panel/public/api/",
     apiUrlother: "https://anutechinfra.com/anutechAPI/api/",
     apiUrlsms: "http://sms.ishivax.in/api/",
    // apiUrl1:"https://anutechinfra.com/anutechAPI/"
     // apiUrl:"https://anutechinfra.com/anutechAPI/api/"
-    //apiUrl: 'https://localhost:7025/api/'
+    apiUrl: 'https://localhost:7025/api/'
     //apiUrl:'https://www.indianfilms.in/eBuilderAPI/api/'
 
   },
@@ -133,5 +133,8 @@ export const environment = {
 
   StoreClosing:"StoreClosing/SaveStoreClosing",
   GetStoreClosingByStoreId:"StoreClosing/GetStoreClosingByStoreId",
+  GetStoreOpeningDetailById:"StoreClosing/GetStoreOpeningDetailById",
+  SaveOpeningBalance:"StoreClosing/SaveOpeningBalance",
+  GetStoreOpeningCashByStoreId:"StoreClosing/GetStoreOpeningCashByStoreId",
 };
 

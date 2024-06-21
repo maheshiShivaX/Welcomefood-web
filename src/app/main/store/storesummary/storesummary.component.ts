@@ -36,6 +36,7 @@ export class StoresummaryComponent {
     this.storeid = localStorage.getItem("storeid");
     this.GetItemSaleByStoreCategoryByStoreId(1)
     // this.GetExpenseItemsByAmountDate();
+    this.GetStoreOpeningCashByStoreId();
     this.GetItemPurchaseByStoreIdcase(1);
     this.GetItemPurchaseByStoreIdcheqe(2);
     this.GetExpenseItemsById(2);
@@ -47,6 +48,28 @@ export class StoresummaryComponent {
 
 
   }
+
+
+
+  
+openingbal:any
+openingcash:number=0;
+  GetStoreOpeningCashByStoreId() {
+
+    this.http.getAll(environment.GetStoreOpeningCashByStoreId + "?pStoreId=" + this.storeid + "&pAmountDate=" + this.entryDate).subscribe((result: any) => {
+      if (result.isSuccess == 1) {
+        console.log(result.data)
+        this.openingbal = result.data;
+this.openingcash=this.openingbal[0].amount;
+this.totalinputcase = this.totalinputcase+ this.openingcash;
+console.log(this.openingcash);
+      }
+      else {
+        // this.insideList = null;
+      }
+    })
+  }
+
 lotteryData:any;
 lotteryamountsale:any;
   GetOtherSale(pStoreId: any, pGroupId: any, pEntryDate: any) {

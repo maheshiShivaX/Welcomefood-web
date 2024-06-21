@@ -11,6 +11,8 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { DailysaleComponent } from './dailysale/dailysale.component';
 import { DailysalesexpensesComponent } from './dailysalesexpenses/dailysalesexpenses.component';
 import { StoresummaryComponent } from './storesummary/storesummary.component';
+import { PlsheetComponent } from './plsheet/plsheet.component';
+
 
 const routes: Routes = [
   { path: 'moneyin/:storeId', component: MoneyinComponent },
@@ -26,6 +28,11 @@ const routes: Routes = [
   {
     path: 'storesummary', component: StoresummaryComponent
   },
+  {
+    path: 'plsheet', component: PlsheetComponent
+  },
+
+  
 ]
 
 @NgModule({
@@ -35,7 +42,9 @@ const routes: Routes = [
     DashboardComponent,
     DailysaleComponent,
     DailysalesexpensesComponent,
-    StoresummaryComponent
+    StoresummaryComponent,
+    PlsheetComponent,
+  
   ],
   imports: [
     CommonModule,

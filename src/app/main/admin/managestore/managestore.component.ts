@@ -333,5 +333,11 @@ sortList(property: keyof TableRow, direction: 'asc' | 'desc') {
         }
       })
     }
+
+    onOnboardStore(pid:any)
+    {
+      this.router.navigateByUrl('/admin/onboardstore/'+ pid);
+    }
   
+   
 }

@@ -10,6 +10,7 @@ import { AssignstoreComponent } from './assignstore/assignstore.component';
 import { ManagestoreproductComponent } from './managestoreproduct/managestoreproduct.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { VendorComponent } from './vendor/vendor.component';
+import { OnboardstoreComponent } from './onboardstore/onboardstore.component';
 
 
 const routes: Routes = [
@@ -20,7 +21,8 @@ const routes: Routes = [
   { path: 'assignstore', component: AssignstoreComponent },
   { path: 'managestoreproduct', component: ManagestoreproductComponent },
   { path: 'vendor', component: VendorComponent },
-
+  { path: 'onboardstore', component: OnboardstoreComponent },
+  { path: 'onboardstore/:storeId', component: OnboardstoreComponent },
 ]
 
 @NgModule({
@@ -32,6 +34,7 @@ const routes: Routes = [
     AssignstoreComponent,
     ManagestoreproductComponent,
     VendorComponent,
+    OnboardstoreComponent,
 
   ],
   imports: [

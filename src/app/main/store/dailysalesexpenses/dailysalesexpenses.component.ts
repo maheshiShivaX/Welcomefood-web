@@ -12,6 +12,26 @@ import { environment } from 'src/app/environments/environment.prod';
   styleUrls: ['./dailysalesexpenses.component.scss']
 })
 export class DailysalesexpensesComponent {
+
+  validateNumber(event: KeyboardEvent) {
+    const charCode = event.which ? event.which : event.keyCode;
+    const inputChar = String.fromCharCode(charCode);
+    const pattern = /[0-9]|\./;
+
+    if (!pattern.test(inputChar) && charCode > 31) {
+      event.preventDefault();
+    }
+  
+  }
+  validateDecimalPlaces(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    const value = inputElement.value;
+
+    if (value.includes('.') && value.split('.')[1].length > 2) {
+      inputElement.value = value.substring(0, value.length - 1);
+    }
+  }
+  
   storeid: any;
   showCreditCardInput: boolean = true;
   showStoreInput: boolean = false;
