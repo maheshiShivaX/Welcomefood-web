@@ -86,18 +86,18 @@
 }
 
 .categoryicon img {
-    padding: 14.67px;
+    padding: 10.67px;
     border-radius: 11.67px;
-    height: 55px;
-    width: 55px;
+    height: 45px;
+    width: 45px;
 }
 
 .expensesdata {
-    gap: 14px;
+    gap: 10px;
     align-items: center;
     // margin-top: 24px;
     padding: 9px;
-    ;
+    max-width: 200px;
     cursor: pointer;
 }
 
@@ -134,16 +134,16 @@
 }
 
 .store-heading h4 {
-    font-size: 20px;
-    font-weight: bold;
+    font-size: 18px;
+    font-weight: 600;
     line-height: 33.6px;
     color: #080433;
     margin-bottom: 12px;
 }
 
 .expenses-submitbtn button {
-    width: 171px;
-    height: 54px;
+    width: 120px;
+    height: 45px;
     border-radius: 12px;
     border: none;
     background-color: #023088;
@@ -153,17 +153,17 @@
     color: #fff;
 }
 
-.expenses-submitbtn {
-    padding: 12px 38px;
-    position: fixed;
-    float: right;
-    display: flex;
-    justify-content: end;
-    right: 0;
-    background: #fff;
-    width: 100%;
-    bottom: 0;
-}
+// .expenses-submitbtn {
+//     padding: 12px 38px;
+//     position: fixed;
+//     float: right;
+//     display: flex;
+//     justify-content: end;
+//     right: 0;
+//     background: #fff;
+//     width: 100%;
+//     bottom: 0;
+// }
 .paytype {
     display: flex;
     flex-direction: row;
@@ -177,7 +177,7 @@
     align-items: center;
     cursor: pointer;
     font-size: 16px;
-    gap: 6px;;
+    // gap: 6px;;
     /* Adjust as necessary */
 }
 
@@ -191,8 +191,8 @@
     font-size: 14px;
     list-style: 16.94px;
     border: 1px solid #747684;
-    padding: 6px 15px;
-    gap: 4px;
+    padding: 5px 10px;
+    gap: 3px;
 }
 
 .paytype-option input:checked+.custom-radio {
@@ -481,8 +481,6 @@
     border: none;
 }
 
-
-
 .dataform .typeheading h6 {
     font-size: 14px;
     line-height: 19.06px;
@@ -496,16 +494,16 @@
 // }
 
 .dataform form label {
-    font-size: 12px;
+    font-size: 14px;
     line-height: 14.52px;
     color: #080433;
-    font-weight: 400;
+    font-weight: 500;
 }
 
 .dataform form input {
     border: 1px solid #ECF1F5;
     border-radius: 8px;
-    height: 41px;
+    height: 35px;
 }
 
 // .carddataform {
@@ -513,7 +511,6 @@
 // }
 
 // store expenses
-
 
 .dailytabledata {
     overflow-x: auto;
@@ -526,11 +523,15 @@
 
 .dailytabledata .forminput .inputfield {
     background-color: #fff;
-    height: 41px;
+    height: 35px;
     border-radius: 8px;
     border: 1px solid #ECF1F5;
 }
 
+.dailytabledata .forminput .inputfield .form-control {
+    height: 100%;
+    padding: 0px 5px;
+}
 
 .dailytabledata form .inputfield span {
     font-size: 14px;
@@ -540,8 +541,7 @@
 }
 
 // payroll css
-
-
+ 
 .payrolldataform .typeheading h6 {
     font-size: 14px;
     line-height: 19.06px;
@@ -550,18 +550,51 @@
 }
 
 .payrolldataform form label {
-    font-size: 12px;
+    font-size: 14px;
     line-height: 14.52px;
     color: #080433;
-    font-weight: 400;
+    font-weight: 500;
+    gap: 3px;
 }
 
 .payrolldataform form input {
     border: 1px solid #ECF1F5;
     border-radius: 8px;
-    height: 41px;
+    height: 35px;
 }
 
 .payrollcarddataform {
     margin-right: 15px;
+}
+
+// table
+.data-in-table {
+    max-height: 70vh;
+    overflow: auto;
+}
+
+.data-in-table .table-container table td {
+    border: 1px solid #dee2e6;
+    padding-left: 6px;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.data-in-table .table-container table th {
+    border: 1px solid #dee2e6;
+    padding: 6px 6px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.data-in-table .table-container table thead tr {
+    background-color: #dbdbdb;
+}
+
+.action {
+    width: 60px;
+}
+
+.data-in-table h4 {
+    font-size: 20px;
 }

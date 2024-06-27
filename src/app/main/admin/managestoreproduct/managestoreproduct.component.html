@@ -1,183 +1,66 @@
-<!-- <p>managestoreproduct works!</p>
-<div class="storeentryform">
-    <div class="store-heading row justify-content-between">
-        <h4 class="">Assign Stores </h4>
-    </div>
-    <div class="storeformdata">
-        <form [formGroup]="form" class="row" (submit)="onSubmit()">
 
-            <div class="mb-3 col-lg-6">
-                <div class="form-group ">
-                    <label for="exampleFormControlSelect1">Store Name</label> -->
-
-                    <!-- <ng-container *ngFor="let item of storedetail; let i = index ">
-                            <input type="checkbox"   />{{item.storeName}} <br>
-                            </ng-container> -->
-
-                    <!-- <ng-select formControlName="storeId" id="storeId" #SelectSizeDefault [items]="storedetail"
-                        [searchable]="true" bindLabel="storeName" bindValue="storeId">
-                    </ng-select> -->
-
-                    <!-- <select class="form-control" formControlName ="storeId" id="exampleFormControlSelect1">
-                            <option>Please select</option>
-                        
-                            <option value={{item.storeId}} *ngFor="let item of storedetail">{{item.storeName}}</option>
-                         
-                        </select> -->
-                <!-- </div>
-
-            </div>
-
-            <div class="mb-3 col-lg-6">
-                <div class="form-group ">
-                    <label for="exampleFormControlSelect1">Product Category</label>
-
-
-
-                    <ng-select formControlName="productCategoryId" id="productCategoryId" #SelectSizeDefault
-                        (ngModelChange)="GetProductDetailbyCategoryId($event)" [items]="productcategory"
-                        [searchable]="true" bindLabel="categoryName" bindValue="productCategoryId">
-                    </ng-select>
-
-                </div>
-            </div>
-
-            <div class="mb-3 col-lg-6">
-                <div class="form-group ">
-                    <label for="exampleFormControlSelect1">Product Name</label>
-
-
-
-                    <ng-select formControlName="productId" id="productId" #SelectSizeDefault [items]="products"
-                        [searchable]="true" bindLabel="productName" bindValue="productId">
-                    </ng-select> -->
-
-
-
-                    <!-- <select class="form-control" formControlName ="employeeId" id="exampleFormControlSelect1">
-                            <option>Please select</option>
-                        
-                            <option value={{item.employeeId}} *ngFor="let item of employeedetails">{{item.name}}</option>
-                         
-                        </select> -->
-                <!-- </div>
-            </div>
-
-
-
-            <div class="submit-btn col-12 d-flex justify-content-sm-end justify-content-between">
-                <div class="resetbtn">
-                    <button (click)="onReset()" [disabled]="form.invalid" type="button">
-                        Reset
-                    </button>
-                </div>
-                <div class="savebtn">
-                    <button type="submit" [disabled]="isLoading">
-                        <ng-container *ngIf="!isLoading">Save</ng-container>
-                        <ng-container *ngIf="isLoading">
-                            <span clas="indicator-progress" [style.display]="'block'">
-                                Please wait...
-                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
-                            </span>
-                        </ng-container>
-                    </button>
-                </div>
-            </div>
-        </form>
-    </div>
-
-
-    <div class="">
-        <div class="search-field d-sm-flex justify-content-between my-4">
-            <div class="pageoption d-flex align-items-center">
-                <select class="pagecounting" id="pagecount">
-                    <option value="50">50</option>
-                    <option value="200">200</option>
-                    <option value='all'>All</option>
-                </select>
-            </div>
-            <div class="d-flex gap-2">
-                <input class="searchfield" type="text" placeholder="Search...">
-            </div>
-        </div>
-        <div class="table-container" *ngIf="productstores!=null">
-            <table class="table">
-                <thead class="thead text-white">
-                    <tr>
-                        <th scope="col">S.N.</th>
-
-                        <th scope="col">Store Name</th>
-                        <th scope="col">Category Name</th>
-                        <th scope="col">Category Code</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let item of productstores;let idx=index;">
-                        <td>{{idx+1}}</td>
-                        <td>{{item.storeName}}</td>
-                        <td>{{item.productCategoryName}}</td>
-                        <td>{{item.productName}}</td>
-                        <td>
-                            <button type="button" (click)="onActive(item.storeProductId)"
-                                style="margin-left: 10px;;">{{item.isActive== true ? 'Active' :'Deactive' }}</button>
-                            <button type="button" (click)="onDelete(item.storeProductId)"
-                                style="margin-left: 10px;;">Delete</button>
-                        </td>
-                    </tr>
-
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="pagination-container my-0">
-        <button class="btn">
-            < </button>
-                <ng-container>
-                    <button class="btn">
-                        1
-                    </button>
-                    <button class="btn btn-primary active">
-                        2
-                    </button>
-                    <span class="ellipsiss">...</span>
-                </ng-container>
-                <button class="btn">
-                    >
-                </button>
-    </div>
-</div>
- -->
 
 
 <div class="storeentryform">
-    <div class="store-heading">
-        <h4 class="">Assign Stores</h4>
+    <div class="store-heading" *ngIf="storedetail !=null">
+        <h4 class="">Store Product : {{this.storedetail[0].storeName}}</h4> <a (click)="onAdd()">  +Add Product </a>
     </div>
-    <div class="storeformdata pt-2">
+    <div class="storeformdata pt-2" *ngIf="isAdd==true">
         <form [formGroup]="form" class="row" (submit)="onSubmit()">
-            <div class="mb-3 col-xl-4 col-lg-6">
+            <div class=" col-12">
+            <button type="button" *ngFor="let item of productcategory"
+            (click)="GetProductDetailbyCategoryId(item.productCategoryId)"
+            class="btn btn-gray mb-2 me-sm-3 me-1 waves-effect waves-light">{{item.categoryName}}</button>
+            </div>
+
+            <!-- <div class="mb-3 col-xl-4 col-lg-6">
                 <label for="FormControlInput1" class="form-label">Store Name<span class="required">*</span></label>
                 <ng-select formControlName="storeId" id="storeId" #SelectSizeDefault [items]="storedetail"
                     [searchable]="true" bindLabel="storeName" bindValue="storeId">
                 </ng-select>
-            </div>
+            </div> -->
 
-            <div class="mb-3 col-xl-4 col-lg-6">
+            <!-- <div class="mb-3 col-xl-4 col-lg-6">
                 <label for="FormControlInput1" class="form-label">Product Category<span>*</span></label>
                 <ng-select formControlName="productCategoryId" id="productCategoryId" #SelectSizeDefault
                     (ngModelChange)="GetProductDetailbyCategoryId($event)" [items]="productcategory" [searchable]="true"
                     bindLabel="categoryName" bindValue="productCategoryId">
                 </ng-select>
+            </div> -->
+           
+            <div class="col-md-5 col-12" style="margin-top: 20px;; max-height: 400px; overflow-y: scroll;">
+                <table class="table table-hover table-striped-columns table-bordered"
+                    style="border: thin;border-color: #fff;" id="tabellist" #content>
+                    <thead style="top: 0; z-index: 1; background-color: white; border-color:fff; ">
+                        <tr style="background-color: #e6e6e6;">
+                            <th> <input type="checkbox"
+                                (change)="oncheckAllSubCategory(products )"
+                                [checked]="checkal"
+                                 
+                                    ></th>
+                            <th>Product Sub Category</th>
+                        </tr>
+                    </thead>
+                    <tbody style="top: 0;z-index: 1; background-color: white; border-color:fff; ">
+                        <tr style="background-color: #e6e6e6;"
+                            *ngFor="let item of products">
+                            <td style="width: 20px;;"> <input type="checkbox"
+                                    id="{{item.productId}}"
+                                    [value]="item.productId"
+                                    [checked]="isSelected(item)"
+                                 ></td>
+                            <td>
+                                <label
+                                    for="{{item.productName}}">{{item.productName}}</label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
-            <div class="mb-3 col-xl-4 col-lg-6">
-                <label for="FormControlInput1" class="form-label">Product Name<span>*</span></label>
 
-                <ng-select formControlName="productId" id="productId" #SelectSizeDefault [items]="products"
-                    [searchable]="true" bindLabel="productName" bindValue="productId">
-                </ng-select>
-            </div>
+
+        
 
             <div class="submit-btn col-12">
                 <div class="allbtn d-flex justify-content-sm-end justify-content-between">

@@ -108,17 +108,35 @@
     text-align: right;
 }
 
+.Closing-cash label{
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 19.6px;
+    color: #080433;
+}
+
 .dailyform .category .form {
     padding: auto 20px;
 }
 
-.dailyform .category .form .inputfield {
-    height: 41px;
+.dailyform .category .form .inputfield,
+.Closing-cash .inputfield
+{
+    height: 35px;
     border-radius: 8px;
     border: 1px solid #ECF1F5;
 }
 
-.dailyform .category .form input {
+.dailyform .category .form .form-control,
+.Closing-cash .inputfield
+{
+    height: 100%;
+    padding: 0px 5px;
+}
+
+.dailyform .category .form input,
+.Closing-cash .inputfield input
+{
     border: none;
 }
 
@@ -158,6 +176,58 @@
 
 .calenderdate-mobile {
     display: none;
+}
+
+.next-submitbtn button {
+    width: 120px;
+    height: 45px;
+    border-radius: 12px;
+    border: none;
+    background-color: #023088;
+    font-size: 16px;
+    line-height: 16px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.fixed-button{
+    padding: 12px 38px;
+    position: fixed;
+    float: right;
+    display: flex;
+    justify-content: end;
+    right: 0;
+    background: #fff;
+    width: 100%;
+    bottom: 0;
+}
+
+.back-submitbtn button {
+    width: 120px;
+    height: 45px;
+    border-radius: 12px;
+    border: 1px solid #023088;
+    background-color: #ffffff;
+    font-size: 16px;
+    line-height: 16px;
+    font-weight: 600;
+    color: #000000;
+}
+
+// .back-submitbtn {
+//     padding: 12px 38px;
+//     position: fixed;
+//     float: right;
+//     display: flex;
+//     justify-content: start;
+//     right: 0;
+//     background: #fff;
+//     width: 100%;
+//     bottom: 0;
+// }
+
+.action {
+    width: 60px;
 }
 
 @media (min-width:992px) and (max-width:1200px) {
@@ -314,12 +384,11 @@
 
     .purchases .store-heading h4 {
         font-size: 18px;
-        font-weight: bold;
+        font-weight: 600;
         line-height: 18.6px;
         color: #080433;
         margin-bottom: 24px;
     }
-
 }
 
 @media (min-width: 1024px) {
@@ -439,9 +508,13 @@
 
 .dailytabledata .forminput .inputfield {
     background-color: #fff;
-    height: 41px;
+    height: 35px;
     border-radius: 8px;
     border: 1px solid #ECF1F5;
+}
+
+.dailytabledata .forminput .inputfield .form-control{
+    padding: 0px 5px;
 }
 
 .readonly {
@@ -511,14 +584,14 @@
 }
 
 .purchases .storeformdata form input {
-    height: 41px;
-    border-radius: 12px;
+    height: 35px;
+    border-radius: 8px;
     border: 1px solid #ECF1F5;
 }
 
 .purchases .storeformdata form label {
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 500;
     line-height: 21px;
     color: #474A65;
 }
@@ -567,12 +640,11 @@
     font-size: 14px;
     list-style: 16.94px;
     border: 1px solid #747684;
-    padding: 0px 15px;
-    gap: 4px;
+    padding: 0px 10px;
 }
 
 .radio-input {
-    /* display: none; */
+    // display: none;
     /* Hide the default radio button */
 }
 
@@ -621,14 +693,14 @@
     display: inline-block;
     background-color: #FFFFFF;
     color: #080433;
-    border-radius: 12px;
+    border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s;
-    width: 140px;
-    height: 50px;
-    font-size: 18px;
+    width: 110px;
+    height: 40px;
+    font-size: 16px;
     line-height: 18px;
-    font-weight: 600;
+    font-weight: 500;
     border: 1px solid #ECF1F5;
 }
 
@@ -637,14 +709,14 @@
     display: inline-block;
     background-color: #023088;
     color: white;
-    border-radius: 12px;
+    border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s;
-    width: 140px;
-    height: 50px;
-    font-size: 18px;
+    width: 110px;
+    height: 40px;
+    font-size: 16px;
     line-height: 18px;
-    font-weight: 600;
+    font-weight: 500;
     border: none;
 }
 

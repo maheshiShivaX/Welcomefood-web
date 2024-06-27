@@ -42,6 +42,7 @@ export class ManagestoreComponent {
     contactPerson: new FormControl(''),
     isActive: new FormControl(true),
     createdBy: new FormControl(0),
+    comapnyId:new FormControl(0),
   });
 
   constructor(private router: Router, private authService: AuthService,
@@ -50,7 +51,7 @@ export class ManagestoreComponent {
     this.authService.currentUser.subscribe((user) => {
       const currentUser = user;
       this.form.value.createdBy = currentUser.loginId;
-
+      this.companyId= currentUser.companyId;
       // Update menu based on user authentication state
     });
   }
@@ -59,7 +60,7 @@ export class ManagestoreComponent {
 // ================================================================
 
 filterValue: string = '';
-
+companyId:any;
 //  applyFilter() {
 //    const filter = this.filterValue.toUpperCase();
 //    this.datalist.forEach(row => {
@@ -229,7 +230,7 @@ sortList(property: keyof TableRow, direction: 'asc' | 'desc') {
 
   ngOnInit() {
 
-    this.GetStoreDetailAll();
+    this.GetStoreDetailbyCompanyId();
   }
 
   onSubmit() {
@@ -240,13 +241,16 @@ sortList(property: keyof TableRow, direction: 'asc' | 'desc') {
       return;
     }
 
+    this.form.value.comapnyId = this.companyId;
    
+    console.log(this.form.value);
+    //return;
     this.http.post(environment.SaveStoreDetail, this.form.value).subscribe((result: any) => {
       if (result.isSuccess == 1) {
         this.isLoading = false;
         this.submitted = false;
         this.onReset();
-        this.GetStoreDetailAll();
+        this.GetStoreDetailbyCompanyId();
         this.toastr.success(result.message);
       }
       else {
@@ -262,8 +266,8 @@ sortList(property: keyof TableRow, direction: 'asc' | 'desc') {
     return this.form.controls;
   }
 
-  GetStoreDetailAll() {
-    this.http.getAll(environment.GetStoreDetail).subscribe((result: any) => {
+  GetStoreDetailbyCompanyId() {
+    this.http.getAll(environment.GetStoreDetailbyCompanyId+"?pCompanyId="+this.companyId).subscribe((result: any) => {
       if (result.isSuccess == 1) {
         console.log(result.data)
         this.datalist = result.data;
@@ -278,7 +282,11 @@ sortList(property: keyof TableRow, direction: 'asc' | 'desc') {
     })
   }
 
+  onProduct(storeId:any)
+  {
 
+    this.router.navigateByUrl('admin/managestoreproduct/' + storeId);
+  }
 
 
   onReset() {
@@ -327,7 +335,7 @@ sortList(property: keyof TableRow, direction: 'asc' | 'desc') {
           console.log(result.data)
           this.toastr.error(result.message);
         
-          this.GetStoreDetailAll()
+          this.GetStoreDetailbyCompanyId()
         }
         else {
         }

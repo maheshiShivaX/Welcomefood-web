@@ -33,7 +33,7 @@ export interface User {
     isActive:boolean,
     createdBy:number
     landingUrl:string,
-    name:string
-
+    name:string,
+    companyId:number
     // Add other fields as needed
   }

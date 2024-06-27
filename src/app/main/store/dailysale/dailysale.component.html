@@ -10,7 +10,7 @@
                         <path d="M20.5 12H3.67" stroke="#080433" stroke-width="1.5" stroke-miterlimit="10"
                             stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
-                    <span>Back</span>
+                    <!-- <span>Back</span> -->
                 </div>
                 <div class="calenderdate-mobile">
                     <div class="previousdate">
@@ -126,15 +126,16 @@
                             <div class="category-heading mb-2">
                                 <span>{{item.productCategoryName}}</span>
                             </div>
-                            <div class="form">
+                            <div class="form inputcolumncount">
                                 <ng-container *ngFor="let row of item.productDetails">
-                                    <div class="form-group row mx-1">
+                                    <div class="form-group row mx-1 inputcategory">
                                         <label for="inputPassword" class="col-xl-3 col-md-4 px-2 col-form-label"><b
                                                 style="font-weight:600">{{row.productName}}</b></label>
                                         <div class="inputfield col-xl-9 col-md-8 d-flex align-items-center">
                                             <span>$</span>
-                                            <input type="text" class="form-control" [(ngModel)]="row.amount"   (keypress)="validateNumber($event)"
-                                            (input)="validateDecimalPlaces($event)"
+                                            <input type="text" class="form-control" [(ngModel)]="row.amount"
+                                                (keypress)="validateNumber($event)"
+                                                (input)="validateDecimalPlaces($event)"
                                                 (blur)="onTextboxLeave($event,row)" id="grocery" placeholder="">
                                         </div>
                                     </div>
@@ -163,7 +164,9 @@
                                                     style="font-weight:600">{{row.productName}}</b></label>
                                             <div class="inputfield col-xl-9 col-md-8 d-flex align-items-center">
                                                 <span>$</span>
-                                                <input type="text" class="form-control" [(ngModel)]="row.amount" (keypress)="validateNumber($event)"  (input)="validateDecimalPlaces($event)"
+                                                <input type="text" class="form-control" [(ngModel)]="row.amount"
+                                                    (keypress)="validateNumber($event)"
+                                                    (input)="validateDecimalPlaces($event)"
                                                     (blur)="onTextboxLeave($event,row )" id="grocery" placeholder="">
                                             </div>
                                         </div>
@@ -179,13 +182,14 @@
             </div>
             <div class="mt-4">
                 <div class="dailyform">
-                    <div class="columncountsection">
+                    <div class="columncountsection Closing-cash">
                         <div class="form-group row mx-1">
                             <label for="inputPassword" class="col-xl-3 col-md-4 px-2 col-form-label"><b
                                     style="font-weight:600">Closing Cash</b></label>
                             <div class="inputfield col-xl-9 col-md-8 d-flex align-items-center">
                                 <span>$</span>
-                                <input type="text" class="form-control" [(ngModel)]="this.storeclosingcash" (keypress)="validateNumber($event)"  (input)="validateDecimalPlaces($event)"
+                                <input type="text" class="form-control" [(ngModel)]="this.storeclosingcash"
+                                    (keypress)="validateNumber($event)" (input)="validateDecimalPlaces($event)"
                                     (blur)="onTextboxLeaveClosing($event )" id="grocery" placeholder="">
                             </div>
                         </div>
@@ -193,16 +197,43 @@
                     <div class="totalamount d-flex justify-content-end">
                         <span>Total Closing Cash : <b>${{this.storeclosingcash}}</b></span>
                     </div>
-                  
-
-
+                </div>
+            </div>
+        </div>
+        <div class="fixed-button col-xl-10 col-lg-9 col-md-8">
+            <div class="d-flex justify-content-end w-100">
+                <div class="next-submitbtn">
+                    <button type="button" (click)="showData(1);">Next</button>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- ==================================purchases page =========-->
+    <style>
+        .data-in-table {
+            max-height: 70vh;
+            overflow: auto;
+        }
 
+        .data-in-table .table-container table td {
+            border: 1px solid #dee2e6;
+            padding-left: 6px;
+            font-size: 12px;
+            font-weight: 400;
+        }
+
+        .data-in-table .table-container table th {
+            border: 1px solid #dee2e6;
+            padding: 6px 6px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .data-in-table .table-container table thead tr {
+            background-color: #dbdbdb;
+        }
+    </style>
     <div class="purchases mt-4" *ngIf="showPurchasesInput">
         <div class="store-heading">
             <h4 class="">Purchase Register</h4>
@@ -224,46 +255,33 @@
                     </label>
                 </div>
                 <div class="row">
-                    <div class="mb-3 col-xl-4 col-lg-6">
+                    <div class="mb-3 col-xl-3 col-lg-6">
                         <label for="FormControlInput1" class="form-label">Vendor Name</label>
                         <!-- <ng-select formControlName="vendorId" id="vendorId" #SelectSizeDefault>
                         </ng-select> -->
-
                         <ng-select formControlName="vendorId" id="vendorId" #SelectSizeDefault [items]="vendorList"
                             [searchable]="true" bindLabel="vendorName" bindValue="vendorId">
                         </ng-select>
-
-
                     </div>
-                    <div class="mb-3 col-xl-4 col-lg-6">
+                    <div class="mb-3 col-xl-3 col-lg-6">
                         <label for="FormControlInput1" class="form-label">Product Category</label>
                         <ng-select formControlName="productCategoryId" id="productCategoryId" #SelectSizeDefault
                             [items]="productcategorylist" [searchable]="true" bindLabel="productCategoryName"
                             (ngModelChange)="GetProductDetailbyCategoryId($event)" bindValue="productCategoryId">
                         </ng-select>
-
-
-
-
                     </div>
-
-
-
-
-
-
-                    <div class="mb-3 col-xl-4 col-lg-6">
+                    <div class="mb-3 col-xl-3 col-lg-6">
                         <label for="FormControlInput1" class="form-label">Product</label>
                         <ng-select formControlName="productId" id="productId" #SelectSizeDefault [items]="productlist"
                             bindLabel="productName" bindValue="productId">
                         </ng-select>
                     </div>
-                    <div class="mb-3 col-xl-4 col-lg-6">
+                    <div class="mb-3 col-xl-3 col-lg-6">
                         <label for="FormControlInput1" class="form-label">Amount</label>
-                        <input type="text" class="form-control" formControlName="amount" id="amount"  (keypress)="validateNumber($event)"
-                        (input)="validateDecimalPlaces($event)" placeholder="$">
+                        <input type="text" class="form-control" formControlName="amount" id="amount"
+                            (keypress)="validateNumber($event)" (input)="validateDecimalPlaces($event)" placeholder="$">
                     </div>
-                    <div class="mb-3 col-xl-4 col-lg-6" *ngIf="this.selectedOption=='2'">
+                    <div class="mb-3 col-xl-3 col-lg-6" *ngIf="this.selectedOption=='2'">
                         <label for="FormControlInput1" class="form-label">Cheque Number</label>
                         <input type="text" class="form-control" formControlName="chequeNo" id="chequeNo"
                             placeholder="#">
@@ -285,8 +303,8 @@
                 </div>
             </form>
         </div>
-        <div class="commontable">
-            <div class="search-field d-sm-flex justify-content-between my-3">
+        <div class="data-in-table my-3">
+            <!-- <div class="search-field d-sm-flex justify-content-between">
                 <div class="pageoption d-flex align-items-center">
                     <select class="pagecounting" id="pagecount">
                         <option value="50">50</option>
@@ -297,10 +315,10 @@
                 <div class="d-flex gap-2 mt-sm-auto mt-3">
                     <input class="searchfield" type="text" placeholder="Search...">
                 </div>
-            </div>
+            </div> -->
             <div class="table-container">
-                <table class="table">
-                    <thead class="thead text-white">
+                <table class="w-100">
+                    <thead class="text-white">
                         <tr>
                             <th>Sr.No</th>
                             <th>Vendor Name</th>
@@ -314,15 +332,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let row of purchaseitemlist">
-                            <td class="tablefirstdata">1</td>
+                        <tr *ngFor="let row of purchaseitemlist ;let idx =index">
+                            <td class="tablefirstdata text-center">{{idx + 1}}</td>
                             <td>{{row.vendorName}}</td>
                             <td>{{row.categoryName}}</td>
                             <td>{{row.producName}}</td>
                             <td>{{row.payModeType}}</td>
                             <td>{{row.amount}}</td>
                             <td>{{row.chequeNo}}</td>
-                            <th>{{row.createdDate}}</th>
+                            <td>{{row.createdDate | date : 'dd-MM-yyyy hh:mm:ss'}}</td>
                             <td class="action">
                                 <button type="button" (click)="onEditpurchase(row.itemPurchaseId)" class="editbtn">
                                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
@@ -370,7 +388,7 @@
                 </table>
             </div>
         </div>
-        <div class="pagination-container my-0">
+        <!-- <div class="pagination-container my-0">
             <button class="btn">
                 < </button>
                     <ng-container>
@@ -385,6 +403,16 @@
                     <button class="btn">
                         >
                     </button>
+        </div> -->
+        <div class="fixed-button col-xl-10 col-lg-9 col-md-8">
+            <div class="d-flex justify-content-between w-100">
+                <div class="back-submitbtn">
+                    <button type="button" (click)="showData(1);">Back</button>
+                </div>
+                <div class="next-submitbtn">
+                    <button type="button" (click)="showData(3);">Next</button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -414,9 +442,9 @@
                                     <td>
                                         <div class="forminput ">
                                             <div class="inputfield px-2 mx-3 d-flex align-items-center">
-                                                <span></span>
-                                                <input type="text" [(ngModel)]="item.regular" (input)="updateTotals()"  (keypress)="validateNumber($event)"
-                                                (input)="validateDecimalPlaces($event)"
+                                                <input type="text" [(ngModel)]="item.regular" (input)="updateTotals()"
+                                                    (keypress)="validateNumber($event)"
+                                                    (input)="validateDecimalPlaces($event)"
                                                     [readonly]="isReadonly(item.name)" class="form-control">
                                             </div>
                                         </div>
@@ -424,9 +452,9 @@
                                     <td>
                                         <div class="forminput">
                                             <div class="inputfield px-2 mx-3 d-flex align-items-center">
-                                                <span></span>
-                                                <input type="text" [(ngModel)]="item.plus" (input)="updateTotals()"  (keypress)="validateNumber($event)"
-                                                (input)="validateDecimalPlaces($event)"
+                                                <input type="text" [(ngModel)]="item.plus" (input)="updateTotals()"
+                                                    (keypress)="validateNumber($event)"
+                                                    (input)="validateDecimalPlaces($event)"
                                                     [readonly]="isReadonly(item.name)" class="form-control">
                                             </div>
                                         </div>
@@ -434,9 +462,9 @@
                                     <td>
                                         <div class="forminput">
                                             <div class="inputfield px-2 mx-3 d-flex align-items-center">
-                                                <span></span>
-                                                <input type="text" [(ngModel)]="item.premium" (input)="updateTotals()"  (keypress)="validateNumber($event)"
-                                                (input)="validateDecimalPlaces($event)"
+                                                <input type="text" [(ngModel)]="item.premium" (input)="updateTotals()"
+                                                    (keypress)="validateNumber($event)"
+                                                    (input)="validateDecimalPlaces($event)"
                                                     [readonly]="isReadonly(item.name)" class="form-control">
                                             </div>
                                         </div>
@@ -444,9 +472,9 @@
                                     <td>
                                         <div class="forminput">
                                             <div class="inputfield px-2 mx-3 d-flex align-items-center">
-                                                <span></span>
-                                                <input type="text" [(ngModel)]="item.diesel" (input)="updateTotals()"  (keypress)="validateNumber($event)"
-                                                (input)="validateDecimalPlaces($event)"
+                                                <input type="text" [(ngModel)]="item.diesel" (input)="updateTotals()"
+                                                    (keypress)="validateNumber($event)"
+                                                    (input)="validateDecimalPlaces($event)"
                                                     [readonly]="isReadonly(item.name)" class="form-control">
                                             </div>
                                         </div>
@@ -454,279 +482,10 @@
 
                                     <td>{{ item.total | currency }}</td>
                                 </tr>
-                                <!-- <tr>
-                                    <td class="pr-4">Open</td>
-                                    <td>
-                                        <form>
-                                            <div class="inputfield px-2 mx-3 d-flex align-items-center">
-                                                <span>$</span>
-                                                <input type="text" class="form-control" id="grocery" placeholder="100">
-                                            </div>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <form>
-                                            <div class="inputfield px-2 mx-3 d-flex align-items-center">
-                                                <span>$</span>
-                                                <input type="text" class="form-control" id="grocery" placeholder="100">
-                                            </div>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <form>
-                                            <div class="inputfield px-2 mx-3 d-flex align-items-center">
-                                                <span>$</span>
-                                                <input type="text" class="form-control" id="grocery" placeholder="100">
-                                            </div>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <form>
-                                            <div class="inputfield px-2 mx-3 d-flex align-items-center">
-                                                <span>$</span>
-                                                <input type="text" class="form-control" id="grocery" placeholder="100">
-                                            </div>
-                                        </form>
-                                    </td>
-                                    <td class="total">
-                                        <span>Total: <b>$0.0</b></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="pr-4">+ Purchases</td>
-                                    <td>
-                                        <form>
-                                            <div class="inputfield px-2 mx-3 d-flex align-items-center">
-                                                <span>$</span>
-                                                <input type="text" class="form-control" id="grocery" placeholder="100">
-                                            </div>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <form>
-                                            <div class="inputfield px-2 mx-3 d-flex align-items-center">
-                                                <span>$</span>
-                                                <input type="text" class="form-control" id="grocery" placeholder="100">
-                                            </div>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <form>
-                                            <div class="inputfield px-2 mx-3 d-flex align-items-center">
-                                                <span>$</span>
-                                                <input type="text" class="form-control" id="grocery" placeholder="100">
-                                            </div>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <form>
-                                            <div class="inputfield px-2 mx-3 d-flex align-items-center">
-                                                <span>$</span>
-                                                <input type="text" class="form-control" id="grocery" placeholder="100">
-                                            </div>
-                                        </form>
-                                    </td>
-                                    <td class="total">
-                                        <span>Total: <b>$0.0</b></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="pr-4">-Sales</td>
-                                    <td>
-                                        <form>
-                                            <div class="inputfield px-2 mx-3 d-flex align-items-center">
-                                                <span>$</span>
-                                                <input type="text" class="form-control" id="grocery" placeholder="100">
-                                            </div>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <form>
-                                            <div class="inputfield px-2 mx-3 d-flex align-items-center">
-                                                <span>$</span>
-                                                <input type="text" class="form-control" id="grocery" placeholder="100">
-                                            </div>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <form>
-                                            <div class="inputfield px-2 mx-3 d-flex align-items-center">
-                                                <span>$</span>
-                                                <input type="text" class="form-control" id="grocery" placeholder="100">
-                                            </div>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <form>
-                                            <div class="inputfield px-2 mx-3 d-flex align-items-center">
-                                                <span>$</span>
-                                                <input type="text" class="form-control" id="grocery" placeholder="100">
-                                            </div>
-                                        </form>
-                                    </td>
-                                    <td class="total">
-                                        <span>Total: <b>$1,359.00</b></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="pr-4"><b>Close</b></td>
-                                    <td>
-                                        <form>
-                                            <div class="inputfield px-2 mx-3 d-flex align-items-center">
-                                                <span>$</span>
-                                                <input type="text" class="form-control" id="grocery" placeholder="100">
-                                            </div>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <form>
-                                            <div class="inputfield px-2 mx-3 d-flex align-items-center">
-                                                <span>$</span>
-                                                <input type="text" class="form-control" id="grocery" placeholder="100">
-                                            </div>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <form>
-                                            <div class="inputfield px-2 mx-3 d-flex align-items-center">
-                                                <span>$</span>
-                                                <input type="text" class="form-control" id="grocery" placeholder="100">
-                                            </div>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <form>
-                                            <div class="inputfield px-2 mx-3 d-flex align-items-center">
-                                                <span>$</span>
-                                                <input type="text" class="form-control" id="grocery" placeholder="100">
-                                            </div>
-                                        </form>
-                                    </td>
-                                    <td class="total">
-                                        <span>Total: <b>$8,394.80</b></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="pr-4">Physical</td>
-                                    <td>
-                                        <form>
-                                            <div class="inputfield px-2 mx-3 d-flex align-items-center">
-                                                <span>$</span>
-                                                <input type="text" class="form-control" id="grocery" placeholder="100">
-                                            </div>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <form>
-                                            <div class="inputfield px-2 mx-3 d-flex align-items-center">
-                                                <span>$</span>
-                                                <input type="text" class="form-control" id="grocery" placeholder="100">
-                                            </div>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <form>
-                                            <div class="inputfield px-2 mx-3 d-flex align-items-center">
-                                                <span>$</span>
-                                                <input type="text" class="form-control" id="grocery" placeholder="100">
-                                            </div>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <form>
-                                            <div class="inputfield px-2 mx-3 d-flex align-items-center">
-                                                <span>$</span>
-                                                <input type="text" class="form-control" id="grocery" placeholder="100">
-                                            </div>
-                                        </form>
-                                    </td>
-                                    <td class="total">
-                                        <span>Total: <b>$8,275.41</b></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="pr-4"><b>Over/Short</b></td>
-                                    <td>
-                                        <form>
-                                            <div class="inputfield px-2 mx-3 d-flex align-items-center">
-                                                <span>$</span>
-                                                <input type="text" class="form-control" id="grocery" placeholder="100">
-                                            </div>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <form>
-                                            <div class="inputfield px-2 mx-3 d-flex align-items-center">
-                                                <span>$</span>
-                                                <input type="text" class="form-control" id="grocery" placeholder="100">
-                                            </div>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <form>
-                                            <div class="inputfield px-2 mx-3 d-flex align-items-center">
-                                                <span>$</span>
-                                                <input type="text" class="form-control" id="grocery" placeholder="100">
-                                            </div>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <form>
-                                            <div class="inputfield px-2 mx-3 d-flex align-items-center">
-                                                <span>$</span>
-                                                <input type="text" class="form-control" id="grocery" placeholder="100">
-                                            </div>
-                                        </form>
-                                    </td>
-                                    <td class="total">
-                                        <span>Total: <b>$-119.39</b></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="pr-4"><b>Todays Retail Price</b></td>
-                                    <td>
-                                        <form>
-                                            <div class="inputfield px-2 mx-3 d-flex align-items-center">
-                                                <span>$</span>
-                                                <input type="text" class="form-control" id="grocery" placeholder="100">
-                                            </div>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <form>
-                                            <div class="inputfield px-2 mx-3 d-flex align-items-center">
-                                                <span>$</span>
-                                                <input type="text" class="form-control" id="grocery" placeholder="100">
-                                            </div>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <form>
-                                            <div class="inputfield px-2 mx-3 d-flex align-items-center">
-                                                <span>$</span>
-                                                <input type="text" class="form-control" id="grocery" placeholder="100">
-                                            </div>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <form>
-                                            <div class="inputfield px-2 mx-3 d-flex align-items-center">
-                                                <span>$</span>
-                                                <input type="text" class="form-control" id="grocery" placeholder="100">
-                                            </div>
-                                        </form>
-                                    </td>
-                                    <td class="total">
-                                        <span>Total: <b>$-119.39</b></span>
-                                    </td>
-                                </tr> -->
-
                             </tbody>
                         </table>
-
-
                     </div>
-                    <div class="submit-btn col-12">
+                    <div class="submit-btn col-12 pl-0">
                         <div class="allbtn d-flex">
                             <div class="resetbtn">
                                 <button type="button" (click)="GetGesdetailByDateStoreIdonRest()">
@@ -743,13 +502,40 @@
                 </div>
             </div>
         </div>
+        <div class="fixed-button col-xl-10 col-lg-9 col-md-8">
+            <div class="d-flex justify-content-between w-100">
+                <div class="back-submitbtn">
+                    <button type="button" (click)="showData(0);">Back</button>
+                </div>
+                <div class="next-submitbtn">
+                    <button type="button" (click)="showData(2);">Next</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- ==================================Expenses================ -->
     <div class="dailysalesexpenses" *ngIf="showExpensesInput">
         <app-dailysalesexpenses></app-dailysalesexpenses>
+        <div class="fixed-button col-xl-10 col-lg-9 col-md-8">
+            <div class="d-flex justify-content-between w-100">
+                <div class="back-submitbtn">
+                    <button type="button" (click)="showData(2);">Back</button>
+                </div>
+                <div class="next-submitbtn">
+                    <button type="button" (click)="showData(4);">Next</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <main class="storereport mt-4" *ngIf="showSummaryInput">
         <app-storesummary></app-storesummary>
+        <div class="fixed-button col-xl-10 col-lg-9 col-md-8">
+            <div class="d-flex justify-content-start w-100">
+                <div class="back-submitbtn">
+                    <button type="button" (click)="showData(3);">Back</button>
+                </div>
+            </div>
+        </div>
     </main>

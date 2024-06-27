@@ -30,11 +30,13 @@ export class AssignstoreComponent {
   currentPage: number = 1;
   isLoading: boolean = false;
   submitted: boolean = false;
+  companyId:any;
   constructor(private router: Router, private authService: AuthService,
     private http: HttpService, private toastr: ToastrService,
   ) {
     this.authService.currentUser.subscribe((user) => {
       const currentUser = user;
+      this.companyId = currentUser.companyId;
 
       // Update menu based on user authentication state
     });
@@ -228,7 +230,7 @@ sortList(property: keyof TableRow, direction: 'asc' | 'desc') {
 
 
   GetStoreDetailAll() {
-    this.http.getAll(environment.GetStoreDetail).subscribe((result: any) => {
+    this.http.getAll(environment.GetStoreDetailbyCompanyId  + "?pCompanyId="+this.companyId ).subscribe((result: any) => {
       if (result.isSuccess == 1) {
         console.log(result.data)
         this.storedetail = result.data;
@@ -239,7 +241,7 @@ sortList(property: keyof TableRow, direction: 'asc' | 'desc') {
     })
   }
   GetEmployeeDetail() {
-    this.http.getAll(environment.GetLoginDetailByRole+ "?pRoleId=" + 3).subscribe((result: any) => {
+    this.http.getAll(environment.GetLoginDetailByCompanyRole+ "?pRoleId=" + 3  + "&pComapnyId="+this.companyId).subscribe((result: any) => {
       if (result.isSuccess == 1) {
         console.log(result.data)
         this.employeedetails = result.data;
@@ -250,7 +252,7 @@ sortList(property: keyof TableRow, direction: 'asc' | 'desc') {
     })
   }
   GetEmployeeStore() {
-    this.http.getAll(environment.GetEmployeeStore).subscribe((result: any) => {
+    this.http.getAll(environment.GetEmployeeStoreByCompanyId + "?pCompanyId="+this.companyId).subscribe((result: any) => {
       if (result.isSuccess == 1) {
         console.log(result.data)
         this.datalist = result.data;

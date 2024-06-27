@@ -40,6 +40,7 @@ export class VendorComponent {
   datalist: TableRow[] = [];
   isLoading: boolean = false;
   submitted: boolean = false;
+  companyId:any;
   public form = new FormGroup({
     vendorId: new FormControl(0),
     vendorCode: new FormControl('', Validators.required),
@@ -49,6 +50,7 @@ export class VendorComponent {
     address: new FormControl('', Validators.required),
     isActive: new FormControl(true),
     createdBy: new FormControl(0),
+    companyId:new FormControl(0),
   });
 
 
@@ -74,7 +76,7 @@ export class VendorComponent {
     this.authService.currentUser.subscribe((user) => {
       const currentUser = user;
       this.form.value.createdBy = currentUser.loginId;
-
+      this.companyId= currentUser.companyId;
       // Update menu based on user authentication state
     });
   }
@@ -272,7 +274,7 @@ sortList(property: keyof TableRow, direction: 'asc' | 'desc') {
       this.isLoading = false;
       return;
     }
-
+this.form.value.companyId=this.companyId;
 
     this.http.post(environment.SaveVendorDetail, this.form.value).subscribe((result: any) => {
       if (result.isSuccess == 1) {
@@ -298,7 +300,7 @@ sortList(property: keyof TableRow, direction: 'asc' | 'desc') {
   }
 
   GetVendorDetail() {
-    this.http.getAll(environment.GetVendorDetail).subscribe((result: any) => {
+    this.http.getAll(environment.GetVendorDetailByComapnyId+"?pCompanyId="+this.companyId).subscribe((result: any) => {
       if (result.isSuccess == 1) {
         console.log(result.data)
         this.datalist = result.data;

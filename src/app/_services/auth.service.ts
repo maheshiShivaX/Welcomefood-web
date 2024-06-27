@@ -33,7 +33,8 @@ export class AuthService {
     isActive:true,
     createdBy:0,
     landingUrl:'/auth/logindetail',
-    name:''
+    name:'',
+    companyId:0
     // Add other default values as needed
   };
 
@@ -53,10 +54,6 @@ export class AuthService {
 
       this.currentUser = this.currentUserSubject.asObservable();
     }
-   
-
-
-
   }
   logout() {
     localStorage.setItem('currentUser', JSON.stringify(this.defaultUserData));

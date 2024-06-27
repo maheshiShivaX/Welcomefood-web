@@ -2,13 +2,13 @@ export const environment = {
   production: true,
   hmr: false,
   config: {
-   // apiUrl:"https://www.indianfilms.in/wfapi/api/",
+   //apiUrl:"https://www.indianfilms.in/wfapi/api/",
     //apiUrl:"http://stage.ishivaxservices.com/admin_panel/public/api/",
     apiUrlother: "https://anutechinfra.com/anutechAPI/api/",
     apiUrlsms: "http://sms.ishivax.in/api/",
    // apiUrl1:"https://anutechinfra.com/anutechAPI/"
     // apiUrl:"https://anutechinfra.com/anutechAPI/api/"
-    apiUrl: 'https://localhost:7025/api/'
+     apiUrl: 'https://localhost:7025/api/'
     //apiUrl:'https://www.indianfilms.in/eBuilderAPI/api/'
 
   },
@@ -37,6 +37,8 @@ export const environment = {
   LockedLoginDetailById: "LoginDetail/LockedLoginDetailById",
   ActiveLoginDetailById: "LoginDetail/ActiveLoginDetailById",
   GetLoginDetailByRole: "LoginDetail/GetLoginDetailByRole",
+GetLoginDetailsByCompanyId :"LoginDetail/GetLoginDetailsByCompanyId",
+GetLoginDetailByCompanyRole:"LoginDetail/GetLoginDetailByCompanyRole",
 
   GetMenuDetailByTypeId: "RolePermission/GetMenuDetailByTypeId",
   SaveLoginDetail: "LoginDetail/SaveLoginDetail",
@@ -44,13 +46,15 @@ export const environment = {
   GetStoreDetailAll: "StoreDetail/GetStoreDetailAll",
   GetStoreDetail: "StoreDetail/GetStoreDetail",
   DeleteStoreDetailById: "StoreDetail/DeleteStoreDetailById",
+  GetStoreDetailbyCompanyId:"StoreDetail/GetStoreDetailbyCompanyId",
 
 
   DeleteEmployeeDetailById: "EmployeeDetail/DeleteEmployeeDetailById",
   GetEmployeeDetailAll: "EmployeeDetail/GetEmployeeDetailAll",
   GetEmployeeDetail: "EmployeeDetail/GetEmployeeDetail",
   SaveEmployeeDetail: "EmployeeDetail/SaveEmployeeDetail",
-
+  GetEmployeeDetailbyCompanyId:"EmployeeDetail/GetEmployeeDetailbyCompanyId",
+  
 
   DeleteProductCategoryById: "ProductCategory/DeleteProductCategoryById",
   GetProductCategoryAll: "ProductCategory/GetProductCategoryAll",
@@ -68,18 +72,22 @@ export const environment = {
 
 
   GetRole: "Role/GetRole",
+  GetForAdminRole:"Role/GetForAdminRole",
 
   GetEmployeeStore: "EmployeeStore/GetEmployeeStore",
   SaveEmployeeStore: "EmployeeStore/SaveEmployeeStore",
   DeleteEmployeeStoreById: "EmployeeStore/DeleteEmployeeStoreById",
   ActiveEmployeeStoreById: "EmployeeStore/ActiveEmployeeStoreById",
   GetEmployeeStoreByUserId:"EmployeeStore/GetEmployeeStoreByUserId",
-
+  GetEmployeeStoreByCompanyId:"EmployeeStore/GetEmployeeStoreByCompanyId",
 
   SaveStoreProduct: "StoreProduct/SaveStoreProduct",
   GetStoreProduct: "StoreProduct/GetStoreProduct",
   DeleteStoreProductById: "StoreProduct/DeleteStoreProductById",
   ActiveStoreProductById: "StoreProduct/ActiveStoreProductById",
+  SaveStoreProductBulk:"StoreProduct/SaveStoreProductBulk",
+
+
 
   GetProductGroup:"ProductGroup/GetProductGroup",
   SaveItemSale:"ItemSale/SaveItemSale",
@@ -100,6 +108,7 @@ export const environment = {
   SaveVendorDetail:"VendorDetail/SaveVendorDetail",
   GetVendorDetail:"VendorDetail/GetVendorDetail",
   DeleteVendorDetailById:"VendorDetail/DeleteVendorDetailById",
+  GetVendorDetailByComapnyId:"VendorDetail/GetVendorDetailByComapnyId",
 
   SaveExpenseHead:"ExpenseHead/SaveExpenseHead",
   GetExpenseHead:"ExpenseHead/GetExpenseHead",
@@ -136,5 +145,7 @@ export const environment = {
   GetStoreOpeningDetailById:"StoreClosing/GetStoreOpeningDetailById",
   SaveOpeningBalance:"StoreClosing/SaveOpeningBalance",
   GetStoreOpeningCashByStoreId:"StoreClosing/GetStoreOpeningCashByStoreId",
+
+  GetPLStoreDetail:"PLReport/GetPLStoreDetail",
 };
 

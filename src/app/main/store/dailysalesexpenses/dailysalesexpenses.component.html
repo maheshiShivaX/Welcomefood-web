@@ -1,7 +1,7 @@
 <!-- cards -->
 <div class="dailysales">
     <div class="d-flex justify-content-between align-items-center">
-        <div class="dailyheading my-lg-3 my-2 pt-2">
+        <div class="dailyheading mb-lg-3 mt-lg-4 my-2">
             <h4 class="mb-0">Add Expenses</h4>
         </div>
         <!-- <div class="d-flex justify-content-end mt-5 pt-4">
@@ -120,7 +120,7 @@
 
         <!-- credit card section -->
         <div *ngIf="showCreditCardInput">
-            <div class="d-sm-flex justify-content-between mt-sm-4 mb-sm-auto mt-2 mb-4 py-sm-3 py-1">
+            <div class="d-sm-flex justify-content-between mt-sm-4 mb-sm-auto mt-2 mb-4">
                 <div class="store-heading">
                     <h4 class="">Add Credit Card Report</h4>
                 </div>
@@ -139,16 +139,17 @@
                 </div> -->
             </div>
             <div class="dataform row align-items-center">
-                <div class="typeheading col">
+                <!-- <div class="typeheading col">
                     <h6 class="mb-0">Credit Card</h6>
-                </div>
-                <div class="col-xl-11 col-lg-10 carddataform">
-                    <form class="row align-items-end justify-content-between" [formGroup]="formcradit" (submit)="onSubmitCredit()">
-                        <div class="col-lg-4 col-sm-5 mt-lg-auto mt-3 pl-lg-0">
+                </div> -->
+                <div class="col-xl-12 col-lg-10 carddataform">
+                    <form class="row align-items-end justify-content-between" [formGroup]="formcradit"
+                        (submit)="onSubmitCredit()">
+                        <div class="col-lg-4 col-sm-5 mt-lg-auto mt-3">
                             <div class="form-group mb-0">
                                 <label for="FormControlInput1" class="form-label">Amount</label>
-                                <input type="text" class="form-control" id="amount" formControlName="amount" (keypress)="validateNumber($event)"
-                                (input)="validateDecimalPlaces($event)"
+                                <input type="text" class="form-control" id="amount" formControlName="amount"
+                                    (keypress)="validateNumber($event)" (input)="validateDecimalPlaces($event)"
                                     placeholder="Enter Amount">
                             </div>
                         </div>
@@ -168,11 +169,11 @@
                     </form>
                 </div>
             </div>
-            <div class="commontable mt-4 py-3">
+            <div class="data-in-table mt-4">
                 <h4>Reports</h4>
                 <div class="table-container">
-                    <table class="table">
-                        <thead class="thead text-white">
+                    <table class="w-100">
+                        <thead class="text-white">
                             <tr>
                                 <th>Sr.No</th>
                                 <th scope="col">Amount</th>
@@ -181,8 +182,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let row of expenseiteslist">
-                                <td class="tablefirstdata">1</td>
+                            <tr *ngFor="let row of expenseiteslist;let idx =index">
+                                <td class="tablefirstdata">{{idx + 1}}</td>
                                 <td>{{row.amount}}</td>
                                 <td class="descriptiontd">{{row.description}}</td>
                                 <td class="action">
@@ -227,7 +228,7 @@
                                     </button>
                                 </td>
                             </tr>
-                           
+
 
                         </tbody>
                     </table>
@@ -237,11 +238,11 @@
 
         <!-- ============Store Expenses section============ -->
         <div *ngIf="showStoreInput">
-            <div class="store-heading mt-xl-4 py-3">
+            <div class="store-heading mt-xl-4">
                 <h4 class="mb-0">Add Store Expense Report</h4>
             </div>
             <div>
-                <div class="data-container pt-4" *ngIf="expenseitem != null">
+                <div class="data-container pt-2" *ngIf="expenseitem != null">
                     <div class="paytype">
                         <label class="paytype-option">
                             <input type="radio" name="payMode" [ngModelOptions]="{standalone: true}"
@@ -264,8 +265,8 @@
                                 <tr class="">
                                     <th class="px-3 pb-2"></th>
 
-                                    <th class="px-3 pb-2">Amount</th>
-                                    <th class="px-3 pb-2">Description</th>
+                                    <th class="px-3 pb-2" style="font-size: 14px; font-weight: 500;">Amount</th>
+                                    <th class="px-3 pb-2" style="font-size: 14px; font-weight: 500;">Description</th>
                                 </tr>
                             </thead>
                             <tbody *ngIf="expenseitemdetail != null">
@@ -277,8 +278,9 @@
                                             <div class="inputfield px-2 d-flex align-items-center">
                                                 <span>$</span>
 
-                                                <input type="text" class="form-control" (keypress)="validateNumber($event)"
-                                                (input)="validateDecimalPlaces($event)"
+                                                <input type="text" class="form-control"
+                                                    (keypress)="validateNumber($event)"
+                                                    (input)="validateDecimalPlaces($event)"
                                                     [ngModelOptions]="{standalone: true}" [(ngModel)]="row.amount">
                                             </div>
                                         </div>
@@ -286,7 +288,7 @@
                                     <td class="col-6 px-0">
                                         <div class="forminput">
                                             <div class="inputfield px-2 ml-3 d-flex align-items-center">
-                                               
+
                                                 <input type="text" class="form-control"
                                                     [ngModelOptions]="{standalone: true}" [(ngModel)]="row.description">
 
@@ -300,8 +302,8 @@
                         </table>
                     </div>
                 </div>
-                <div class="">
-                    <div class="expenses-submitbtn">
+                <div class="mt-1">
+                    <div class="expenses-submitbtn text-center">
                         <button type="submit" (click)="onExpeseSave()">Submit</button>
                     </div>
                 </div>
@@ -310,14 +312,14 @@
 
         <!-- ============Lottery Payout section============ -->
         <div *ngIf="showLotteryInput">
-            <div class="store-heading mt-xl-4 py-3">
+            <div class="store-heading mt-xl-4">
                 <h4 class="mb-0">Add Lottery Expense Report</h4>
             </div>
             <div>
-                <div class="data-container pt-4" *ngIf="expenseitem != null">
+                <div class="data-container pt-2" *ngIf="expenseitem != null">
                     <div class="paytype">
                         <label class="paytype-option">
-                            <input type="radio" name="payMode" [ngModelOptions]="{standalone: true}" 
+                            <input type="radio" name="payMode" [ngModelOptions]="{standalone: true}"
                                 [(ngModel)]="selectedOption" (ngModelChange)="onPayModeChange('1')" value="1"
                                 class="radio-input" />
                             <span class="custom-radio"></span>
@@ -350,8 +352,9 @@
                                             <div class="inputfield px-2 d-flex align-items-center">
                                                 <span>$</span>
 
-                                                <input type="text" class="form-control" (keypress)="validateNumber($event)"
-                                                (input)="validateDecimalPlaces($event)"
+                                                <input type="text" class="form-control"
+                                                    (keypress)="validateNumber($event)"
+                                                    (input)="validateDecimalPlaces($event)"
                                                     [ngModelOptions]="{standalone: true}" [(ngModel)]="row.amount">
                                             </div>
                                         </div>
@@ -359,7 +362,7 @@
                                     <td class="col-6 px-0">
                                         <div class="forminput">
                                             <div class="inputfield px-2 ml-3 d-flex align-items-center">
-                                               
+
                                                 <input type="text" class="form-control"
                                                     [ngModelOptions]="{standalone: true}" [(ngModel)]="row.description">
 
@@ -373,280 +376,286 @@
                         </table>
                     </div>
                 </div>
-                <div class="">
-                    <div class="expenses-submitbtn">
+                <div class="mt-1">
+                    <div class="expenses-submitbtn text-center">
                         <button type="submit" (click)="onExpeseSave()">Submit</button>
                     </div>
                 </div>
             </div>
         </div>
 
-            <!-- ============Arcade Payout section============ -->
-            <div *ngIf="showArcadeInput">
-                <div class="store-heading mt-xl-4 py-3">
-                    <h4 class="mb-0">Add Arcade Payouts Report</h4>
-                </div>
-                <div>
-                    <div class="data-container pt-4" *ngIf="expenseitem != null">
-                        <div class="paytype">
-                            <label class="paytype-option">
-                                <input type="radio" name="payMode" [ngModelOptions]="{standalone: true}"
-                                    [(ngModel)]="selectedOption" (ngModelChange)="onPayModeChange('1')" value="1"
-                                    class="radio-input" />
-                                <span class="custom-radio"></span>
-                                Cash
-                            </label>
-                            <label class="paytype-option">
-                                <input type="radio" name="payMode" [ngModelOptions]="{standalone: true}"
-                                    [(ngModel)]="selectedOption" (ngModelChange)="onPayModeChange('2')" value="2"
-                                    class="radio-input" />
-                                <span class="custom-radio"></span>
-                                Cheque
-                            </label>
-                        </div>
-                        <div class="dailytabledata expensestabledata">
-                            <table>
-                                <thead>
-                                    <tr class="">
-                                        <th class="px-3 pb-2"></th>
-    
-                                        <th class="px-3 pb-2">Amount</th>
-                                        <th class="px-3 pb-2">Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody *ngIf="expenseitemdetail != null">
-                                    <tr *ngFor="let row of expenseitemdetail">
-                                        <td class="pr-xl-4">{{row.categoryName}}</td>
-    
-                                        <td class="pl-3 col-xl-2 col-lg-3">
-                                            <div class="forminput">
-                                                <div class="inputfield px-2 d-flex align-items-center">
-                                                    <span>$</span>
-    
-                                                    <input type="text" class="form-control" (keypress)="validateNumber($event)"
-                                                    (input)="validateDecimalPlaces($event)"
-                                                        [ngModelOptions]="{standalone: true}" [(ngModel)]="row.amount">
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="col-6 px-0">
-                                            <div class="forminput">
-                                                <div class="inputfield px-2 ml-3 d-flex align-items-center">
-                                                
-                                                    <input type="text" class="form-control"
-                                                        [ngModelOptions]="{standalone: true}" [(ngModel)]="row.description">
-    
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-    
-    
-                                </tbody>
-                            </table>
-                        </div>
+        <!-- ============Arcade Payout section============ -->
+        <div *ngIf="showArcadeInput">
+            <div class="store-heading mt-xl-4">
+                <h4 class="mb-0">Add Arcade Payouts Report</h4>
+            </div>
+            <div>
+                <div class="data-container pt-2" *ngIf="expenseitem != null">
+                    <div class="paytype">
+                        <label class="paytype-option">
+                            <input type="radio" name="payMode" [ngModelOptions]="{standalone: true}"
+                                [(ngModel)]="selectedOption" (ngModelChange)="onPayModeChange('1')" value="1"
+                                class="radio-input" />
+                            <span class="custom-radio"></span>
+                            Cash
+                        </label>
+                        <label class="paytype-option">
+                            <input type="radio" name="payMode" [ngModelOptions]="{standalone: true}"
+                                [(ngModel)]="selectedOption" (ngModelChange)="onPayModeChange('2')" value="2"
+                                class="radio-input" />
+                            <span class="custom-radio"></span>
+                            Cheque
+                        </label>
                     </div>
-                    <div class="">
-                        <div class="expenses-submitbtn">
-                            <button type="submit" (click)="onExpeseSave()">Submit</button>
-                        </div>
+                    <div class="dailytabledata expensestabledata">
+                        <table>
+                            <thead>
+                                <tr class="">
+                                    <th class="px-3 pb-2"></th>
+
+                                    <th class="px-3 pb-2">Amount</th>
+                                    <th class="px-3 pb-2">Description</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="expenseitemdetail != null">
+                                <tr *ngFor="let row of expenseitemdetail">
+                                    <td class="pr-xl-4">{{row.categoryName}}</td>
+
+                                    <td class="pl-3 col-xl-2 col-lg-3">
+                                        <div class="forminput">
+                                            <div class="inputfield px-2 d-flex align-items-center">
+                                                <span>$</span>
+
+                                                <input type="text" class="form-control"
+                                                    (keypress)="validateNumber($event)"
+                                                    (input)="validateDecimalPlaces($event)"
+                                                    [ngModelOptions]="{standalone: true}" [(ngModel)]="row.amount">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="col-6 px-0">
+                                        <div class="forminput">
+                                            <div class="inputfield px-2 ml-3 d-flex align-items-center">
+
+                                                <input type="text" class="form-control"
+                                                    [ngModelOptions]="{standalone: true}" [(ngModel)]="row.description">
+
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="mt-1">
+                    <div class="expenses-submitbtn text-center">
+                        <button type="submit" (click)="onExpeseSave()">Submit</button>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- ============Other Payout section============ -->
-            <div *ngIf="showOtherInput">
-                <div class="store-heading mt-xl-4 py-3">
-                    <h4 class="mb-0">Add Other Payouts Report</h4>
-                </div>
-                <div>
-                    <div class="data-container pt-4" *ngIf="expenseitem != null">
-                        <div class="paytype">
-                            <label class="paytype-option">
-                                <input type="radio" name="payMode" [ngModelOptions]="{standalone: true}"
-                                    [(ngModel)]="selectedOption" (ngModelChange)="onPayModeChange('1')" value="1"
-                                    class="radio-input" />
-                                <span class="custom-radio"></span>
-                                Cash
-                            </label>
-                            <label class="paytype-option">
-                                <input type="radio" name="payMode" [ngModelOptions]="{standalone: true}"
-                                    [(ngModel)]="selectedOption" (ngModelChange)="onPayModeChange('2')" value="2"
-                                    class="radio-input" />
-                                <span class="custom-radio"></span>
-                                Cheque
-                            </label>
-                        </div>
-                        <div class="dailytabledata expensestabledata">
-                            <table>
-                                <thead>
-                                    <tr class="">
-                                        <th class="px-3 pb-2"></th>
-    
-                                        <th class="px-3 pb-2">Amount</th>
-                                        <th class="px-3 pb-2">Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody *ngIf="expenseitemdetail != null">
-                                    <tr *ngFor="let row of expenseitemdetail">
-                                        <td class="pr-xl-4">{{row.categoryName}}</td>
-    
-                                        <td class="pl-3 col-xl-2 col-lg-3">
-                                            <div class="forminput">
-                                                <div class="inputfield px-2 d-flex align-items-center">
-                                                    <span>$</span>
-    
-                                                    <input type="text" class="form-control" (keypress)="validateNumber($event)"
-                                                    (input)="validateDecimalPlaces($event)"
-                                                        [ngModelOptions]="{standalone: true}" [(ngModel)]="row.amount">
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="col-6 px-0">
-                                            <div class="forminput">
-                                                <div class="inputfield px-2 ml-3 d-flex align-items-center">
-                                                  
-                                                    <input type="text" class="form-control"
-                                                        [ngModelOptions]="{standalone: true}" [(ngModel)]="row.description">
-    
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-    
-    
-                                </tbody>
-                            </table>
-                        </div>
+        <!-- ============Other Payout section============ -->
+        <div *ngIf="showOtherInput">
+            <div class="store-heading mt-xl-4">
+                <h4 class="mb-0">Add Other Payouts Report</h4>
+            </div>
+            <div>
+                <div class="data-container pt-2" *ngIf="expenseitem != null">
+                    <div class="paytype">
+                        <label class="paytype-option">
+                            <input type="radio" name="payMode" [ngModelOptions]="{standalone: true}"
+                                [(ngModel)]="selectedOption" (ngModelChange)="onPayModeChange('1')" value="1"
+                                class="radio-input" />
+                            <span class="custom-radio"></span>
+                            Cash
+                        </label>
+                        <label class="paytype-option">
+                            <input type="radio" name="payMode" [ngModelOptions]="{standalone: true}"
+                                [(ngModel)]="selectedOption" (ngModelChange)="onPayModeChange('2')" value="2"
+                                class="radio-input" />
+                            <span class="custom-radio"></span>
+                            Cheque
+                        </label>
                     </div>
-                    <div class="">
-                        <div class="expenses-submitbtn">
-                            <button type="submit" (click)="onExpeseSave()">Submit</button>
-                        </div>
+                    <div class="dailytabledata expensestabledata">
+                        <table>
+                            <thead>
+                                <tr class="">
+                                    <th class="px-3 pb-2"></th>
+
+                                    <th class="px-3 pb-2">Amount</th>
+                                    <th class="px-3 pb-2">Description</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="expenseitemdetail != null">
+                                <tr *ngFor="let row of expenseitemdetail">
+                                    <td class="pr-xl-4">{{row.categoryName}}</td>
+
+                                    <td class="pl-3 col-xl-2 col-lg-3">
+                                        <div class="forminput">
+                                            <div class="inputfield px-2 d-flex align-items-center">
+                                                <span>$</span>
+
+                                                <input type="text" class="form-control"
+                                                    (keypress)="validateNumber($event)"
+                                                    (input)="validateDecimalPlaces($event)"
+                                                    [ngModelOptions]="{standalone: true}" [(ngModel)]="row.amount">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="col-6 px-0">
+                                        <div class="forminput">
+                                            <div class="inputfield px-2 ml-3 d-flex align-items-center">
+
+                                                <input type="text" class="form-control"
+                                                    [ngModelOptions]="{standalone: true}" [(ngModel)]="row.description">
+
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="mt-1">
+                    <div class="expenses-submitbtn text-center">
+                        <button type="submit" (click)="onExpeseSave()">Submit</button>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Payroll section -->
-            <div *ngIf="showPayrollInput">
-                <div class="d-sm-flex justify-content-between mt-4 py-3">
-                    <div class="store-heading">
-                        <h4 class="">Add Payroll Report</h4>
-                    </div>
+        <!-- Payroll section -->
+        <div *ngIf="showPayrollInput">
+            <div class="d-sm-flex justify-content-between mt-4">
+                <div class="store-heading">
+                    <h4 class="">Add Payroll Report</h4>
                 </div>
-                <div class="payrolldataform align-items-center">
-                    <div class="payrollcarddataform">
-                        <form class="row align-items-end justify-content-between" [formGroup]="formcradit" (submit)="onSubmitPayrols()">
-                            <div class="col-12 mb-2 d-flex justify-content-center">
+            </div>
+            <div class="payrolldataform align-items-center">
+                <div class="payrollcarddataform">
+                    <form class="row align-items-end justify-content-between" [formGroup]="formcradit"
+                        (submit)="onSubmitPayrols()">
+                        <div class="col-12 mb-2 d-flex justify-content-center">
                             <div class="paytypes">
                                 <label class="paytype-option">
-                                    <input type="radio" name="payMode" formControlName="payModeId"  [(ngModel)]="selectedOption"  value="1" class="radio-input" />
+                                    <input type="radio" name="payMode" formControlName="payModeId"
+                                        [(ngModel)]="selectedOption" value="1" class="radio-input" />
                                     <span class="custom-radio"></span>
                                     Cash
                                 </label>
                                 <label class="paytype-option">
-                                    <input type="radio" name="payMode" formControlName="payModeId"  [(ngModel)]="selectedOption"  value="2" class="radio-input" />
+                                    <input type="radio" name="payMode" formControlName="payModeId"
+                                        [(ngModel)]="selectedOption" value="2" class="radio-input" />
                                     <span class="custom-radio"></span>
                                     Cheque
                                 </label>
                             </div>
 
-                            
 
+
+                        </div>
+                        <div class="col-lg col-sm-6 mt-lg-auto mt-3">
+                            <div class="form-group mb-0">
+                                <label for="FormControlInput1" class="form-label">Employee Name</label>
+                                <input type="text" class="form-control" id="description" formControlName="description"
+                                    placeholder="Employee Name">
                             </div>
-                            <div class="col-lg col-sm-6 mt-lg-auto mt-3">
-                                <div class="form-group mb-0">
-                                    <label for="FormControlInput1" class="form-label">Employee Name</label>
-                                    <input type="text" class="form-control" id="description"
-                                        formControlName="description" placeholder="Employee Name">
-                                </div>
+                        </div>
+                        <div class="col-lg col-sm-6">
+                            <div class="form-group mb-0">
+                                <label for="FormControlInput1" class="form-label">Amount</label>
+                                <input type="text" class="form-control" id="amount" formControlName="amount"
+                                    (keypress)="validateNumber($event)" (input)="validateDecimalPlaces($event)"
+                                    placeholder="Enter Amount">
                             </div>
-                            <div class="col-lg col-sm-6">
-                                <div class="form-group mb-0">
-                                    <label for="FormControlInput1" class="form-label">Amount</label>
-                                    <input type="text" class="form-control" id="amount" formControlName="amount" (keypress)="validateNumber($event)"
-                                    (input)="validateDecimalPlaces($event)"
-                                        placeholder="Enter Amount">
-                                </div>
+                        </div>
+
+
+                        <div class="col-lg-2 col-sm-3 mt-lg-auto mt-3">
+                            <div class="submitbtn">
+                                <button>Submit</button>
                             </div>
-                           
-                           
-                            <div class="col-lg-2 col-sm-3 mt-lg-auto mt-3">
-                                <div class="submitbtn">
-                                    <button  >Submit</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
-                <div class="commontable mt-4 py-3">
-                    <h4>Reports</h4>
-                    <div class="table-container">
-                        <table class="table">
-                            <thead class="thead text-white">
-                                <tr>
-                                    <th>Sr.No</th> <th scope="col">Employee Name</th>
-                                    <th scope="col">Pay Mode</th>
-                                    <th scope="col">Amount</th>
-                                   
-                                    <th scope="col" colspan="2">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let row of expenseiteslist">
-                                    <td class="tablefirstdata">1</td>
-                                    <td class="descriptiontd">{{row.description}}</td>
-                                    <td class="descriptiontd">{{row.payModeName}}</td>
-                                    <td>{{row.amount}}</td>
-                                   
-                                    <td class="action">
-                                        <button type="button" class="editbtn" (click)="onedit(row.expenseItemId)">
-                                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <rect width="40" height="40" rx="12" fill="#F8F5FF" />
-                                                <path
-                                                    d="M21.05 13L14.2083 20.2417C13.95 20.5167 13.7 21.0584 13.65 21.4334L13.3416 24.1334C13.2333 25.1084 13.9333 25.775 14.9 25.6084L17.5833 25.15C17.9583 25.0834 18.4833 24.8084 18.7416 24.525L25.5833 17.2834C26.7666 16.0334 27.3 14.6084 25.4583 12.8667C23.625 11.1417 22.2333 11.75 21.05 13Z"
-                                                    stroke="#023088" stroke-width="1.5" stroke-miterlimit="10"
-                                                    stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M19.9083 14.2084C20.2667 16.5084 22.1333 18.2667 24.45 18.5"
-                                                    stroke="#023088" stroke-width="1.5" stroke-miterlimit="10"
-                                                    stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M12.5 28.3334H27.5" stroke="#023088" stroke-width="1.5"
-                                                    stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </button>
-                                    </td>
-                                    <td class="action">
-                                        <button type="button" class="deletebtn">
-                                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <rect width="40" height="40" rx="12" fill="#FFF0F1" />
-                                                <path
-                                                    d="M27.5 14.9833C24.725 14.7083 21.9333 14.5667 19.15 14.5667C17.5 14.5667 15.85 14.65 14.2 14.8167L12.5 14.9833"
-                                                    stroke="#C82D31" stroke-width="1.5" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                                <path
-                                                    d="M17.0834 14.1416L17.2667 13.05C17.4 12.2583 17.5 11.6666 18.9084 11.6666H21.0917C22.5 11.6666 22.6084 12.2916 22.7334 13.0583L22.9167 14.1416"
-                                                    stroke="#C82D31" stroke-width="1.5" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                                <path
-                                                    d="M25.7083 17.6167L25.1666 26.0084C25.075 27.3167 25 28.3334 22.675 28.3334H17.325C15 28.3334 14.925 27.3167 14.8333 26.0084L14.2916 17.6167"
-                                                    stroke="#C82D31" stroke-width="1.5" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                                <path d="M18.6083 23.75H21.3833" stroke="#C82D31" stroke-width="1.5"
-                                                    stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M17.9166 20.4166H22.0833" stroke="#C82D31" stroke-width="1.5"
-                                                    stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </button>
-                                    </td>
-                                </tr>
-                               
-    
-                            </tbody>
-                        </table>
-                    </div>
+            </div>
+            <div class="data-in-table mt-4">
+                <h4>Reports</h4>
+                <div class="table-container">
+                    <table class="w-100">
+                        <thead class="text-white">
+                            <tr>
+                                <th>Sr.No</th>
+                                <th scope="col">Employee Name</th>
+                                <th scope="col">Pay Mode</th>
+                                <th scope="col">Amount</th>
+
+                                <th scope="col" colspan="2">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let row of expenseiteslist; let idx =index">
+                                <td class="tablefirstdata">{{idx + 1}}</td>
+                                <td class="descriptiontd">{{row.description}}</td>
+                                <td class="descriptiontd">{{row.payModeName}}</td>
+                                <td>{{row.amount}}</td>
+
+                                <td class="action">
+                                    <button type="button" class="editbtn" (click)="onedit(row.expenseItemId)">
+                                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <rect width="40" height="40" rx="12" fill="#F8F5FF" />
+                                            <path
+                                                d="M21.05 13L14.2083 20.2417C13.95 20.5167 13.7 21.0584 13.65 21.4334L13.3416 24.1334C13.2333 25.1084 13.9333 25.775 14.9 25.6084L17.5833 25.15C17.9583 25.0834 18.4833 24.8084 18.7416 24.525L25.5833 17.2834C26.7666 16.0334 27.3 14.6084 25.4583 12.8667C23.625 11.1417 22.2333 11.75 21.05 13Z"
+                                                stroke="#023088" stroke-width="1.5" stroke-miterlimit="10"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M19.9083 14.2084C20.2667 16.5084 22.1333 18.2667 24.45 18.5"
+                                                stroke="#023088" stroke-width="1.5" stroke-miterlimit="10"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M12.5 28.3334H27.5" stroke="#023088" stroke-width="1.5"
+                                                stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </button>
+                                </td>
+                                <td class="action">
+                                    <button type="button" class="deletebtn">
+                                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <rect width="40" height="40" rx="12" fill="#FFF0F1" />
+                                            <path
+                                                d="M27.5 14.9833C24.725 14.7083 21.9333 14.5667 19.15 14.5667C17.5 14.5667 15.85 14.65 14.2 14.8167L12.5 14.9833"
+                                                stroke="#C82D31" stroke-width="1.5" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path
+                                                d="M17.0834 14.1416L17.2667 13.05C17.4 12.2583 17.5 11.6666 18.9084 11.6666H21.0917C22.5 11.6666 22.6084 12.2916 22.7334 13.0583L22.9167 14.1416"
+                                                stroke="#C82D31" stroke-width="1.5" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path
+                                                d="M25.7083 17.6167L25.1666 26.0084C25.075 27.3167 25 28.3334 22.675 28.3334H17.325C15 28.3334 14.925 27.3167 14.8333 26.0084L14.2916 17.6167"
+                                                stroke="#C82D31" stroke-width="1.5" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path d="M18.6083 23.75H21.3833" stroke="#C82D31" stroke-width="1.5"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M17.9166 20.4166H22.0833" stroke="#C82D31" stroke-width="1.5"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+
+
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
+</div>

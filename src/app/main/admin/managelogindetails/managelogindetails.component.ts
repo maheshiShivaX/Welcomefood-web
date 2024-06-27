@@ -31,12 +31,13 @@ export class ManagelogindetailsComponent {
   isAsc: any = 'desc';
   pageSize: number = 50;
   currentPage: number = 1;
-
+  companyId:any;
   constructor(private router: Router, private authService: AuthService,
     private http: HttpService, private toastr: ToastrService,
   ) {
     this.authService.currentUser.subscribe((user) => {
       const currentUser = user;
+      this.companyId = currentUser.companyId;
       // Update menu based on user authentication state
     });
   }
@@ -217,7 +218,7 @@ sortList(property: keyof TableRow, direction: 'asc' | 'desc') {
 // =============================================================================
 
   GetLoginDetails() {
-    this.http.getAll(environment.GetLoginDetails).subscribe((result: any) => {
+    this.http.getAll(environment.GetLoginDetailsByCompanyId+"?pCompanyId="+this.companyId).subscribe((result: any) => {
       if (result.isSuccess == 1) {
         console.log(result.data)
         this.datalist = result.data;

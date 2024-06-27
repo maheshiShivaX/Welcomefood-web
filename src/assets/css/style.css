@@ -541,9 +541,9 @@ body::-webkit-scrollbar-thumb {
 }
 
 .dailytabledata table thead th {
-  font-size: 12px !important;
+  font-size: 14px !important;
   line-height: 14.52px !important;
-  font-weight: 400 !important;
+  font-weight: 500 !important;
   color: #080433;
 }
 
@@ -581,7 +581,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .purchases .ng-select .ng-select-container {
-  height: 41px !important;
-  border-radius: 12px !important;
+  height: 35px !important;
+  border-radius: 8px !important;
   border: 1px solid #ECF1F5 !important;
 }

@@ -20,6 +20,7 @@ const routes: Routes = [
   { path: 'managelogindetails', component: ManagelogindetailsComponent },
   { path: 'assignstore', component: AssignstoreComponent },
   { path: 'managestoreproduct', component: ManagestoreproductComponent },
+  { path: 'managestoreproduct/:storeId', component: ManagestoreproductComponent },
   { path: 'vendor', component: VendorComponent },
   { path: 'onboardstore', component: OnboardstoreComponent },
   { path: 'onboardstore/:storeId', component: OnboardstoreComponent },

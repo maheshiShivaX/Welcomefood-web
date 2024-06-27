@@ -1,9 +1,36 @@
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 mb-3">
       <div class="summaryheading">
-        <h4>Store Summary</h4>
-      </div>
-      <div class="mt-2">
+        <h4>Store P&L Sheet</h4>
+        
+        <form class="row align-items-end px-0 col-12 justify-content-between" [formGroup]="form" >
+     <div class="mb-3 col-xl-4 col-lg-6">
+                <label for="FormControlInput1" class="form-label">Store Name<span class="required">*</span></label>
+                <ng-select formControlName="storeId" id="storeId" #SelectSizeDefault [items]="storeList"
+                    [searchable]="true" bindLabel="storeName" bindValue="storeId">
+                </ng-select>
+
+            </div> 
+            <div class="previousdate">
+                <span>From Date :</span>
+                <span class="dateicon">
+                    <!-- <img src="../../../../assets/images/calendar-2.png" /> -->
+                    <!-- <p class="mb-0">7 Dec 2023</p> -->
+                    <input type="date" id="entrydate" formControlName="fromDate" [(ngModel)]="fromDate" >
+                </span>
+            </div>
+            <div class="previousdate">
+                <span>To Date :</span>
+                <span class="dateicon">
+                    <!-- <img src="../../../../assets/images/calendar-2.png" /> -->
+                    <!-- <p class="mb-0">7 Dec 2023</p> -->
+                    <input type="date" id="toDate" formControlName="toDate" [(ngModel)]="toDate" >
+                </span>
+            </div>
+            <button type="button" (click)="onGetReport()" >Get Report</button>
+        </form>
+   
+      <div class="mt-2" *ngIf="this.storedetail!=null">
         <div class="pagedatatable d-flex">
           <div class="">
             <div class="container">
@@ -17,38 +44,38 @@
                     <strong>Store Name:</strong> FAIR GROUND<br>
                     <strong>Month:</strong> May 2024
                 </div>
-                <div class="section">
+                <div class="section" >
                     <div class="section-title">Grocery</div>
                     <table>
                         <tr>
                             <th>Opening Stock</th>
-                            <td>66,928.63</td>
+                            <td>${{this.storedetail.openingBalance}}</td>
                             <th>Monthly Inside Sales</th>
-                            <td>$62,525.71</td>
+                            <td>${{this.storedetail.insideSale}}</td>
                         </tr>
                         <tr>
                             <th>Cash Purchase</th>
-                            <td>5,544.96</td>
-                            <th>Uber Eats</th>
-                            <td>$-</td>
+                            <td>${{this.storedetail.cashPurchase}}</td>
+                            <th></th>
+                            <td>$ -</td>
                         </tr>
                         <tr>
                             <th>Chq Purchase</th>
-                            <td>38,462.47</td>
+                            <td>${{this.storedetail.checkPurchase}}</td>
                             <th>Closing Stock</th>
-                            <td>$61,780.58</td>
+                            <td>${{this.storedetail.closingStock}}</td>
                         </tr>
                         <tr>
                             <th>Credit Eby brown bank</th>
-                            <td>(30.59)</td>
-                            <th>Total</th>
-                            <td>$1,24,306.29</td>
+                            <td>-</td>
+                            <th></th>
+                            <td></td>
                         </tr>
                         <tr class="highlight">
                             <th>Total</th>
-                            <td>1,10,905.47</td>
-                            <th></th>
-                            <td></td>
+                            <td>${{this.storedetail.totalBalance }}</td>
+                            <th>Total</th>
+                            <td>${{this.storedetail.totalSaleBalance}}</td>
                         </tr>
                     </table>
                 </div>
@@ -56,46 +83,42 @@
                     <table>
                         <tr>
                             <th>Inside Gross Profit</th>
-                            <td>13,400.82</td>
+                            <td>${{this.storedetail.insideGrossProfit }}</td>
                             <th>% Margin</th>
-                            <td>0.2289</td>
-                        </tr>
-                        <tr>
-                            <th>ITG</th>
-                            <td>96.40</td>
-                            <th></th>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th>PM</th>
-                            <td></td>
-                            <th></th>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th>US SMOKLESS</th>
-                            <td></td>
-                            <th></th>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th>RJR</th>
-                            <td>816.90</td>
-                            <th></th>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th>Others</th>
-                            <td></td>
-                            <th></th>
-                            <td></td>
+                            <td>${{this.storedetail.margin}}</td>
                         </tr>
                         <tr class="total">
                             <th>Inside Total Gross</th>
-                            <td>14,314.12</td>
+                            <td>${{this.storedetail.insideGrossProfit}}</td>
                             <th></th>
                             <td></td>
                         </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th colspan="2" > Expenses </th>
+                        </tr>
+                        <tr><td colspan="2" >Fixed</td></tr>
+                        <tr *ngFor="let item of  this.storedetail.fixedExpenseDtos">
+                            <td>{{item.expenseName}}</td><td>{{item.expenseAmount}}</td>
+                        </tr>
+                        <tr><td>Total Expenses</td><td>{{this.storedetail.fixedExpenceAmount}}</td></tr>
+                    </table>
+
+                    <table>
+                        <tr>
+                            <th colspan="2" >  Income 	  </th>
+                        </tr>
+                        <tr><td >Inside Gross</td><td>{{this.storedetail.insideGrossProfit}}</td></tr>
+                        <tr><td >Gas Profit</td><td></td></tr>
+                        <tr><td >Lotto Commission</td><td>{{this.storedetail.lotteryProfit}}</td></tr>
+                        <tr><td >COAM Commission</td><td></td></tr>
+                        <tr><td >ATM Commission</td><td></td></tr>
+                        <tr><td >Others</td><td></td></tr>
+                        <tr><td>Money Order Commission</td><td></td></tr>
+                        <tr><td>Payroll Taxes Withhold</td><td></td></tr>
+                        <tr><td>HRA</td><td></td></tr>
+                        <tr><td>Total</td><td>{{this.storedetail.totalIncome}}</td></tr>
                     </table>
                 </div>
             </div>
