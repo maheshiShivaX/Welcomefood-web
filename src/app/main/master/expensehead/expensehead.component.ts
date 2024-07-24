@@ -7,11 +7,16 @@ import { HttpService } from 'src/app/_services/http.service';
 import { environment } from 'src/app/environments/environment.prod';
 
 interface TableRow {
-  expenseHeadId: number;
-  expenseHeadCode: string;
-  expenseName: string;
+  isFixed:boolean;
+  expenseCategoryId: number;
+  expenseGroupId:number;
+  expanseName: string;
+  expanseCode: string;
+  expenseGroupName:string;
   visible: boolean;
 }
+
+
 
 
 
@@ -23,7 +28,21 @@ interface TableRow {
 })
 export class ExpenseheadComponent {
 
-
+  expensegroup:any;
+ 
+  GetExpenseGroupByCompanyId(companyid:any) {
+    this.http.getAll(environment.GetExpenseGroupByCompanyId+"?pCompanyId="+companyid).subscribe((result: any) => {
+      if (result.isSuccess == 1) {
+        console.log(result.data)
+        this.expensegroup = result.data;
+      
+        console.log(this.datalist)
+      }
+      else { 
+        // this.products = null;
+      }
+    })
+  }
 
 
  expenseheads:any;
@@ -35,9 +54,11 @@ export class ExpenseheadComponent {
   pageSize: number = 50;
   currentPage: number = 1;
   public form = new FormGroup({
-    expenseHeadId: new FormControl(0),
-    expenseHeadCode: new FormControl('', Validators.required),
-    expenseName: new FormControl('', Validators.required),
+    isFixed:new FormControl(false),
+    expenseCategoryId: new FormControl(0),
+    expenseGroupId:new FormControl(0),
+    expanseName: new FormControl('', Validators.required),
+    expanseCode: new FormControl('', Validators.required),
     isActive: new FormControl(true),
     createdBy: new FormControl(0),
   });
@@ -52,7 +73,7 @@ export class ExpenseheadComponent {
     this.authService.currentUser.subscribe((user) => {
       const currentUser = user;
       this.form.value.createdBy = currentUser.loginId;
-
+this.companyid=currentUser.companyId;
       // Update menu based on user authentication state
     });
   }
@@ -246,25 +267,34 @@ sortList(property: keyof TableRow, direction: 'asc' | 'desc') {
   }
 
   ngOnInit() {
-
-    this.GetProductDetail();
+this.GetExpenseGroupByCompanyId(this.companyid);
+    this.ExpenseItemDetailByDateCompanyId();
   }
-
+  selectedOption: string | undefined;
   onSubmit() {
     this.isLoading = true;
     this.submitted = true;
+
+    this.form.patchValue({
+isFixed :this.selectedOption=="1" ? true : false
+
+    })
+
     if (this.form.invalid) {
       this.isLoading = false;
       return;
     }
 
+    console.log(this.form.value)
+  //  return;
+
    
-    this.http.post(environment.SaveExpenseHead, this.form.value).subscribe((result: any) => {
+    this.http.post(environment.SaveExpenseCategory, this.form.value).subscribe((result: any) => {
       if (result.isSuccess == 1) {
         this.isLoading = false;
         this.submitted = false;
         this.onReset();
-        this.GetProductDetail();
+        this.ExpenseItemDetailByDateCompanyId();
         this.toastr.success(result.message);
       }
       else {
@@ -279,9 +309,10 @@ sortList(property: keyof TableRow, direction: 'asc' | 'desc') {
   get f() {
     return this.form.controls;
   }
+  companyid:any;
 
-  GetProductDetail() {
-    this.http.getAll(environment.GetExpenseHead).subscribe((result: any) => {
+  ExpenseItemDetailByDateCompanyId() {
+    this.http.getAll(environment.ExpenseItemDetailByDateCompanyId + "?pCompanyId="+ this.companyid).subscribe((result: any) => {
       if (result.isSuccess == 1) {
         console.log(result.data)
         this.datalist = result.data;
@@ -299,9 +330,10 @@ sortList(property: keyof TableRow, direction: 'asc' | 'desc') {
 
   onReset() {
     this.form.patchValue({
-      expenseHeadId: 0,
-      expenseName: '',
-      expenseHeadCode: '',
+      expanseCode: '',
+      expanseName: '',
+      expenseCategoryId: 0,
+      expenseGroupId:0,
       isActive: true,
       createdBy: 0
 
@@ -314,13 +346,15 @@ sortList(property: keyof TableRow, direction: 'asc' | 'desc') {
  
   onEdit(pId:any)
   {
-    this.expensehead = this.datalist.filter(((x: { expenseHeadId: any; }) => x.expenseHeadId == pId));
+    this.expensehead = this.datalist.filter(((x: { expenseCategoryId: any; }) => x.expenseCategoryId == pId));
     this.form.patchValue({
-      expenseHeadId: this.expensehead[0].expenseHeadId,
-      expenseHeadCode:  this.expensehead[0].expenseHeadCode,
-      expenseName:  this.expensehead[0].expenseName,
+      expenseCategoryId: this.expensehead[0].expenseCategoryId,
+      expanseCode:  this.expensehead[0].expanseCode,
+      expanseName:  this.expensehead[0].expanseName,
+      expenseGroupId: this.expensehead[0].expenseGroupId,
       isActive: this.expensehead[0].isActive,
       createdBy: this.expensehead[0].createdBy,
+      isFixed:this.expensehead[0].isFixed==true?true :false
     });
     this.openPopup('');
   }
@@ -331,12 +365,12 @@ sortList(property: keyof TableRow, direction: 'asc' | 'desc') {
   onDelete(pId:any)
   {
 
-      this.http.getAll(environment.DeleteExpenseHeadById+ "?pExpenseHeadId=" + pId ).subscribe((result: any) => {
+      this.http.getAll(environment.DeleteExpenseCategoryById+ "?pExpenseCategoryId=" + pId ).subscribe((result: any) => {
         if (result.isSuccess == 1) {
           console.log(result.data)
           this.toastr.error(result.message);
         
-          this.GetProductDetail()
+          this.ExpenseItemDetailByDateCompanyId()
         }
         else {
         }

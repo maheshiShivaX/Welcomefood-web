@@ -3,7 +3,7 @@
         <h4 class="">Manage Login Details</h4>
     </div>
 
-    <div class="commontable">
+    <div class="">
         <div class="search-field d-sm-flex justify-content-between my-3">
             <div class="pageoption d-flex align-items-center">
                 <select class="pagecounting" id="pagecount" (change)="onPageSizeChange($event)">
@@ -17,9 +17,9 @@
                     (input)="applyFilter()">
             </div>
         </div>
-        <div class="table-container">
-            <table class="table" *ngIf="visibleRows!=null">
-                <thead class="thead text-white">
+        <div class="data-in-table ">
+            <table class="w-100" *ngIf="visibleRows!=null">
+                <thead class="text-white">
                     <tr>
                         <th scope="col">S.N.</th>
                         <th scope="col">User Id</th>

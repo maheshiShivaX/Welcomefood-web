@@ -1,16 +1,19 @@
-
-
-
 <div class="storeentryform">
-    <div class="store-heading" *ngIf="storedetail !=null">
-        <h4 class="">Store Product : {{this.storedetail[0].storeName}}</h4> <a (click)="onAdd()">  +Add Product </a>
+    <div class="store-heading d-flex align-items-center justify-content-between" *ngIf="storedetail !=null">
+        <div class="d-flex align-items-center" style="gap: 10px;">
+            <span>
+                << </span>
+                    <h4 class="mb-0">Store Product : {{this.storedetail[0].storeName}}</h4>
+        </div>
+        <div class="add-productbtn"><button (click)="onAdd()"> +Add Product </button></div>
     </div>
+
     <div class="storeformdata pt-2" *ngIf="isAdd==true">
-        <form [formGroup]="form" class="row" (submit)="onSubmit()">
-            <div class=" col-12">
-            <button type="button" *ngFor="let item of productcategory"
-            (click)="GetProductDetailbyCategoryId(item.productCategoryId)"
-            class="btn btn-gray mb-2 me-sm-3 me-1 waves-effect waves-light">{{item.categoryName}}</button>
+        <form [formGroup]="form" class="" (submit)="onSubmit()">
+            <div class="categoryname">
+                <button type="button" *ngFor="let item of productcategory"
+                    (click)="GetProductDetailbyCategoryId(item.productCategoryId)"
+                    class="btn btn-gray mb-2 me-sm-3 me-1 waves-effect waves-light">{{item.categoryName}}</button>
             </div>
 
             <!-- <div class="mb-3 col-xl-4 col-lg-6">
@@ -27,51 +30,51 @@
                     bindLabel="categoryName" bindValue="productCategoryId">
                 </ng-select>
             </div> -->
-           
-            <div class="col-md-5 col-12" style="margin-top: 20px;; max-height: 400px; overflow-y: scroll;">
-                <table class="table table-hover table-striped-columns table-bordered"
-                    style="border: thin;border-color: #fff;" id="tabellist" #content>
+
+            <div class="managestoretable" style="margin-top: 10px;; max-height: 300px; overflow-y: scroll;">
+                <table class="table-hover table-striped-columns w-100" style="border: thin;border-color: #fff;"
+                    id="tabellist" #content>
                     <thead style="top: 0; z-index: 1; background-color: white; border-color:fff; ">
                         <tr style="background-color: #e6e6e6;">
-                            <th> <input type="checkbox"
-                                (change)="oncheckAllSubCategory(products )"
-                                [checked]="checkal"
-                                 
-                                    ></th>
-                            <th>Product Sub Category</th>
+                            <th>
+                                <div class="pcategory d-flex align-items-center">
+                                    <input type="checkbox" (change)="oncheckAllSubCategory(products )"
+                                        [checked]="checkal" />
+                                    <span style="font-weight: 600;">Product Sub Category</span>
+                                </div>
+                            </th>
                         </tr>
                     </thead>
-                    <tbody style="top: 0;z-index: 1; background-color: white; border-color:fff; ">
-                        <tr style="background-color: #e6e6e6;"
-                            *ngFor="let item of products">
-                            <td style="width: 20px;;"> <input type="checkbox"
-                                    id="{{item.productId}}"
-                                    [value]="item.productId"
-                                    [checked]="isSelected(item)"
-                                 ></td>
+                    <tbody class="checkbox-grid">
+                        <tr class="checkbox-item" *ngFor="let item of products">
                             <td>
-                                <label
-                                    for="{{item.productName}}">{{item.productName}}</label>
+                                <div class="pcategory d-flex align-items-center">
+                                    <input type="checkbox" id="{{item.productId}}" [value]="item.productId"
+                                        [checked]="isSelected(item)" />
+                                    <label for="{{item.productName}}" class="mb-0">{{item.productName}}</label>
+                                    
+                                </div>
+                                
                             </td>
                         </tr>
                     </tbody>
-                </table>
+                </table><div *ngIf="f['productId'].errors && ( submitted)" class="invalid-feedback">
+                    <div class="text-red-600" *ngIf="f['productId'].errors?.['required']">Product is
+                        Required.
+                    </div>
+                   
+                </div>
             </div>
 
-
-
-        
-
-            <div class="submit-btn col-12">
+            <div class="submit-btn col-12 mt-3">
                 <div class="allbtn d-flex justify-content-sm-end justify-content-between">
                     <div class="resetbtn">
-                        <button (click)="onReset()" [disabled]="form.invalid" type="button">
+                        <button (click)="onReset()"  type="button">
                             Reset
                         </button>
                     </div>
                     <div class="savebtn">
-                        <button type="submit" 
-                            [disabled]="isLoading">
+                        <button type="submit" [disabled]="isLoading">
                             <ng-container *ngIf="!isLoading">Save</ng-container>
                             <ng-container *ngIf="isLoading">
                                 <span clas="indicator-progress" [style.display]="'block'">
@@ -85,7 +88,7 @@
             </div>
         </form>
     </div>
-    <div class="commontable">
+    <div class="">
         <div class="search-field d-sm-flex justify-content-between my-3">
             <div class="pageoption d-flex align-items-center">
                 <select class="pagecounting" id="pagecount" (change)="onPageSizeChange($event)">
@@ -99,9 +102,9 @@
                     (input)="applyFilter()">
             </div>
         </div>
-        <div class="table-container">
-            <table class="table" *ngIf="visibleRows!=null">
-                <thead class="thead text-white">
+        <div class="data-in-table">
+            <table class="w-100" *ngIf="visibleRows!=null">
+                <thead class="text-white">
                     <tr>
                         <th>Sr.No</th>
                         <th scope="col">Store Name</th>
@@ -118,31 +121,18 @@
                         <td>{{item.productCategoryName}}</td>
                         <td>{{item.productName}}</td>
                         <td [ngClass]="item.isActive ? 'statusbtngreen' : 'statusbtn'">
-                            <button type="button" (click)="onActive(item.storeProductId)"
-                         >{{item.isActive== true ? 'Active' :'Deactive' }}</button>
+                            <button type="button" (click)="onActive(item.storeProductId)">{{item.isActive== true ?
+                                'Active' :'Deactive' }}</button>
                         </td>
                         <td class="action">
                             <button type="button" (click)="onDelete(item.storeProductId)" class="deletebtn">
-                                <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <rect width="40" height="40" rx="12" fill="#FFF0F1" />
-                                    <path
-                                        d="M27.5 14.9833C24.725 14.7083 21.9333 14.5667 19.15 14.5667C17.5 14.5667 15.85 14.65 14.2 14.8167L12.5 14.9833"
-                                        stroke="#C82D31" stroke-width="1.5" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <path
-                                        d="M17.0834 14.1416L17.2667 13.05C17.4 12.2583 17.5 11.6666 18.9084 11.6666H21.0917C22.5 11.6666 22.6084 12.2916 22.7334 13.0583L22.9167 14.1416"
-                                        stroke="#C82D31" stroke-width="1.5" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <path
-                                        d="M25.7083 17.6167L25.1666 26.0084C25.075 27.3167 25 28.3334 22.675 28.3334H17.325C15 28.3334 14.925 27.3167 14.8333 26.0084L14.2916 17.6167"
-                                        stroke="#C82D31" stroke-width="1.5" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <path d="M18.6083 23.75H21.3833" stroke="#C82D31" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M17.9166 20.4166H22.0833" stroke="#C82D31" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
+                                <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M17.5 4.98356C14.725 4.70856 11.9333 4.56689 9.15 4.56689C7.5 4.56689 5.85 4.65023 4.2 4.81689L2.5 4.98356" stroke="#C82D31" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M7.0835 4.1415L7.26683 3.04984C7.40016 2.25817 7.50016 1.6665 8.9085 1.6665H11.0918C12.5002 1.6665 12.6085 2.2915 12.7335 3.05817L12.9168 4.1415" stroke="#C82D31" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M15.7082 7.6167L15.1665 16.0084C15.0748 17.3167 14.9998 18.3334 12.6748 18.3334H7.32484C4.99984 18.3334 4.92484 17.3167 4.83317 16.0084L4.2915 7.6167" stroke="#C82D31" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M8.6084 13.75H11.3834" stroke="#C82D31" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M7.9165 10.4165H12.0832" stroke="#C82D31" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
                             </button>
                         </td>
                     </tr>

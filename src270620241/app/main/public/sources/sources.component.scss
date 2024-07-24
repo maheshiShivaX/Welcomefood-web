@@ -1,0 +1,264 @@
+.cross-icon {
+    height: 48px;
+    width: 48px;
+    border: 1px solid #ECF1F5;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: end;
+    float: right;
+    position: relative;
+    left: 40%;
+}
+
+.model-logo {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.process-line {
+    gap: 6px;
+    padding-top: 20px;
+}
+
+.stepbtn button {
+    padding: 8px 24px;
+    border-radius: 20px;
+    color: #474A65;
+    background-color: #FFFFFF;
+    font-size: 14px;
+    line-height: 19.6px;
+    font-weight: 600;
+    border: none;
+}
+
+.cashdata {
+    gap: 14px;
+    align-items: center;
+}
+
+.cashicon img {
+    padding: 18.67px;
+    background-color: #023088;
+    border-radius: 11.67px;
+}
+
+.cashsection {
+    padding: 24px;
+    background-color: #FFFFFF;
+    color: #080433;
+    border-radius: 20px;
+}
+
+.cashcontent p {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+}
+
+.cashcontent span {
+    font-size: 24px;
+    line-height: 33.6px;
+    font-weight: 700;
+}
+
+.previousdate {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.previousdate span {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+}
+
+.previousdate .dateicon {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.productcategory {
+    padding: 24px;
+    background-color: #FFFFFF;
+    color: #080433;
+    border-radius: 20px;
+    margin-top: 24px;
+}
+
+.productdata {
+    gap: 14px;
+    align-items: center;
+}
+
+.categoryicon img {
+    padding: 18.67px;
+    border-radius: 11.67px;
+    height: 62px;
+    width: 62px;
+}
+
+.gcategoryicon img {
+    background-color: #FB5B83;
+}
+
+.tcategoryicon img {
+    background-color: #7976FF;
+}
+
+.wcategoryicon img {
+    background-color: #D18EF1;
+}
+
+.scategoryicon img {
+    background-color: #1DBA40;
+}
+
+.dcategoryicon img {
+    background-color: #ED6C3C;
+}
+
+.productcontent p {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+}
+
+.productcontent span {
+    font-size: 24px;
+    line-height: 33.6px;
+    font-weight: 700;
+}
+
+.modelmain .selectform form label {
+    font-size: 14px;
+    line-height: 21px;
+    font-weight: 500;
+    color: #474A65;
+}
+
+.modelmain .selectform form select {
+    height: 60px;
+    border: 1px solid #ECF1F5;
+    border-radius: 12px;
+}
+
+.addbtn button {
+    height: 60px;
+    width: 171px;
+    border: 5px solid #CCD5FF;
+    background-color: transparent;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    color: #080433;
+}
+
+.btn:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.selectform {
+    padding-top: 24px;
+    padding-left: 32px;
+    padding-right: 0px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+
+.results h4 {
+    font-size: 24px;
+    line-height: 33.6px;
+    font-weight: 600;
+    color: #080433;
+}
+
+.filter span,
+filter .dropdown .form-control {
+    font-size: 14px;
+    line-height: 16.94px;
+    font-weight: 700;
+    color: #080433;
+}
+
+.dropdown .form-control {
+    height: 42px;
+    width: 192px;
+    border-radius: 12px;
+}
+
+.resultsec {
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 24px;
+}
+
+.scashsection {
+    padding: 24px;
+    background-color: #FFFFFF;
+    color: #080433;
+    border-radius: 20px;
+}
+
+.scashdata {
+    gap: 14px;
+    align-items: center;
+}
+
+.scashicon img {
+    padding: 18.67px;
+    background-color: #023088;
+    border-radius: 11.67px;
+}
+
+.scashcontent p {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+}
+
+.scashcontent span {
+    font-size: 24px;
+    line-height: 33.6px;
+    font-weight: 700;
+}
+
+.saledata {
+    gap: 14px;
+    align-items: center;
+}
+
+.saleicon img {
+    padding: 18.67px;
+    background-color: #FB5B83;
+    border-radius: 11.67px;
+}
+
+.salecontent p {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+}
+
+.salecontent span {
+    font-size: 24px;
+    line-height: 33.6px;
+    font-weight: 700;
+}
+
+.modelmain .nextbtn button {
+    height: 60px;
+    width: 171px;
+    border-radius: 12px;
+    background: #023088;
+    color: #FFF;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 18px;
+    border: none;
+}

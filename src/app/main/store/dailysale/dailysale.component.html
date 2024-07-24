@@ -65,18 +65,45 @@
                         Purchases
                     </button>
                 </div>
-                <div class="buttonsec mt-sm-auto mt-2 paddingbtn" [ngClass]="showExpensesInput ? 'daily' : 'menubtn'">
-                    <button (click)="showData(3);">
+                <div class="buttonsec mt-sm-auto mt-2 paddingbtn" [ngClass]="showExpensesnewInput ? 'daily' : 'menubtn'">
+                    <button (click)="showData(5);">
                         <div>
                             <svg width="18" height="18" viewBox="0 0 20 20" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M12.8125 13.4373C12.8125 12.8964 12.8125 11.2498 14.375 11.2498H17.5V9.3748C17.5 8.51324 16.7991 7.8123 15.9375 7.8123H2.5C1.63844 7.8123 0.9375 8.51324 0.9375 9.3748V17.4998C0.9375 18.3614 1.63844 19.0623 2.5 19.0623H15.9375C16.7991 19.0623 17.5 18.3614 17.5 17.4998V15.6248H14.375C12.8125 15.6248 12.8125 13.9782 12.8125 13.4373ZM13.4375 7.1873V5.29293C13.4375 4.97012 13.2691 4.6773 12.9869 4.5098C12.8448 4.42455 12.6828 4.37811 12.5171 4.37515C12.3514 4.37219 12.1879 4.4128 12.0428 4.49293L6.63938 7.1873H13.4375Z"
-                                    [attr.fill]="showExpensesInput ? '#fff' : '#7976FF'" />
+                                    [attr.fill]="showExpensesnewInput ? '#fff' : '#7976FF'" />
 
                             </svg>
                         </div>
                         Expenses
+                    </button>
+                </div>
+                <div class="buttonsec mt-sm-auto mt-2 paddingbtn" [ngClass]="showpayroll ? 'daily' : 'menubtn'">
+                    <button (click)="showData(6);">
+                        <div>
+                            <svg width="18" height="18" viewBox="0 0 20 20" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M12.8125 13.4373C12.8125 12.8964 12.8125 11.2498 14.375 11.2498H17.5V9.3748C17.5 8.51324 16.7991 7.8123 15.9375 7.8123H2.5C1.63844 7.8123 0.9375 8.51324 0.9375 9.3748V17.4998C0.9375 18.3614 1.63844 19.0623 2.5 19.0623H15.9375C16.7991 19.0623 17.5 18.3614 17.5 17.4998V15.6248H14.375C12.8125 15.6248 12.8125 13.9782 12.8125 13.4373ZM13.4375 7.1873V5.29293C13.4375 4.97012 13.2691 4.6773 12.9869 4.5098C12.8448 4.42455 12.6828 4.37811 12.5171 4.37515C12.3514 4.37219 12.1879 4.4128 12.0428 4.49293L6.63938 7.1873H13.4375Z"
+                                    [attr.fill]="showpayroll ? '#fff' : '#7976FF'" />
+
+                            </svg>
+                        </div>
+                        Payroll
+                    </button>
+                </div>
+                <div class="buttonsec mt-sm-auto mt-2 paddingbtn" [ngClass]="showrebate ? 'daily' : 'menubtn'">
+                    <button (click)="showData(7);">
+                        <div>
+                            <svg width="18" height="18" viewBox="0 0 20 20" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M12.8125 13.4373C12.8125 12.8964 12.8125 11.2498 14.375 11.2498H17.5V9.3748C17.5 8.51324 16.7991 7.8123 15.9375 7.8123H2.5C1.63844 7.8123 0.9375 8.51324 0.9375 9.3748V17.4998C0.9375 18.3614 1.63844 19.0623 2.5 19.0623H15.9375C16.7991 19.0623 17.5 18.3614 17.5 17.4998V15.6248H14.375C12.8125 15.6248 12.8125 13.9782 12.8125 13.4373ZM13.4375 7.1873V5.29293C13.4375 4.97012 13.2691 4.6773 12.9869 4.5098C12.8448 4.42455 12.6828 4.37811 12.5171 4.37515C12.3514 4.37219 12.1879 4.4128 12.0428 4.49293L6.63938 7.1873H13.4375Z"
+                                    [attr.fill]="showrebate ? '#fff' : '#7976FF'" />
+                            </svg>
+                        </div>
+                        Other Income
                     </button>
                 </div>
                 <div class="buttonsec mt-sm-auto mt-2" [ngClass]="showSummaryInput ? 'daily' : 'menubtn'">
@@ -418,10 +445,11 @@
 
     <!-- ==================================gas inventory ==========-->
     <div *ngIf="showGasInput" class="mt-4">
-        <div class="dailyheading mb-3">
+      
+        <div class="dailyheading mb-3"  style="display: none;">
             <h4>Gas Inventory</h4>
         </div>
-        <div class="gasinventory-container gasinventory">
+        <div class="gasinventory-container gasinventory"  style="display: none;">
             <div class="gasinventory">
                 <div class="data-container pt-3">
                     <div class="dailytabledata">
@@ -480,7 +508,7 @@
                                         </div>
                                     </td>
 
-                                    <td>{{ item.total | currency }}</td>
+                                    <td>{{ item.total }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -502,6 +530,8 @@
                 </div>
             </div>
         </div>
+
+        <app-gesinvoice></app-gesinvoice>
         <div class="fixed-button col-xl-10 col-lg-9 col-md-8">
             <div class="d-flex justify-content-between w-100">
                 <div class="back-submitbtn">
@@ -514,9 +544,8 @@
         </div>
     </div>
 
-    <!-- ==================================Expenses================ -->
-    <div class="dailysalesexpenses" *ngIf="showExpensesInput">
-        <app-dailysalesexpenses></app-dailysalesexpenses>
+    <div class="dailysalesexpenses" *ngIf="showExpensesnewInput">
+        <app-expense></app-expense>
         <div class="fixed-button col-xl-10 col-lg-9 col-md-8">
             <div class="d-flex justify-content-between w-100">
                 <div class="back-submitbtn">
@@ -529,6 +558,33 @@
         </div>
     </div>
 
+
+    <div class="dailysalesexpenses" *ngIf="showpayroll">
+        <app-payroll></app-payroll>
+        <div class="fixed-button col-xl-10 col-lg-9 col-md-8">
+            <div class="d-flex justify-content-between w-100">
+                <div class="back-submitbtn">
+                    <button type="button" (click)="showData(2);">Back</button>
+                </div>
+                <div class="next-submitbtn">
+                    <button type="button" (click)="showData(4);">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dailysalesexpenses" *ngIf="showrebate">
+        <app-otherincome></app-otherincome>
+        <div class="fixed-button col-xl-10 col-lg-9 col-md-8">
+            <div class="d-flex justify-content-between w-100">
+                <div class="back-submitbtn">
+                    <button type="button" (click)="showData(2);">Back</button>
+                </div>
+                <div class="next-submitbtn">
+                    <button type="button" (click)="showData(4);">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <main class="storereport mt-4" *ngIf="showSummaryInput">
         <app-storesummary></app-storesummary>
         <div class="fixed-button col-xl-10 col-lg-9 col-md-8">

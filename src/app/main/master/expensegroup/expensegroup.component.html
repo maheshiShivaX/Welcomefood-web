@@ -1,0 +1,135 @@
+<div class="storeentryform">
+    <div class="store-heading d-lg-flex justify-content-between align-items-center">
+        <h4 class="mb-0">Manage Expense Group</h4>
+        <div class="drawersec">
+            <button class="opendrawer mt-md-auto mt-3" type="button" data-toggle="modal" data-target="#exampleModalCenter"
+                (click)="openPopup('New')">+ Add Expense Group</button>
+        </div>
+    </div>
+
+
+    <div id="productpopupContainer" class="termspopup-container">
+        <div class="cross-button">
+            <span class="" (click)="closePopup()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7.75735 7.75757L16.2426 16.2428" stroke="#080433" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                <path d="M7.75736 16.2428L16.2426 7.75757" stroke="#080433" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+        </span>
+        </div>
+
+        
+        <form [formGroup]="form" class="row" (submit)="onSubmit()">
+            
+            <div class="mb-3 col-12">
+                <label for="FormControlInput1" class="form-label">Expense Group Name</label>
+                <input type="text" class="form-control" formControlName="expenseGroupName" id="FormControlInput1"
+                    placeholder="Enter Expense Group">
+                <div *ngIf="f['expenseGroupName'].errors && (f['expenseGroupName']?.touched || submitted)"
+                    class="invalid-feedback">
+                    <div class="text-red-600" *ngIf="f['expenseGroupName'].errors?.['required']">Expense Group Name is
+                        required.
+                    </div>
+                </div>
+            </div>
+           
+            <div class="submit-btn col-12 d-flex justify-content-sm-end justify-content-between">
+                <div class="resetbtn">
+                    <button (click)="onReset()" [disabled]="form.invalid" type="button">
+                        Reset
+                    </button>
+                </div>
+                <div class="savebtn">
+                    <button type="submit" [disabled]="isLoading" (click)="closePopup()">
+                        <ng-container *ngIf="!isLoading">Save</ng-container>
+                        <ng-container *ngIf="isLoading">
+                            <span clas="indicator-progress" [style.display]="'block'">
+                                Please wait...
+                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                            </span>
+                        </ng-container>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+
+
+
+    <div class="">
+        <div class="search-field d-sm-flex justify-content-between my-3">
+            <div class="pageoption d-flex align-items-center">
+                <select class="pagecounting" id="pagecount" (change)="onPageSizeChange($event)">
+                    <option value="50">50</option>
+                    <option value="200">200</option>
+                    <option value='all'>All</option>
+                </select>
+            </div>
+            <div class="d-flex gap-2 mt-sm-auto mt-3">
+                <input class="searchfield" type="text" placeholder="Search..." [(ngModel)]="filterValue"
+                (input)="applyFilter()">
+            </div>
+        </div>
+        <div class="data-in-table">
+            <table class="w-100" *ngIf="visibleRows!=null">
+                <thead class="text-white">
+                    <tr>
+                        <th scope="col">S.N.</th>
+                        <th scope="col"> Expense Group Name</th>
+                  
+                        <th scope="col" colspan="2">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of visibleRows; let idx=index;" class="whitebg-row" [style.display]="item.visible ? 'table-row' : 'none'" class="whitebg-row">
+                        <td class="tablefirstdata">{{(currentPage - 1)*pageSize +idx +1}}</td>
+                        <td>{{item.expenseGroupName}}</td>
+                        
+                        <td class="action">
+                            <button type="button" (click)="onEdit(item.expenseGroupId)" class="editbtn">
+                                <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M11.05 3.00002L4.20829 10.2417C3.94996 10.5167 3.69996 11.0584 3.64996 11.4334L3.34162 14.1334C3.23329 15.1084 3.93329 15.775 4.89996 15.6084L7.58329 15.15C7.95829 15.0834 8.48329 14.8084 8.74162 14.525L15.5833 7.28335C16.7666 6.03335 17.3 4.60835 15.4583 2.86668C13.625 1.14168 12.2333 1.75002 11.05 3.00002Z" stroke="#023088" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M9.9082 4.2085C10.2665 6.5085 12.1332 8.26683 14.4499 8.50016" stroke="#023088" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M2.5 18.3335H17.5" stroke="#023088" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg> 
+                            </button>
+                        </td>
+                        <td class="action">
+                            <button type="button" (click)="onDelete(item.expenseGroupId)" class="deletebtn">
+                                <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M17.5 4.98356C14.725 4.70856 11.9333 4.56689 9.15 4.56689C7.5 4.56689 5.85 4.65023 4.2 4.81689L2.5 4.98356" stroke="#C82D31" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M7.0835 4.1415L7.26683 3.04984C7.40016 2.25817 7.50016 1.6665 8.9085 1.6665H11.0918C12.5002 1.6665 12.6085 2.2915 12.7335 3.05817L12.9168 4.1415" stroke="#C82D31" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M15.7082 7.6167L15.1665 16.0084C15.0748 17.3167 14.9998 18.3334 12.6748 18.3334H7.32484C4.99984 18.3334 4.92484 17.3167 4.83317 16.0084L4.2915 7.6167" stroke="#C82D31" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M8.6084 13.75H11.3834" stroke="#C82D31" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M7.9165 10.4165H12.0832" stroke="#C82D31" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                            </button>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="pagination-container my-0">
+        <button class="btn" (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1">
+            < </button>
+            <ng-container *ngFor="let page of getPageNumbers()">
+                <button class="btn" [ngClass]="{ 'active': page === currentPage }"
+                    *ngIf="page !== '...' && page !== currentPage" (click)="onPageChange(page)">
+                    {{ page }}
+                </button>
+                <button class="btn btn-primary active" *ngIf="page === currentPage" disabled>
+                    {{ page }}
+                </button>
+                <span class="ellipsiss" *ngIf="page === '...'">...</span>
+            </ng-container>
+                <button class="btn" (click)="onPageChange(currentPage + 1)" [disabled]="currentPage === totalPages">
+                    >
+                </button>
+    </div>
+</div>

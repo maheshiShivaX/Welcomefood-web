@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 mb-3">
+        <div class="summaryheading">
+            <h4>Store Daily Sheet </h4>
+
+            <form class="row align-items-center px-0 col-12 justify-content-between" [formGroup]="form">
+                <div class="mb-3 col-xl-4 col-lg-6">
+                    <label for="FormControlInput1" class="form-label">Store Name<span class="required">*</span></label>
+                    <ng-select formControlName="storeId" id="storeId" #SelectSizeDefault [items]="storeList"
+                        [searchable]="true" bindLabel="storeName" bindValue="storeId">
+                    </ng-select>
+
+                </div>
+                <div class="dateformet">
+                    <label class="date form-label">From Date :</label><br>
+                    <input type="date" id="entrydate" formControlName="fromDate" [(ngModel)]="fromDate">
+                </div>
+                <div class="dateformet">
+                    <label class="date form-label">To Date :</label><br>
+                    <input type="date" id="toDate" formControlName="toDate" [(ngModel)]="toDate">
+                </div>
+                <div class="reportbutton">
+                    <button type="button" (click)="onGetReport()">Get Report</button>
+                </div>
+            </form>
+
+            <div class="mt-2">
+                <app-storesummary></app-storesummary>
+            </div>
+        </div>
+    </div>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/_services/auth.service';
@@ -58,7 +58,7 @@ export class ManagestoreproductComponent {
   public form = new FormGroup({
     storeProductId: new FormControl(0),
     productCategoryId: new FormControl(0),
-    productId: new FormControl(''),
+    productId: new FormControl('',Validators.required),
     storeId: new FormControl(0),
     isActive: new FormControl(true),
     createdBy: new FormControl(0),
@@ -79,6 +79,9 @@ export class ManagestoreproductComponent {
       this.isAdd = true;
     }
 
+  }
+  get f() {
+    return this.form.controls;
   }
 
   applyFilter() {
@@ -230,7 +233,10 @@ export class ManagestoreproductComponent {
         console.log(result.data)
         this.products = result.data;
         this.checkal = false;
-        this.form.value.productCategoryId = pCategoryId;
+        this.form.patchValue({
+          productCategoryId : pCategoryId,
+
+        })
       }
       else {
         this.products = null;
@@ -285,13 +291,14 @@ export class ManagestoreproductComponent {
         const subCategoryIds: number[] = this.selectedItems.map(item => item.productId);
         const commaSeparatedString: string = subCategoryIds.join(',');
         console.log(commaSeparatedString);
-        this.form.value.productId = commaSeparatedString;
-        // this.getProductDetails(commaSeparatedString)
-        // }else
-        // {
-        //  // this.productList = null;
-        //  // this.selectedproductItems =[];
-        // }
+
+        this.form.patchValue(
+          {
+            productId : commaSeparatedString,
+
+          }
+        )
+     
       }
     }
     catch (error) {
@@ -366,6 +373,7 @@ export class ManagestoreproductComponent {
     //this.form.value.productId = commaSeparatedString
     console.log(this.form.value);
     this.form.value.storeId = this.storeId;
+  
     if (this.form.invalid) {
       this.isLoading = false;
       return;
@@ -389,7 +397,9 @@ export class ManagestoreproductComponent {
       }
     });
   }
-  onReset() {
+  onReset() {   
+     this.selectedItems=[];
+    this.checkal =false;
     this.form.patchValue({
       storeProductId: 0,
       storeId: 0,
@@ -399,6 +409,8 @@ export class ManagestoreproductComponent {
       createdBy: 0
 
     });
+
+  
   }
 }
 

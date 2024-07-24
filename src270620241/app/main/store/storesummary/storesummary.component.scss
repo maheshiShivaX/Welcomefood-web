@@ -1,0 +1,56 @@
+// store summary===================================================================
+.summaryheading h4 {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 28.6px;
+    color: #080433;
+}
+
+.pagedatatable {
+    gap: 10px;
+}
+
+.productcategory,.purchasetext,.expensetext {
+    text-align: end;
+}
+
+th {
+    font-weight: 500;
+    font-size: 14px;
+    text-align: center;
+    padding: auto 10px;
+    background-color: #e6e6e6;
+}
+
+.headbackcolor {
+    background-color: #bdbdbd;
+}
+
+table,
+th,
+td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 8px 8px 0px;
+}
+
+td {
+    font-size: 12px;
+}
+
+.vendorcategory h2 {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 28.6px;
+    color: #080433;
+}
+
+.total {
+    font-size: 14px;
+    font-weight: 600;
+    color: #7976ff;
+}
+
+.tablewidth {
+    width: 100%;
+}

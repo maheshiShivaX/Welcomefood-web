@@ -1,0 +1,600 @@
+.store-heading h4 {
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 33.6px;
+    color: #080433;
+    margin-bottom: 24px;
+}
+
+.daily button {
+    padding: 16px 26px;
+    border: none;
+    border-radius: 12px;
+    background-color: #7976FF;
+    font-size: 14px;
+    line-height: 16.94px;
+    font-weight: 400;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border: 3px solid #7976FF;
+}
+
+.previousdate .dateicon input {
+    border: none;
+    background-color: transparent;
+}
+
+.previousdate {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.previousdate span {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+}
+
+.previousdate .dateicon {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.add-dailysalesbtn {
+    gap: 10px;
+}
+
+.add-dailysalesbtn .menubtn button {
+    padding: 16px 26px;
+    border: 3px solid #CCD5FF;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 1);
+    font-size: 14px;
+    line-height: 16.94px;
+    font-weight: 400;
+    color: #080433;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.backbtn {
+    gap: 12px;
+}
+
+.backbtn span {
+    font-size: 14px;
+    line-height: 21px;
+    font-weight: 500;
+    color: #080433;
+}
+
+.back-menubtn {
+    gap: 20px;
+}
+
+.productcontent p {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+}
+
+.categoryicon img {
+    padding: 10.67px;
+    border-radius: 11.67px;
+    height: 45px;
+    width: 45px;
+}
+
+.expensesdata {
+    gap: 10px;
+    align-items: center;
+    // margin-top: 24px;
+    padding: 9px;
+    max-width: 200px;
+    cursor: pointer;
+}
+
+.titletd {
+    min-width: 150px;
+}
+
+.arcadetitle {
+    min-width: 240px;
+}
+
+.othertitle {
+    min-width: 150px;
+}
+
+.payrollemployeename {
+    min-width: 150px;
+}
+
+.paymoderoll {
+    min-width: 140px;
+}
+
+.payrolldescription {
+    min-width: 250px;
+}
+
+.dailyheading h4 {
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 32.6px;
+    color: #080433;
+    margin-bottom: 24px;
+}
+
+.store-heading h4 {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 33.6px;
+    color: #080433;
+    margin-bottom: 12px;
+}
+
+.expenses-submitbtn button {
+    width: 120px;
+    height: 45px;
+    border-radius: 12px;
+    border: none;
+    background-color: #023088;
+    font-size: 16px;
+    line-height: 16px;
+    font-weight: 600;
+    color: #fff;
+}
+
+// .expenses-submitbtn {
+//     padding: 12px 38px;
+//     position: fixed;
+//     float: right;
+//     display: flex;
+//     justify-content: end;
+//     right: 0;
+//     background: #fff;
+//     width: 100%;
+//     bottom: 0;
+// }
+.paytype {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 8px;
+}
+
+.paytype-option {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 16px;
+    // gap: 6px;;
+    /* Adjust as necessary */
+}
+
+// .paytype input {
+//     height: 20px;
+// }
+
+.paytype label {
+    border-radius: 56px;
+    background-color: #fff;
+    font-size: 14px;
+    list-style: 16.94px;
+    border: 1px solid #747684;
+    padding: 5px 10px;
+    gap: 3px;
+}
+
+.paytype-option input:checked+.custom-radio {
+    background-color: #7976FF;
+    /* Add this if you want a visual indicator */
+}
+
+.paytypes {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    justify-content: center;
+}
+
+
+.paytypes label {
+    border-radius: 56px;
+    background-color: #fff;
+    font-size: 14px;
+    list-style: 16.94px;
+    border: 1px solid #747684;
+    padding: 0px 15px;
+}
+
+@media (min-width:992px) and (max-width:1200px) {
+    .add-dailysalesbtn .menubtn button {
+        padding: 8px 6px;
+        border: 3px solid #CCD5FF;
+        border-radius: 12px;
+        background-color: rgba(255, 255, 255, 1);
+        font-size: 12px;
+        line-height: 12px;
+        font-weight: 400;
+        color: #080433;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .daily button {
+        padding: 8px 6px;
+        border: none;
+        border-radius: 12px;
+        background-color: #7976FF;
+        font-size: 12px;
+        line-height: 12px;
+        font-weight: 400;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        border: 3px solid #7976FF;
+    }
+
+    .previousdate span {
+        font-size: 12px;
+        line-height: 24px;
+        font-weight: 500;
+    }
+
+    .back-menubtn {
+        gap: 10px;
+    }
+
+    // .productcontent p {
+    //     font-size: 12px;
+    //     line-height: 18px;
+    //     font-weight: 500;
+    // }
+
+    // .categoryicon img {
+    //     padding: 14.67px;
+    //     border-radius: 11.67px;
+    //     height: 45px;
+    //     width: 45px;
+    // }
+
+    .expensesdata {
+        gap: 10px;
+        align-items: center;
+        padding: 9px;
+        cursor: pointer;
+    }
+
+
+}
+
+@media (min-width:768px) and (max-width:992px) {
+    .add-dailysalesbtn .menubtn button {
+        padding: 8px 6px;
+        border: 3px solid #CCD5FF;
+        border-radius: 10px;
+        background-color: rgba(255, 255, 255, 1);
+        font-size: 12px;
+        line-height: 12px;
+        font-weight: 400;
+        color: #080433;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .daily button {
+        padding: 8px 6px;
+        border: none;
+        border-radius: 12px;
+        background-color: #7976FF;
+        font-size: 10px;
+        line-height: 12px;
+        font-weight: 400;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        border: 3px solid #7976FF;
+    }
+
+    .previousdate span {
+        font-size: 12px;
+        line-height: 24px;
+        font-weight: 500;
+    }
+
+    .back-menubtn {
+        gap: 10px;
+    }
+
+    // .productcontent p {
+    //     font-size: 12px;
+    //     line-height: 18px;
+    //     font-weight: 500;
+    // }
+
+    // .categoryicon img {
+    //     padding: 14.67px;
+    //     border-radius: 11.67px;
+    //     height: 40px;
+    //     width: 40px;
+    // }
+
+    .expensesdata {
+        gap: 8px;
+        align-items: center;
+        padding: 9px;
+        cursor: pointer;
+    }
+}
+
+@media (min-width:572px) and (max-width:768px) {
+    .add-dailysalesbtn .menubtn button {
+        padding: 10px 16px;
+        border: 3px solid #CCD5FF;
+        border-radius: 10px;
+        background-color: rgba(255, 255, 255, 1);
+        font-size: 12px;
+        line-height: 12px;
+        font-weight: 400;
+        color: #080433;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .daily button {
+        padding: 10px 16px;
+        border: none;
+        border-radius: 12px;
+        background-color: #7976FF;
+        font-size: 10px;
+        line-height: 12px;
+        font-weight: 400;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        border: 3px solid #7976FF;
+    }
+
+    .previousdate span {
+        font-size: 12px;
+        line-height: 24px;
+        font-weight: 500;
+    }
+
+    .back-menubtn {
+        gap: 10px;
+    }
+
+    // .productcontent p {
+    //     font-size: 12px;
+    //     line-height: 18px;
+    //     font-weight: 500;
+    // }
+
+    // .categoryicon img {
+    //     padding: 14.67px;
+    //     border-radius: 11.67px;
+    //     height: 40px;
+    //     width: 40px;
+    // }
+
+    .expensesdata {
+        gap: 8px;
+        align-items: center;
+        padding: 9px;
+        cursor: pointer;
+    }
+}
+
+@media (min-width:320px) and (max-width:572px) {
+
+    // .carddataform {
+    //     margin-right: auto;
+    // }
+    .dailyheading h4 {
+        font-size: 18px;
+        font-weight: bold;
+        line-height: 18.6px;
+        color: #080433;
+        margin-bottom: 24px;
+    }
+
+    .store-heading h4 {
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 33.6px;
+        color: #080433;
+        margin-bottom: 12px;
+    }
+}
+
+// expenses page css
+
+// credit card
+.commontable h4 {
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 33.6px;
+    color: #080433;
+    margin-bottom: 24px;
+}
+
+.expensescategory {
+    padding: 9px;
+    background-color: #FFFFFF;
+    color: #080433;
+    border-radius: 20px;
+}
+
+.gcategoryicon img {
+    background-color: #FB5B83;
+}
+
+.productcontent span {
+    font-size: 24px;
+    line-height: 33.6px;
+    font-weight: 700;
+}
+
+.addmore button {
+    background-color: #fff;
+    border: 3px solid #95A8FF;
+    border-radius: 8px;
+    padding: 12px 22px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    color: #080433;
+}
+
+.submitbtn button {
+    width: 100%;
+    height: 41px;
+    background-color: #023088;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 14px;
+    line-height: 14px;
+    font-weight: 600;
+    border: none;
+}
+
+.dataform .typeheading h6 {
+    font-size: 14px;
+    line-height: 19.06px;
+    color: #080433;
+    font-weight: 400;
+}
+
+// .dataform .typeheading {
+//     padding-left: 15px;
+//     padding-right: 24px;
+// }
+
+.dataform form label {
+    font-size: 14px;
+    line-height: 14.52px;
+    color: #080433;
+    font-weight: 500;
+}
+
+.dataform form input {
+    border: 1px solid #ECF1F5;
+    border-radius: 8px;
+    height: 35px;
+}
+
+// .carddataform {
+//     margin-right: 15px;
+// }
+
+// store expenses
+
+.dailytabledata {
+    overflow-x: auto;
+    max-width: 100%;
+}
+
+.dailytabledata .forminput input {
+    border: none;
+}
+
+.dailytabledata .forminput .inputfield {
+    background-color: #fff;
+    height: 35px;
+    border-radius: 8px;
+    border: 1px solid #ECF1F5;
+}
+
+.dailytabledata .forminput .inputfield .form-control {
+    height: 100%;
+    padding: 0px 5px;
+}
+
+.dailytabledata form .inputfield span {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 19.2px;
+    color: #080433;
+}
+
+// payroll css
+ 
+.payrolldataform .typeheading h6 {
+    font-size: 14px;
+    line-height: 19.06px;
+    color: #080433;
+    font-weight: 400;
+}
+
+.payrolldataform form label {
+    font-size: 14px;
+    line-height: 14.52px;
+    color: #080433;
+    font-weight: 500;
+    gap: 3px;
+}
+
+.payrolldataform form input {
+    border: 1px solid #ECF1F5;
+    border-radius: 8px;
+    height: 35px;
+}
+
+.payrollcarddataform {
+    margin-right: 15px;
+}
+
+// table
+.data-in-table {
+    max-height: 70vh;
+    overflow: auto;
+}
+
+.data-in-table .table-container table td {
+    border: 1px solid #dee2e6;
+    padding-left: 6px;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.data-in-table .table-container table th {
+    border: 1px solid #dee2e6;
+    padding: 6px 6px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.data-in-table .table-container table thead tr {
+    background-color: #dbdbdb;
+}
+
+.action {
+    width: 60px;
+}
+
+.data-in-table h4 {
+    font-size: 20px;
+}

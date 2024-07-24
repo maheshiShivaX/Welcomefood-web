@@ -42,8 +42,8 @@ export class ManageemployeeComponent {
   public form = new FormGroup({
     employeeId: new FormControl(0),
     name: new FormControl('', Validators.required),
-    emailId: new FormControl('', Validators.required),
-    mobileNo: new FormControl('', Validators.required),
+    emailId: new FormControl('',  [Validators.required, Validators.email]),
+    mobileNo: new FormControl('', [Validators.required,Validators.pattern("^(\\+91-?)?([0-9]{10},?)+$")]),
     gender: new FormControl('', Validators.required),
     isHide: new FormControl(false),
     isActive: new FormControl(true),

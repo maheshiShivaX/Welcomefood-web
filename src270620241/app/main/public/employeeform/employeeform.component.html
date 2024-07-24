@@ -1,0 +1,180 @@
+<div class="storeentryform">
+    <div class="store-heading row justify-content-between">
+        <h4 class="">Manage Employee</h4>
+        <div class="drawersec">
+            <button class="opendrawer" (click)="openDrawer()">+ Add Employee</button>
+        </div>
+    </div>
+    <div class="drawer" [style.width]="isOpen ? '450px' : '0'" [style.right]="isOpen ? '0' : '-450px'"
+        style="z-index: 9999;">
+        <a href="javascript:void(0)" class="closebtn" (click)="closeDrawer()">&times;</a>
+        <form class="row">
+            <div class="mb-3 col-12">
+                <label for="FormControlInput1" class="form-label">Employee Name<span class="required">*</span></label>
+                <input type="text" class="form-control" id="FormControlInput1" placeholder="Enter Store Name">
+            </div>
+            <div class="mb-3 col-12">
+                <label for="FormControlInput1" class="form-label">Employee Email</label>
+                <input type="email" class="form-control" id="FormControlInput1" placeholder="Enter Store Email">
+            </div>
+            <div class="mb-3 col-12">
+                <label for="FormControlInput1" class="form-label">Mobile No</label>
+                <input type="text" class="form-control" id="FormControlInput1" placeholder="Enter Store Contact No">
+            </div>
+            <div class="mb-3 col-12">
+                <label for="FormControlInput1" class="form-label">Gender</label>
+                <div class="genderinput d-flex justify-content-between">
+                    <div class="gendersec d-flex align-items-center">
+                        <label class="mb-0">Male</label>
+                        <input type="radio" class="form-control gender" id="FormControlInput1"
+                        placeholder="Enter Store Contact No">
+                    </div>
+                    <div class="gendersec d-flex align-items-center">
+                        <label class="mb-0">Female</label>
+                        <input type="radio" class="form-control gender" id="FormControlInput1"
+                        placeholder="Enter Store Contact No">
+                    </div>
+                    <div class="gendersec d-flex align-items-center">
+                        <label class="mb-0">Other</label>
+                        <input type="radio" class="form-control gender" id="FormControlInput1"
+                        placeholder="Enter Store Contact No">
+                    </div>
+                </div>
+            </div>
+            <div class="submit-btn col-12 d-flex justify-content-between mt-3">
+                <div class="resetbtn">
+                    <button>Reset</button>
+                </div>
+                <div class="savebtn">
+                    <button>Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="">
+        <div class="search-field d-sm-flex justify-content-between my-4">
+            <div class="pageoption d-flex align-items-center">
+                <select class="pagecounting" id="pagecount">
+                    <option value="50">50</option>
+                    <option value="200">200</option>
+                    <option value='all'>All</option>
+                </select>
+            </div>
+            <div class="d-flex gap-2">
+                <input class="searchfield" type="text" placeholder="Search...">
+            </div>
+        </div>
+        <div class="table-container">
+            <table class="table">
+                <thead class="thead text-white">
+                    <tr>
+                        <th scope="col">Store Name</th>
+                        <th scope="col">Store Code</th>
+                        <th scope="col">Store Email</th>
+                        <th scope="col">Store Contact No</th>
+                        <th scope="col">Store Opening Date</th>
+                        <th scope="col">Address</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Store Name</td>
+                        <td>$1, 174.57</td>
+                        <td>$1, 033.81</td>
+                        <td>$830.34</td>
+                        <td>$1, 033.81</td>
+                        <td>$830.34</td>
+                    </tr>
+                    <tr>
+                        <td>Store Name</td>
+                        <td>$1, 174.57</td>
+                        <td>$1, 033.81</td>
+                        <td>$830.34</td>
+                        <td>$1, 033.81</td>
+                        <td>$830.34</td>
+                    </tr>
+                    <tr>
+                        <td>Store Name</td>
+                        <td>$1, 174.57</td>
+                        <td>$1, 033.81</td>
+                        <td>$830.34</td>
+                        <td>$1, 033.81</td>
+                        <td>$830.34</td>
+                    </tr>
+                    <tr>
+                        <td>Store Name</td>
+                        <td>$1, 174.57</td>
+                        <td>$1, 033.81</td>
+                        <td>$830.34</td>
+                        <td>$1, 033.81</td>
+                        <td>$830.34</td>
+                    </tr>
+                    <tr>
+                        <td>Store Name</td>
+                        <td>$1, 174.57</td>
+                        <td>$1, 033.81</td>
+                        <td>$830.34</td>
+                        <td>$1, 033.81</td>
+                        <td>$830.34</td>
+                    </tr>
+                    <tr>
+                        <td>Store Name</td>
+                        <td>$1, 174.57</td>
+                        <td>$1, 033.81</td>
+                        <td>$830.34</td>
+                        <td>$1, 033.81</td>
+                        <td>$830.34</td>
+                    </tr>
+                    <tr>
+                        <td>Store Name</td>
+                        <td>$1, 174.57</td>
+                        <td>$1, 033.81</td>
+                        <td>$830.34</td>
+                        <td>$1, 033.81</td>
+                        <td>$830.34</td>
+                    </tr>
+                    <tr>
+                        <td>Store Name</td>
+                        <td>$1, 174.57</td>
+                        <td>$1, 033.81</td>
+                        <td>$830.34</td>
+                        <td>$1, 033.81</td>
+                        <td>$830.34</td>
+                    </tr>
+                    <tr>
+                        <td>Store Name</td>
+                        <td>$1, 174.57</td>
+                        <td>$1, 033.81</td>
+                        <td>$830.34</td>
+                        <td>$1, 033.81</td>
+                        <td>$830.34</td>
+                    </tr>
+                    <tr>
+                        <td>Store Name</td>
+                        <td>$1, 174.57</td>
+                        <td>$1, 033.81</td>
+                        <td>$830.34</td>
+                        <td>$1, 033.81</td>
+                        <td>$830.34</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="pagination-container my-0">
+        <button class="btn">
+            < </button>
+                <ng-container>
+                    <button class="btn">
+                        1
+                    </button>
+                    <button class="btn btn-primary active">
+                        2
+                    </button>
+                    <span class="ellipsiss">...</span>
+                </ng-container>
+                <button class="btn">
+                    >
+                </button>
+    </div>
+</div>

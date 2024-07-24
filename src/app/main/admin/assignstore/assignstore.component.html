@@ -4,7 +4,7 @@
     </div>
     <div class="storeformdata">
         <form [formGroup]="form" class="row" (submit)="onSubmit()">
-            <div class="mb-3 col-lg-6">
+            <div class="col-lg-6">
                 <div class="form-group ">
                     <label for="exampleFormControlSelect1">Employee Name</label>
                     <ng-select formControlName="employeeId" id="employeeId" #SelectSizeDefault [items]="employeedetails"
@@ -16,7 +16,7 @@
                         </select> -->
                 </div>
             </div>
-            <div class="mb-3 col-lg-6">
+            <div class="col-lg-6">
                 <div class="form-group ">
                     <label for="exampleFormControlSelect1">Store Name</label>
                     <!-- <ng-container *ngFor="let item of storedetail; let i = index ">
@@ -53,7 +53,7 @@
     </div>
 
 
-    <div class="commontable">
+    <div class="">
         <div class="search-field d-sm-flex justify-content-between my-3">
             <div class="pageoption d-flex align-items-center">
                 <select class="pagecounting" id="pagecount" (change)="onPageSizeChange($event)">
@@ -67,9 +67,9 @@
                     (input)="applyFilter()">
             </div>
         </div>
-        <div class="table-container">
-            <table class="table" *ngIf="visibleRows!=null">
-                <thead class="thead text-white">
+        <div class="data-in-table">
+            <table class="w-100" *ngIf="visibleRows!=null">
+                <thead class="text-white">
                     <tr>
                         <th scope="col">S.N.</th>
                         <th scope="col">Employee Name</th>
@@ -89,26 +89,13 @@
                         </td>
                         <td class="action">
                             <button type="button" (click)="onDelete(item.employeeStoreId)" class="deletebtn">
-                                <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <rect width="40" height="40" rx="12" fill="#FFF0F1" />
-                                    <path
-                                        d="M27.5 14.9833C24.725 14.7083 21.9333 14.5667 19.15 14.5667C17.5 14.5667 15.85 14.65 14.2 14.8167L12.5 14.9833"
-                                        stroke="#C82D31" stroke-width="1.5" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <path
-                                        d="M17.0834 14.1416L17.2667 13.05C17.4 12.2583 17.5 11.6666 18.9084 11.6666H21.0917C22.5 11.6666 22.6084 12.2916 22.7334 13.0583L22.9167 14.1416"
-                                        stroke="#C82D31" stroke-width="1.5" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <path
-                                        d="M25.7083 17.6167L25.1666 26.0084C25.075 27.3167 25 28.3334 22.675 28.3334H17.325C15 28.3334 14.925 27.3167 14.8333 26.0084L14.2916 17.6167"
-                                        stroke="#C82D31" stroke-width="1.5" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <path d="M18.6083 23.75H21.3833" stroke="#C82D31" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M17.9166 20.4166H22.0833" stroke="#C82D31" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
+                                <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M17.5 4.98356C14.725 4.70856 11.9333 4.56689 9.15 4.56689C7.5 4.56689 5.85 4.65023 4.2 4.81689L2.5 4.98356" stroke="#C82D31" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M7.0835 4.1415L7.26683 3.04984C7.40016 2.25817 7.50016 1.6665 8.9085 1.6665H11.0918C12.5002 1.6665 12.6085 2.2915 12.7335 3.05817L12.9168 4.1415" stroke="#C82D31" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M15.7082 7.6167L15.1665 16.0084C15.0748 17.3167 14.9998 18.3334 12.6748 18.3334H7.32484C4.99984 18.3334 4.92484 17.3167 4.83317 16.0084L4.2915 7.6167" stroke="#C82D31" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M8.6084 13.75H11.3834" stroke="#C82D31" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M7.9165 10.4165H12.0832" stroke="#C82D31" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
                             </button>
                         </td>
                     </tr>

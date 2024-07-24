@@ -1,0 +1,106 @@
+<div  class="mt-4">
+    <div class="dailyheading mb-3">
+        <h4>Gas Inventory</h4>
+    </div>
+    <div class="gasinventory-container gasinventory">
+        <div class="gasinventory">
+            <div class="data-container pt-3">
+                <div class="dailytabledata">
+                    <table>
+                        <thead>
+                            <tr class="">
+                                <th class="px-3 pb-2"></th>
+                                <th class="px-3 pb-2">Open Stock</th>
+                                <th class="px-3 pb-2">Purchases</th>
+                                <th class="px-3 pb-2">Purchases Rate</th>
+                                <th class="px-3 pb-2">Sales</th>
+                                <th class="px-3 pb-2">Sales Rate</th>
+                                <th class="px-3 pb-2">Closing Stock</th>
+                                <th class="px-3 pb-2">Physical Stock</th>
+                                <th class="px-3 pb-2">Over Short</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of gesdetail">
+                                <td class="pr-4">{{ item.gesTypeName }}</td>
+                                <td>
+                                    <div class="forminput ">
+                                        <div class="inputfield px-2 mx-3 d-flex align-items-center" style="background-color: #f0f0f0">
+                                            <input type="text" readonly  [(ngModel)]="item.openStock" 
+                                                  class="form-control">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="forminput">
+                                        <div class="inputfield px-2 mx-3 d-flex align-items-center">
+                                            <input type="text" [(ngModel)]="item.purchases"  class="form-control"  (input)="updateTotals(item)">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="forminput">
+                                        <div class="inputfield px-2 mx-3 d-flex align-items-center">
+                                            <input type="text" [(ngModel)]="item.purchasesRate"  class="form-control">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="forminput">
+                                        <div class="inputfield px-2 mx-3 d-flex align-items-center">
+                                            <input type="text" [(ngModel)]="item.sales"  class="form-control"  (input)="updateTotals(item)">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="forminput">
+                                        <div class="inputfield px-2 mx-3 d-flex align-items-center">
+                                            <input type="text" [(ngModel)]="item.salesRate"  class="form-control">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="forminput">
+                                        <div class="inputfield px-2 mx-3 d-flex align-items-center" style="background-color: #f0f0f0">
+                                            <input type="text" readonly [(ngModel)]="item.closingStock"  class="form-control"  (input)="updateTotals(item)">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="forminput">
+                                        <div class="inputfield px-2 mx-3 d-flex align-items-center">
+                                            <input type="text" [(ngModel)]="item.physicalStock"  class="form-control"  (input)="updateTotals(item)">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="forminput">
+                                        <div class="inputfield px-2 mx-3 d-flex align-items-center" style="background-color: #f0f0f0">
+                                            <input type="text" readonly [(ngModel)]="item.overShort"  class="form-control">
+                                        </div>
+                                    </div>
+                                </td>
+                              
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="submit-btn col-12 pl-0">
+                    <div class="allbtn d-flex">
+                        <div class="resetbtn">
+                            <button type="button" (click)="GetGesdetailByDateStoreIdonRest()">
+                                Reset
+                            </button>
+                        </div>
+                        <div class="savebtn">
+                            <button type="submit" (click)="onGesSubmit()">
+                                <ng-container>Save</ng-container>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

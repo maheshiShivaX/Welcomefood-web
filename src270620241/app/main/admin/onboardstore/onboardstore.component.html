@@ -1,0 +1,60 @@
+<div class="purchases " >
+    <div class="store-heading">
+        <h4 class="">Manage Opening Balance</h4>
+    </div>
+    <div class="storeformdata pt-2" *ngIf="this.edit==false">
+        <form class="" [formGroup]="formClosing" (submit)="onSubmitClosing()">
+           
+            <div class="row">
+                <div class="mb-3 col-xl-4 col-lg-6">
+                    <label for="FormControlInput1" class="form-label">Opening Balance</label>
+                    <input type="text" formControlName="amount" class="form-control"  (keypress)="validateNumber($event)"  (input)="validateDecimalPlaces($event)"
+                     id="grocery" placeholder="">
+                </div>
+                <div class="mb-3 col-xl-4 col-lg-6">
+                    <label for="FormControlInput1" class="form-label">Date</label>
+                    <input type="date" class="form-control" formControlName="amountDate" id="amount"  (keypress)="validateNumber($event)"
+                    (input)="validateDecimalPlaces($event)" placeholder="$">
+                </div>
+                <div class="mb-3 col-xl-4 col-lg-6 row align-items-end"> 
+                    <div class="allbtn d-flex">
+                        <div class="resetbtn">
+                            <button type="button" (click)="reset()">
+                                Reset
+                            </button>
+                        </div>
+                        <div class="savebtn">
+                            <button type="submit">
+                                <ng-container>Save</ng-container>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="storeformdata pt-2 d-flex justify-content-between align-items-center" *ngIf="this.edit== true && openingdata !=null">
+        <div><b>Opening Balance</b> {{this.openingdata.amount}}</div> 
+        <div class="d-flex align-items-center opening"><span><b>Opening Date</b> {{this.openingamountdate| date :'dd-MM-yyyy'}} </span>
+        <div>
+            <button type="button" title="On Board Detail" (click)="onEdit(0)" class="editbtn">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <rect width="40" height="40" rx="12" fill="#F8F5FF" />
+                    <path
+                        d="M21.05 13L14.2083 20.2417C13.95 20.5167 13.7 21.0584 13.65 21.4334L13.3416 24.1334C13.2333 25.1084 13.9333 25.775 14.9 25.6084L17.5833 25.15C17.9583 25.0834 18.4833 24.8084 18.7416 24.525L25.5833 17.2834C26.7666 16.0334 27.3 14.6084 25.4583 12.8667C23.625 11.1417 22.2333 11.75 21.05 13Z"
+                        stroke="#023088" stroke-width="1.5" stroke-miterlimit="10"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M19.9083 14.2084C20.2667 16.5084 22.1333 18.2667 24.45 18.5"
+                        stroke="#023088" stroke-width="1.5" stroke-miterlimit="10"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M12.5 28.3334H27.5" stroke="#023088" stroke-width="1.5"
+                        stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </button>
+        </div>
+        </div>
+    </div>
+  
+  
+</div>

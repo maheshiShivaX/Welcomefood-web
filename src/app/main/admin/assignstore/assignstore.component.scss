@@ -1,15 +1,16 @@
 .store-heading h4{
-    font-size: 24px;
-    font-weight: bold;
+    font-size: 20px;
+    font-weight: 600;
     line-height: 33.6px;
     color: #080433;
     margin-bottom: 24px;
 }
 
 .storeentryform .storeformdata form input {
-    height: 50px;
+    height: 41px;
     border-radius: 12px;
     border: 1px solid #ECF1F5;
+    font-size: 14px;
 }
 
 .storeentryform .storeformdata form label {
@@ -24,7 +25,7 @@
     // background-color: #ffffff;
     border-radius: 20px;
     text-align: end;
-    margin-bottom: 15px;
+    // margin-bottom: 15px;
     gap: 15px;
     justify-content: end;
 }
@@ -36,9 +37,9 @@
     border-radius: 12px;
     cursor: pointer;
     transition: background-color 0.3s;
-    width: 140px;
-    height: 50px;
-    font-size: 18px;
+    width: 121px;
+    height: 41px;
+    font-size: 16px;
     line-height: 18px;
     font-weight: 600;
     border: 1px solid #ECF1F5;
@@ -51,9 +52,9 @@
     border-radius: 12px;
     cursor: pointer;
     transition: background-color 0.3s;
-    width: 140px;
-    height: 50px;
-    font-size: 18px;
+    width: 121px;
+    height: 41px;
+    font-size: 16px;
     line-height: 18px;
     font-weight: 600;
     border: none;
@@ -66,9 +67,9 @@
 .statusbtngreen button {
     background: #1DBA401F;
     border: 1.5px solid #1DBA40;
-    padding: 10px 30px;
+    padding: 3px 12px;
     border-radius: 8px;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 500;
     line-height: 21px;
     color: #1DBA40;
@@ -77,9 +78,9 @@
 .statusbtn button {
     background: #C82D311C;
     border: 1.5px solid #C82D31;
-    padding: 10px 30px;
+    padding: 3px 12px;
     border-radius: 8px;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 500;
     line-height: 21px;
     color: #C82D31;

@@ -1,0 +1,85 @@
+.storeentryform h4{
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 33.6px;
+    color: #080433;
+    margin-bottom: 24px;
+}
+
+.statusbtn,.statusbtngreen {
+    width: 120px;
+}
+
+.statusbtngreen button {
+    background: #1DBA401F;
+    border: 1.5px solid #1DBA40;
+    padding: 10px 30px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    color: #1DBA40;
+}
+
+.statusbtn button {
+    background: #C82D311C;
+    border: 1.5px solid #C82D31;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    color: #C82D31;
+    padding: 10px 30px;
+}
+
+.approvebtn,.lockbtn, .lockbtnu,.approvebtnna {
+    width: 160px;
+}
+
+.approvebtn button {
+    background: #0230881a;
+    border: 1.5px solid #023088;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    color: #023088;
+    width: 140px;
+    height: 45px;
+}
+
+.approvebtnna button {
+    background: #ED6C3C1F;
+    border: 1.5px solid #ED6C3C;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    color: #ED6C3C;
+    width: 140px;
+    height: 45px;
+}
+
+.lockbtn button {
+    background: #FB5B831C;
+    border: 1.5px solid #FB5B83;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    color: #FB5B83;
+    width: 140px;
+    height: 45px;
+}
+
+.lockbtnu button {
+    background: #74768414;
+    border: 1.5px solid #747684;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    color: #747684;
+    width: 140px;
+    height: 45px;
+}

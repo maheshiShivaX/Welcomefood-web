@@ -17,8 +17,8 @@ export class PlsheetComponent {
   storedetail:any;
   storeid:any;
 
-
-
+  fromDate:any;
+  toDate:any;
   constructor(private router: Router, private authService: AuthService, private route: ActivatedRoute,
     private http: HttpService, private toastr: ToastrService
   ) {
@@ -29,6 +29,15 @@ export class PlsheetComponent {
       this.loginId = currentUser.loginId;
       // Update menu based on user authentication state
     });
+
+
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = ('0' + (today.getMonth() + 1)).slice(-2); // Add leading zero, month starts at 0
+    const dd = ('0' + today.getDate()).slice(-2); // Add leading zero
+    this.fromDate= `${yyyy}-${mm}-${dd}`;
+     this.toDate = `${yyyy}-${mm}-${dd}`;
+
   }
 
   public form = new FormGroup({
@@ -40,8 +49,9 @@ export class PlsheetComponent {
 
    // =============================================================================
    ngOnInit() {
+  
 
-    this.GetStoreDetailAll();
+    this.GetEmployeeStoreByUserId();
    // this.route.snapshot.params["storeId"];
     
 
@@ -61,8 +71,25 @@ export class PlsheetComponent {
   }
 
   storeList:any
-  fromDate:any;
-  toDate:any;
+  // fromDate:any;
+  // toDate:any;
+
+
+  GetEmployeeStoreByUserId() {
+
+    this.http.getAll(environment.GetEmployeeStoreByUserId +"?pUserId=" + this.loginId ).subscribe((result: any) => {
+      if (result.isSuccess == 1) {
+        console.log(result.data)
+        this.storeList = result.data;
+     
+       
+      }
+      else { this.storeList = null;
+      }
+    })
+  }
+
+
   GetStoreDetailAll() {
     this.http.getAll(environment.GetStoreDetail).subscribe((result: any) => {
       if (result.isSuccess == 1) {
@@ -74,11 +101,23 @@ export class PlsheetComponent {
       }
     })
   }
+  storename:any;
+
   onGetReport()
   {
     console.log(this.form.value);
 
-
+this.storename = this.storeList.filter((x: { storeId: number | null | undefined; })=>x.storeId==this.form.value.storeId)[0].storeName
     this.GetPLStoreDetail(this.form.value.storeId, this.form.value.fromDate,this.form.value.toDate)
+
+    this.reporttype='plreport';
   }
+
+  reporttype:any;
+  onChange(reporttype :any)
+  {
+
+  this.reporttype=reporttype;
 }
+  }
+

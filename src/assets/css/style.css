@@ -198,9 +198,9 @@ th {
   border: 1px solid #eee;
 }
 
-.search-field {
+/* .search-field {
   background-image: linear-gradient(to bottom, rgba(252, 250, 254, 1), rgba(251, 252, 253, 1), rgba(251, 248, 255, 1), rgba(255, 250, 255, 1));
-}
+} */
 
 .datarow {
   background-color: #FFFFFF;
@@ -219,7 +219,7 @@ th {
 .table-container {
   overflow-x: auto;
   max-width: 100%;
-  max-height: 70vh;
+  max-height: 60vh;
 }
 
 
@@ -281,6 +281,15 @@ th {
   border: none;
 }
 
+.data-in-table th[scope="row"],
+.data-in-table thead tr {
+  position: sticky !important;
+  top: 0 !important;
+  left: 0 !important;
+  z-index: 999 !important;
+  background-color: #eee;
+}
+
 /* =====================table css close=============================== */
 
 /*mystore table */
@@ -319,7 +328,7 @@ th {
 }
 
 .searchfield {
-  height: 50px;
+  height: 41px;
   border-radius: 12px;
   border: 1px solid #ECF1F5;
   padding: 0px 20px;
@@ -345,8 +354,8 @@ th {
   margin: 0px 0px;
   border: 1px solid #dbdbdb;
   border-radius: 0px;
-  height: 40px;
-  padding: 0px 15px;
+  height: 32px;
+  padding: 0px 10px;
 }
 
 .ellipsiss {
@@ -362,7 +371,7 @@ th {
 }
 
 .pageoption .pagecounting {
-  height: 45px;
+  height: 41px;
   padding: 0px 15px;
   color: #8a7f7f;
   background: #fff;
@@ -428,17 +437,23 @@ th {
 }
 
 /* ngselect css */
+/* .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked {
+  color: #333;
+  font-size: 14px !important;
+} */
 
 .termspopup-container .ng-select .ng-select-container {
-  height: 50px !important;
+  height: 41px !important;
   border-radius: 12px !important;
   border: 1px solid #ECF1F5 !important;
+  font-size: 14px;
 }
 
 .ng-select .ng-select-container {
-  height: 50px !important;
+  height: 41px !important;
   border-radius: 12px !important;
   border: 1px solid #ECF1F5 !important;
+  font-size: 14px;
 }
 
 .ngselectnew {
@@ -516,8 +531,8 @@ body::-webkit-scrollbar-thumb {
 }
 
 .cross-button span {
-  height: 48px;
-  width: 48px;
+  height: 40px;
+  width: 40px;
   border: 1px solid #ECF1F5;
   border-radius: 10px;
   display: flex;
@@ -584,4 +599,45 @@ body::-webkit-scrollbar-thumb {
   height: 35px !important;
   border-radius: 8px !important;
   border: 1px solid #ECF1F5 !important;
+}
+
+/*small tables */
+.data-in-table {
+  max-height: 60vh;
+  overflow: auto;
+  border: 1px solid #dee2e6;
+}
+
+.data-in-table table td {
+  border: 1px solid #dee2e6;
+  padding: 5px 8px;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.data-in-table table th {
+  border: 1px solid #dee2e6;
+  padding: 5px 6px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.data-in-table table thead tr {
+  background-color: #dbdbdb;
+}
+
+.action {
+  width: 40px;
+}
+
+.data-in-table h4 {
+  font-size: 20px;
+}
+
+.invalid-feedback {
+  display: block;
+  width: 100%;
+  margin-top: .25rem;
+  font-size: 80%;
+  color: #dc3545;
 }

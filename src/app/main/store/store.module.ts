@@ -12,6 +12,13 @@ import { DailysaleComponent } from './dailysale/dailysale.component';
 import { DailysalesexpensesComponent } from './dailysalesexpenses/dailysalesexpenses.component';
 import { StoresummaryComponent } from './storesummary/storesummary.component';
 import { PlsheetComponent } from './plsheet/plsheet.component';
+import { DailysalesheetComponent } from './dailysalesheet/dailysalesheet.component';
+import { ExpenseComponent } from './expense/expense.component';
+import { PayrollComponent } from './payroll/payroll.component';
+import { RebateComponent } from './rebate/rebate.component';
+import { OtherincomeComponent } from './otherincome/otherincome.component';
+import { GesinvoiceComponent } from './gesinvoice/gesinvoice.component';
+import { GesentryComponent } from './gesentry/gesentry.component';
 
 
 const routes: Routes = [
@@ -31,6 +38,13 @@ const routes: Routes = [
   {
     path: 'plsheet', component: PlsheetComponent
   },
+  {
+    path: 'dailysalesheet', component: DailysalesheetComponent
+  },
+
+
+  
+  
 
   
 ]
@@ -44,6 +58,13 @@ const routes: Routes = [
     DailysalesexpensesComponent,
     StoresummaryComponent,
     PlsheetComponent,
+    DailysalesheetComponent,
+    ExpenseComponent,
+    PayrollComponent,
+    RebateComponent,
+    OtherincomeComponent,
+    GesinvoiceComponent,
+    GesentryComponent,
   
   ],
   imports: [

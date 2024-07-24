@@ -1,51 +1,121 @@
+.summaryheading h4 {
+    font-size: 20px;
+    font-weight: 600;
+}
 
-.container {
+.dateformet .date {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.dateformet input {
+    border: none;
+    background: #ecf1f5;
+    border-radius: 5px;
+    padding: 2px 5px;
+}
+
+.reportbutton button {
+    background: #0058ff;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.datasheet {
+    display: flex;
+    justify-content: center;
     width: 100%;
-    margin: 0 auto;
-    border: 1px solid #000;
-    padding: 20px;
+}
+
+.tsheet {
+    // width: 100%;
+    // margin: 0 auto;
+    // border: 1px solid #000;
+    padding: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
 .header {
     text-align: center;
     margin-bottom: 20px;
 }
+
 .header img {
     width: 100px;
 }
+
 .title {
     background-color: yellow;
-    font-weight: bold;
+    font-weight: 600;
     padding: 10px;
     text-align: center;
 }
+
 .section {
     margin-bottom: 20px;
 }
+
+.section span {
+    font-size: 15px;
+}
+
+.section .heading {
+    font-weight: 600;
+}
+
 .section-title {
     background-color: green;
     color: white;
     padding: 5px;
     font-weight: bold;
 }
+
 table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
 }
-th, td {
+
+th,
+td {
     border: 1px solid #000;
-    padding: 8px;
+    padding: 6px;
     text-align: right;
+    font-size: 13px;
 }
+
 th {
     background-color: #f2f2f2;
 }
+
 .highlight {
     background-color: #d3d3d3;
     font-weight: bold;
 }
+
 .total {
     background-color: lightgreen;
     font-weight: bold;
+}
+
+.reportbtn {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.reportbtn button {
+    margin-bottom: 12px;
+    border: none;
+    background: #0058ff;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 6px;
+    border-radius: 6px;
+    max-width: 160px;
 }

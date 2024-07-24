@@ -1,15 +1,16 @@
 .storeentryform h4{
-    font-size: 24px;
-    font-weight: bold;
+    font-size: 20px;
+    font-weight: 600;
     line-height: 33.6px;
     color: #080433;
-    margin-bottom: 24px;
+    margin-bottom: 10px;
 }
 
 .storeentryform form input,select {
-    height: 50px;
+    height: 41px;
     border-radius: 12px;
     border: 1px solid #ECF1F5;
+    font-size: 14px;
 }
 
 .storeentryform form .gender {
@@ -45,9 +46,9 @@
     border-radius: 12px;
     cursor: pointer;
     transition: background-color 0.3s;
-    width: 140px;
-    height: 50px;
-    font-size: 18px;
+    width: 121px;
+    height: 41px;
+    font-size: 16px;
     line-height: 18px;
     font-weight: 600;
     border: 1px solid #ECF1F5;
@@ -60,9 +61,9 @@
     border-radius: 12px;
     cursor: pointer;
     transition: background-color 0.3s;
-    width: 140px;
-    height: 50px;
-    font-size: 18px;
+    width: 121px;
+    height: 41px;
+    font-size: 16px;
     line-height: 18px;
     font-weight: 600;
     border: none;
@@ -117,11 +118,11 @@
 .drawersec button {
     background-color: #023088;
     color: #fff;
-    font-size: 16px;
+    font-size: 12px;
     text-transform: uppercase;
     border: none;
-    padding: 10px 20px;
-    font-weight: 700;
+    padding: 8px 15px;
+    font-weight: 600;
     border-radius: 50px;
   }
   

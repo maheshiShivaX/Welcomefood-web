@@ -1,0 +1,189 @@
+<div class="storeentryform">
+    <!-- login access popup -->
+  
+        <div class="store-heading d-md-flex justify-content-between align-items-center">
+            <h4 class="mb-0">Manage Vendor</h4>
+            <div class="drawersec">
+                <button class="opendrawer" (click)="openDrawer()">+ Add Vendor</button>
+            </div>
+        </div>
+        <div class="drawer" [style.max-width]="isOpen ? '450px' : '0'" [style.right]="isOpen ? '0' : '-450px'"
+            style="z-index: 9999;">
+            <a href="javascript:void(0)" class="closebtn" (click)="closeDrawer()">&times;</a>
+            <form [formGroup]="form" class="row" (submit)="onSubmit()">
+                <div class="mb-3 col-12">
+                    <label for="FormControlInput1" class="form-label">Vendor Name<span class="required">*</span></label>
+                    <input type="text" class="form-control" formControlName="vendorName" id="FormControlInput1"
+                        placeholder="Enter Vendor Name">
+                    <div *ngIf="f['vendorName'].errors && (f['vendorName']?.touched || submitted)" class="invalid-feedback">
+                        <div class="text-red-600" *ngIf="f['vendorName'].errors?.['required']">Vendor Name is
+                            required.
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3 col-12">
+                    <label for="FormControlInput1" class="form-label">Vendor Code<span class="required">*</span></label>
+                    <input type="text" class="form-control" formControlName="vendorCode" id="FormControlInput1"
+                        placeholder="Enter Vendor Code">
+                    <div *ngIf="f['vendorCode'].errors && (f['vendorCode']?.touched || submitted)" class="invalid-feedback">
+                        <div class="text-red-600" *ngIf="f['vendorCode'].errors?.['required']">Vendor Code is
+                            required.
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3 col-12">
+                    <label for="FormControlInput1" class="form-label">Vendor Email</label>
+                    <input type="email" class="form-control" formControlName="emailId" id="FormControlInput1"
+                        placeholder="Enter Employee Email">
+                    <div *ngIf="f['emailId'].errors && (f['emailId']?.touched || submitted)" class="invalid-feedback">
+                        <div class="text-red-600" *ngIf="f['emailId'].errors?.['required']">Vendor Email Id is
+                            required.
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3 col-12">
+                    <label for="FormControlInput1" class="form-label">Mobile No</label>
+                    <input type="text" class="form-control" formControlName="contactNo" id="FormControlInput1"
+                        placeholder="Enter Mobile No">
+                    <div *ngIf="f['contactNo'].errors && (f['contactNo']?.touched || submitted)" class="invalid-feedback">
+                        <div class="text-red-600" *ngIf="f['contactNo'].errors?.['required']">Vendor Mobile No is
+                            required.
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3 col-12">
+                    <label for="FormControlInput1" class="form-label">Address</label>
+                    <input type="text" class="form-control" formControlName="address" id="FormControlInput1"
+                        placeholder="Enter Address">
+                    <div *ngIf="f['address'].errors && (f['address']?.touched || submitted)" class="invalid-feedback">
+                        <div class="text-red-600" *ngIf="f['address'].errors?.['required']">Vendor Address No is
+                            required.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="submit-btn col-12 d-flex justify-content-sm-between pt-2">
+                    <div class="resetbtn">
+                        <button (click)="onReset()" [disabled]="form.invalid" type="button">
+                            Reset
+                        </button>
+                    </div>
+                    <div class="savebtn">
+                        <button type="submit" [disabled]="isLoading">
+                            <ng-container *ngIf="!isLoading">Save</ng-container>
+                            <ng-container *ngIf="isLoading">
+                                <span clas="indicator-progress" [style.display]="'block'">
+                                    Please wait...
+                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                </span>
+                            </ng-container>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="commontable">
+            <div class="search-field d-sm-flex justify-content-between my-3">
+                <div class="pageoption d-flex align-items-center">
+                    <select class="pagecounting" id="pagecount" (change)="onPageSizeChange($event)">
+                        <option value="50">50</option>
+                        <option value="200">200</option>
+                        <option value='all'>All</option>
+                    </select>
+                </div>
+                <div class="d-flex gap-2 mt-sm-auto mt-3">
+                    <input class="searchfield" type="text" placeholder="Search..." [(ngModel)]="filterValue"
+                    (input)="applyFilter()">
+                </div>
+            </div>
+            <div class="table-container">
+                <table class="table" *ngIf="visibleRows!=null">
+                    <thead class="thead text-white">
+                        <tr>
+                            <th scope="col">S.N.</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Code</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Contact No</th>
+                            <th scope="col">Address</th>
+                            <th scope="col" colspan="2">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="whitebg-row" *ngFor="let item of visibleRows; let idx=index;" [style.display]="item.visible ? 'table-row' : 'none'">
+                            <td class="tablefirstdata">{{(currentPage - 1)*pageSize +idx +1}}</td>
+                            <td>{{item.vendorName}}</td>
+                            <td>{{item.vendorCode}}</td>
+                            <td>{{item.emailId}}</td>
+                            <td>{{item.contactNo}}</td>
+                            <td>{{item.address}}</td>
+                           
+                            <td class="action">
+                                <button type="button" (click)="onEdit(item.vendorId)" class="editbtn">
+                                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="40" height="40" rx="12" fill="#F8F5FF" />
+                                        <path
+                                            d="M21.05 13L14.2083 20.2417C13.95 20.5167 13.7 21.0584 13.65 21.4334L13.3416 24.1334C13.2333 25.1084 13.9333 25.775 14.9 25.6084L17.5833 25.15C17.9583 25.0834 18.4833 24.8084 18.7416 24.525L25.5833 17.2834C26.7666 16.0334 27.3 14.6084 25.4583 12.8667C23.625 11.1417 22.2333 11.75 21.05 13Z"
+                                            stroke="#023088" stroke-width="1.5" stroke-miterlimit="10"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M19.9083 14.2084C20.2667 16.5084 22.1333 18.2667 24.45 18.5"
+                                            stroke="#023088" stroke-width="1.5" stroke-miterlimit="10"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M12.5 28.3334H27.5" stroke="#023088" stroke-width="1.5"
+                                            stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </button>
+                            </td>
+                            <td class="action">
+                                <button type="button"  (click)="onDelete(item.vendorId)"
+                                class="deletebtn">
+                                <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="40" height="40" rx="12" fill="#FFF0F1" />
+                                    <path
+                                        d="M27.5 14.9833C24.725 14.7083 21.9333 14.5667 19.15 14.5667C17.5 14.5667 15.85 14.65 14.2 14.8167L12.5 14.9833"
+                                        stroke="#C82D31" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path
+                                        d="M17.0834 14.1416L17.2667 13.05C17.4 12.2583 17.5 11.6666 18.9084 11.6666H21.0917C22.5 11.6666 22.6084 12.2916 22.7334 13.0583L22.9167 14.1416"
+                                        stroke="#C82D31" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path
+                                        d="M25.7083 17.6167L25.1666 26.0084C25.075 27.3167 25 28.3334 22.675 28.3334H17.325C15 28.3334 14.925 27.3167 14.8333 26.0084L14.2916 17.6167"
+                                        stroke="#C82D31" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M18.6083 23.75H21.3833" stroke="#C82D31" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M17.9166 20.4166H22.0833" stroke="#C82D31" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </button>
+                            </td>
+                    
+                        </tr>
+    
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="pagination-container my-0">
+            <button class="btn" (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1">
+                < </button>
+                <ng-container *ngFor="let page of getPageNumbers()">
+                    <button class="btn" [ngClass]="{ 'active': page === currentPage }"
+                        *ngIf="page !== '...' && page !== currentPage" (click)="onPageChange(page)">
+                        {{ page }}
+                    </button>
+                    <button class="btn btn-primary active" *ngIf="page === currentPage" disabled>
+                        {{ page }}
+                    </button>
+                    <span class="ellipsiss" *ngIf="page === '...'">...</span>
+                </ng-container>
+                    <button class="btn" (click)="onPageChange(currentPage + 1)" [disabled]="currentPage === totalPages">
+                        >
+                    </button>
+        </div>
+    </div>
+    
+    

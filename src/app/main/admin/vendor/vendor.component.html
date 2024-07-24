@@ -15,7 +15,7 @@
                     <label for="FormControlInput1" class="form-label">Vendor Name<span class="required">*</span></label>
                     <input type="text" class="form-control" formControlName="vendorName" id="FormControlInput1"
                         placeholder="Enter Vendor Name">
-                    <div *ngIf="f['vendorName'].errors && (f['vendorName']?.touched || submitted)" class="invalid-feedback">
+                    <div *ngIf="f['vendorName'].errors && ( submitted)" class="invalid-feedback">
                         <div class="text-red-600" *ngIf="f['vendorName'].errors?.['required']">Vendor Name is
                             required.
                         </div>
@@ -24,8 +24,8 @@
                 <div class="mb-3 col-12">
                     <label for="FormControlInput1" class="form-label">Vendor Code<span class="required">*</span></label>
                     <input type="text" class="form-control" formControlName="vendorCode" id="FormControlInput1"
-                        placeholder="Enter Vendor Code">
-                    <div *ngIf="f['vendorCode'].errors && (f['vendorCode']?.touched || submitted)" class="invalid-feedback">
+                        placeholder="Enter Vendor Code"  >
+                    <div *ngIf="f['vendorCode'].errors && ( submitted)" class="invalid-feedback">
                         <div class="text-red-600" *ngIf="f['vendorCode'].errors?.['required']">Vendor Code is
                             required.
                         </div>
@@ -35,17 +35,23 @@
                     <label for="FormControlInput1" class="form-label">Vendor Email</label>
                     <input type="email" class="form-control" formControlName="emailId" id="FormControlInput1"
                         placeholder="Enter Employee Email">
-                    <div *ngIf="f['emailId'].errors && (f['emailId']?.touched || submitted)" class="invalid-feedback">
+                    <div *ngIf="f['emailId'].errors && ( submitted)" class="invalid-feedback">
                         <div class="text-red-600" *ngIf="f['emailId'].errors?.['required']">Vendor Email Id is
                             required.
+                        </div>
+                        <div class="text-red-600" *ngIf="f['emailId'].errors?.['email']">Vendor Email No is
+                            Incorrect.
                         </div>
                     </div>
                 </div>
                 <div class="mb-3 col-12">
                     <label for="FormControlInput1" class="form-label">Mobile No</label>
-                    <input type="text" class="form-control" formControlName="contactNo" id="FormControlInput1"
+                    <input type="text" class="form-control" maxlength="10" formControlName="contactNo" id="FormControlInput1"
                         placeholder="Enter Mobile No">
-                    <div *ngIf="f['contactNo'].errors && (f['contactNo']?.touched || submitted)" class="invalid-feedback">
+                    <div *ngIf="f['contactNo'].errors && ( submitted)" class="invalid-feedback">
+                        <div class="text-red-600" *ngIf="f['contactNo'].errors?.['pattern']">Vendor Mobile No is
+                            Incorrect.
+                        </div>
                         <div class="text-red-600" *ngIf="f['contactNo'].errors?.['required']">Vendor Mobile No is
                             required.
                         </div>
@@ -55,7 +61,7 @@
                     <label for="FormControlInput1" class="form-label">Address</label>
                     <input type="text" class="form-control" formControlName="address" id="FormControlInput1"
                         placeholder="Enter Address">
-                    <div *ngIf="f['address'].errors && (f['address']?.touched || submitted)" class="invalid-feedback">
+                    <div *ngIf="f['address'].errors && ( submitted)" class="invalid-feedback">
                         <div class="text-red-600" *ngIf="f['address'].errors?.['required']">Vendor Address No is
                             required.
                         </div>
@@ -82,7 +88,7 @@
                 </div>
             </form>
         </div>
-        <div class="commontable">
+        <div class="">
             <div class="search-field d-sm-flex justify-content-between my-3">
                 <div class="pageoption d-flex align-items-center">
                     <select class="pagecounting" id="pagecount" (change)="onPageSizeChange($event)">
@@ -96,9 +102,9 @@
                     (input)="applyFilter()">
                 </div>
             </div>
-            <div class="table-container">
-                <table class="table" *ngIf="visibleRows!=null">
-                    <thead class="thead text-white">
+            <div class="data-in-table">
+                <table class="w-100" *ngIf="visibleRows!=null">
+                    <thead class="text-white">
                         <tr>
                             <th scope="col">S.N.</th>
                             <th scope="col">Name</th>
@@ -120,44 +126,23 @@
                            
                             <td class="action">
                                 <button type="button" (click)="onEdit(item.vendorId)" class="editbtn">
-                                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <rect width="40" height="40" rx="12" fill="#F8F5FF" />
-                                        <path
-                                            d="M21.05 13L14.2083 20.2417C13.95 20.5167 13.7 21.0584 13.65 21.4334L13.3416 24.1334C13.2333 25.1084 13.9333 25.775 14.9 25.6084L17.5833 25.15C17.9583 25.0834 18.4833 24.8084 18.7416 24.525L25.5833 17.2834C26.7666 16.0334 27.3 14.6084 25.4583 12.8667C23.625 11.1417 22.2333 11.75 21.05 13Z"
-                                            stroke="#023088" stroke-width="1.5" stroke-miterlimit="10"
-                                            stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M19.9083 14.2084C20.2667 16.5084 22.1333 18.2667 24.45 18.5"
-                                            stroke="#023088" stroke-width="1.5" stroke-miterlimit="10"
-                                            stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M12.5 28.3334H27.5" stroke="#023088" stroke-width="1.5"
-                                            stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                    </svg>
+                                    <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M11.05 3.00002L4.20829 10.2417C3.94996 10.5167 3.69996 11.0584 3.64996 11.4334L3.34162 14.1334C3.23329 15.1084 3.93329 15.775 4.89996 15.6084L7.58329 15.15C7.95829 15.0834 8.48329 14.8084 8.74162 14.525L15.5833 7.28335C16.7666 6.03335 17.3 4.60835 15.4583 2.86668C13.625 1.14168 12.2333 1.75002 11.05 3.00002Z" stroke="#023088" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M9.9082 4.2085C10.2665 6.5085 12.1332 8.26683 14.4499 8.50016" stroke="#023088" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M2.5 18.3335H17.5" stroke="#023088" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
                                 </button>
                             </td>
                             <td class="action">
                                 <button type="button"  (click)="onDelete(item.vendorId)"
                                 class="deletebtn">
-                                <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <rect width="40" height="40" rx="12" fill="#FFF0F1" />
-                                    <path
-                                        d="M27.5 14.9833C24.725 14.7083 21.9333 14.5667 19.15 14.5667C17.5 14.5667 15.85 14.65 14.2 14.8167L12.5 14.9833"
-                                        stroke="#C82D31" stroke-width="1.5" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <path
-                                        d="M17.0834 14.1416L17.2667 13.05C17.4 12.2583 17.5 11.6666 18.9084 11.6666H21.0917C22.5 11.6666 22.6084 12.2916 22.7334 13.0583L22.9167 14.1416"
-                                        stroke="#C82D31" stroke-width="1.5" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <path
-                                        d="M25.7083 17.6167L25.1666 26.0084C25.075 27.3167 25 28.3334 22.675 28.3334H17.325C15 28.3334 14.925 27.3167 14.8333 26.0084L14.2916 17.6167"
-                                        stroke="#C82D31" stroke-width="1.5" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <path d="M18.6083 23.75H21.3833" stroke="#C82D31" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M17.9166 20.4166H22.0833" stroke="#C82D31" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
+                                <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M17.5 4.98356C14.725 4.70856 11.9333 4.56689 9.15 4.56689C7.5 4.56689 5.85 4.65023 4.2 4.81689L2.5 4.98356" stroke="#C82D31" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M7.0835 4.1415L7.26683 3.04984C7.40016 2.25817 7.50016 1.6665 8.9085 1.6665H11.0918C12.5002 1.6665 12.6085 2.2915 12.7335 3.05817L12.9168 4.1415" stroke="#C82D31" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M15.7082 7.6167L15.1665 16.0084C15.0748 17.3167 14.9998 18.3334 12.6748 18.3334H7.32484C4.99984 18.3334 4.92484 17.3167 4.83317 16.0084L4.2915 7.6167" stroke="#C82D31" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M8.6084 13.75H11.3834" stroke="#C82D31" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M7.9165 10.4165H12.0832" stroke="#C82D31" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
                             </button>
                             </td>
                     

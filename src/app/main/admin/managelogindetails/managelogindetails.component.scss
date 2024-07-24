@@ -1,9 +1,9 @@
 .storeentryform h4{
-    font-size: 24px;
-    font-weight: bold;
+    font-size: 20px;
+    font-weight: 600;
     line-height: 33.6px;
     color: #080433;
-    margin-bottom: 24px;
+    margin-bottom: 10px;
 }
 
 .statusbtn,.statusbtngreen {
@@ -13,7 +13,7 @@
 .statusbtngreen button {
     background: #1DBA401F;
     border: 1.5px solid #1DBA40;
-    padding: 10px 30px;
+    padding: 3px 12px;
     border-radius: 8px;
     font-size: 14px;
     font-weight: 500;
@@ -29,7 +29,7 @@
     font-weight: 500;
     line-height: 21px;
     color: #C82D31;
-    padding: 10px 30px;
+    padding: 3px 12px;
 }
 
 .approvebtn,.lockbtn, .lockbtnu,.approvebtnna {
@@ -44,8 +44,7 @@
     font-weight: 500;
     line-height: 21px;
     color: #023088;
-    width: 140px;
-    height: 45px;
+    padding: 3px 12px;
 }
 
 .approvebtnna button {
@@ -56,8 +55,7 @@
     font-weight: 500;
     line-height: 21px;
     color: #ED6C3C;
-    width: 140px;
-    height: 45px;
+    padding: 3px 12px;
 }
 
 .lockbtn button {
@@ -68,8 +66,7 @@
     font-weight: 500;
     line-height: 21px;
     color: #FB5B83;
-    width: 140px;
-    height: 45px;
+    padding: 3px 12px;
 }
 
 .lockbtnu button {
@@ -80,6 +77,5 @@
     font-weight: 500;
     line-height: 21px;
     color: #747684;
-    width: 140px;
-    height: 45px;
+    padding: 3px 12px;
 }

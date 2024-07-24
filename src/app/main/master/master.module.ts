@@ -6,6 +6,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ExpenseheadComponent } from './expensehead/expensehead.component';
+import { ExpensegroupComponent } from './expensegroup/expensegroup.component';
+import { IncometypeComponent } from './incometype/incometype.component';
+import { CreditcardComponent } from './creditcard/creditcard.component';
 
 const routes: Routes = [
   { path: 'productcategory', component: ProductcategoryComponent },
@@ -14,17 +17,30 @@ const routes: Routes = [
   },
   {
     path: 'expensehead', component: ExpenseheadComponent
+  },
+  {
+    path: 'expensegroup', component: ExpensegroupComponent
+  },
+  {
+    path: 'incometype', component: IncometypeComponent
+  }
+  ,
+  {
+    path: 'creditcard', component: CreditcardComponent
   }
 
-
   
+
 ]
 
 @NgModule({
   declarations: [
     ProductcategoryComponent,
     ProductdetailComponent,
-    ExpenseheadComponent
+    ExpenseheadComponent,
+    ExpensegroupComponent,
+    IncometypeComponent,
+    CreditcardComponent
   ],
   imports: [
     CommonModule,

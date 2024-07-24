@@ -51,10 +51,12 @@ export class DailysaleComponent {
   insidesaleamount: any = 0;
   outsidesaleamount: any = 0;
   totalsaleamount: any = 0;
+  showpayroll:boolean=false;
+  showrebate:boolean=false;
   showDailysaleInput: boolean = true;
   showGasInput: boolean = false;
   showPurchasesInput: boolean = false;
-  showExpensesInput: boolean = false;
+  showExpensesnewInput: boolean = false;
   activeButtonIndex: number | null = 0;
   vendorList: any;
   productlist: any;
@@ -393,8 +395,10 @@ showSummaryInput:boolean=false;
     this.showDailysaleInput = false;
     this.showGasInput = false;
     this.showPurchasesInput = false;
-    this.showExpensesInput = false;
+    this.showExpensesnewInput =false;
     this.showSummaryInput= false;
+    this.showpayroll=false;
+    this.showrebate=false;
     if (pid == 0) {
       this.showDailysaleInput = true;
     }
@@ -404,12 +408,20 @@ showSummaryInput:boolean=false;
     else if (pid == 2) {
       this.showPurchasesInput = true;
     }
-    else if (pid == 3) {
-      this.showExpensesInput = true;
-    }
     else if (pid == 4) {
       this.showSummaryInput = true;
+    } else if (pid == 5) {
+      this.showExpensesnewInput = true;
     }
+    else if (pid == 6) {
+      this.showpayroll = true;
+    }
+    else if (pid == 7) {
+      this.showrebate = true;
+    }
+    
+
+    
 
     
     else {
@@ -453,7 +465,9 @@ showSummaryInput:boolean=false;
   inventory: InventoryItem[] = [
     { name: 'Open', regular: 0, plus: 0, premium: 0, diesel: 0, total: 0 },
     { name: 'Purchases', regular: 0, plus: 0, premium: 0, diesel: 0, total: 0 },
+    { name: 'Purchases Rate', regular: 0, plus: 0, premium: 0, diesel: 0, total: 0 },
     { name: 'Sales', regular: 0, plus: 0, premium: 0, diesel: 0, total: 0 },
+    { name: 'Sales Rate', regular: 0, plus: 0, premium: 0, diesel: 0, total: 0 },
     { name: 'Close', regular: 0, plus: 0, premium: 0, diesel: 0, total: 0 },
     { name: 'Physical', regular: 0, plus: 0, premium: 0, diesel: 0, total: 0 },
     { name: 'overShort', regular: 0, plus: 0, premium: 0, diesel: 0, total: 0 },
@@ -539,12 +553,14 @@ showSummaryInput:boolean=false;
   updateTotals(): void {
     const open = this.inventory.find(item => item.name === 'Open');
     const purchases = this.inventory.find(item => item.name === 'Purchases');
+    const purchasesrate = this.inventory.find(item => item.name === 'Purchases Rate');
     const sales = this.inventory.find(item => item.name === 'Sales');
+    const salesRate = this.inventory.find(item => item.name === 'Sales Rate');
     const close = this.inventory.find(item => item.name === 'Close');
     const physical = this.inventory.find(item => item.name === 'Physical');
     const overShort = this.inventory.find(item => item.name === 'overShort');
 
-    if (open && purchases && sales && close && physical && overShort) {
+    if (open && purchases && sales && close && physical && overShort && purchasesrate && overShort ) {
       // Calculate Close
       close.regular = (+open.regular) + (+purchases.regular) - (+sales.regular);
       close.plus = (+open.plus) + (+purchases.plus) - (+sales.plus);
@@ -567,8 +583,16 @@ showSummaryInput:boolean=false;
 
       // Calculate totals for each row
       this.inventory.forEach(item => {
-        item.total = (+item.regular) + (+item.plus) + (+item.premium) + (+item.diesel);
+
+        if(item.name=='Purchases Rate' || item.name=='Sales Rate')
+        {
+          item.total = +(( (+item.regular) + (+item.plus) + (+item.premium) + (+item.diesel))/4) .toFixed(2);
+        }else
+        {
+          item.total = +( (+item.regular) + (+item.plus) + (+item.premium) + (+item.diesel)).toFixed(2);
+        }
       });
+
     }
   }
 
@@ -616,7 +640,7 @@ showSummaryInput:boolean=false;
 
   }
   onGesSubmit() {
-    this.selectedRowsitems = this.inventory.filter(x => x.name == 'Purchases' || x.name == 'Sales' || x.name == 'Physical');
+    this.selectedRowsitems = this.inventory.filter(x => x.name == 'Purchases' || x.name == 'Sales' || x.name == 'Physical' || x.name == 'Purchases Rate' || x.name == 'Sales Rate');
     this.formGes.patchValue({
       storeId: +this.storeId,
       entryDate: this.entryDate,

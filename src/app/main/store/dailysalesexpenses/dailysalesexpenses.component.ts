@@ -184,6 +184,7 @@ export class DailysalesexpensesComponent {
     this.showGasInput = false;
     this.showPurchasesInput = false;
     this.showExpensesInput = false;
+
     if (pid == 0) {
       this.showDailysaleInput = true;
     }
