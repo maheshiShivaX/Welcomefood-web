@@ -1,0 +1,326 @@
+// .form-outline {
+//     position: relative;
+// }
+
+// .form-control {
+//     padding-top: 1.5rem;
+// }
+
+// .form-control:focus + .form-label {
+//     transform: translateY(-50%) translateY(-1.5rem); 
+//     font-size: 0.8rem; 
+//     color: #6c757d; 
+// }
+
+// .form-label {
+//     position: absolute;
+//     top: 50%;
+//     left: 1rem; 
+//     transform: translateY(-50%);
+//     pointer-events: none;
+//     transition: all 0.2s ease-in-out;
+//     padding: 0 0.25rem; 
+// }
+
+// .form-control:focus + .form-label {
+//     border: none;
+//     background-color: #fff;
+// }
+
+// .form-control:focus {
+//     color: #495057;
+//     background-color: #fff;
+//     border-color: #023088;
+//     outline: 0;
+//     box-shadow: none;
+//   }
+
+//   .userloginform {
+//     border-radius: 12px;
+//   }
+
+.bg-image-vertical {
+    position: relative;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: auto 100%;
+}
+
+@media (min-width: 1025px) {
+    .h-custom-2 {
+        height: 100%;
+    }
+}
+
+.loginform form .logindes {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 600;
+    color: #474A65;
+    padding-bottom: 44px;
+    text-align: center;
+}
+
+.loginform form h3 {
+    font-size: 26px;
+    line-height: 36px;
+    font-weight: bold;
+    color: #080433;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.loginform form label,
+.loginform form .remember {
+    font-size: 14px;
+    line-height: 21px;
+    font-weight: 500;
+    color: #474A65;
+}
+
+.loginform form input {
+    height: 60px;
+    border: 1px solid #ECF1F5;
+    border-radius: 12px;
+}
+
+.loginform form .remember {
+    font-size: 16px;
+    line-height: 21px;
+    font-weight: 500;
+    color: #474A65;
+    gap: 5px;
+}
+
+.forgotpass a {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 600;
+    color: #ED6C3C;
+}
+
+.btn {
+    background-color: #023088;
+    font-size: 18px;
+    // line-height: 18px;
+    font-weight: 700;
+    color: #FFFFFF;
+}
+
+.addbtn button {
+    height: 60px;
+    width: 171px;
+    border: 5px solid #CCD5FF;
+    background-color: transparent;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    color: #080433;
+}
+
+.btn:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.notyextsec {
+    gap: 10px;
+}
+
+.notyet p {
+    font-size: 14px;
+    line-height: 16.94px;
+    font-weight: 600;
+    color: #080433;
+}
+
+.loginform form {
+    width: 472px;
+}
+
+@media (min-width:768px) and (max-width:992px) {
+    .addbtn button {
+        height: 50px;
+        width: 130px;
+        border: 5px solid #CCD5FF;
+        background-color: transparent;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 18px;
+        color: #080433;
+    }
+
+    .logo img {
+        height: 36px;
+    }
+}
+
+@media (min-width:572px) and (max-width:768px) {
+    .addbtn button {
+        height: 50px;
+        width: 130px;
+        border: 5px solid #CCD5FF;
+        background-color: transparent;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 18px;
+        color: #080433;
+    }
+
+    .logo img {
+        height: 36px;
+    }
+}
+
+@media (min-width:310px) and (max-width:572px) {
+    .addbtn button {
+        height: 45px;
+        width: 130px;
+        border: 5px solid #CCD5FF;
+        background-color: transparent;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 18px;
+        color: #080433;
+    }
+
+    .logo img {
+        height: 36px;
+    }
+
+
+    .loginform form .logindes {
+        font-size: 14px;
+        line-height: 21px;
+        font-weight: 600;
+        color: #474A65;
+        padding-bottom: 30px;
+        text-align: center;
+    }
+
+    .loginform form h3 {
+        font-size: 22px;
+        line-height: 25px;
+        font-weight: bold;
+        color: #080433;
+        padding-bottom: 8px;
+        text-align: center;
+    }
+
+    .loginform form input {
+        height: 50px;
+        border: 1px solid #ECF1F5;
+        border-radius: 12px;
+    }
+
+    .remembersection {
+        text-align: center;
+    }
+
+    .remember {
+        text-align: center;
+        justify-content: center;
+    }
+
+    .logosection {
+        text-align: center;
+    }
+
+    .notyextsec {
+        justify-content: center;
+    }
+
+    .notyet p {
+        font-size: 12px;
+        line-height: 14.94px;
+        font-weight: 600;
+        color: #080433;
+    }
+
+    .loginform form .remember {
+        font-size: 14px;
+        line-height: 18px;
+        font-weight: 500;
+        color: #474A65;
+        gap: 5px;
+    }
+    
+    .forgotpass a {
+        font-size: 14px;
+        line-height: 21px;
+        font-weight: 600;
+        color: #ED6C3C;
+    }
+}
+
+@media only screen and (max-width:310px) {
+    .addbtn button {
+        height: 40px;
+        width: 120px;
+        border: 5px solid #CCD5FF;
+        background-color: transparent;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 18px;
+        color: #080433;
+    }
+
+    .logo img {
+        width: 100%;
+    }
+
+
+    .loginform form .logindes {
+        font-size: 12px;
+        line-height: 16px;
+        font-weight: 600;
+        color: #474A65;
+        padding-bottom: 30px;
+        text-align: center;
+    }
+
+    .loginform form h3 {
+        font-size: 18px;
+        line-height: 21px;
+        font-weight: bold;
+        color: #080433;
+        padding-bottom: 8px;
+        text-align: center;
+    }
+
+    .loginform form input {
+        height: 50px;
+        border: 1px solid #ECF1F5;
+        border-radius: 12px;
+    }
+
+    .remembersection {
+        text-align: center;
+    }
+
+    .remember {
+        text-align: center;
+        justify-content: center;
+    }
+
+    .logosection {
+        text-align: center;
+    }
+
+    .notyextsec {
+        justify-content: center;
+    }
+
+    .notyet p {
+        font-size: 12px;
+        line-height: 14.94px;
+        font-weight: 600;
+        color: #080433;
+    }
+}

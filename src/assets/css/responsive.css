@@ -1,0 +1,109 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*---For Laptop---*/
+@media (max-width: 1800px) {}
+
+@media only screen and (max-width: 1550px) {}
+
+@media(min-width:1200px) {
+    
+}
+
+@media(max-width:1440px) {}
+
+/*---For Laptop---*/
+@media (min-width: 1200px) and (max-width: 1400px) {}
+
+@media (min-width: 1024px) and (max-width: 1199px) {}
+
+@media (min-width: 992px) and (max-width: 1024px) {}
+
+@media (max-width: 1199px) {}
+
+
+/*---For Horizental iPad---*/
+@media (min-width: 992px) and (max-width: 1199px) {}
+
+@media (min-width: 991px) {}
+
+@media (min-width: 768px) {}
+
+/*---For Vertical iPad---*/
+@media (min-width: 768px) and (max-width: 991px) {}
+
+
+@media (max-width: 991px) {}
+
+/*---For Mobile---*/
+@media (max-width: 767px) {
+
+    .navbarTabBar_menu .nav{
+        justify-content: space-evenly;
+    }
+    .navbarTabBar_menu{
+        display: block;
+    }
+
+    .next_btn a{
+        padding: 4px 19px;
+    }
+    .sales_wepper .nav-tabs .nav-link.active{
+        padding: 3.5px 8px;
+    }
+    .sales_wepper .nav-tabs .nav-link{
+        margin-bottom: 15px;
+        padding: 3.5px 8px;
+    }
+
+    .store_daily_sales .store_PL_sheet_wepper .nav {
+        width: 100% !important;
+    }
+
+    .store_daily_sales .store_name {
+        display: block !important;
+    }
+
+    .store_daily_sales .navbarTabBar_menu {
+        display: block !important;
+    }
+
+    .store_daily_sales .sales_wepper {
+        padding: 10px;
+    }
+}
+
+@media (min-width:576) {}
+
+@media (max-width: 513px) {
+    .store_PL_sheet_wepper .nav {
+        width: 100%;
+    }
+
+    .store_PL_sheet_wepper .d-flex{
+        display: block !important;
+    }
+
+    .cash_wepper .table_hedding th {
+        padding: 10px 10px;
+        font-size: 12px;
+    }
+
+  
+}
+
+@media (max-width: 462px) {}
+
+@media (max-width: 480px) {}
+
+@media (max-width: 425px) {}
+
+@media (max-width: 414px) {}
+
+@media (max-width: 320px) {}
+
+@media (max-width: 395px) {}
+
+@media (max-width: 375px) {}
+
+@media (max-width: 342px) {}

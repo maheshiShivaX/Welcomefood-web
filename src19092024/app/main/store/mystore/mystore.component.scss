@@ -1,0 +1,96 @@
+.mystoretitle h6 {
+    font-size: 24px;
+    line-height: 33.6px;
+    font-weight: 700;
+    color: #080433;
+}
+
+.adddailybtn {
+    width: 180px;
+}
+
+// .storename-address {
+//     width: 330px;
+// }
+
+.storename-add {
+    max-width: 340px;
+    min-width: 255px;
+    align-items: center;
+}
+
+thead tr{
+    background-color: rgb(244, 244, 243) !important;
+}
+
+tbody {
+    background-color: #fff;
+}
+
+.location {
+    align-items: start;
+}
+
+.addbtn button {
+    // padding: 10px 16px 10px 15px;
+    border: 5px solid #CCD5FF;
+    background-color: transparent;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    width: 170px;
+    height: 50px;
+}
+
+.btn:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.editbtn button {
+    display: inline-block;
+    background-color: #023088;
+    color: white;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 171px;
+    height: 60px;
+    font-size: 18px;
+    line-height: 18px;
+    font-weight: 600;
+    border: none;
+}
+
+.editrequest h4 {
+    font-size: 24px;
+    line-height: 33.6px;
+    font-weight: 700;
+    color: #080433;
+}
+
+.editrequest span {
+    font-size: 15px;
+    line-height: 22.5px;
+    font-weight: 600;
+    color: #080433;
+    padding-top: 12px;
+}
+
+.reason label {
+    font-size: 14px;
+    line-height: 21px;
+    font-weight: 500;
+    color: #747684;
+}
+
+.reason input {
+    height: 120px;
+    border: 1px solid #ECF1F5;
+    border-radius: 12px;
+}
+
+.termspopup-container {
+    padding: 34px !important;
+}

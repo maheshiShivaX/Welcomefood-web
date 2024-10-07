@@ -1,0 +1,587 @@
+.adminnavbar {
+    height: 95px;
+    padding-left: 32px;
+    padding-right: 32px;
+    box-shadow: 0 0 3px #00000026;
+}
+
+.search-bar {
+    border: 1px solid #ECF1F5;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.navbar-nav {
+    gap: 20px;
+    padding-right: 30px !important;
+}
+
+// .adminnav {
+//     gap: 20px;
+// }
+
+.search-input:focus {
+    background: transparent;
+    box-shadow: none;
+    border: none;
+}
+
+.theme {
+    border: 1px solid #ECF1F5;
+    border-radius: 10px;
+    height: 48px;
+    width: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.notification {
+    border: 1px solid #ECF1F5;
+    border-radius: 10px;
+    height: 48px;
+    width: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile img {
+    height: 48px;
+    width: 48px;
+    border-radius: 10px;
+}
+
+.btn:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    background-color: white;
+    color: #000;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    gap: 10px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    // margin-top: 8px;
+    border-radius: 8px;
+}
+
+.dropdown-content:hover {
+    border-radius: 8px;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    list-style: none;
+}
+
+.dropdown-content a:hover {
+    background-color: #ffdfdf;
+
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+// .dropdown:hover .dropbtn {
+//     background-color: #3e8e41;
+// }
+
+.profile-name span {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    color: #080433;
+}
+
+.profile-name p {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 18px;
+    color: #474A65;
+}
+
+.navbar-toggler {
+    height: 48px;
+    width: 48px;
+    padding: 0;
+}
+
+@media (min-width:768px) and (max-width:992px) {
+    // .profile img {
+    //     height: 42px;
+    //     width: 42px;
+    //     border-radius: 10px;
+    // }
+
+    // .theme,
+    // .notification {
+    //     height: 40px;
+    //     width: 40px;
+    // }
+
+
+    .profile-name span {
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 21px;
+        color: #080433;
+    }
+
+    .profile-name p {
+        font-size: 10px;
+        font-weight: 400;
+        line-height: 15px;
+        color: #474A65;
+    }
+
+    .navbar-nav {
+        gap: 10px;
+        padding-right: 20px !important;
+    }
+
+    .search-button {
+        border-radius: 50%;
+        padding: 6px 10px;
+        transition: all .4s;
+    }
+}
+
+@media only screen and (max-width:768px) {
+    .adminnavbar {
+        height: 80px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .navbar {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    .navbar-nav {
+        flex-direction: row;
+    }
+}
+
+@media only screen and (max-width:768px) {
+    .profile img {
+        height: 42px;
+        width: 42px;
+        border-radius: 10px;
+    }
+
+    .theme,
+    .notification {
+        height: 42px;
+        width: 42px;
+    }
+
+    .navbar-toggler {
+        height: 40px;
+        width: 40px;
+        padding: 0;
+    }
+
+    .navbar-nav {
+        gap: 10px;
+        padding-right: 20px !important;
+    }
+
+    .profile-name,
+    .dropdownicon {
+        display: none;
+    }
+
+}
+
+
+// logout popup
+
+.logpopup-container {
+    // box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    color: #000;
+    display: none;
+    background: rgba(0, 0, 0, 0.5);
+    height: 100vh;
+}
+
+.popupmaincontain {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.logoutcontainer {
+    width: 520px;
+    background-color: #FFFFFF;
+    padding: 25px;
+    border-radius: 10px;
+    border: 1px solid #ECF1F5;
+}
+
+.logoutcontain h4 {
+    font-size: 28px;
+    line-height: 39.2px;
+    font-weight: bold;
+    color: #080433;
+}
+
+.logoutcontain span {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+    color: #747684;
+}
+
+.logpopupbtn .cancelbtn button {
+    width: 169px;
+    height: 60px;
+    border-radius: 12px;
+    background-color: #F8F5FF;
+    border: none;
+    color: #080433;
+    font-size: 16px;
+    line-height: 16px;
+    font-weight: 600;
+}
+
+.logpopupbtn .logoutbtn button {
+    width: 169px;
+    height: 60px;
+    border-radius: 12px;
+    background-color: #023088;
+    border: none;
+    color: #FFFFFF;
+    font-size: 16px;
+    line-height: 16px;
+    font-weight: 600;
+}
+
+.logpopupbtn {
+    display: flex;
+    justify-content: space-around;
+}
+
+.logoutcontain,
+.logpopupbtn {
+    margin-top: 30px;
+}
+
+@media only screen and (max-width:260px) {
+    .logoutcontainer {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .logpopupbtn {
+        display: block;
+    }
+
+    .logoutbtn {
+        padding-top: 12px;
+    }
+
+    .contain .logicon svg {
+        height: 50px;
+        width: 50px;
+    }
+
+    .logoutcontain h4 {
+        font-size: 20px;
+        line-height: 15.2px;
+        font-weight: bold;
+        color: #080433;
+    }
+
+    .logoutcontain span {
+        font-size: 12px;
+        line-height: 16px;
+        font-weight: 500;
+        color: #747684;
+    }
+
+    .logpopupbtn .cancelbtn button {
+        width: 150px;
+        height: 50px;
+        font-size: 16px;
+        line-height: 16px;
+
+    }
+
+    .logpopupbtn .logoutbtn button {
+        width: 150px;
+        height: 50px;
+        font-size: 16px;
+        line-height: 16px;
+    }
+}
+
+@media (min-width:260px) and (max-width:320px) {
+    .logoutcontainer {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .logpopupbtn {
+        display: block;
+    }
+
+    .logoutbtn {
+        padding-top: 12px;
+    }
+
+    .contain .logicon svg {
+        height: 50px;
+        width: 50px;
+    }
+
+    .logoutcontain h4 {
+        font-size: 20px;
+        line-height: 15.2px;
+        font-weight: bold;
+        color: #080433;
+    }
+
+    .logoutcontain span {
+        font-size: 12px;
+        line-height: 16px;
+        font-weight: 500;
+        color: #747684;
+    }
+
+    .logpopupbtn .cancelbtn button {
+        width: 150px;
+        height: 50px;
+        font-size: 16px;
+        line-height: 16px;
+
+    }
+
+    .logpopupbtn .logoutbtn button {
+        width: 150px;
+        height: 50px;
+        font-size: 16px;
+        line-height: 16px;
+    }
+}
+
+@media (min-width:320px) and (max-width:640px) {
+
+    .logoutcontain,
+    .logpopupbtn {
+        margin-top: 15px;
+    }
+
+    .logpopup-container {
+        width: 280px;
+        padding: 15px;
+    }
+
+    .logpopupbtn {
+        display: block;
+    }
+
+    .logoutbtn {
+        padding-top: 18px;
+    }
+
+    .contain .logicon svg {
+        height: 70px;
+        width: 70px;
+    }
+
+    .logoutcontain h4 {
+        font-size: 25px;
+        line-height: 30.2px;
+        font-weight: bold;
+        color: #080433;
+    }
+
+    .logoutcontain span {
+        font-size: 14px;
+        line-height: 21px;
+        font-weight: 500;
+        color: #747684;
+    }
+
+    .logpopupbtn .cancelbtn button {
+        width: 150px;
+        height: 50px;
+        font-size: 16px;
+        line-height: 16px;
+
+    }
+
+    .logpopupbtn .logoutbtn button {
+        width: 150px;
+        height: 50px;
+        font-size: 16px;
+        line-height: 16px;
+    }
+
+}
+
+@media (min-width:640px) and (max-width:768px) {
+    .logoutcontainer {
+        width: 470px;
+        padding: 15px;
+    }
+}
+
+
+// notification css {
+    .notification .badge {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        height: 20px;
+        width: 20px;
+        border-radius: 50%;
+        background: red;
+        color: white;
+      }
+
+      
+// notification popup  
+
+.notification-container {
+    background-color: #FFFFFF;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    box-shadow: 0 2px 3px #00000026;
+    width: 400px;
+    padding: 24px;
+    position:absolute;
+    top: 100%;
+    // position: fixed;
+    // top: 50%;
+    // left: 50%;
+    // transform: translate(-50%, -50%);
+    z-index: 10000;
+    color: #000;
+    max-height: 472px;
+    display: none;
+    margin-top: 26px;
+    // right: 0;
+}
+
+.notification-container h3 {
+    color: #000;
+    text-transform: capitalize;
+    font-weight: bold;
+    text-align: center;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.notification-container .termsandcondition li {
+    font-size: 12px;
+    line-height: 18px;
+    color: #747684;
+    opacity: 70%;
+    padding-left: 4px;
+    padding-right: 4px;
+    font-weight: 500;
+    list-style: none;
+    gap: 12px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.notibtn {
+    background-color: transparent;
+    border: none;
+}
+
+.notification-container .closebtn button {
+    background-color: transparent;
+    border: none;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #ED6C3C;
+    font-weight: bold;
+    text-align: center;
+}
+
+.notification-container .scroll-text {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.bottonborder {
+    margin-top: 12px;
+    margin-bottom: 12px;
+    background-color: #ECF1F5;
+    height: 1px;
+}
+
+.termsandcon  {
+    margin-bottom: 12px;
+}
+
+
+@media only screen and (max-width:260px) {
+
+    .notification-container {
+        width: 100%;
+        padding: 15px;
+    }
+
+}
+
+@media (min-width:260px) and (max-width:320px) {
+
+    .notification-container {
+        width: 100%;
+        padding: 15px;
+    }
+}
+
+@media (min-width:320px) and (max-width:640px) {
+
+    .notification-container {
+        width: 300px;
+        padding: 15px;
+        max-width: 380px;
+    }
+}
+
+@media (min-width:640px) and (max-width:768px) {
+
+}

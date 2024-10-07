@@ -1,0 +1,284 @@
+<!-- cards -->
+<div class="dailysales">
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="dailyheading mb-lg-3 mt-lg-4 my-2">
+            <h4 class="mb-0">Add Expenses</h4>
+        </div>
+    </div>
+
+    <div class="expensescategory mx-0" style="display: none;">
+
+        <owl-carousel-o [options]="videoslide" style="width: 100%!important;">
+            <ng-container class="custom-slide" *ngFor="let item of expensegrouplist  let i = index">
+                <ng-template carouselSlide [id]="item.expenseGroupId" class="custom-slide">
+                    <div class="expensesdata d-flex"
+                        (click)="showexpensesData(item.expenseGroupId,'Expense'); activeIndex = i"
+                        [style.border]="activeIndex === i ? '2px solid #FB5B83': null"
+                        [style.border-radius.px]="activeIndex === i ? 12 : null"
+                        [style.padding.px]="activeIndex === i ? 8 : null"
+                        [style.background]="activeIndex === i ? '#ed6c3c1a' : null"
+                        [style.box-shadow]="activeIndex ===i ? 'rgba(237, 108, 60, 0.15) 0px 20px 40px 0px' : null">
+                        <div class="gcategoryicon categoryicon">
+                            <img src="./assets/images/creditcard.png" alt="cash" />
+                        </div>
+                        <div class="productcontent">
+                            <p class="mb-0">{{item.expenseGroupName}}</p>
+                        </div>
+                    </div>
+                </ng-template>
+            </ng-container>
+
+            <ng-container class="custom-slide">
+                <ng-template class="" carouselSlide class="custom-slide">
+                    <div class="expensesdata d-flex" (click)="showexpensesData(1,'Payroll'); activeIndex = 1"
+                        [style.border]="activeIndex === 1 ? '2px solid #FB5B83': null"
+                        [style.border-radius.px]="activeIndex === 1 ? 12 : null"
+                        [style.padding.px]="activeIndex === 1 ? 8 : null"
+                        [style.background]="activeIndex === 1 ? '#ed6c3c1a' : null"
+                        [style.box-shadow]="activeIndex === 1 ? 'rgba(237, 108, 60, 0.15) 0px 20px 40px 0px' : null">
+                        <div class="gcategoryicon categoryicon">
+                            <img src="./assets/images/storeexpense.png" alt="cash" />
+                        </div>
+                        <div class="productcontent">
+                            <p class="mb-0">Payroll</p>
+                        </div>
+                    </div>
+                </ng-template>
+            </ng-container>
+
+            <!-- <ng-container class="custom-slide">
+                    <ng-template class="" carouselSlide class="custom-slide">
+                        <div class="expensesdata d-flex" (click)="showexpensesData(1); activeIndex = 1"
+                            [style.border]="activeIndex === 1 ? '2px solid #FB5B83': null"
+                            [style.border-radius.px]="activeIndex === 1 ? 12 : null"
+                            [style.padding.px]="activeIndex === 1 ? 8 : null"
+                            [style.background]="activeIndex === 1 ? '#ed6c3c1a' : null"
+                            [style.box-shadow]="activeIndex === 1 ? 'rgba(237, 108, 60, 0.15) 0px 20px 40px 0px' : null">
+                            <div class="gcategoryicon categoryicon">
+                                <img src="./assets/images/storeexpense.png" alt="cash" />
+                            </div>
+                            <div class="productcontent">
+                                <p class="mb-0">Store Expense</p>
+                            </div>
+                        </div>
+                    </ng-template>
+                </ng-container> -->
+            <!-- <ng-container class="custom-slide">
+                    <ng-template class="" carouselSlide class="custom-slide">
+                        <div class="expensesdata d-flex" (click)="showexpensesData(1); activeIndex = 1"
+                            [style.border]="activeIndex === 1 ? '2px solid #FB5B83': null"
+                            [style.border-radius.px]="activeIndex === 1 ? 12 : null"
+                            [style.padding.px]="activeIndex === 1 ? 8 : null"
+                            [style.background]="activeIndex === 1 ? '#ed6c3c1a' : null"
+                            [style.box-shadow]="activeIndex === 1 ? 'rgba(237, 108, 60, 0.15) 0px 20px 40px 0px' : null">
+                            <div class="gcategoryicon categoryicon">
+                                <img src="./assets/images/storeexpense.png" alt="cash" />
+                            </div>
+                            <div class="productcontent">
+                                <p class="mb-0">Store Expense</p>
+                            </div>
+                        </div>
+                    </ng-template>
+                </ng-container>
+                <ng-container class="custom-slide">
+                    <ng-template class="" carouselSlide class="custom-slide">
+                        <div class="expensesdata d-flex" (click)="showexpensesData(2); activeIndex = 2"
+                            [style.border]="activeIndex === 2 ? '2px solid #FB5B83': null"
+                            [style.border-radius.px]="activeIndex === 2 ? 12 : null"
+                            [style.padding.px]="activeIndex === 2 ? 8 : null"
+                            [style.background]="activeIndex === 2 ? '#ed6c3c1a' : null"
+                            [style.box-shadow]="activeIndex === 2 ? 'rgba(237, 108, 60, 0.15) 0px 20px 40px 0px' : null">
+                            <div class="gcategoryicon categoryicon">
+                                <img src="./assets/images/lotterypayout.png" alt="cash" />
+                            </div>
+                            <div class="productcontent">
+                                <p class="mb-0">Lottery Payout</p>
+                            </div>
+                        </div>
+                    </ng-template>
+                </ng-container>
+                <ng-container class="custom-slide">
+                    <ng-template class="" carouselSlide class="custom-slide">
+                        <div class="expensesdata d-flex" (click)="showexpensesData(3); activeIndex = 3"
+                            [style.border]="activeIndex === 3 ? '2px solid #FB5B83': null"
+                            [style.border-radius.px]="activeIndex === 3 ? 12 : null"
+                            [style.padding.px]="activeIndex === 3 ? 8 : null"
+                            [style.background]="activeIndex === 3 ? '#ed6c3c1a' : null"
+                            [style.box-shadow]="activeIndex === 3 ? 'rgba(237, 108, 60, 0.15) 0px 20px 40px 0px' : null">
+                            <div class="gcategoryicon categoryicon">
+                                <img src="./assets/images/lotterypayout.png" alt="cash" />
+                            </div>
+                            <div class="productcontent">
+                                <p class="mb-0">Arcade Payout</p>
+                            </div>
+                        </div>
+                    </ng-template>
+                </ng-container>
+                <ng-container class="custom-slide">
+                    <ng-template class="" carouselSlide class="custom-slide">
+                        <div class="expensesdata d-flex" (click)="showexpensesData(4); activeIndex = 4"
+                            [style.border]="activeIndex === 4 ? '2px solid #FB5B83': null"
+                            [style.border-radius.px]="activeIndex === 4 ? 12 : null"
+                            [style.padding.px]="activeIndex === 4 ? 8 : null"
+                            [style.background]="activeIndex === 4 ? '#ed6c3c1a' : null"
+                            [style.box-shadow]="activeIndex === 4 ? 'rgba(237, 108, 60, 0.15) 0px 20px 40px 0px' : null">
+                            <div class="gcategoryicon categoryicon">
+                                <img src="./assets/images/otherpayout.png" alt="cash" />
+                            </div>
+                            <div class="productcontent">
+                                <p class="mb-0">Other Payout</p>
+                            </div>
+                        </div>
+                    </ng-template>
+                </ng-container>
+                <ng-container class="custom-slide">
+                    <ng-template class="" carouselSlide class="custom-slide">
+                        <div class="expensesdata d-flex" (click)="showexpensesData(5); activeIndex = 5"
+                            [style.border]="activeIndex === 5 ? '2px solid #FB5B83': null"
+                            [style.border-radius.px]="activeIndex === 5 ? 12 : null"
+                            [style.padding.px]="activeIndex === 5 ? 8 : null"
+                            [style.background]="activeIndex === 5 ? '#ed6c3c1a' : null"
+                            [style.box-shadow]="activeIndex === 5 ? 'rgba(237, 108, 60, 0.15) 0px 20px 40px 0px' : null">
+                            <div class="gcategoryicon categoryicon">
+                                <img src="./assets/images/payroll.png" alt="cash" />
+                            </div>
+                            <div class="productcontent">
+                                <p class="mb-0">Payroll</p>
+                            </div>
+                        </div>
+                    </ng-template>
+                </ng-container> -->
+        </owl-carousel-o>
+
+
+
+    </div>
+
+
+    <div class="storeformdata pt-2">
+        <form class="" [formGroup]="formcradit" (submit)="onSubmitCredit()">
+            <div class="row">
+
+                <div class="mb-3 col-xl-3 col-lg-6">
+                    <label for="FormControlInput1" class="form-label">{{this.groupname}} </label>
+                    <ng-select formControlName="expenseCategoryId" id="expenseCategoryId" #SelectSizeDefault
+                        [items]="expenseitem" bindLabel="expanseName" bindValue="expenseCategoryId">
+                    </ng-select>
+                </div>
+
+                <div class="form-group mb-0">
+                    <label for="FormControlInput1" class="form-label">Description</label>
+                    <input type="text" class="form-control" id="description" formControlName="description"
+                        placeholder="Enter Description">
+                </div>
+
+                <div class="mb-2 col-xl-2 col-lg-6">
+                    <label for="FormControlInput1" class="form-label">Pay Modes </label>
+                    <ng-select formControlName="payModeId" id="payModeId" (ngModelChange)="onPaymodechange($event)"
+                        #SelectSizeDefault [items]="paymode" bindLabel="payModeName" bindValue="payModeId">
+                    </ng-select>
+                </div>
+
+
+                <div class="mb-2 col-xl-2 col-lg-6">
+                    <label for="FormControlInput1" class="form-label">Amount</label>
+                    <input type="text" class="form-control" formControlName="amount" id="amount"
+                        (keypress)="validateNumber($event)" (input)="validateDecimalPlaces($event)" placeholder="$">
+                </div>
+                <div class="mb-3 col-xl-3 col-lg-6" *ngIf="this.selectedOption=='2'">
+                    <label for="FormControlInput1" class="form-label">Cheque Number</label>
+                    <input type="text" class="form-control" formControlName="chequeNo" id="chequeNo" placeholder="#">
+                </div>
+                <div class="submit-btn col-12">
+                    <div class="allbtn d-flex">
+                        <div class="resetbtn">
+                            <button type="button">
+                                Reset
+                            </button>
+                        </div>
+                        <div class="savebtn">
+                            <button type="submit">
+                                <ng-container>Save</ng-container>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="data-in-table my-3">
+
+        <div class="table-container">
+            <table class="w-100">
+                <thead class="text-white">
+                    <tr>
+                        <th>Sr.No</th>
+                        <th>Category Name</th>
+                        <th>Description</th>
+
+                        <th>Pay Type</th>
+                        <th>Amount</th>
+                        <th>Cheque No</th>
+                        <th>Entry Date</th>
+                        <th colspan="2">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let row of expenseitemlist ;let idx =index">
+                        <td class="tablefirstdata text-center">{{idx + 1}}</td>
+
+                        <td>{{row.categoryName}}</td>
+                        <td>{{row.description}}</td>
+                        <td>{{row.payModeName}}</td>
+                        <td>{{row.amount}}</td>
+                        <td>{{row.chequeNo}}</td>
+                        <td>{{row.createdDate | date : 'dd-MM-yyyy hh:mm:ss'}}</td>
+                        <td class="action">
+                            <button type="button" (click)="onedit(row.expenseItemId)" class="editbtn">
+                                <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="40" height="40" rx="12" fill="#F8F5FF" />
+                                    <path
+                                        d="M21.05 13L14.2083 20.2417C13.95 20.5167 13.7 21.0584 13.65 21.4334L13.3416 24.1334C13.2333 25.1084 13.9333 25.775 14.9 25.6084L17.5833 25.15C17.9583 25.0834 18.4833 24.8084 18.7416 24.525L25.5833 17.2834C26.7666 16.0334 27.3 14.6084 25.4583 12.8667C23.625 11.1417 22.2333 11.75 21.05 13Z"
+                                        stroke="#023088" stroke-width="1.5" stroke-miterlimit="10"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M19.9083 14.2084C20.2667 16.5084 22.1333 18.2667 24.45 18.5"
+                                        stroke="#023088" stroke-width="1.5" stroke-miterlimit="10"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M12.5 28.3334H27.5" stroke="#023088" stroke-width="1.5"
+                                        stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </button>
+                        </td>
+                        <td class="action">
+                            <button type="button" class="deletebtn">
+                                <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="40" height="40" rx="12" fill="#FFF0F1" />
+                                    <path
+                                        d="M27.5 14.9833C24.725 14.7083 21.9333 14.5667 19.15 14.5667C17.5 14.5667 15.85 14.65 14.2 14.8167L12.5 14.9833"
+                                        stroke="#C82D31" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path
+                                        d="M17.0834 14.1416L17.2667 13.05C17.4 12.2583 17.5 11.6666 18.9084 11.6666H21.0917C22.5 11.6666 22.6084 12.2916 22.7334 13.0583L22.9167 14.1416"
+                                        stroke="#C82D31" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path
+                                        d="M25.7083 17.6167L25.1666 26.0084C25.075 27.3167 25 28.3334 22.675 28.3334H17.325C15 28.3334 14.925 27.3167 14.8333 26.0084L14.2916 17.6167"
+                                        stroke="#C82D31" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M18.6083 23.75H21.3833" stroke="#C82D31" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M17.9166 20.4166H22.0833" stroke="#C82D31" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </button>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

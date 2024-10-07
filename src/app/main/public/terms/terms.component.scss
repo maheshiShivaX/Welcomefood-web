@@ -1,0 +1,36 @@
+.terms .termstitle h4{
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 33.6px;
+}
+.terms .termstitle ul {
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 33.6px;
+    padding-left: 20px;
+}
+
+.termstitle {
+    gap: 15px;
+    align-items: center;
+}
+
+.terms-contain ul li {
+    list-style: none;
+    padding-top: 20px;
+}
+
+.terms-contain ul li span{
+  font-size: 18px;
+  line-height: 27px;
+  font-weight: 600;
+  color: #080433;
+}
+
+.terms-contain ul li p {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+    color: #747684;
+    padding-top: 10px;
+}
