@@ -98,7 +98,8 @@ export class DailysaleComponent {
     this.GetOtherSale(this.storeId, 1, this.entryDate);
     this. GetGetStoreClosingByStoreId(this.storeId, this.entryDate) ;
     this.GetAmountByGroupId(this.storeId, this.entryDate)
-    this.GetLotteryTypeStoreIdDate();
+    // this.GetLotteryTypeStoreIdDate();
+    // this.GetLotteryExpenseStoreIdDate();
     // this.GetGesdetailByDateStoreId();
     this.updateTotals();
 // this.GetExpenseItemsByAmountDate();
@@ -116,6 +117,8 @@ onother()
 
 lotterytype:any
 lotteryamount:any;
+lotteryamountExpense:any;
+lotterytypeExpense:any;
 
 GetLotteryTypeStoreIdDate() {
   this.http.getAll(environment.GetLotteryTypeStoreIdDate + "?pStoreId=" + this.storeId  + "&pAmountDate=" + this.entryDate).subscribe((result: any) => {
@@ -125,6 +128,22 @@ GetLotteryTypeStoreIdDate() {
 
 
       this.lotteryamount  = this.lotterytype.reduce((acc: any, item: { lotteryAmount: any; }) => acc + (item.lotteryAmount || 0), 0);
+
+
+    }
+    else {
+      this.lotterytype = null;
+    }
+  })
+}
+GetLotteryExpenseStoreIdDate() {
+  this.http.getAll(environment.GetLotteryExpenseStoreIdDate + "?pStoreId=" + this.storeId  + "&pAmountDate=" + this.entryDate).subscribe((result: any) => {
+    if (result.isSuccess == 1) {
+      console.log(result.data)
+      this.lotterytypeExpense = result.data;
+
+
+      this.lotteryamountExpense  = this.lotterytypeExpense.reduce((acc: any, item: { lotteryAmount: any; }) => acc + (item.lotteryAmount || 0), 0);
 
 
     }
@@ -490,6 +509,7 @@ showSummaryInput:boolean=false;
   }
 
   dated:any;
+  showlottery:boolean=false;
 showOtherincome :boolean=false;
   showData(pid: any) {
      //alert(pid)
@@ -501,6 +521,7 @@ showOtherincome :boolean=false;
     this.showpayroll=false;
     this.showrebate=false;
     this.isView= false;
+    this.showlottery= false;
     this.showOtherincome=false;
     if (pid == 0) {
       this.showDailysaleInput = true;
@@ -532,11 +553,9 @@ showOtherincome :boolean=false;
     else if (pid == 7) {
       this.showrebate = true;
     }
-    
-
-    
-
-    
+    else if (pid == 8) {
+      this.showlottery = true;
+    }
     else {
       alert("data not found")
     }
@@ -673,8 +692,6 @@ showOtherincome :boolean=false;
     });
   }
 
-
- 
 creditcarddata:any;
   onSubmitCreditCard() {
 
@@ -720,6 +737,7 @@ creditcarddata:any;
       
         
         this.  GetLotteryTypeStoreIdDate();
+        this.  GetLotteryExpenseStoreIdDate();
 
       }
       else {

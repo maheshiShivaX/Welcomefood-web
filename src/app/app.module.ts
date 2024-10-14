@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
@@ -11,6 +11,9 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { CarouselModule } from 'ngx-owl-carousel-o';
+import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+
 
 
 
@@ -60,8 +63,13 @@ const routerOptions: ExtraOptions = {
     ToastrModule.forRoot(),
     NgSelectModule,
     BrowserAnimationsModule,
-    CarouselModule
+    CarouselModule,
+    CanvasJSAngularChartsModule,
+    NgxChartsModule,
+
+     
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA], // Add this line
   providers: [ {provide: LocationStrategy, useClass: HashLocationStrategy},],
   bootstrap: [AppComponent]
 })

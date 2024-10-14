@@ -1,6 +1,7 @@
 
+       <!-- <canvasjs-chart [options]="chartOptions" [styles]="{ width: '100%', height: '360px' }"  (chartInstance)="getChartInstance($event)"></canvasjs-chart> -->
 
-
+      
 
 
 
@@ -17,8 +18,19 @@
                     <span>Filter by:</span>
                 </div>
                 <div class="ml-2">
-                    <div class="dropdown mr-1" style="float:left;">
-                        <button class="dropbtn profile d-flex">
+                    <div class="dropdown mr-1" style="float:left;width: 250px;">
+
+                     
+
+                       <ng-select [(ngModel)]="selectedValue" (change)="onSelectChange($event)">
+                        <ng-option [value]="0" >All Store</ng-option>
+                        <ng-option *ngFor="let option of storedetail" [value]="option.storeId">{{ option.storeName }}</ng-option>
+                      </ng-select>
+
+
+
+
+                        <!-- <button class="dropbtn profile d-flex">
                             <div class="profile-name">
                                 <span>All Stores</span>
                             </div>
@@ -29,15 +41,15 @@
                                 </path>
                             </svg>
                         </button>
-                        <div class="dropdown-content" style="left:0;">
-                            <a href="#">Store 1</a>
-                            <a href="#">Store 2</a>
-                            <a href="#">Store 3</a>
-                        </div>
+                        <div class="dropdown-content" style="left:0;" >
+                            <a  onchange="getdata()" *ngFor="let item of storedetail" >{{item.storeName}}</a>
+                       
+                        </div> -->
+
                     </div>
                 </div>
             </div>
-            <div class="addbtn">
+            <!-- <div class="addbtn">
                 <button>
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z"
@@ -49,85 +61,341 @@
                     </svg>
 
                     Add Daily Report</button>
-            </div>
+            </div> -->
         </div>
     </div>
-    <div class="datacard">
-        <div class="pb-3">
-            <div class="card card-common">
-                <div class="card-body">
-                    <div class="cardsection">
-                        <div class="d-flex justify-content-between">
-                            <h5>Total Store</h5>
-                            <!-- <h6>8 Dec 2023</h6> -->
-                        </div>
-                        <div class="d-flex justify-content-between align-items-end">
-                            <h3 class="pt-3 mb-0">2</h3>
-                            <div class="persent pt-3">
-                                <!-- <p class="mb-0 text-end">25%</p>
-                                <span>Compared by: <b>Dec 7</b></span> -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="pb-3">
+    <div class="datacard row">
+       
+        <div class="pb-3 col-3">
             <div class="card card-common">
                 <div class="card-body">
                     <div class="cardsection">
                         <div class="d-flex justify-content-between">
                             <h5>Total Daily Sale</h5>
-                            <!-- <h6>8 Dec 2023</h6> -->
+                            <div class="persent ">
+                                <!-- <p class="mb-0 text-end">{{(((this.dailysaledata[0].y-this.dailysaledata[1].y)/this.dailysaledata[0].y)*100).toFixed(0) }}</p> -->
+                                <p class="mb-0 text-end" [ngClass]="{ 'text-danger': getPercentageChange(this.dailysaledata) < 0, 'text-success': getPercentageChange(this.dailysaledata) >= 0 }">
+                                    {{ getPercentageChange(this.dailysaledata).toFixed(0) }}%
+                                  </p>
+                                <span *ngIf="dailysaledata!=null">Compared by:<b>{{this.dailysaledata[1].amountDate | date : 'MMM d'}}</b></span>
+                            </div>
                         </div>
-                        <div class="d-flex justify-content-between align-items-end">
-                            <h3 class="pt-3 mb-0">$3,799</h3>
+                        <div class="d-flex justify-content-between align-items-end" *ngIf="dailysaledata!= null ">
                             <div class="persent pt-3">
-                                <!-- <p class="mb-0 text-end">25%</p>
-                                <span>Compared by: <b>Dec 7</b></span> -->
+                                <p class="mb-0 text-end" *ngIf="this.dailysaledata[1]!=null">{{this.dailysaledata[1].amountDate | date : 'd MMM y'}}</p>
+                                <span><b>${{this.dailysaledata[1].y}}</b></span>
+                            </div>
+                            <div class="persent pt-3">
+                                <p class="mb-0 text-end"> {{this.dailysaledata[0].amountDate | date : 'd MMM y'}}</p><!-- 8 Dec 2023 -->
+                                <span><b>${{this.dailysaledata[0].y}}</b></span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="pb-3">
+
+        
+        <div class="pb-3 col-3">
             <div class="card card-common">
                 <div class="card-body">
                     <div class="cardsection">
                         <div class="d-flex justify-content-between">
-                            <h5>Total Profit</h5>
-                            <!-- <h6>8 Dec 2023</h6> -->
+                            <h5>Total Gas Sale</h5>
+                            <div class="persent ">
+                                <!-- <p class="mb-0 text-end">{{(((this.dailysaledata[0].y-this.dailysaledata[1].y)/this.dailysaledata[0].y)*100).toFixed(0) }}</p> -->
+                                <p class="mb-0 text-end" [ngClass]="{ 'text-danger': getPercentageChange(this.gasSaleData) < 0, 'text-success': getPercentageChange(this.gasSaleData) >= 0 }">
+                                    {{ getPercentageChange(this.gasSaleData).toFixed(0) }}%
+                                  </p>
+                                <span *ngIf="gasSaleData!=null">Compared by:<b>{{this.gasSaleData[1].amountDate | date : 'MMM d'}}</b></span>
+                            </div>
                         </div>
-                        <div class="d-flex justify-content-between align-items-end">
-                            <h3 class="pt-3 mb-0">$3,799</h3>
+                        <div class="d-flex justify-content-between align-items-end" *ngIf="gasSaleData!= null ">
                             <div class="persent pt-3">
-                                <!-- <p class="mb-0 text-end">25%</p>
-                                <span>Compared by:<b>Dec 7</b></span> -->
+                                <p class="mb-0 text-end" *ngIf="this.gasSaleData[1]!=null">{{this.gasSaleData[1].amountDate | date : 'd MMM y'}}</p>
+                                <span><b>${{this.gasSaleData[1].y}}</b></span>
+                            </div>
+                            <div class="persent pt-3">
+                                <p class="mb-0 text-end"> {{this.gasSaleData[0].amountDate | date : 'd MMM y'}}</p><!-- 8 Dec 2023 -->
+                                <span><b>${{this.gasSaleData[0].y}}</b></span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="pb-3">
+
+        
+
+        <div class="pb-3 col-3">
             <div class="card card-common">
                 <div class="card-body">
                     <div class="cardsection">
                         <div class="d-flex justify-content-between">
-                            <h5>Total Sales</h5>
-                            <!-- <h6>8 Dec 2023</h6> -->
+                            <h5>Total Lottery</h5>
+                            <div class="persent ">
+                                <!-- <p class="mb-0 text-end">{{(((this.dailysaledata[0].y-this.dailysaledata[1].y)/this.dailysaledata[0].y)*100).toFixed(0) }}</p> -->
+                                <p class="mb-0 text-end" [ngClass]="{ 'text-danger': getPercentageChange(this.lotteryData) < 0, 'text-success': getPercentageChange(this.lotteryData) >= 0 }">
+                                    {{ getPercentageChange(this.lotteryData).toFixed(0) }}%
+                                  </p>
+                                <span *ngIf="lotteryData!=null">Compared by:<b>{{this.lotteryData[1].amountDate | date : 'MMM d'}}</b></span>
+                            </div>
                         </div>
-                        <div class="d-flex justify-content-between align-items-end">
-                            <h3 class="pt-3 mb-0">$3,799</h3>
+                        <div class="d-flex justify-content-between align-items-end" *ngIf="lotteryData!= null ">
                             <div class="persent pt-3">
-                                <p class="mb-0 text-end">25%</p>
-                                <span>Compared by:<b>Dec 7</b></span>
+                                <p class="mb-0 text-end" *ngIf="this.lotteryData[1]!=null">{{this.lotteryData[1].amountDate | date : 'd MMM y'}}</p>
+                                <span><b>${{this.lotteryData[1].y}}</b></span>
+                            </div>
+                            <div class="persent pt-3">
+                                <p class="mb-0 text-end"> {{this.lotteryData[0].amountDate | date : 'd MMM y'}}</p><!-- 8 Dec 2023 -->
+                                <span><b>${{this.lotteryData[0].y}}</b></span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        
+
+        
+        <div class="pb-3 col-3">
+            <div class="card card-common">
+                <div class="card-body">
+                    <div class="cardsection">
+                        <div class="d-flex justify-content-between">
+                            <h5>Total Expense</h5>
+                            <div class="persent ">
+                                <!-- <p class="mb-0 text-end">{{(((this.dailysaledata[0].y-this.dailysaledata[1].y)/this.dailysaledata[0].y)*100).toFixed(0) }}</p> -->
+                                <p class="mb-0 text-end" [ngClass]="{ 'text-danger': getPercentageChange(this.expenseData) < 0, 'text-success': getPercentageChange(this.expenseData) >= 0 }">
+                                    {{ getPercentageChange(this.expenseData).toFixed(0) }}%
+                                  </p>
+                                <span *ngIf="expenseData!=null">Compared by:<b>{{this.expenseData[1].amountDate | date : 'MMM d'}}</b></span>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-end" *ngIf="expenseData!= null ">
+                            <div class="persent pt-3">
+                                <p class="mb-0 text-end" *ngIf="this.expenseData[1]!=null">{{this.expenseData[1].amountDate | date : 'd MMM y'}}</p>
+                                <span><b>${{this.expenseData[1].y}}</b></span>
+                            </div>
+                            <div class="persent pt-3">
+                                <p class="mb-0 text-end"> {{this.expenseData[0].amountDate | date : 'd MMM y'}}</p><!-- 8 Dec 2023 -->
+                                <span><b>${{this.expenseData[0].y}}</b></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+        
+        <div class="pb-3 col-3">
+            <div class="card card-common">
+                <div class="card-body">
+                    <div class="cardsection">
+                        <div class="d-flex justify-content-between">
+                            <h5>Total Other Income</h5>
+                            <div class="persent ">
+                                <!-- <p class="mb-0 text-end">{{(((this.dailysaledata[0].y-this.dailysaledata[1].y)/this.dailysaledata[0].y)*100).toFixed(0) }}</p> -->
+                                <p class="mb-0 text-end" [ngClass]="{ 'text-danger': getPercentageChange(this.otherIncomeData) < 0, 'text-success': getPercentageChange(this.otherIncomeData) >= 0 }">
+                                    {{ getPercentageChange(this.otherIncomeData).toFixed(0) }}%
+                                  </p>
+                                <span *ngIf="otherIncomeData!=null">Compared by:<b>{{this.otherIncomeData[1].amountDate | date : 'MMM d'}}</b></span>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-end" *ngIf="otherIncomeData!= null ">
+                            <div class="persent pt-3">
+                                <p class="mb-0 text-end" *ngIf="this.otherIncomeData[1]!=null">{{this.otherIncomeData[1].amountDate | date : 'd MMM y'}}</p>
+                                <span><b>${{this.otherIncomeData[1].y}}</b></span>
+                            </div>
+                            <div class="persent pt-3">
+                                <p class="mb-0 text-end"> {{this.otherIncomeData[0].amountDate | date : 'd MMM y'}}</p><!-- 8 Dec 2023 -->
+                                <span><b>${{this.otherIncomeData[0].y}}</b></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pb-3 col-3">
+            <div class="card card-common">
+                <div class="card-body">
+                    <div class="cardsection">
+                        <div class="d-flex justify-content-between">
+                            <h5> Credit Card Income</h5>
+                            <div class="persent ">
+                                <!-- <p class="mb-0 text-end">{{(((this.dailysaledata[0].y-this.dailysaledata[1].y)/this.dailysaledata[0].y)*100).toFixed(0) }}</p> -->
+                                <p class="mb-0 text-end" [ngClass]="{ 'text-danger': getPercentageChange(this.creditCardData) < 0, 'text-success': getPercentageChange(this.creditCardData) >= 0 }">
+                                    {{ getPercentageChange(this.creditCardData).toFixed(0) }}%
+                                  </p>
+                                <span *ngIf="creditCardData!=null">Compared by:<b>{{this.creditCardData[1].amountDate | date : 'MMM d'}}</b></span>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-end" *ngIf="creditCardData!= null ">
+                            <div class="persent pt-3">
+                                <p class="mb-0 text-end" *ngIf="this.creditCardData[1]!=null">{{this.creditCardData[1].amountDate | date : 'd MMM y'}}</p>
+                                <span><b>${{this.creditCardData[1].y}}</b></span>
+                            </div>
+                            <div class="persent pt-3">
+                                <p class="mb-0 text-end"> {{this.creditCardData[0].amountDate | date : 'd MMM y'}}</p><!-- 8 Dec 2023 -->
+                                <span><b>${{this.creditCardData[0].y}}</b></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pb-3 col-3">
+            <div class="card card-common">
+                <div class="card-body">
+                    <div class="cardsection">
+                        <div class="d-flex justify-content-between">
+                            <h5> Purchase </h5>
+                            <div class="persent ">
+                                <!-- <p class="mb-0 text-end">{{(((this.dailysaledata[0].y-this.dailysaledata[1].y)/this.dailysaledata[0].y)*100).toFixed(0) }}</p> -->
+                                <p class="mb-0 text-end" [ngClass]="{ 'text-danger': getPercentageChange(this.purchaseData) < 0, 'text-success': getPercentageChange(this.purchaseData) >= 0 }">
+                                    {{ getPercentageChange(this.purchaseData).toFixed(0) }}%
+                                  </p>
+                                <span *ngIf="purchaseData!=null">Compared by:<b>{{this.purchaseData[1].amountDate | date : 'MMM d'}}</b></span>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-end" *ngIf="purchaseData!= null ">
+                            <div class="persent pt-3">
+                                <p class="mb-0 text-end" *ngIf="this.purchaseData[1]!=null">{{this.purchaseData[1].amountDate | date : 'd MMM y'}}</p>
+                                <span><b>${{this.purchaseData[1].y}}</b></span>
+                            </div>
+                            <div class="persent pt-3">
+                                <p class="mb-0 text-end"> {{this.purchaseData[0].amountDate | date : 'd MMM y'}}</p><!-- 8 Dec 2023 -->
+                                <span><b>${{this.purchaseData[0].y}}</b></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+     
+
+        
+
+        <div class="pb-3 col-3">
+            <div class="card card-common">
+                <div class="card-body">
+                    <div class="cardsection">
+                        <div class="d-flex justify-content-between">
+                            <h5>Total Gas Purchase</h5>
+                            <div class="persent ">
+                                <!-- <p class="mb-0 text-end">{{(((this.dailysaledata[0].y-this.dailysaledata[1].y)/this.dailysaledata[0].y)*100).toFixed(0) }}</p> -->
+                                <p class="mb-0 text-end" [ngClass]="{ 'text-danger': getPercentageChange(this.gasPurchaseData) < 0, 'text-success': getPercentageChange(this.gasPurchaseData) >= 0 }">
+                                    {{ getPercentageChange(this.gasPurchaseData).toFixed(0) }}%
+                                  </p>
+                                <span *ngIf="gasPurchaseData!=null">Compared by:<b>{{this.gasPurchaseData[1].amountDate | date : 'MMM d'}}</b></span>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-end" *ngIf="gasPurchaseData!= null ">
+                            <div class="persent pt-3">
+                                <p class="mb-0 text-end" *ngIf="this.gasPurchaseData[1]!=null">{{this.gasPurchaseData[1].amountDate | date : 'd MMM y'}}</p>
+                                <span><b>${{this.gasPurchaseData[1].y}}</b></span>
+                            </div>
+                            <div class="persent pt-3">
+                                <p class="mb-0 text-end"> {{this.gasPurchaseData[0].amountDate | date : 'd MMM y'}}</p><!-- 8 Dec 2023 -->
+                                <span><b>${{this.gasPurchaseData[0].y}}</b></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       
+    
+
+    </div>
+        <div class="datacard row">
+           
+        <div class="pb-3 col-3">
+            <div class="card card-common">
+                <div class="card-body">
+                    <div id="chartContainer" #myDiv style="height: 370px; width: 100%; margin:auto; "></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="pb-3 col-3">
+            <div class="card card-common">
+                <div class="card-body">
+                    <div id="chartContainer1" #my1Div1 style="height: 370px; width: 100%; margin:auto;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pb-3 col-3">
+            <div class="card card-common">
+                <div class="card-body">
+                    <div id="chartContainer2" #my2iv2 style="height: 370px; width: 100%; margin:auto;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pb-3 col-3">
+            <div class="card card-common">
+                <div class="card-body">
+                    <div id="chartContainer3" #myDiv3 style="height: 370px; width: 100%; margin:auto;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pb-3 col-3">
+            <div class="card card-common">
+                <div class="card-body">
+                    <div id="chartContainer4" #myDiv4 style="height: 370px; width: 100%; margin:auto;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pb-3 col-3">
+            <div class="card card-common">
+                <div class="card-body">
+                    <div id="chartContainer5" #myDiv5 style="height: 370px; width: 100%; margin:auto;"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="pb-3 col-3">
+            <div class="card card-common">
+                <div class="card-body">
+                    <div id="chartContainer6" #myDiv6 style="height: 370px; width: 100%; margin:auto;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pb-3 col-3">
+            <div class="card card-common">
+                <div class="card-body">
+                    <div id="chartContainer7" #myDiv7 style="height: 370px; width: 100%; margin:auto;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="pb-3 col-3">
+            <div class="card card-common">
+                <div class="card-body">
+                    <div id="chartContainer8" #myDiv style="height: 370px; width: 100%; margin:auto;"></div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="pb-3 col-3">
+            <div class="card card-common">
+                <div class="card-body">
+                    <div id="chartContainer9" #myDiv style="height: 370px; width: 100%; margin:auto;"></div>
+                </div>
+            </div>
+        </div> -->
+
+        <!-- <canvasjs-chart  [options]="chartOptions" [styles]="{ width: '100%', height: '360px' }"  (chartInstance)="getChartInstance($event)" ></canvasjs-chart> -->
+
+      
     </div>
 </div>
+

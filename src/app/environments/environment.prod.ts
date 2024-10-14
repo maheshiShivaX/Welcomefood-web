@@ -2,7 +2,7 @@ export const environment = {
   production: true,
   hmr: false,
   config: {
-   //  apiUrl:"https://www.indianfilms.in/wfapi/api/",
+    // apiUrl:"https://www.indianfilms.in/wfapi/api/",
     //apiUrl:"http://stage.ishivaxservices.com/admin_panel/public/api/",
     apiUrlother: "https://anutechinfra.com/anutechAPI/api/",
     apiUrlsms: "http://sms.ishivax.in/api/",
@@ -196,6 +196,8 @@ GetBalanceSheetByStoreId:"BalanceSheet/GetBalanceSheetByStoreId",
 GetGesSummaryByIdStoreIdDate:"BalanceSheet/GetGesSummaryByIdStoreIdDate",
 GetLotteryTypeByStoreId:"LotteryType/GetLotteryTypeByStoreId",
 GetLotteryTypeStoreIdDate:"LotteryType/GetLotteryTypeStoreIdDate",
+GetLotteryExpenseStoreIdDate:"LotteryType/GetLotteryExpenseStoreIdDate",
 SaveLotteryPayDetail:"LotteryPayDetail/SaveLotteryPayDetail",
+ddailysale:"PLReport/DashboardData",
 };
 

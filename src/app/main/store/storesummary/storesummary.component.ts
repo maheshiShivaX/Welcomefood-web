@@ -293,7 +293,7 @@ console.log(this.lotteryData);
         this.saledata = result.data;
         this.coninup = this.saledata.filter((x: { productGroupName: string; }) => x.productGroupName == 'Arcade').reduce((acc: any, item: { amount: any; }) => acc + (item.amount || 0), 0);
         this.otheramount = this.saledata.filter((x: { productGroupName: string; }) => x.productGroupName == 'Other Income').reduce((acc: any, item: { amount: any; }) => acc + (item.amount || 0), 0);
-        this.lottery = this.saledata.filter((x: { productGroupName: string; }) => x.productGroupName == 'Lottery').reduce((acc: any, item: { amount: any; }) => acc + (item.amount || 0), 0);
+        //this.lottery = this.saledata.filter((x: { productGroupName: string; }) => x.productGroupName == 'Lottery').reduce((acc: any, item: { amount: any; }) => acc + (item.amount || 0), 0);
         this.salestax = this.saledata.filter((x: { productGroupName: string; }) => x.productGroupName == 'Taxes').reduce((acc: any, item: { amount: any; }) => acc + (item.amount || 0), 0);
         this.gessale = this.saledata.filter((x: { productGroupName: string; }) => x.productGroupName == 'Gas').reduce((acc: any, item: { amount: any; }) => acc + (item.amount || 0), 0);
         this.totalinputcase = this.totalinputcase + (+this.coninup) + (+this.otheramount) + (+this.lottery) + (+this.salestax) + (+this.gessale)//+ (+this.totalinsideamount)  //(+this.storeclosingcash) + (+this.totalinsideamount)

@@ -1,0 +1,83 @@
+<div class="purchases mt-4" ></div>
+    <div class="store-heading">
+        <h4 class="">Purchase Register</h4>
+    </div>
+    <div class="gasinventory storeformdata pt-2">
+
+<div class="mt-4">
+    <div class="dailyform">
+        <div class="columncountsection">
+        
+                <div class="category ">
+                    <div class="category-heading mb-2">
+                        <span>LOTTERY</span>
+                    </div>
+                    <div class="form">
+                        <ng-container *ngFor="let item of lotterytype">
+                        <div class="form-group row mx-1">
+                            <label for="inputPassword"
+                                class="col-xl-3 col-md-4 px-2 col-form-label"><b
+                                    style="font-weight:600">{{item.lotteryName}}</b></label>
+                            <div
+                                class="inputfield col-xl-9 col-md-8 d-flex align-items-center">
+                                <span>$</span>
+                                <input type="text" class="form-control"
+                                    [(ngModel)]="item.lotteryAmount"
+                                    (keypress)="validateNumber($event)"
+                                    (input)="validateDecimalPlaces($event)"
+                                    (blur)="onTextboxLotteryLeave($event,item )"
+                                    id="grocery" placeholder="">
+                            </div>
+                        </div>
+                    </ng-container>
+
+                    </div>
+                </div>
+            
+        </div>
+        <div class="totalamount d-flex justify-content-end">
+            <span>Total Lottery Amount :
+                <b>${{this.lotteryamount}}</b></span>
+        </div>
+    </div>
+</div>
+<div class="mt-4">
+    <div class="dailyform">
+        <div class="columncountsection">
+        
+                <div class="category ">
+                    <div class="category-heading mb-2">
+                        <span>LOTTERY Expense</span>
+                    </div>
+                    <div class="form">
+                        <ng-container *ngFor="let item of lotterytypeExpense">
+                        <div class="form-group row mx-1">
+                            <label for="inputPassword"
+                                class="col-xl-3 col-md-4 px-2 col-form-label"><b
+                                    style="font-weight:600">{{item.lotteryName}}</b></label>
+                            <div
+                                class="inputfield col-xl-9 col-md-8 d-flex align-items-center">
+                                <span>$</span>
+                                <input type="text" class="form-control"
+                                    [(ngModel)]="item.lotteryAmount"
+                                    (keypress)="validateNumber($event)"
+                                    (input)="validateDecimalPlaces($event)"
+                                    (blur)="onTextboxLotteryLeave($event,item )"
+                                    id="grocery" placeholder="">
+                            </div>
+                        </div>
+                    </ng-container>
+
+                    </div>
+                </div>
+            
+        </div>
+        <div class="totalamount d-flex justify-content-end">
+            <span>Total Lottery Expense Amount :
+                <b>${{this.lotteryamountExpense}}</b></span>
+        </div>
+    </div>
+</div>
+    </div>
+    
+    

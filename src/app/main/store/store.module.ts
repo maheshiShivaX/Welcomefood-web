@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MystoreComponent } from './mystore/mystore.component';
 import { MoneyinComponent } from './moneyin/moneyin.component';
@@ -22,6 +22,7 @@ import { GesentryComponent } from './gesentry/gesentry.component';
 import { NewbalancesheetComponent } from './newbalancesheet/newbalancesheet.component';
 import { BalancesheetComponent } from './balancesheet/balancesheet.component';
 import { PurchseregisterComponent } from './purchseregister/purchseregister.component';
+import { LotteryComponent } from './lottery/lottery.component';
 
 
 const routes: Routes = [
@@ -75,6 +76,8 @@ const routes: Routes = [
     NewbalancesheetComponent,
     BalancesheetComponent,
     PurchseregisterComponent,
+    LotteryComponent,
+    
   
   ],
   imports: [
@@ -83,6 +86,7 @@ const routes: Routes = [
     FormsModule, CarouselModule],
   exports: [
     DailysalesexpensesComponent
-  ]
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA], // Add this line
 })
 export class StoreModule { }
