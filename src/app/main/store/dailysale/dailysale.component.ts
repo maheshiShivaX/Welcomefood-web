@@ -84,6 +84,24 @@ export class DailysaleComponent {
 
   }
 
+  storedetail: any;
+  GetStoreDetailAll(storeId: any) {
+    this.http.getAll(environment.GetStoreDetail).subscribe((result: any) => {
+      if (result.isSuccess == 1) {
+        console.log(result.data)
+        this.storedetail = result.data.filter((x: { storeId: any; }) => x.storeId == storeId);
+      }
+      else {
+        this.storedetail = null;
+      }
+    })
+  }
+
+  onBack()
+  {
+    this.router.navigateByUrl('/store/mystore');
+  }
+
   ngOnInit() {
     this.storeId = this.route.snapshot.params["storeId"];
     localStorage.setItem("storeid",this.storeId);
@@ -93,7 +111,7 @@ export class DailysaleComponent {
     // this.storesdata[0].storeid = this.storeId;
     // this.storesdata[0].fromdate = this.dated;
     // this.storesdata[0].todate=this.dated
-
+    this.GetStoreDetailAll(this.storeId) 
     this.GetInsideSale(this.storeId, 1, this.entryDate);
     this.GetOtherSale(this.storeId, 1, this.entryDate);
     this. GetGetStoreClosingByStoreId(this.storeId, this.entryDate) ;

@@ -1,7 +1,7 @@
 <div class="storeentryform">
     <div class="store-heading d-flex align-items-center justify-content-between" *ngIf="storedetail !=null">
         <div class="d-flex align-items-center" style="gap: 10px;">
-            <span>
+            <span (click)="onBack()">
                 << </span>
                     <h4 class="mb-0">Store Product : {{this.storedetail[0].storeName}}</h4>
         </div>

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RouterModule, Routes } from '@angular/router';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ManagestoreComponent } from './managestore/managestore.component';
 import { ManageemployeeComponent } from './manageemployee/manageemployee.component';
 import { ManagelogindetailsComponent } from './managelogindetails/managelogindetails.component';
@@ -11,6 +11,9 @@ import { ManagestoreproductComponent } from './managestoreproduct/managestorepro
 import { NgSelectModule } from '@ng-select/ng-select';
 import { VendorComponent } from './vendor/vendor.component';
 import { OnboardstoreComponent } from './onboardstore/onboardstore.component';
+import { AdminComponent } from './admin/admin.component';
+import { ProfileComponent } from './profile/profile.component';
+import { PackageComponent } from './package/package.component';
 
 
 const routes: Routes = [
@@ -24,6 +27,10 @@ const routes: Routes = [
   { path: 'vendor', component: VendorComponent },
   { path: 'onboardstore', component: OnboardstoreComponent },
   { path: 'onboardstore/:storeId', component: OnboardstoreComponent },
+  { path: '', component: AdminComponent },
+  { path: 'profile', component: ProfileComponent },
+  { path: 'package', component: PackageComponent },
+  
 ]
 
 @NgModule({
@@ -36,6 +43,9 @@ const routes: Routes = [
     ManagestoreproductComponent,
     VendorComponent,
     OnboardstoreComponent,
+    AdminComponent,
+    ProfileComponent,
+    PackageComponent,
 
   ],
   imports: [
@@ -43,7 +53,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     ReactiveFormsModule,
     FormsModule,
-    NgSelectModule
+    NgSelectModule,
+  
   ]
 })
 export class AdminModule { }

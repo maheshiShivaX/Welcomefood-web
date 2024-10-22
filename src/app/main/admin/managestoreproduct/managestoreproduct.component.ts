@@ -412,5 +412,11 @@ export class ManagestoreproductComponent {
 
   
   }
+
+  
+  onBack()
+  {
+    this.router.navigateByUrl('/admin/managestore');
+  }
 }
 

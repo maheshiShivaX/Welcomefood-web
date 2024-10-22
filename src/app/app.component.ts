@@ -18,7 +18,9 @@ export class AppComponent {
 
     this.authService.currentUser.subscribe((user) => {
       const currentUser = user;
+ 
       this.roleId=currentUser.roleId;
+
     });
 
 
@@ -29,13 +31,11 @@ export class AppComponent {
   ngOnInit() {
 
     this.authService.currentUser.subscribe((user) => {
-    //  alert('saddfg');
+
       const currentUser = user;
+
       this.roleId=currentUser.roleId;
     });
-
-
-    //  this.getmenu(1, 2)
   }
 
 

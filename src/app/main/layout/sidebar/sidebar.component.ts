@@ -16,9 +16,9 @@ export class SidebarComponent {
 
   activeIndex = 0;
   loggedInUser: User | null = null;
-  username:any;
-  rolename:any;
-  roleId:any='2';
+  username: any;
+  rolename: any;
+  roleId: any = '2';
   //private dataChangeSubscription: Subscription;
   toglarStatus: boolean = false
 
@@ -28,8 +28,13 @@ export class SidebarComponent {
 
     this.authService.currentUser.subscribe((user) => {
       const currentUser = user;
-      this.roleId=currentUser.roleId;
-      this.getmenu(1, currentUser.roleId);
+      this.roleId = currentUser.roleId;
+      if (currentUser.roleId != null) {
+        this.getmenu(1, currentUser.roleId);
+      } else {
+
+      }
+
       // Update menu based on user authentication state
     });
 
@@ -49,25 +54,29 @@ export class SidebarComponent {
 
   showMenu: boolean = false;
 
-  
+
 
   onClose() {
     this.toglarStatus = false
-}
+  }
 
 
-  onLogout()
-  {
-    this.authService.logout(); 
+  onLogout() {
+    this.authService.logout();
   }
 
 
   ngOnInit() {
 
     this.authService.currentUser.subscribe((user) => {
-    //  alert('saddfg');
+      //  alert('saddfg');
       const currentUser = user;
-      this.getmenu(1, currentUser.roleId);
+
+      if (currentUser.roleId != null) {
+        this.getmenu(1, currentUser.roleId);
+      } else {
+        this.router.navigateByUrl('auth/logindetail');
+      }
       // Update menu based on user authentication state
     });
 
@@ -78,23 +87,23 @@ export class SidebarComponent {
   currentlyOpenMenu: HTMLElement | null = null;
 
   showSubmenu(itemEl: HTMLElement, item: any) {
-      if (!itemEl) return;
-  
-      if (item.type === 'collapsible') {
-          if (this.currentlyOpenMenu && this.currentlyOpenMenu !== itemEl) {
-              this.currentlyOpenMenu.classList.remove("showMenu");
-          }
-          itemEl.classList.toggle("showMenu");
-          this.currentlyOpenMenu = itemEl;
-      } else {
-        if (this.currentlyOpenMenu && this.currentlyOpenMenu !== itemEl) {
-          this.currentlyOpenMenu.classList.remove("showMenu");
+    if (!itemEl) return;
+
+    if (item.type === 'collapsible') {
+      if (this.currentlyOpenMenu && this.currentlyOpenMenu !== itemEl) {
+        this.currentlyOpenMenu.classList.remove("showMenu");
       }
-          this.router.navigateByUrl(item.url);
+      itemEl.classList.toggle("showMenu");
+      this.currentlyOpenMenu = itemEl;
+    } else {
+      if (this.currentlyOpenMenu && this.currentlyOpenMenu !== itemEl) {
+        this.currentlyOpenMenu.classList.remove("showMenu");
       }
+      this.router.navigateByUrl(item.url);
+    }
   }
 
-  
+
   // showSubmenu(itemEl: HTMLElement,item:any) {
   //   if (item.type == 'collapsible') {
   //     itemEl.classList.toggle("showMenu");
@@ -108,12 +117,13 @@ export class SidebarComponent {
     // Add logic here to handle menu item click or navigation
   }
   getmenu(pMenuTypeId: number, pRoleId: number) {
+
+
     this.http.getAll(environment.GetMenuDetailByTypeId + "?pMenuTypeId=" + pMenuTypeId + "&pRoleId=" + pRoleId).subscribe((result: any) => {
       if (result.isSuccess == 1) {
 
 
         this.menu = result.data;
-        console.log(this.menu);
 
       }
       else {

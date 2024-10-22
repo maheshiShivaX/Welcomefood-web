@@ -132,7 +132,7 @@ export class NewbalancesheetComponent {
   ];
 
   ngOnInit() {
-    this.storeid = localStorage.getItem("storeid");
+    // this.storeid = localStorage.getItem("storeid");
     this.GetEmployeeStoreByUserId();
     this.GetBalanceSheetTerm();
 
@@ -170,7 +170,7 @@ return res;
 
 
     this.formB.patchValue({
-      storeId: this.storeid,
+      storeId:this.form.value.storeId,
       periodDateFrom: this.form.value.fromDate,
       periodDateTo: this.form.value.toDate,
     });
@@ -186,7 +186,7 @@ return res;
 
       return;
     }
-    //return;
+   // return;
 
     this.http.post(environment.BalanceSheet, this.formB.value).subscribe((result: any) => {
       if (result.isSuccess == 1) {

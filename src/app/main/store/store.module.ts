@@ -23,6 +23,7 @@ import { NewbalancesheetComponent } from './newbalancesheet/newbalancesheet.comp
 import { BalancesheetComponent } from './balancesheet/balancesheet.component';
 import { PurchseregisterComponent } from './purchseregister/purchseregister.component';
 import { LotteryComponent } from './lottery/lottery.component';
+import { ManagebstermComponent } from '../master/managebsterm/managebsterm.component';
 
 
 const routes: Routes = [
@@ -50,9 +51,13 @@ const routes: Routes = [
   },
   {
     path: 'newbalancesheet', component: NewbalancesheetComponent
+  }
+  ,
+  {
+    path: 'managebsterm', component: ManagebstermComponent
   },
   
-  
+   
 
   
 ]

@@ -11,8 +11,6 @@ import { HttpService } from 'src/app/_services/http.service';
 export class HeaderComponent {
   constructor(private http: HttpService, private router: Router, private authService: AuthService) {
     this.authService.currentUser.subscribe((user) => {
-
-      console.log(user);
       const currentUser = user;
       this.username = currentUser.name;
       this.rolename = currentUser.roleName;

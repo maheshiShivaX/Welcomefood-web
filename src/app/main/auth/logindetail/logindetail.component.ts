@@ -25,25 +25,28 @@ export class LogindetailComponent {
   });
 str:any;
   constructor(private http: HttpService, private router: Router,private authService: AuthService) {
-   
+   debugger;
     // let a= localStorage.getItem('currentUser');
+  
     // if(a!=null)
     //   {
-    //     this.str = localStorage.getItem('currentUser');
+    //     this.str= a;
+    //     console.log(this.str);
+    //     this.router.navigateByUrl(this.str.landingUrl);
     //   }
-  
-    // this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(this.str));
-    
-    // this.currentUser = this.currentUserSubject.asObservable();
-   // this.authService.setLoggedInUser( this.str );
+
   }
   ngOnInit() {
     // let a= localStorage.getItem('currentUser');
+  
     // if(a!=null)
     //   {
-    //     this.str = localStorage.getItem('currentUser');
+    //     this.str= a;
+    //     this.router.navigateByUrl(this.str.landingUrl);
     //   }
-    // this.authService.setLoggedInUser( this.str );
+
+    //this.authService.logout()
+
   }
 
 
@@ -58,18 +61,15 @@ str:any;
     }
     this.http.getAll(environment.GetLoginDetailByUserIdPassword + "?pUserId=" + this.form.value.userId + "&pPassword=" + this.form.value.password).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result);
         debugger;
       
         this.isLoading = false;
         this.submitted = false;
-        console.log(result.data);
+      
         localStorage.setItem('currentUser', JSON.stringify(result.data[0]));
         this.authService.setLoggedInUser(result.data[0]);
-       
       }
       else {
-        console.log(result);
         this.isLoading = false;
         this.submitted = false;
       }

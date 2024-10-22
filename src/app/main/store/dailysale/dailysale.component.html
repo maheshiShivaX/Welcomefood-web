@@ -2,6 +2,14 @@
 
 
 <div class="store_daily_sales">
+    <div class="store-heading d-flex align-items-center justify-content-between" *ngIf="storedetail !=null">
+        <div class="d-flex align-items-center" style="gap: 10px;">
+            <span (click)="onBack()">
+                << </span>
+                    <h4 class="mb-0">Store : {{this.storedetail[0].storeName}}</h4>
+        </div>
+    </div>
+  
     <section>
         <div class="p-0">
             <div class="row p-0">

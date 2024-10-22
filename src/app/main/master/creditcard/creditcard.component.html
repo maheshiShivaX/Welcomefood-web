@@ -42,7 +42,7 @@
                 <label for="FormControlInput1" class="form-label">Credit Card Name</label>
                 <input type="text" class="form-control" formControlName="cardName" id="FormControlInput1"
                     placeholder="Enter Credit Card Name">
-                <div *ngIf="f['cardName'].errors && (f['cardName']?.touched || submitted)"
+                <div *ngIf="f['cardName'].errors && (submitted)"
                     class="invalid-feedback">
                     <div class="text-red-600" *ngIf="f['cardName'].errors?.['required']">Credit Card Name is
                         required.
@@ -54,7 +54,7 @@
                 <label for="FormControlInput1" class="form-label">Credit Card No</label>
                 <input type="text" class="form-control" formControlName="cardNo" id="FormControlInput1"
                     placeholder="Enter Credit Card No">
-                <div *ngIf="f['cardNo'].errors && (f['cardNo']?.touched || submitted)"
+                <div *ngIf="f['cardNo'].errors && ( submitted)"
                     class="invalid-feedback">
                     <div class="text-red-600" *ngIf="f['cardNo'].errors?.['required']">Credit Card No is
                         required.

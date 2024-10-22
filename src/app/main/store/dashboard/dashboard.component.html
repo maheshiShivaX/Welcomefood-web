@@ -77,13 +77,13 @@
                                 <p class="mb-0 text-end" [ngClass]="{ 'text-danger': getPercentageChange(this.dailysaledata) < 0, 'text-success': getPercentageChange(this.dailysaledata) >= 0 }">
                                     {{ getPercentageChange(this.dailysaledata).toFixed(0) }}%
                                   </p>
-                                <span *ngIf="dailysaledata!=null">Compared by:<b>{{this.dailysaledata[1].amountDate | date : 'MMM d'}}</b></span>
+                                <span *ngIf="dailysaledata!=null">Compared by:<b>{{ this.dailysaledata[1] !=null ? this.dailysaledata[1].amountDate :"" | date : 'MMM d'}}</b></span>
                             </div>
                         </div>
                         <div class="d-flex justify-content-between align-items-end" *ngIf="dailysaledata!= null ">
                             <div class="persent pt-3">
-                                <p class="mb-0 text-end" *ngIf="this.dailysaledata[1]!=null">{{this.dailysaledata[1].amountDate | date : 'd MMM y'}}</p>
-                                <span><b>${{this.dailysaledata[1].y}}</b></span>
+                                <p class="mb-0 text-end" *ngIf="this.dailysaledata[1]!=null">{{this.dailysaledata[1] !=null ? this.dailysaledata[1].amountDate :"" | date : 'd MMM y'}}</p>
+                                <span><b>${{this.dailysaledata[1] !=null ? this.dailysaledata[1].y : 0}}</b></span>
                             </div>
                             <div class="persent pt-3">
                                 <p class="mb-0 text-end"> {{this.dailysaledata[0].amountDate | date : 'd MMM y'}}</p><!-- 8 Dec 2023 -->

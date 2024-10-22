@@ -36,15 +36,13 @@ export class HttpService {
 
   public post<T>(apiUrl: string, data: T): Observable<T> {
    
-    console.log(this.actionUrl + apiUrl);
-    console.log(data);
+
     return this.http.post<T>(this.actionUrl + apiUrl, data);
   }
 
   public postOther<T>(apiUrl: string, data: T): Observable<T> {
    
-    console.log(this.actionUrlOther + apiUrl);
-    console.log(data);
+
     return this.http.post<T>(this.actionUrlOther + apiUrl, data);
   }
  
