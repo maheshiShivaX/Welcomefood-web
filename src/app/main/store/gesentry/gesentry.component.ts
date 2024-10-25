@@ -31,6 +31,25 @@ export class GesentryComponent {
     });
   }
 
+  validateNumber(event: KeyboardEvent) {
+    const charCode = event.which ? event.which : event.keyCode;
+    const inputChar = String.fromCharCode(charCode);
+    const pattern = /[0-9]|\./;
+
+    if (!pattern.test(inputChar) && charCode > 31) {
+      event.preventDefault();
+    }
+  
+  }
+  validateDecimalPlaces(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    const value = inputElement.value;
+
+    if (value.includes('.') && value.split('.')[1].length > 2) {
+      inputElement.value = value.substring(0, value.length - 1);
+    }
+  }
+
 
   ngOnInit() {
     this.storeid = localStorage.getItem("storeid");
@@ -57,7 +76,7 @@ export class GesentryComponent {
 
   updateTotals(item: any) { 
     
-    item.closingStock = (+item.openStock) + (+item.purchases) - (+item.sales);
+    item.closingStock =( (+item.openStock) + (+item.purchases) - (+item.sales)).toFixed(2);
 
  
     item.overShort =+( item.physicalStock -item.closingStock).toFixed(2);

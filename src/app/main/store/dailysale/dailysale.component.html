@@ -30,7 +30,7 @@
                                         
 
 
-                                        <button class="nav-link" id="gas_inventory-tab" data-bs-toggle="tab"
+                                        <button class="nav-link " id="gas_inventory-tab" data-bs-toggle="tab"
                                         (click)="showData(8)" data-bs-target="#gas_inventory" type="button" role="tab"
                                         aria-controls="gas_inventory" aria-selected="false"><svg
                                             _ngcontent-ng-c1357113999="" width="16" height="18" viewBox="0 0 18 20"
@@ -41,7 +41,7 @@
                                         </svg> Lottery </button>
 
 
-                                    <button class="nav-link" id="gas_inventory-tab" data-bs-toggle="tab"
+                                    <button class="nav-link " id="gas_inventory-tab" data-bs-toggle="tab"
                                         (click)="showData(1)" data-bs-target="#gas_inventory" type="button" role="tab"
                                         aria-controls="gas_inventory" aria-selected="false"><svg
                                             _ngcontent-ng-c1357113999="" width="16" height="18" viewBox="0 0 18 20"
@@ -71,6 +71,16 @@
                                                 fill=""></path>
                                         </svg> Expenses </button>
 
+                                        <button class="nav-link" id="expenses-tab" data-bs-toggle="tab"
+                                        (click)="showData(10)" data-bs-target="#expenses" type="button" role="tab"
+                                        aria-controls="expenses" aria-selected="false"><svg _ngcontent-ng-c1357113999=""
+                                            width="18" height="18" viewBox="0 0 20 20" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path _ngcontent-ng-c1357113999=""
+                                                d="M12.8125 13.4373C12.8125 12.8964 12.8125 11.2498 14.375 11.2498H17.5V9.3748C17.5 8.51324 16.7991 7.8123 15.9375 7.8123H2.5C1.63844 7.8123 0.9375 8.51324 0.9375 9.3748V17.4998C0.9375 18.3614 1.63844 19.0623 2.5 19.0623H15.9375C16.7991 19.0623 17.5 18.3614 17.5 17.4998V15.6248H14.375C12.8125 15.6248 12.8125 13.9782 12.8125 13.4373ZM13.4375 7.1873V5.29293C13.4375 4.97012 13.2691 4.6773 12.9869 4.5098C12.8448 4.42455 12.6828 4.37811 12.5171 4.37515C12.3514 4.37219 12.1879 4.4128 12.0428 4.49293L6.63938 7.1873H13.4375Z"
+                                                fill=""></path>
+                                        </svg> Credit Card </button>
+
                                     <button class="nav-link" id="payroll-tab" data-bs-toggle="tab" (click)="showData(4)"
                                         data-bs-target="#payroll" type="button" role="tab" aria-controls="payroll"
                                         aria-selected="false"> <svg _ngcontent-ng-c1357113999="" width="18" height="18"
@@ -91,6 +101,53 @@
                                                 fill=""></path>
                                         </svg> Other Income </button>
 
+
+                                        
+                                    <button class="nav-link" id="other_income-tab" data-bs-toggle="tab"
+                                    (click)="showData(11)" data-bs-target="#other_income" type="button" role="tab"
+                                    aria-controls="other_income" aria-selected="false"> <svg
+                                        _ngcontent-ng-c1357113999="" width="18" height="18" viewBox="0 0 20 20"
+                                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path _ngcontent-ng-c1357113999=""
+                                            d="M12.8125 13.4373C12.8125 12.8964 12.8125 11.2498 14.375 11.2498H17.5V9.3748C17.5 8.51324 16.7991 7.8123 15.9375 7.8123H2.5C1.63844 7.8123 0.9375 8.51324 0.9375 9.3748V17.4998C0.9375 18.3614 1.63844 19.0623 2.5 19.0623H15.9375C16.7991 19.0623 17.5 18.3614 17.5 17.4998V15.6248H14.375C12.8125 15.6248 12.8125 13.9782 12.8125 13.4373ZM13.4375 7.1873V5.29293C13.4375 4.97012 13.2691 4.6773 12.9869 4.5098C12.8448 4.42455 12.6828 4.37811 12.5171 4.37515C12.3514 4.37219 12.1879 4.4128 12.0428 4.49293L6.63938 7.1873H13.4375Z"
+                                            fill=""></path>
+                                    </svg> Other Cash Adjustment</button>
+
+                                    
+                                    <button class="nav-link" id="other_income-tab" data-bs-toggle="tab"
+                                    (click)="showData(12)" data-bs-target="#other_income" type="button" role="tab"
+                                    aria-controls="other_income" aria-selected="false"> <svg
+                                        _ngcontent-ng-c1357113999="" width="18" height="18" viewBox="0 0 20 20"
+                                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path _ngcontent-ng-c1357113999=""
+                                            d="M12.8125 13.4373C12.8125 12.8964 12.8125 11.2498 14.375 11.2498H17.5V9.3748C17.5 8.51324 16.7991 7.8123 15.9375 7.8123H2.5C1.63844 7.8123 0.9375 8.51324 0.9375 9.3748V17.4998C0.9375 18.3614 1.63844 19.0623 2.5 19.0623H15.9375C16.7991 19.0623 17.5 18.3614 17.5 17.4998V15.6248H14.375C12.8125 15.6248 12.8125 13.9782 12.8125 13.4373ZM13.4375 7.1873V5.29293C13.4375 4.97012 13.2691 4.6773 12.9869 4.5098C12.8448 4.42455 12.6828 4.37811 12.5171 4.37515C12.3514 4.37219 12.1879 4.4128 12.0428 4.49293L6.63938 7.1873H13.4375Z"
+                                            fill=""></path>
+                                    </svg> Tax Collection</button>
+
+
+
+                                    <button class="nav-link" id="other_income-tab" data-bs-toggle="tab"
+                                    (click)="showData(13)" data-bs-target="#other_income" type="button" role="tab"
+                                    aria-controls="other_income" aria-selected="false"> <svg
+                                        _ngcontent-ng-c1357113999="" width="18" height="18" viewBox="0 0 20 20"
+                                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path _ngcontent-ng-c1357113999=""
+                                            d="M12.8125 13.4373C12.8125 12.8964 12.8125 11.2498 14.375 11.2498H17.5V9.3748C17.5 8.51324 16.7991 7.8123 15.9375 7.8123H2.5C1.63844 7.8123 0.9375 8.51324 0.9375 9.3748V17.4998C0.9375 18.3614 1.63844 19.0623 2.5 19.0623H15.9375C16.7991 19.0623 17.5 18.3614 17.5 17.4998V15.6248H14.375C12.8125 15.6248 12.8125 13.9782 12.8125 13.4373ZM13.4375 7.1873V5.29293C13.4375 4.97012 13.2691 4.6773 12.9869 4.5098C12.8448 4.42455 12.6828 4.37811 12.5171 4.37515C12.3514 4.37219 12.1879 4.4128 12.0428 4.49293L6.63938 7.1873H13.4375Z"
+                                            fill=""></path>
+                                    </svg> Arcade</button>
+
+
+                                        <button class="nav-link" id="other_income-tab" data-bs-toggle="tab"
+                                        (click)="showData(9)" data-bs-target="#other_income" type="button" role="tab"
+                                        aria-controls="other_income" aria-selected="false"> <svg
+                                            _ngcontent-ng-c1357113999="" width="18" height="18" viewBox="0 0 20 20"
+                                            fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path _ngcontent-ng-c1357113999=""
+                                                d="M12.8125 13.4373C12.8125 12.8964 12.8125 11.2498 14.375 11.2498H17.5V9.3748C17.5 8.51324 16.7991 7.8123 15.9375 7.8123H2.5C1.63844 7.8123 0.9375 8.51324 0.9375 9.3748V17.4998C0.9375 18.3614 1.63844 19.0623 2.5 19.0623H15.9375C16.7991 19.0623 17.5 18.3614 17.5 17.4998V15.6248H14.375C12.8125 15.6248 12.8125 13.9782 12.8125 13.4373ZM13.4375 7.1873V5.29293C13.4375 4.97012 13.2691 4.6773 12.9869 4.5098C12.8448 4.42455 12.6828 4.37811 12.5171 4.37515C12.3514 4.37219 12.1879 4.4128 12.0428 4.49293L6.63938 7.1873H13.4375Z"
+                                                fill=""></path>
+                                        </svg> Closing Cash/Stock </button>
+
+
                                     <button class="nav-link" id="store_summary-tab" data-bs-toggle="tab"
                                         (click)="showData(6)" data-bs-target="#store_summary" type="button" role="tab"
                                         aria-controls="store_summary" aria-selected="false"> <svg
@@ -105,7 +162,7 @@
                             </nav>
                             <!-- <input type="date" id="start" name="trip-start" value="2018-07-22" min="2018-01-01"
                                     max="2018-12-31" /> -->
-                            <input type="date" [value]="entryDate | date:'yyyy-MM-dd'" />
+                            <input type="date" (change)="onDateChange($event)"  [value]="entryDate | date:'yyyy-MM-dd'" />
                         </div>
                         <div class="tab-content" id="nav-tabContent">
                             <div *ngIf="showDailysaleInput">
@@ -145,90 +202,15 @@
                                                     </div>
                                                 </ng-container>
                                                 <div class="totalamount d-flex justify-content-end">
-                                                    <span>Total Inside Sales : <b>${{this.insidesaleamount}}</b></span>
+                                                    <span>Total Inside Sales : <b>${{this.insidesaleamount.toFixed(2)}}</b></span>
                                                 </div>
                                             </div>
                                         </div>
+
+
 
 
                                         <div class="mt-4" style="display: none;">
-                                            <div class="dailyform">
-                                                <div class="columncountsection">
-                                                
-                                                        <div class="category ">
-                                                            <div class="category-heading mb-2">
-                                                                <span>LOTTERY</span>
-                                                            </div>
-                                                            <div class="form">
-                                                                <ng-container *ngFor="let item of lotterytype">
-                                                                <div class="form-group row mx-1">
-                                                                    <label for="inputPassword"
-                                                                        class="col-xl-3 col-md-4 px-2 col-form-label"><b
-                                                                            style="font-weight:600">{{item.lotteryName}}</b></label>
-                                                                    <div
-                                                                        class="inputfield col-xl-9 col-md-8 d-flex align-items-center">
-                                                                        <span>$</span>
-                                                                        <input type="text" class="form-control"
-                                                                            [(ngModel)]="item.lotteryAmount"
-                                                                            (keypress)="validateNumber($event)"
-                                                                            (input)="validateDecimalPlaces($event)"
-                                                                            (blur)="onTextboxLotteryLeave($event,item )"
-                                                                            id="grocery" placeholder="">
-                                                                    </div>
-                                                                </div>
-                                                            </ng-container>
-
-                                                            </div>
-                                                        </div>
-                                                    
-                                                </div>
-                                                <div class="totalamount d-flex justify-content-end">
-                                                    <span>Total Lottery Amount :
-                                                        <b>${{this.lotteryamount}}</b></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mt-4"  style="display: none;">
-                                            <div class="dailyform">
-                                                <div class="columncountsection">
-                                                
-                                                        <div class="category ">
-                                                            <div class="category-heading mb-2">
-                                                                <span>LOTTERY Expense</span>
-                                                            </div>
-                                                            <div class="form">
-                                                                <ng-container *ngFor="let item of lotterytypeExpense">
-                                                                <div class="form-group row mx-1">
-                                                                    <label for="inputPassword"
-                                                                        class="col-xl-3 col-md-4 px-2 col-form-label"><b
-                                                                            style="font-weight:600">{{item.lotteryName}}</b></label>
-                                                                    <div
-                                                                        class="inputfield col-xl-9 col-md-8 d-flex align-items-center">
-                                                                        <span>$</span>
-                                                                        <input type="text" class="form-control"
-                                                                            [(ngModel)]="item.lotteryAmount"
-                                                                            (keypress)="validateNumber($event)"
-                                                                            (input)="validateDecimalPlaces($event)"
-                                                                            (blur)="onTextboxLotteryLeave($event,item )"
-                                                                            id="grocery" placeholder="">
-                                                                    </div>
-                                                                </div>
-                                                            </ng-container>
-
-                                                            </div>
-                                                        </div>
-                                                    
-                                                </div>
-                                                <div class="totalamount d-flex justify-content-end">
-                                                    <span>Total Lottery Expense Amount :
-                                                        <b>${{this.lotteryamountExpense}}</b></span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-
-                                        <div class="mt-4">
                                             <div class="dailyform">
                                                 <div class="columncountsection">
                                                     <ng-container *ngFor="let item of creditcardlist">
@@ -262,7 +244,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="mt-4">
+                                        <div class="mt-4" style="display: none;">
                                             <div class="dailyform">
                                                 <div class="columncountsection Closing-cash">
                                                     <div class="category ">
@@ -292,13 +274,13 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="fixed-button col-xl-10 col-lg-9 col-md-8">
+                                    <!-- <div class="fixed-button col-xl-10 col-lg-9 col-md-8">
                                         <div class="d-flex justify-content-end w-100">
                                             <div class="next-submitbtn">
                                                 <button type="button" (click)="showData(1);">NEXT</button>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
 
 
 
@@ -311,7 +293,7 @@
                             
                                 <div class="dailysalesexpenses" *ngIf=" this.showGasInput== true">
                                     <app-gesinvoice ></app-gesinvoice>
-                                    <div class="fixed-button col-xl-10 col-lg-9 col-md-8">
+                                    <!-- <div class="fixed-button col-xl-10 col-lg-9 col-md-8">
                                         <div class="d-flex justify-content-between w-100">
                                             <div class="back-submitbtn">
                                                 <button type="button" (click)="showData(8);">Back</button>
@@ -320,7 +302,7 @@
                                                 <button type="button" (click)="showData(2);">Next</button>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
 
@@ -328,8 +310,8 @@
 
                                 <div class="dailysalesexpenses" *ngIf=" this.showPurchasesInput== true">
                                   
-                                <app-purchseregister></app-purchseregister>
-                                    <div class="fixed-button col-xl-10 col-lg-9 col-md-8">
+                                <app-purchseregister [storesdata]="storesdata"></app-purchseregister>
+                                    <!-- <div class="fixed-button col-xl-10 col-lg-9 col-md-8">
                                         <div class="d-flex justify-content-between w-100">
                                             <div class="back-submitbtn">
                                                 <button type="button" (click)="showData(1);">Back</button>
@@ -338,7 +320,7 @@
                                                 <button type="button" (click)="showData(3);">Next</button>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
 
 
@@ -346,36 +328,48 @@
 
                             <div  class="dailysalesexpenses"  *ngIf=" this.showExpensesnewInput== true">
                                 <app-expense></app-expense>
-                                <div class="fixed-button col-xl-10 col-lg-9 col-md-8">
+                                <!-- <div class="fixed-button col-xl-10 col-lg-9 col-md-8">
                                     <div class="d-flex justify-content-between w-100">
                                         <div class="back-submitbtn">
                                             <button type="button" (click)="showData(2);">Back</button>
                                         </div>
                                         <div class="next-submitbtn">
-                                            <button type="button" (click)="showData(4);">Next</button>
+                                            <button type="button" (click)="showData(10);">Next</button>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
-                     
-                            <div  class="dailysalesexpenses"  *ngIf=" this.showpayroll== true">
-                                <app-payroll></app-payroll>
-                                <div class="fixed-button col-xl-10 col-lg-9 col-md-8">
+                            <div  class="dailysalesexpenses"  *ngIf=" this.showCreditcardinput== true">
+                                <app-creditcard></app-creditcard>
+                                <!-- <div class="fixed-button col-xl-10 col-lg-9 col-md-8">
                                     <div class="d-flex justify-content-between w-100">
                                         <div class="back-submitbtn">
                                             <button type="button" (click)="showData(3);">Back</button>
                                         </div>
                                         <div class="next-submitbtn">
+                                            <button type="button" (click)="showData(4);">Next</button>
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>
+                            <div  class="dailysalesexpenses"  *ngIf=" this.showpayroll== true">
+                                <app-payroll></app-payroll>
+                                <!-- <div class="fixed-button col-xl-10 col-lg-9 col-md-8">
+                                    <div class="d-flex justify-content-between w-100">
+                                        <div class="back-submitbtn">
+                                            <button type="button" (click)="showData(10);">Back</button>
+                                        </div>
+                                        <div class="next-submitbtn">
                                             <button type="button" (click)="showData(5);">Next</button>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
 
                             <div  class="dailysalesexpenses"  *ngIf=" this.showOtherincome== true">
                                 <app-otherincome></app-otherincome>
 
-                                <div class="fixed-button col-xl-10 col-lg-9 col-md-8">
+                                <!-- <div class="fixed-button col-xl-10 col-lg-9 col-md-8">
                                     <div class="d-flex justify-content-between w-100">
                                         <div class="back-submitbtn">
                                             <button type="button" (click)="showData(4);">Back</button>
@@ -384,28 +378,93 @@
                                             <button type="button" (click)="showData(6);">Next</button>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
-                          
-                            <div  class="dailysalesexpenses"  *ngIf=" this.showSummaryInput== true">
-                                <app-storesummary  [storesdata]="storesdata"></app-storesummary>
 
-                                <div class="fixed-button col-xl-10 col-lg-9 col-md-8">
+
+                            
+                            <div  class="dailysalesexpenses"  *ngIf=" this.showTaxCollection== true">
+                                <app-taxcollection [storesdata]="storesdata"></app-taxcollection>
+
+                                <!-- <div class="fixed-button col-xl-10 col-lg-9 col-md-8">
                                     <div class="d-flex justify-content-between w-100">
                                         <div class="back-submitbtn">
                                             <button type="button" (click)="showData(5);">Back</button>
                                         </div>
-                                        <!-- <div class="next-submitbtn">
-                                            <button type="button" (click)="showData(6);">Next</button>
-                                        </div> -->
+                                        <div class="next-submitbtn">
+                                            <button type="button" (click)="showData(9);">Next</button>
+                                        </div>
                                     </div>
-                                </div>
+                                </div> -->
+                            </div>
+                            <div  class="dailysalesexpenses"  *ngIf=" this.showArcade== true">
+                                <app-arcade [storesdata]="storesdata"></app-arcade>
+
+                                <!-- <div class="fixed-button col-xl-10 col-lg-9 col-md-8">
+                                    <div class="d-flex justify-content-between w-100">
+                                        <div class="back-submitbtn">
+                                            <button type="button" (click)="showData(5);">Back</button>
+                                        </div>
+                                        <div class="next-submitbtn">
+                                            <button type="button" (click)="showData(9);">Next</button>
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>
+                            
+
+                            <div  class="dailysalesexpenses"  *ngIf=" this.showCasereconcil== true">
+                                <app-cashreconcil [storesdata]="storesdata"></app-cashreconcil>
+
+                                <!-- <div class="fixed-button col-xl-10 col-lg-9 col-md-8">
+                                    <div class="d-flex justify-content-between w-100">
+                                        <div class="back-submitbtn">
+                                            <button type="button" (click)="showData(5);">Back</button>
+                                        </div>
+                                        <div class="next-submitbtn">
+                                            <button type="button" (click)="showData(9);">Next</button>
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>
+                            
+
+                            <div  class="dailysalesexpenses"  *ngIf=" this.showClosingInput== true">
+                                <app-closing  [storesdata]="storesdata"></app-closing>
+
+                                <!-- <div class="fixed-button col-xl-10 col-lg-9 col-md-8">
+                                    <div class="d-flex justify-content-between w-100">
+                                        <div class="back-submitbtn">
+                                            <button type="button" (click)="showData(5);">Back</button>
+                                        </div>
+                                        <div class="next-submitbtn">
+                                            <button type="button" (click)="showData(6);">Next</button>
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>
+
+
+
+
+                          
+                            <div  class="dailysalesexpenses"  *ngIf=" this.showSummaryInput== true">
+                                <app-storesummary  [storesdata]="storesdata"></app-storesummary>
+
+                                <!-- <div class="fixed-button col-xl-10 col-lg-9 col-md-8">
+                                    <div class="d-flex justify-content-between w-100">
+                                        <div class="back-submitbtn">
+                                            <button type="button" (click)="showData(5);">Back</button>
+                                        </div>
+                                      
+                                    </div>
+                                </div> -->
                             </div>
 
                             <div  class="dailysalesexpenses"  *ngIf=" this.showlottery== true">
                                 <app-lottery     [storesdata]="storesdata"></app-lottery>
 
-                                <div class="fixed-button col-xl-10 col-lg-9 col-md-8">
+                                <!-- <div class="fixed-button col-xl-10 col-lg-9 col-md-8">
                                     <div class="d-flex justify-content-between w-100">
                                         <div class="back-submitbtn">
                                             <button type="button" (click)="showData(0);">Back</button>
@@ -414,7 +473,7 @@
                                             <button type="button" (click)="showData(1);">Next</button>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                             
                         </div>

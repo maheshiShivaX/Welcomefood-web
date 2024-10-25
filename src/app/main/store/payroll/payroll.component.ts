@@ -37,7 +37,8 @@ public form = new FormGroup({
   amountDate: new FormControl(''),
   amount: new FormControl(0),
   isActive: new FormControl(true),
-  createdBy: new FormControl(0)
+  createdBy: new FormControl(0),
+  chequeNo: new FormControl(''),
 });
 
 storeid:any;
@@ -53,7 +54,7 @@ ngOnInit() {
 
 
 GetEmployeeByStoreId( pGroupId: any) {
-    this.http.getAll(environment.GetEmployeeByStoreId + "?pStoreId=" + this.storeid ).subscribe((result: any) => {
+    this.http.getAll(environment.GetStoreEmployeeByStoreId + "?pStoreId=" + this.storeid ).subscribe((result: any) => {
       if (result.isSuccess == 1) {
         console.log(result.data)
         this.employeeList = result.data;
@@ -172,7 +173,8 @@ this.selectedOption=id;
       payModeId: 0,
       amountDate:'',
       amount: 0,
-      isActive:true
+      isActive:true,
+      chequeNo:''
     });
   }
 salaryList:any;
@@ -188,7 +190,8 @@ salaryList:any;
       payModeId: this.salaryList[0].payModeId,
       amountDate: this.salaryList[0].amountDate,
       amount: this.salaryList[0].amount,
-      isActive:this.salaryList[0].isActive
+      isActive:this.salaryList[0].isActive,
+      chequeNo:this.salaryList[0].chequeNo
     });
   
   }

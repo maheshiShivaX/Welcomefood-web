@@ -24,6 +24,11 @@ import { BalancesheetComponent } from './balancesheet/balancesheet.component';
 import { PurchseregisterComponent } from './purchseregister/purchseregister.component';
 import { LotteryComponent } from './lottery/lottery.component';
 import { ManagebstermComponent } from '../master/managebsterm/managebsterm.component';
+import { ClosingComponent } from './closing/closing.component';
+import { CreditcardComponent } from './creditcard/creditcard.component';
+import { CashreconcilComponent } from './cashreconcil/cashreconcil.component';
+import { TaxcollectionComponent } from './taxcollection/taxcollection.component';
+import { ArcadeComponent } from './arcade/arcade.component';
 
 
 const routes: Routes = [
@@ -82,6 +87,11 @@ const routes: Routes = [
     BalancesheetComponent,
     PurchseregisterComponent,
     LotteryComponent,
+    ClosingComponent,
+    CreditcardComponent,
+    CashreconcilComponent,
+    TaxcollectionComponent,
+    ArcadeComponent,
     
   
   ],

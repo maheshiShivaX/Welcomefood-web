@@ -61,6 +61,7 @@ export class DailysaleComponent {
   showpayroll:boolean=false;
   showrebate:boolean=false;
   showDailysaleInput: boolean = true;
+  showClosingInput: boolean = false;
   showGasInput: boolean = false;
   showPurchasesInput: boolean = false;
   showExpensesnewInput: boolean = false;
@@ -73,7 +74,7 @@ export class DailysaleComponent {
     private http: HttpService, private toastr: ToastrService) {
     this.entryDate = new Date().toISOString().split('T')[0];
 
-    this.selectedOption = "1";
+ 
 
 
     this.dated = this.entryDate;
@@ -82,6 +83,27 @@ export class DailysaleComponent {
     // this.storesdata[0].fromdate = this.dated;
     // this.storesdata[0].todate=this.dated
 
+  }
+
+
+  onDateChange(event :any)
+  {
+
+const input = event.target as HTMLInputElement;
+//this.dated = new Date(input.value);
+this.entryDate = new Date(input.value).toISOString().split('T')[0];
+console.log('Selected Date:', this.entryDate);
+
+this.storeId = this.route.snapshot.params["storeId"];
+localStorage.setItem("storeid",this.storeId);
+
+this.dated = this.entryDate;
+this.GetStoreDetailAll(this.storeId) 
+this.GetInsideSale(this.storeId, 1, this.entryDate);
+this.GetOtherSale(this.storeId, 1, this.entryDate);
+this. GetGetStoreClosingByStoreId(this.storeId, this.entryDate) ;
+this.GetAmountByGroupId(this.storeId, this.entryDate)
+this.  GetCreditCardByStoreIdDate();
   }
 
   storedetail: any;
@@ -107,20 +129,11 @@ export class DailysaleComponent {
     localStorage.setItem("storeid",this.storeId);
 
     this.dated = this.entryDate;
-
-    // this.storesdata[0].storeid = this.storeId;
-    // this.storesdata[0].fromdate = this.dated;
-    // this.storesdata[0].todate=this.dated
     this.GetStoreDetailAll(this.storeId) 
     this.GetInsideSale(this.storeId, 1, this.entryDate);
     this.GetOtherSale(this.storeId, 1, this.entryDate);
     this. GetGetStoreClosingByStoreId(this.storeId, this.entryDate) ;
     this.GetAmountByGroupId(this.storeId, this.entryDate)
-    // this.GetLotteryTypeStoreIdDate();
-    // this.GetLotteryExpenseStoreIdDate();
-    // this.GetGesdetailByDateStoreId();
-    this.updateTotals();
-// this.GetExpenseItemsByAmountDate();
 this.  GetCreditCardByStoreIdDate();
   }
 
@@ -132,7 +145,7 @@ onother()
 {
   this.isView= false;
 }
-
+showCreditcardinput:boolean=false;
 lotterytype:any
 lotteryamount:any;
 lotteryamountExpense:any;
@@ -171,38 +184,6 @@ GetLotteryExpenseStoreIdDate() {
   })
 }
 
- 
-
-  gesinventory: any;
-
-  GetGesdetailByDateStoreId() {
-    this.http.getAll(environment.GetGesdetailByDateStoreId + "?pAmountDate=" + this.entryDate + "&pStoreId=" + this.storeId).subscribe((result: any) => {
-      if (result.isSuccess == 1) {
-        console.log(result.data)
-        this.gesinventory = result.data;
-
-        this.inventory = this.gesinventory;
-      }
-      else {
-        this.purchaseitemlist = null;
-      }
-    })
-  }
-  GetGesdetailByDateStoreIdonRest() {
-
-    //alert('asd');
-    this.http.getAll(environment.GetGesdetailByDateStoreIdonRest + "?pAmountDate=" + this.entryDate + "&pStoreId=" + this.storeId).subscribe((result: any) => {
-      if (result.isSuccess == 1) {
-        console.log(result.data)
-        this.gesinventory = result.data;
-
-        this.inventory = this.gesinventory;
-      }
-      else {
-        this.purchaseitemlist = null;
-      }
-    })
-  }
 
 
   
@@ -281,15 +262,7 @@ closingdata:any;
     })
   }
   isView:boolean=false;
-  onsummary()
-  {
-    //alert('fg');
-    this.dated = this.entryDate;
-this.isView= true;
-    this.storesdata[0].storeid = this.storeId;
-    this.storesdata[0].fromdate = this.dated;
-    this.storesdata[0].todate=this.dated
-  }
+
   onTextboxLeave(event: Event, row: any): void {
 
 
@@ -500,7 +473,7 @@ creditcardamount:any;
 storeclosingdata:any;
 storeclosingcash:any;
 showSummaryInput:boolean=false;
-
+showCasereconcil:boolean=false;
   onSubmitClosing() {
 
     if (this.formClosing.value.amount == '' || this.formClosing.value.amount == '0') {
@@ -527,6 +500,8 @@ showSummaryInput:boolean=false;
   }
 
   dated:any;
+showTaxCollection:boolean = false;
+showArcade:boolean = false
   showlottery:boolean=false;
 showOtherincome :boolean=false;
   showData(pid: any) {
@@ -541,6 +516,19 @@ showOtherincome :boolean=false;
     this.isView= false;
     this.showlottery= false;
     this.showOtherincome=false;
+    this.showClosingInput=false;
+    this.showCreditcardinput=false;
+    this.showCasereconcil=false;
+this.showTaxCollection=false;
+this.showArcade=false;
+    this.dated = this.entryDate;
+
+    this.storesdata[0].storeid = this.storeId;
+    this.storesdata[0].fromdate = this.dated;
+    this.storesdata[0].todate=this.dated
+
+
+    
     if (pid == 0) {
       this.showDailysaleInput = true;
     }
@@ -573,6 +561,26 @@ showOtherincome :boolean=false;
     }
     else if (pid == 8) {
       this.showlottery = true;
+    } else if (pid == 9) {
+      this.showClosingInput = true;
+
+      
+ this.dated = this.entryDate;
+
+ this.storesdata[0].storeid = this.storeId;
+ this.storesdata[0].fromdate = this.dated;
+ this.storesdata[0].todate=this.dated
+    }
+    else if (pid ==10) {
+      this.showCreditcardinput = true;
+    }  else if (pid ==11) {
+      this.showCasereconcil = true;
+    }
+    else if (pid ==12) {
+      this.showTaxCollection = true;
+    }
+    else if (pid ==13) {
+      this.showArcade = true;
     }
     else {
       alert("data not found")
@@ -590,125 +598,10 @@ showOtherincome :boolean=false;
 
 
 
-  selectedRowsitems: any[] = [];
-  public formGes = new FormGroup({
-    storeId: new FormControl(0),
-    entryDate: new FormControl(''),
-    gesInventoryDtos: new FormArray(this.selectedRowsitems),
-  });
 
-
-  inventory: InventoryItem[] = [
-    { name: 'Open', regular: 0, plus: 0, premium: 0, diesel: 0, total: 0 },
-    { name: 'Purchases', regular: 0, plus: 0, premium: 0, diesel: 0, total: 0 },
-    { name: 'Purchases Rate', regular: 0, plus: 0, premium: 0, diesel: 0, total: 0 },
-    { name: 'Sales', regular: 0, plus: 0, premium: 0, diesel: 0, total: 0 },
-    { name: 'Sales Rate', regular: 0, plus: 0, premium: 0, diesel: 0, total: 0 },
-    { name: 'Close', regular: 0, plus: 0, premium: 0, diesel: 0, total: 0 },
-    { name: 'Physical', regular: 0, plus: 0, premium: 0, diesel: 0, total: 0 },
-    { name: 'overShort', regular: 0, plus: 0, premium: 0, diesel: 0, total: 0 },
-  ];
-
-
-
-
-
-
-  selectedOption: string | undefined;
 
  
-
-
-  updateTotals(): void {
-    const open = this.inventory.find(item => item.name === 'Open');
-    const purchases = this.inventory.find(item => item.name === 'Purchases');
-    const purchasesrate = this.inventory.find(item => item.name === 'Purchases Rate');
-    const sales = this.inventory.find(item => item.name === 'Sales');
-    const salesRate = this.inventory.find(item => item.name === 'Sales Rate');
-    const close = this.inventory.find(item => item.name === 'Close');
-    const physical = this.inventory.find(item => item.name === 'Physical');
-    const overShort = this.inventory.find(item => item.name === 'overShort');
-
-    if (open && purchases && sales && close && physical && overShort && purchasesrate && overShort ) {
-      // Calculate Close
-      close.regular = (+open.regular) + (+purchases.regular) - (+sales.regular);
-      close.plus = (+open.plus) + (+purchases.plus) - (+sales.plus);
-      close.premium = (+open.premium) + (+purchases.premium) - (+sales.premium);
-      close.diesel = (+open.diesel) + (+ purchases.diesel) - (+sales.diesel);
-
-      // Calculate Physical
-      // physical.regular = close.regular;
-      // physical.plus = close.plus;
-      // physical.premium = close.premium;
-      // physical.diesel = close.diesel;
-
-      // Calculate Over/Short
-      // alert(physical.regular);
-
-      overShort.regular = +((+physical.regular) - (+close.regular)).toFixed(2);
-      overShort.plus = +((+physical.plus) - (+close.plus)).toFixed(2);;
-      overShort.premium = +((+physical.premium) - (+close.premium)).toFixed(2);;
-      overShort.diesel = + ((+physical.diesel) - (+close.diesel)).toFixed(2);;
-
-      // Calculate totals for each row
-      this.inventory.forEach(item => {
-
-        if(item.name=='Purchases Rate' || item.name=='Sales Rate')
-        {
-          item.total = +(( (+item.regular) + (+item.plus) + (+item.premium) + (+item.diesel))/4) .toFixed(2);
-        }else
-        {
-          item.total = +( (+item.regular) + (+item.plus) + (+item.premium) + (+item.diesel)).toFixed(2);
-        }
-      });
-
-    }
-  }
-
-  isReadonly(name: string): boolean {
-
-
-    if (name == 'Open') {
-      return true;
-    }
-    else if (name == 'Close') {
-
-      return true;
-    }
-    else if (name == 'overShort') {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
  
-  onGesSubmit() {
-    this.selectedRowsitems = this.inventory.filter(x => x.name == 'Purchases' || x.name == 'Sales' || x.name == 'Physical' || x.name == 'Purchases Rate' || x.name == 'Sales Rate');
-    this.formGes.patchValue({
-      storeId: +this.storeId,
-      entryDate: this.entryDate,
-      gesInventoryDtos: this.selectedRowsitems,
-    })
-    this.formGes.value.gesInventoryDtos = this.selectedRowsitems;
-    console.log(this.formGes.value);
-    if (this.formGes.invalid) {
-      this.isLoading = false;
-      return;
-    }
-    this.http.post(environment.SaveGesDetail, this.formGes.value).subscribe((result: any) => {
-      if (result.isSuccess == 1) {
-        console.log(result);
-        this.toastr.success(result.message);
-      }
-      else {
-        this.isLoading = false;
-        this.submitted = false;
-        console.log(result);
-        this.toastr.error(result.message);
-      }
-    });
-  }
 
 creditcarddata:any;
   onSubmitCreditCard() {

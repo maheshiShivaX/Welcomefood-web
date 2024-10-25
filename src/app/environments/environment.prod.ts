@@ -2,13 +2,13 @@ export const environment = {
   production: true,
   hmr: false,
   config: {
-  //  apiUrl:"https://www.indianfilms.in/wfapi/api/",
+    apiUrl:"https://www.indianfilms.in/wfapi/api/",
     //apiUrl:"http://stage.ishivaxservices.com/admin_panel/public/api/",
     apiUrlother: "https://anutechinfra.com/anutechAPI/api/",
     apiUrlsms: "http://sms.ishivax.in/api/",
     // apiUrl1:"https://anutechinfra.com/anutechAPI/"
     // apiUrl:"https://anutechinfra.com/anutechAPI/api/"
-   apiUrl: 'https://localhost:7025/api/'
+   //apiUrl: 'https://localhost:7025/api/'
     //apiUrl:'https://www.indianfilms.in/eBuilderAPI/api/'
   },
 
@@ -211,5 +211,24 @@ DashboardAdmin:"PLReport/DashboardAdmin",
 GetStoreByCompanyId:"StoreDetail/GetStoreByCompanyId",
 GetCompanyDetailById:"CompanyProfile/GetCompanyDetailById",
 SaveCompanyProfile:"CompanyProfile/SaveCompanyProfile",
+GetCashReconcilByStoreId:"CashReconcil/GetCashReconcilByStoreId",
+SaveCashReconcil:"CashReconcil/SaveCashReconcil",
+DeleteCashReconcilById:"CashReconcil/DeleteCashReconcilById",
+SaveTaxType:"TaxType/SaveTaxType",
+GetTaxType: "TaxType/GetTaxType",
+DeleteTaxTypeById:"TaxType/DeleteTaxTypeById",
+GetTaxTypeByCompanyId:"TaxType/GetTaxTypeByCompanyId",
+SaveTaxDetail:"TaxDetail/SaveTaxDetail",
+GetTaxDetail:"TaxDetail/GetTaxDetail",
+DeleteTaxDetailById:"TaxDetail/DeleteTaxDetailById",
+GetTaxDetailByStoreId:"TaxDetail/GetTaxDetailByStoreId",
+SaveStoreEmployee:"StoreEmployee/SaveStoreEmployee",
+DeleteStoreEmployeeById:"StoreEmployee/DeleteStoreEmployeeById",
+GetStoreEmployeeByCompanyId:"StoreEmployee/GetStoreEmployeeByCompanyId",
+GetStoreEmployeeByStoreId:"StoreEmployee/GetStoreEmployeeByStoreId",
+SaveArcadeDetail:"ArcadeDetail/SaveArcadeDetail",
+GetArcadeDetailByStoreDate:"ArcadeDetail/GetArcadeDetailByStoreDate",
+DeleteArcadeDetailByStoreIdPayId:"ArcadeDetail/DeleteArcadeDetailByStoreIdPayId"
+
 };
 

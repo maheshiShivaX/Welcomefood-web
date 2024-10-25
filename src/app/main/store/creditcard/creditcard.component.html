@@ -1,0 +1,41 @@
+
+<div class="purchases mt-4" >
+    <div class="store-heading">
+        <h4 class="">Credit Card Income</h4>
+    </div>
+    <div class="gasinventory storeformdata pt-2">
+               <div class="dailyform">
+                        <div class="columncountsection">
+                            <ng-container *ngFor="let item of creditcardlist">
+                                <div class="category ">
+
+                                    <div class="form">
+
+                                        <div class="form-group row mx-1">
+                                            <label for="inputPassword"
+                                                class="col-xl-3 col-md-4 px-2 col-form-label"><b
+                                                    style="font-weight:600">{{item.cardName}}</b></label>
+                                            <div
+                                                class="inputfield col-xl-9 col-md-8 d-flex align-items-center">
+                                                <span>$</span>
+                                                <input type="text" class="form-control"
+                                                    [(ngModel)]="item.amount"
+                                                    (keypress)="validateNumber($event)"
+                                                    (input)="validateDecimalPlaces($event)"
+                                                    (blur)="onTextboxCreditLeave($event,item )"
+                                                    id="grocery" placeholder="">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </div>
+                        <div class="totalamount d-flex justify-content-end">
+                            <span>Total Credit Card Amount :
+                                <b>${{this.creditcardamount}}</b></span>
+                        </div>
+                    </div>
+    </div>
+</div>
+                

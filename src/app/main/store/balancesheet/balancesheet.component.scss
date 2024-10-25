@@ -120,3 +120,34 @@ th {
     border-radius: 6px;
     max-width: 160px;
 }
+
+.currnt_assets {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.Total{
+   display: flex ;
+   align-items: center;
+   justify-content: space-between;
+}
+
+.currnt_assets h3{
+    font-size: 16px;
+    font-weight: 700;
+}
+p{
+    padding: 0;
+    margin: 0;
+}
+.currnt_iner{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.box_hedding{
+    margin-bottom: 10px;
+}

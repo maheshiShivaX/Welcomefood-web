@@ -2,20 +2,22 @@
 <div class="dailysales">
     <div class="summaryheading">
         <div >
-        <form  [formGroup]="form"   class="d-flex justify-content"> <h4>Store Balance Sheet</h4>
-        <div class="reportbutton col-4"> <ng-select formControlName="storeId" id="storeId" #SelectSizeDefault [items]="storeList"
-            (ngModelChange)="onStoreChange($event)"
-            [searchable]="true" bindLabel="storeName" bindValue="storeId">
-        </ng-select>  </div>
-        <div class="dateformet">
-            <label class="date form-label">From Date :</label>
-            <input type="date" id="entrydate" formControlName="fromDate" (ngModelChange)="oninputchnage($event)"  [(ngModel)]="fromDate">
-        </div>
-        <div class="dateformet">
-            <label class="date form-label">To Date :</label>
-            <input type="date" id="toDate" formControlName="toDate" (ngModelChange)="oninputchnage($event)" [(ngModel)]="toDate">
-        </div>
-    </form>
+            <form class="row align-items-end px-0 col-12 " [formGroup]="form">
+                <div class="col-xl-4 col-lg-12">
+                    <label for="FormControlInput1" class="form-label">Store Name<span class="required">*</span></label>
+                    <ng-select formControlName="storeId" id="storeId" #SelectSizeDefault [items]="storeList"
+                        [searchable]="true" bindLabel="storeName" bindValue="storeId">
+                    </ng-select>
+                </div>
+                <div class="col-xl-2 col-lg-12">
+                    <label class="date form-label">Month</label><br>
+                    <ng-select formControlName="month" id="month" #SelectSizeDefault  (change)="onMonthChange($event)"
+                    [items]="paymentOptions" bindLabel="label" bindValue="label">
+                </ng-select>
+                        </div>
+              
+        
+            </form>
 </div>
 
 
@@ -45,10 +47,10 @@
                                 <input type="text" class="form-control" formControlName="name" id="name"
                                     placeholder="Perticular">
                             </div>
-                            <div class="mb-2 col-xl-2 col-lg-6">
+                            <!-- <div class="mb-2 col-xl-2 col-lg-6">
                                 <label for="FormControlInput1" class="form-label">Date</label>
                                 <input type="date" id="entryDate" class="form-control" formControlName="entryDate" [(ngModel)]="entryDate">
-                            </div>
+                            </div> -->
                             <div class="mb-3 col-xl-3 col-lg-6">
                                 <label for="FormControlInput1" class="form-label">Amount</label>
                                 <input type="text" class="form-control" formControlName="amount" id="amount"

@@ -1,0 +1,153 @@
+
+
+<div class="purchases mt-4" >
+    <div class="store-heading">
+        <h4 class="">Add Closing Cash/Stock</h4>
+    </div>
+    <div class="gasinventory storeformdata pt-2">
+        <div class="dailyform">
+            <div class="columncountsection Closing-cash">
+                <div class="category ">
+                   
+                    <div class="form">
+
+                        <div class="pagedatatable d-flex" *ngIf="storedetail !=null">
+                            <div class="col-12">
+                              <table class="w-100">
+                                <tr class="text-left">
+                                  <th>Description
+                                  </th>
+                                  <th>Amount</th>
+                                </tr>
+                                <tr class="productcategory">
+                                    <td class="text-left">Opening Cash In hand</td>
+                                    <td>{{this.storedetail.openingBalance.toFixed(2)}}</td>
+                                  </tr>
+                                <tr class="total productcategory">
+                                  <td class="text-left">Total Inside Sale</td>
+                                  <td>{{this.storedetail.totalInsideAmount.toFixed(2)}}</td>
+                                </tr>
+                                
+                                <!-- <tr class="tabledatasort productcategory">
+                                  <td class="text-left">Coin-Up</td>
+                                  <td>{{this.coninup}}</td>
+                                </tr> -->
+                                <tr class="tabledatasort productcategory">
+                                    <td class="text-left">OTHER AMOUNT Inward</td>
+                                    <td>{{this.storedetail.totalInwardAmount}}</td>
+                                  </tr>
+                                <tr class="tabledatasort productcategory">
+                                  <td class="text-left">Lottery</td>
+                                  <td>{{this.storedetail.totalLotteryAmount.toFixed(2)}}</td>
+                                </tr>
+                                <!-- <tr class="tabledatasort productcategory">
+                                  <td class="text-left">Sales Tax</td>
+                                  <td>{{this.salestax}}</td>
+                                </tr> -->
+                                <tr class="tabledatasort productcategory">
+                                  <td class="text-left">Gas Sales Amount</td>
+                                  <td>{{this.storedetail.gesSaleAmount.toFixed(2)}}</td>
+                                </tr>
+                                <tr class=" total productcategory">
+                                  <td class="text-left">Total IN </td>
+                                  <td>{{this.storedetail.totalInputCase.toFixed(2)}}</td>
+                                </tr>
+                    
+                                <tr class="productcategory">
+                                  <td class="text-left">LOTO PAYOUT </td>
+                                  <td>{{this.storedetail.totalLotteryPayoutAmount.toFixed(2)}}</td>
+                                </tr>
+                                <tr class="productcategory">
+                                  <td class="text-left">Store Expenses </td>
+                                  <td>{{this.storedetail.expenseCaseAmount.toFixed(2)}}</td>
+                                </tr>
+                                <tr class="productcategory">
+                                  <td class="text-left">Pay Out Purchases </td>
+                                  <td>
+                                    <!-- {{this.totalamountpurchasecash.toFixed(2)}} -->
+                                </td>
+                                </tr>
+                                <!-- <tr class="productcategory">
+                                  <td class="text-left">Coin-Up </td>
+                                  <td>{{this.arcadeamounts}}</td>
+                                </tr> -->
+                                <tr class="productcategory">
+                                  <td class="text-left">PAYROLL </td>
+                                  <td>{{this.storedetail.salaryAmount.toFixed(2)}}</td>
+                                </tr>
+                                <tr class="productcategory">
+                                    <td class="text-left">OTHER AMOUNT Outward</td>
+                                    <td>{{this.storedetail.totalOutwardAmount}}</td>
+                                  </tr>
+                                <tr class="productcategory">
+                                  <td class="text-left">CREDIT CARD </td>
+                                  <td>{{this.storedetail.totalCreditCardincome.toFixed(2)}}</td>
+                                </tr>
+                                <tr class=" total productcategory">
+                                  <td class="text-left">Total Out </td>
+                                  <td>{{this.storedetail.totalOutputCase.toFixed(2)}}</td>
+                                </tr>
+                                <tr class=" total productcategory">
+                                  <td class="text-left">Calculated Closing Cash  </td>
+                                  <td>{{this.storedetail.totalDiffCase.toFixed(2)}}</td>
+                                </tr>
+                                <tr class="productcategory">
+                                  <td class="text-left">Closing Cash</td>
+                                  <td>{{this.storedetail.closingBalance.toFixed(2)}}</td>
+                                </tr> 
+                                <!-- <tr>
+                                  <td></td>
+                                  <td></td>
+                                </tr> -->
+                               <tr class="productcategory">
+                                  <td>Total Deposit</td>
+                                  <td>{{this.storedetail.closingBalance.toFixed(2)}}</td>
+                                </tr>
+                                <tr class="total productcategory">
+                                  <td> Over/Short</td>
+                                  <td class="text-right">{{this.storedetail.totalOverShort.toFixed(2)}}</td>
+                                </tr>
+                     
+                    
+                    
+                              </table>
+                            </div>
+                        </div>
+                        <!-- <div class="form-group row mx-1" *ngIf="storedetail !=null">
+                            <label for="inputPassword"
+                                class="col-xl-3 col-md-4 px-2 col-form-label"><b
+                                    style="font-weight:600">Calculated Closing Cash </b></label>
+                            <div
+                                class="inputfield col-xl-9 col-md-8 d-flex align-items-center">
+                                <span>$</span>
+                                {{this.storedetail.totalDiffCase.toFixed(2)}}
+                            </div>
+                        </div> -->
+
+
+                <div class="form-group row mx-1">
+                    <label for="inputPassword"
+                        class="col-xl-3 col-md-4 px-2 col-form-label"><b
+                            style="font-weight:600">Physical Closing Cash</b></label>
+                    <div
+                        class="inputfield col-xl-9 col-md-8 d-flex align-items-center">
+                        <span>$</span>
+                        <input type="text" class="form-control"
+                            [(ngModel)]="this.storeclosingcash"
+                            (keypress)="validateNumber($event)"
+                            (input)="validateDecimalPlaces($event)"
+                            (blur)="onTextboxLeaveClosing($event )" id="grocery"
+                            placeholder="">
+                    </div>
+                </div>
+                    </div>
+                </div>
+            </div>
+            <div class="totalamount d-flex justify-content-end">
+                <span>Total Physical Closing Cash : <b>${{this.storeclosingcash}}</b></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,81 @@
+<div class="purchases mt-4" ></div>
+    <div class="store-heading">
+        <h4 class="">Arcade</h4>
+    </div>
+    <div class="gasinventory storeformdata pt-2">
+
+<div class="mt-4">
+    <div class="dailyform">
+        <div class="columncountsection">
+        
+                <div class="category ">
+                    <div class="category-heading mb-2">
+                        <span>Arcade</span>
+                    </div>
+                    <div class="form">
+                     
+                        <div class="form-group row mx-1">
+                            <label for="inputPassword"
+                                class="col-xl-3 col-md-4 px-2 col-form-label"><b
+                                    style="font-weight:600">IN</b></label>
+                            <div
+                                class="inputfield col-xl-9 col-md-8 d-flex align-items-center">
+                                <span>$</span>
+                                <input type="text" class="form-control"
+                                  [value]="inamount"
+                                    (keypress)="validateNumber($event)"
+                                    (input)="validateDecimalPlaces($event)"
+                                    (blur)="onTextboxLeave($event,'1')"
+                                    id="grocery" placeholder="">
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+        </div>
+        <div class="totalamount d-flex justify-content-end">
+            <span>Total IN Amount :
+                <b>${{this.inamount}}</b></span>
+        </div>
+    </div>
+</div>
+<div class="mt-4">
+    <div class="dailyform">
+        <div class="columncountsection">
+        
+                <div class="category ">
+                    <div class="category-heading mb-2">
+                        <span>Arcade</span>
+                    </div>
+                    <div class="form">
+                        
+                        <div class="form-group row mx-1">
+                            <label for="inputPassword"
+                                class="col-xl-3 col-md-4 px-2 col-form-label"><b
+                                    style="font-weight:600">OUT</b></label>
+                            <div
+                                class="inputfield col-xl-9 col-md-8 d-flex align-items-center">
+                                <span>$</span>
+                                <input type="text" class="form-control"
+                                [value]="outamount"
+                                    (keypress)="validateNumber($event)"
+                                    (input)="validateDecimalPlaces($event)"
+                                    (blur)="onTextboxLeave($event,'2')"
+                                    id="grocery" placeholder="">
+                            </div>
+                        </div>
+                   
+
+                    </div>
+                </div>
+            
+        </div>
+        <div class="totalamount d-flex justify-content-end">
+            <span>Total OUT Amount :
+                <b>${{this.outamount}}</b></span>
+        </div>
+    </div>
+</div>
+    </div>
+    
+    

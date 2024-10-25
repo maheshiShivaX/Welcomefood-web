@@ -97,6 +97,7 @@ export class StoresummaryComponent {
 
       }
       else {
+        alert('asd');
         this.storedetail = null;
       }
     })
@@ -107,102 +108,21 @@ export class StoresummaryComponent {
   
 openingbal:any
 openingcash:number=0;
-  GetStoreOpeningCashByStoreId() {
-
-    this.http.getAll(environment.GetStoreOpeningCashByStoreId + "?pStoreId=" + this.storeid + "&pAmountDate=" + this.entryDate).subscribe((result: any) => {
-      if (result.isSuccess == 1) {
-        console.log(result.data)
-        this.openingbal = result.data;
-this.openingcash=this.openingbal[0].amount;
-this.totalinputcase = this.totalinputcase+ this.openingcash;
-console.log(this.openingcash);
-      }
-      else {
-        // this.insideList = null;
-      }
-    })
-  }
+  
 
 lotteryData:any;
 lotteryamountsale:any;
-  GetOtherSale(pStoreId: any, pGroupId: any, pEntryDate: any) {
 
-    this.http.getAll(environment.GetOtherSale + "?pStoreId=" + pStoreId + "&pGroupId=" + pGroupId + "&pEntryDate=" + pEntryDate).subscribe((result: any) => {
-      if (result.isSuccess == 1) {
-        console.log(result.data)
-        console.log('A')
-        this.otherList = result.data;
-       this.lotteryData =  this.otherList.filter((x: { productCategoryName: string; })=>x.productCategoryName== 'Lottery')[0].productDetails  ;
-
-       this.lotteryamountsale=this.lotteryData.reduce((acc: any, item: { amount: any; }) => acc + (item.amount || 0), 0);
-console.log(this.lotteryData);
-      }
-      else {
-        this.otherList = null;
-      }
-    })
-  }
 
 
 
   closingdata: any;
   storeclosingcash: any;
-  GetGetStoreClosingByStoreId() {
-
-    this.http.getAll(environment.GetStoreClosingByStoreId + "?pStoreId=" + this.storeid + "&pAmountDate=" + this.entryDate).subscribe((result: any) => {
-      if (result.isSuccess == 1) {
-        console.log(result.data)
-        this.closingdata = result.data;
-        this.storeclosingcash = this.closingdata[0].amount;
-
-        if (this.storeclosingcash > this.totaldiffrence) {
-
-          this.overshortamount = this.storeclosingcash - this.totaldiffrence
-        } else {
-          this.overshortamount = this.totaldiffrence - this.storeclosingcash
-        }
-
-        // this.totalinputcase = this.totalinputcase +(+this.storeclosingcash);
-      }
-      else {
-        // this.insideList = null;
-      }
-    })
-  }
+ 
 
 
 
-  GetItemSaleByStoreCategoryByStoreId(pGroupId: any) {
-    this.http.getAll(environment.GetItemSaleByStoreCategoryByStoreId + "?pStoreId=" + this.storeid + "&pGroupId=" + pGroupId + "&pAmountDate=" + this.entryDate).subscribe((result: any) => {
-      if (result.isSuccess == 1) {
-        console.log(result.data)
-        console.log('abcd')
-        this.insaidesaledata = result.data;
-        this.totalinsideamount = this.insaidesaledata.reduce((acc: any, item: { amount: any; }) => acc + (item.amount || 0), 0);
 
-        this.totalinputcase = this.totalinputcase + (+this.totalinsideamount);
-      }
-      else {
-        this.insaidesaledata = null;
-      }
-    })
-  }
-
-  GetItemPurchaseByStoreIdcase(payType: any) {
-    this.http.getAll(environment.GetItemPurchaseByStoreId + "?pAmountDate=" + this.entryDate + "&pStoreid=" + this.storeid + "&pPayType=" + 1).subscribe((result: any) => {
-      if (result.isSuccess == 1) {
-        console.log(result.data)
-        this.vendorCategoryAmountscase = result.data;
-        if (result.data.length > 0) {
-          this.categories = Object.keys(result.data[0].amounts);
-        }
-        this.calculateTotalAmounts();
-      }
-      else {
-        // this.insaidesaledata = null;
-      }
-    })
-  }
   GetItemPurchaseByStoreIdcheqe(payType: any) {
     this.http.getAll(environment.GetItemPurchaseByStoreId + "?pAmountDate=" + this.entryDate + "&pStoreid=" + this.storeid + "&pPayType=" + 2).subscribe((result: any) => {
       if (result.isSuccess == 1) {

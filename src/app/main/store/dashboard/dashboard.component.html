@@ -73,21 +73,50 @@
                         <div class="d-flex justify-content-between">
                             <h5>Total Daily Sale</h5>
                             <div class="persent ">
-                                <!-- <p class="mb-0 text-end">{{(((this.dailysaledata[0].y-this.dailysaledata[1].y)/this.dailysaledata[0].y)*100).toFixed(0) }}</p> -->
+                               
                                 <p class="mb-0 text-end" [ngClass]="{ 'text-danger': getPercentageChange(this.dailysaledata) < 0, 'text-success': getPercentageChange(this.dailysaledata) >= 0 }">
                                     {{ getPercentageChange(this.dailysaledata).toFixed(0) }}%
                                   </p>
-                                <span *ngIf="dailysaledata!=null">Compared by:<b>{{ this.dailysaledata[1] !=null ? this.dailysaledata[1].amountDate :"" | date : 'MMM d'}}</b></span>
+                                <span *ngIf="dailysaledata!=null">Compared by:<b>{{ (this.dailysaledata[1] !=null ? this.dailysaledata[1].amountDate :"") | date : 'MMM d'}}</b></span>
                             </div>
                         </div>
                         <div class="d-flex justify-content-between align-items-end" *ngIf="dailysaledata!= null ">
                             <div class="persent pt-3">
-                                <p class="mb-0 text-end" *ngIf="this.dailysaledata[1]!=null">{{this.dailysaledata[1] !=null ? this.dailysaledata[1].amountDate :"" | date : 'd MMM y'}}</p>
+                                <p class="mb-0 text-end" *ngIf="this.dailysaledata[1]!=null">{{ (this.dailysaledata[1] !=null ? this.dailysaledata[1].amountDate :"") | date : 'd MMM y'}}</p>
                                 <span><b>${{this.dailysaledata[1] !=null ? this.dailysaledata[1].y : 0}}</b></span>
                             </div>
                             <div class="persent pt-3">
-                                <p class="mb-0 text-end"> {{this.dailysaledata[0].amountDate | date : 'd MMM y'}}</p><!-- 8 Dec 2023 -->
-                                <span><b>${{this.dailysaledata[0].y}}</b></span>
+                                <p class="mb-0 text-end"> {{(this.dailysaledata[0] !=null ? this.dailysaledata[0].amountDate  : "") | date : 'd MMM y'}}</p>
+                                <span><b>${{this.dailysaledata[0] !=null ? this.dailysaledata[0].y : ""}}</b></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pb-3 col-3">
+            <div class="card card-common">
+                <div class="card-body">
+                    <div class="cardsection">
+                        <div class="d-flex justify-content-between">
+                            <h5>Total Gas Sale</h5>
+                            <div class="persent ">
+                              
+                                <p class="mb-0 text-end" [ngClass]="{ 'text-danger': getPercentageChange(this.gasSaleData) < 0, 'text-success': getPercentageChange(this.gasSaleData) >= 0 }">
+                                    {{ getPercentageChange(this.dailysaledata).toFixed(0) }}%
+                                  </p>
+                                <span *ngIf="gasSaleData!=null">Compared by:<b>{{ (this.gasSaleData[1] !=null ? this.gasSaleData[1].amountDate :"") | date : 'MMM d'}}</b></span>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-end" *ngIf="gasSaleData!= null ">
+                            <div class="persent pt-3">
+                                <p class="mb-0 text-end" *ngIf="this.gasSaleData[1]!=null">{{(this.gasSaleData[1] !=null ? this.gasSaleData[1].amountDate :"") | date : 'd MMM y'}}</p>
+                                <span><b>${{this.gasSaleData[1] !=null ? this.gasSaleData[1].y : 0}}</b></span>
+                            </div>
+                            <div class="persent pt-3">
+                                <p class="mb-0 text-end"> {{(this.gasSaleData[0] !=null ? this.gasSaleData[0].amountDate  : "") | date : 'd MMM y'}}</p><!-- 8 Dec 2023 -->
+                                <span><b>${{this.gasSaleData[0] !=null ? this.gasSaleData[0].y : ""}}</b></span>
                             </div>
                         </div>
                     </div>
@@ -96,14 +125,14 @@
         </div>
 
         
-        <div class="pb-3 col-3">
+        <!-- <div class="pb-3 col-3">
             <div class="card card-common">
                 <div class="card-body">
                     <div class="cardsection">
                         <div class="d-flex justify-content-between">
                             <h5>Total Gas Sale</h5>
                             <div class="persent ">
-                                <!-- <p class="mb-0 text-end">{{(((this.dailysaledata[0].y-this.dailysaledata[1].y)/this.dailysaledata[0].y)*100).toFixed(0) }}</p> -->
+                               
                                 <p class="mb-0 text-end" [ngClass]="{ 'text-danger': getPercentageChange(this.gasSaleData) < 0, 'text-success': getPercentageChange(this.gasSaleData) >= 0 }">
                                     {{ getPercentageChange(this.gasSaleData).toFixed(0) }}%
                                   </p>
@@ -116,16 +145,14 @@
                                 <span><b>${{this.gasSaleData[1].y}}</b></span>
                             </div>
                             <div class="persent pt-3">
-                                <p class="mb-0 text-end"> {{this.gasSaleData[0].amountDate | date : 'd MMM y'}}</p><!-- 8 Dec 2023 -->
+                                <p class="mb-0 text-end"> {{this.gasSaleData[0].amountDate | date : 'd MMM y'}}</p>
                                 <span><b>${{this.gasSaleData[0].y}}</b></span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-        
+        </div> -->
 
         <div class="pb-3 col-3">
             <div class="card card-common">
@@ -134,7 +161,36 @@
                         <div class="d-flex justify-content-between">
                             <h5>Total Lottery</h5>
                             <div class="persent ">
-                                <!-- <p class="mb-0 text-end">{{(((this.dailysaledata[0].y-this.dailysaledata[1].y)/this.dailysaledata[0].y)*100).toFixed(0) }}</p> -->
+                              
+                                <p class="mb-0 text-end" [ngClass]="{ 'text-danger': getPercentageChange(this.lotteryData) < 0, 'text-success': getPercentageChange(this.lotteryData) >= 0 }">
+                                    {{ getPercentageChange(this.lotteryData).toFixed(0) }}%
+                                  </p>
+                                <span *ngIf="lotteryData!=null">Compared by:<b>{{ (this.lotteryData[1] !=null ? this.lotteryData[1].amountDate :"") | date : 'MMM d'}}</b></span>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-end" *ngIf="lotteryData!= null ">
+                            <div class="persent pt-3">
+                                <p class="mb-0 text-end" *ngIf="this.lotteryData[1]!=null">{{(this.lotteryData[1] !=null ? this.lotteryData[1].amountDate :"") | date : 'd MMM y'}}</p>
+                                <span><b>${{this.lotteryData[1] !=null ? this.lotteryData[1].y : 0}}</b></span>
+                            </div>
+                            <div class="persent pt-3">
+                                <p class="mb-0 text-end"> {{(this.lotteryData[0] !=null ? this.lotteryData[0].amountDate  : "") | date : 'd MMM y'}}</p><!-- 8 Dec 2023 -->
+                                <span><b>${{this.lotteryData[0] !=null ? this.lotteryData[0].y : ""}}</b></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="pb-3 col-3">
+            <div class="card card-common">
+                <div class="card-body">
+                    <div class="cardsection">
+                        <div class="d-flex justify-content-between">
+                            <h5>Total Lottery</h5>
+                            <div class="persent ">
+                              
                                 <p class="mb-0 text-end" [ngClass]="{ 'text-danger': getPercentageChange(this.lotteryData) < 0, 'text-success': getPercentageChange(this.lotteryData) >= 0 }">
                                     {{ getPercentageChange(this.lotteryData).toFixed(0) }}%
                                   </p>
@@ -147,16 +203,14 @@
                                 <span><b>${{this.lotteryData[1].y}}</b></span>
                             </div>
                             <div class="persent pt-3">
-                                <p class="mb-0 text-end"> {{this.lotteryData[0].amountDate | date : 'd MMM y'}}</p><!-- 8 Dec 2023 -->
+                                <p class="mb-0 text-end"> {{this.lotteryData[0].amountDate | date : 'd MMM y'}}</p>
                                 <span><b>${{this.lotteryData[0].y}}</b></span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        
-
+        </div> -->
         
         <div class="pb-3 col-3">
             <div class="card card-common">
@@ -165,7 +219,36 @@
                         <div class="d-flex justify-content-between">
                             <h5>Total Expense</h5>
                             <div class="persent ">
-                                <!-- <p class="mb-0 text-end">{{(((this.dailysaledata[0].y-this.dailysaledata[1].y)/this.dailysaledata[0].y)*100).toFixed(0) }}</p> -->
+                              
+                                <p class="mb-0 text-end" [ngClass]="{ 'text-danger': getPercentageChange(this.expenseData) < 0, 'text-success': getPercentageChange(this.expenseData) >= 0 }">
+                                    {{ getPercentageChange(this.expenseData).toFixed(0) }}%
+                                  </p>
+                                <span *ngIf="expenseData!=null">Compared by:<b>{{ (this.expenseData[1] !=null ? this.expenseData[1].amountDate :"") | date : 'MMM d'}}</b></span>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-end" *ngIf="expenseData!= null ">
+                            <div class="persent pt-3">
+                                <p class="mb-0 text-end" *ngIf="this.expenseData[1]!=null">{{(this.expenseData[1] !=null ? this.expenseData[1].amountDate :"") | date : 'd MMM y'}}</p>
+                                <span><b>${{this.expenseData[1] !=null ? this.expenseData[1].y : 0}}</b></span>
+                            </div>
+                            <div class="persent pt-3">
+                                <p class="mb-0 text-end"> {{(this.expenseData[0] !=null ? this.expenseData[0].amountDate  : "") | date : 'd MMM y'}}</p><!-- 8 Dec 2023 -->
+                                <span><b>${{this.expenseData[0] !=null ? this.expenseData[0].y : ""}}</b></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- <div class="pb-3 col-3">
+            <div class="card card-common">
+                <div class="card-body">
+                    <div class="cardsection">
+                        <div class="d-flex justify-content-between">
+                            <h5>Total Expense</h5>
+                            <div class="persent ">
+                            
                                 <p class="mb-0 text-end" [ngClass]="{ 'text-danger': getPercentageChange(this.expenseData) < 0, 'text-success': getPercentageChange(this.expenseData) >= 0 }">
                                     {{ getPercentageChange(this.expenseData).toFixed(0) }}%
                                   </p>
@@ -178,24 +261,52 @@
                                 <span><b>${{this.expenseData[1].y}}</b></span>
                             </div>
                             <div class="persent pt-3">
-                                <p class="mb-0 text-end"> {{this.expenseData[0].amountDate | date : 'd MMM y'}}</p><!-- 8 Dec 2023 -->
+                                <p class="mb-0 text-end"> {{this.expenseData[0].amountDate | date : 'd MMM y'}}</p>
                                 <span><b>${{this.expenseData[0].y}}</b></span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
        
-        
         <div class="pb-3 col-3">
+            <div class="card card-common">
+                <div class="card-body">
+                    <div class="cardsection">
+                        <div class="d-flex justify-content-between">
+                            <h5>Total Expense</h5>
+                            <div class="persent ">
+                              
+                                <p class="mb-0 text-end" [ngClass]="{ 'text-danger': getPercentageChange(this.otherIncomeData) < 0, 'text-success': getPercentageChange(this.otherIncomeData) >= 0 }">
+                                    {{ getPercentageChange(this.otherIncomeData).toFixed(0) }}%
+                                  </p>
+                                <span *ngIf="otherIncomeData!=null">Compared by:<b>{{ (this.otherIncomeData[1] !=null ? this.otherIncomeData[1].amountDate :"") | date : 'MMM d'}}</b></span>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-end" *ngIf="otherIncomeData!= null ">
+                            <div class="persent pt-3">
+                                <p class="mb-0 text-end" *ngIf="this.otherIncomeData[1]!=null">{{(this.otherIncomeData[1] !=null ? this.otherIncomeData[1].amountDate :"") | date : 'd MMM y'}}</p>
+                                <span><b>${{this.otherIncomeData[1] !=null ? this.otherIncomeData[1].y : 0}}</b></span>
+                            </div>
+                            <div class="persent pt-3">
+                                <p class="mb-0 text-end"> {{(this.otherIncomeData[0] !=null ? this.otherIncomeData[0].amountDate  : "") | date : 'd MMM y'}}</p><!-- 8 Dec 2023 -->
+                                <span><b>${{this.otherIncomeData[0] !=null ? this.otherIncomeData[0].y : ""}}</b></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="pb-3 col-3">
             <div class="card card-common">
                 <div class="card-body">
                     <div class="cardsection">
                         <div class="d-flex justify-content-between">
                             <h5>Total Other Income</h5>
                             <div class="persent ">
-                                <!-- <p class="mb-0 text-end">{{(((this.dailysaledata[0].y-this.dailysaledata[1].y)/this.dailysaledata[0].y)*100).toFixed(0) }}</p> -->
+                               
                                 <p class="mb-0 text-end" [ngClass]="{ 'text-danger': getPercentageChange(this.otherIncomeData) < 0, 'text-success': getPercentageChange(this.otherIncomeData) >= 0 }">
                                     {{ getPercentageChange(this.otherIncomeData).toFixed(0) }}%
                                   </p>
@@ -208,7 +319,7 @@
                                 <span><b>${{this.otherIncomeData[1].y}}</b></span>
                             </div>
                             <div class="persent pt-3">
-                                <p class="mb-0 text-end"> {{this.otherIncomeData[0].amountDate | date : 'd MMM y'}}</p><!-- 8 Dec 2023 -->
+                                <p class="mb-0 text-end"> {{this.otherIncomeData[0].amountDate | date : 'd MMM y'}}</p>
                                 <span><b>${{this.otherIncomeData[0].y}}</b></span>
                             </div>
                         </div>
@@ -216,14 +327,46 @@
                 </div>
             </div>
         </div>
-        <div class="pb-3 col-3">
+         -->
+ 
+         <div class="pb-3 col-3">
             <div class="card card-common">
                 <div class="card-body">
                     <div class="cardsection">
                         <div class="d-flex justify-content-between">
                             <h5> Credit Card Income</h5>
                             <div class="persent ">
-                                <!-- <p class="mb-0 text-end">{{(((this.dailysaledata[0].y-this.dailysaledata[1].y)/this.dailysaledata[0].y)*100).toFixed(0) }}</p> -->
+                              
+                                <p class="mb-0 text-end" [ngClass]="{ 'text-danger': getPercentageChange(this.creditCardData) < 0, 'text-success': getPercentageChange(this.creditCardData) >= 0 }">
+                                    {{ getPercentageChange(this.creditCardData).toFixed(0) }}%
+                                  </p>
+                                <span *ngIf="creditCardData!=null">Compared by:<b>{{ (this.creditCardData[1] !=null ? this.creditCardData[1].amountDate :"") | date : 'MMM d'}}</b></span>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-end" *ngIf="creditCardData!= null ">
+                            <div class="persent pt-3">
+                                <p class="mb-0 text-end" *ngIf="this.creditCardData[1]!=null">{{(this.creditCardData[1] !=null ? this.creditCardData[1].amountDate :"") | date : 'd MMM y'}}</p>
+                                <span><b>${{this.creditCardData[1] !=null ? this.creditCardData[1].y : 0}}</b></span>
+                            </div>
+                            <div class="persent pt-3">
+                                <p class="mb-0 text-end"> {{(this.creditCardData[0] !=null ? this.creditCardData[0].amountDate  : "") | date : 'd MMM y'}}</p><!-- 8 Dec 2023 -->
+                                <span><b>${{this.creditCardData[0] !=null ? this.creditCardData[0].y : ""}}</b></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- <div class="pb-3 col-3">
+            <div class="card card-common">
+                <div class="card-body">
+                    <div class="cardsection">
+                        <div class="d-flex justify-content-between">
+                            <h5> Credit Card Income</h5>
+                            <div class="persent ">
+                              
                                 <p class="mb-0 text-end" [ngClass]="{ 'text-danger': getPercentageChange(this.creditCardData) < 0, 'text-success': getPercentageChange(this.creditCardData) >= 0 }">
                                     {{ getPercentageChange(this.creditCardData).toFixed(0) }}%
                                   </p>
@@ -236,14 +379,15 @@
                                 <span><b>${{this.creditCardData[1].y}}</b></span>
                             </div>
                             <div class="persent pt-3">
-                                <p class="mb-0 text-end"> {{this.creditCardData[0].amountDate | date : 'd MMM y'}}</p><!-- 8 Dec 2023 -->
+                                <p class="mb-0 text-end"> {{this.creditCardData[0].amountDate | date : 'd MMM y'}}</p>
                                 <span><b>${{this.creditCardData[0].y}}</b></span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
+
         <div class="pb-3 col-3">
             <div class="card card-common">
                 <div class="card-body">
@@ -251,7 +395,37 @@
                         <div class="d-flex justify-content-between">
                             <h5> Purchase </h5>
                             <div class="persent ">
-                                <!-- <p class="mb-0 text-end">{{(((this.dailysaledata[0].y-this.dailysaledata[1].y)/this.dailysaledata[0].y)*100).toFixed(0) }}</p> -->
+                              
+                                <p class="mb-0 text-end" [ngClass]="{ 'text-danger': getPercentageChange(this.purchaseData) < 0, 'text-success': getPercentageChange(this.purchaseData) >= 0 }">
+                                    {{ getPercentageChange(this.purchaseData).toFixed(0) }}%
+                                  </p>
+                                <span *ngIf="purchaseData!=null">Compared by:<b>{{ (this.purchaseData[1] !=null ? this.purchaseData[1].amountDate :"") | date : 'MMM d'}}</b></span>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-end" *ngIf="purchaseData!= null ">
+                            <div class="persent pt-3">
+                                <p class="mb-0 text-end" *ngIf="this.purchaseData[1]!=null">{{(this.purchaseData[1] !=null ? this.purchaseData[1].amountDate :"") | date : 'd MMM y'}}</p>
+                                <span><b>${{this.purchaseData[1] !=null ? this.purchaseData[1].y : 0}}</b></span>
+                            </div>
+                            <div class="persent pt-3">
+                                <p class="mb-0 text-end"> {{(this.purchaseData[0] !=null ? this.purchaseData[0].amountDate  : "") | date : 'd MMM y'}}</p><!-- 8 Dec 2023 -->
+                                <span><b>${{this.purchaseData[0] !=null ? this.purchaseData[0].y : ""}}</b></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- <div class="pb-3 col-3">
+            <div class="card card-common">
+                <div class="card-body">
+                    <div class="cardsection">
+                        <div class="d-flex justify-content-between">
+                            <h5> Purchase </h5>
+                            <div class="persent ">
+                             
                                 <p class="mb-0 text-end" [ngClass]="{ 'text-danger': getPercentageChange(this.purchaseData) < 0, 'text-success': getPercentageChange(this.purchaseData) >= 0 }">
                                     {{ getPercentageChange(this.purchaseData).toFixed(0) }}%
                                   </p>
@@ -264,18 +438,16 @@
                                 <span><b>${{this.purchaseData[1].y}}</b></span>
                             </div>
                             <div class="persent pt-3">
-                                <p class="mb-0 text-end"> {{this.purchaseData[0].amountDate | date : 'd MMM y'}}</p><!-- 8 Dec 2023 -->
+                                <p class="mb-0 text-end"> {{this.purchaseData[0].amountDate | date : 'd MMM y'}}</p>
                                 <span><b>${{this.purchaseData[0].y}}</b></span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         
      
-
-        
 
         <div class="pb-3 col-3">
             <div class="card card-common">
@@ -284,7 +456,36 @@
                         <div class="d-flex justify-content-between">
                             <h5>Total Gas Purchase</h5>
                             <div class="persent ">
-                                <!-- <p class="mb-0 text-end">{{(((this.dailysaledata[0].y-this.dailysaledata[1].y)/this.dailysaledata[0].y)*100).toFixed(0) }}</p> -->
+                              
+                                <p class="mb-0 text-end" [ngClass]="{ 'text-danger': getPercentageChange(this.gasPurchaseData) < 0, 'text-success': getPercentageChange(this.gasPurchaseData) >= 0 }">
+                                    {{ getPercentageChange(this.purchaseData).toFixed(0) }}%
+                                  </p>
+                                <span *ngIf="gasPurchaseData!=null">Compared by:<b>{{ (this.gasPurchaseData[1] !=null ? this.gasPurchaseData[1].amountDate :"") | date : 'MMM d'}}</b></span>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-end" *ngIf="gasPurchaseData!= null ">
+                            <div class="persent pt-3">
+                                <p class="mb-0 text-end" *ngIf="this.gasPurchaseData[1]!=null">{{(this.gasPurchaseData[1] !=null ? this.gasPurchaseData[1].amountDate :"") | date : 'd MMM y'}}</p>
+                                <span><b>${{this.gasPurchaseData[1] !=null ? this.gasPurchaseData[1].y : 0}}</b></span>
+                            </div>
+                            <div class="persent pt-3">
+                                <p class="mb-0 text-end"> {{(this.gasPurchaseData[0] !=null ? this.gasPurchaseData[0].amountDate  : "") | date : 'd MMM y'}}</p><!-- 8 Dec 2023 -->
+                                <span><b>${{this.gasPurchaseData[0] !=null ? this.gasPurchaseData[0].y : ""}}</b></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="pb-3 col-3">
+            <div class="card card-common">
+                <div class="card-body">
+                    <div class="cardsection">
+                        <div class="d-flex justify-content-between">
+                            <h5>Total Gas Purchase</h5>
+                            <div class="persent ">
+                                
                                 <p class="mb-0 text-end" [ngClass]="{ 'text-danger': getPercentageChange(this.gasPurchaseData) < 0, 'text-success': getPercentageChange(this.gasPurchaseData) >= 0 }">
                                     {{ getPercentageChange(this.gasPurchaseData).toFixed(0) }}%
                                   </p>
@@ -297,14 +498,14 @@
                                 <span><b>${{this.gasPurchaseData[1].y}}</b></span>
                             </div>
                             <div class="persent pt-3">
-                                <p class="mb-0 text-end"> {{this.gasPurchaseData[0].amountDate | date : 'd MMM y'}}</p><!-- 8 Dec 2023 -->
+                                <p class="mb-0 text-end"> {{this.gasPurchaseData[0].amountDate | date : 'd MMM y'}}</p>
                                 <span><b>${{this.gasPurchaseData[0].y}}</b></span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
        
     

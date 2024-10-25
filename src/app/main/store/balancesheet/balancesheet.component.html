@@ -2,92 +2,220 @@
     <div class="col-lg-12 col-md-12 col-sm-12 mb-3">
         <div class="summaryheading">
             <div class="d-flex justify-content-between">
-            <h4>Store Balance Sheet</h4>
-            <div class="reportbutton"><button type="button" (click)="onBalancesheet()">Create Balance Sheet</button></div>
-        </div>
+                <h4>Store Balance Sheet</h4>
+                <div class="reportbutton"><button type="button" (click)="onBalancesheet()">Create Balance Sheet</button>
+                </div>
+            </div>
             <form class="row align-items-end px-0 col-12 justify-content-between" [formGroup]="form">
-                <div class="col-xl-4 col-lg-6">
+                <div class="col-xl-4 col-lg-12">
                     <label for="FormControlInput1" class="form-label">Store Name<span class="required">*</span></label>
                     <ng-select formControlName="storeId" id="storeId" #SelectSizeDefault [items]="storeList"
                         [searchable]="true" bindLabel="storeName" bindValue="storeId">
                     </ng-select>
                 </div>
-                <div class="dateformet">
-                    <label class="date form-label">From Date :</label><br>
-                    <input type="date" id="entrydate" formControlName="fromDate" [(ngModel)]="fromDate">
+                <div class="col-xl-2 col-lg-12">
+                    <label class="date form-label">Month</label><br>
+                    <ng-select formControlName="month" id="month" #SelectSizeDefault [items]="paymentOptions"
+                        bindLabel="label" bindValue="label">
+                    </ng-select>
                 </div>
-                <div class="dateformet">
-                    <label class="date form-label">To Date :</label><br>
-                    <input type="date" id="toDate" formControlName="toDate" [(ngModel)]="toDate">
-                </div>
-                <div class="reportbutton">
+                <div class="col-xl-4 col-lg-12 reportbutton">
+
                     <button type="button" (click)="onGetReport()">Get Report</button>
+
                 </div>
+
             </form>
 
 
-
-            <div *ngIf="balancesheetData !=null" >
+            <!-- <div *ngIf="balancesheetData !=null">
                 <div class="section mt-1 d-flex justify-content-between">
-                                                    <div class="storename">
-                                                        <span class="heading">Store Name:</span>
-                                                        <span>{{balancesheetData[0].storeName}}</span>
-                                                    </div>
-                                                    <div class="month">
-                                                        <span class="heading">Period:</span>
-                                                        <span>From Date : {{this.fromDate}} To Date: {{this.toDate}} </span>
-                                                    </div>
-                                                </div>
-                
-                
-                    <div class="d-flex justify-content-between">
+                    <div class="storename">
+                        <span class="heading">Store Name:</span>
+                        <span>{{balancesheetData[0].storeName}}</span>
+                    </div>
+                    <div class="month">
+                        <span class="heading">Period:</span>
+                        <span>From Date : {{this.fromDate}} To Date: {{this.toDate}} </span>
+                    </div>
+                </div>
+
+
+                <div class="d-flex justify-content-between">
                     <table>
-                        <tr><td style="width: 40%;">Liability</td><td style="width: 30%;">Amount</td><td style="width: 30%;">Amount</td>
-                           </tr>
-                           <tr  *ngFor="let item of balancesheetData[0].bsitemDtos.bsitemLiabilitiesDtos"><td colspan="3">
-                            <table >
-                            
-                                <tr><td colspan="3">{{item.termName}}</td></tr>
-                                <tr  *ngFor="let row of item.bsitemIDtos">
-                                <td style="width: 40%;">{{row.name}}</td>
-                                <td style="width: 30%;">{{row.amount}}</td>
-                                <td style="width: 30%;"></td>
-                                </tr>
-                                <tr><td colspan="2"></td><td>{{item.amount}}</td></tr>
-                            </table>
-                
-                            </td></tr>
-                            <tr><td colspan="2">LIABILITIES GRAND TOTAL</td><td>{{balancesheetData[0].liabilityTotal}}</td></tr>
+                        <tr>
+                            <td style="width: 40%;">Liability</td>
+                            <td style="width: 30%;">Amount</td>
+                            <td style="width: 30%;">Amount</td>
+                        </tr>
+                        <tr *ngFor="let item of balancesheetData[0].bsitemDtos.bsitemLiabilitiesDtos">
+                            <td colspan="3" class="p-0" style="border-left: unset; border-right: unset;">
+                                <table class="mb-0">
+
+                                    <tr>
+                                        <td colspan="3" style="border-top: unset; border-right: unset;">
+                                            {{item.termName}}</td>
+                                    </tr>
+                                    <tr *ngFor="let row of item.bsitemIDtos">
+                                        <td style="width: 40%; border-top: unset; border-right: unset;">{{row.name}}
+                                        </td>
+                                        <td style="width: 30%; border-right: unset;">{{row.amount}}</td>
+                                        <td style="width: 30%; border-bottom: unset; border-right: unset;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="border-bottom: unset;"></td>
+                                        <td style="border-bottom: unset; border-right: unset;">{{item.amount}}</td>
+                                    </tr>
+                                </table>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">LIABILITIES GRAND TOTAL</td>
+                            <td>{{balancesheetData[0].liabilityTotal}}</td>
+                        </tr>
                     </table>
                     <table>
-                        <tr><td style="width: 40%;">Assets</td><td style="width: 30%;">Amount</td><td style="width: 30%;">Amount</td>
-                           </tr>
-                           <tr  *ngFor="let item of balancesheetData[0].bsitemDtos.bsitemAssetsDtos"><td colspan="3">
-                            <table >
-                                <tr><td colspan="3">{{item.termName}}</td></tr><tr  *ngFor="let row of item.bsitemIDtos">
-                                <td style="width: 40%;">{{row.name}}</td>
-                                <td style="width: 30%;">{{row.amount}}</td>
-                                <td style="width: 30%;"></td>
-                            </tr>
-                            <tr><td colspan="2"></td><td>{{item.amount}}</td></tr>
-                        </table>
-                            
-                            </td></tr>
-                            <tr><td colspan="2">ASSETS GRAND TOTAL</td><td>{{balancesheetData[0].assetTotal}}</td></tr>
-                
+                        <tr>
+                            <td style="width: 40%; border-left: unset;">Assets</td>
+                            <td style="width: 30%;">Amount</td>
+                            <td style="width: 30%;">Amount</td>
+                        </tr>
+                        <tr *ngFor="let item of balancesheetData[0].bsitemDtos.bsitemAssetsDtos">
+                            <td colspan="3" class="p-0" style="border: unset;">
+                                <table class="mb-0">
+                                    <tr>
+                                        <td colspan="3" style="border-top: unset;">{{item.termName}}</td>
+                                    </tr>
+                                    <tr *ngFor="let row of item.bsitemIDtos">
+                                        <td style="width: 40%;">{{row.name}}</td>
+                                        <td style="width: 30%;">{{row.amount}}</td>
+                                        <td style="width: 30%; border-bottom: unset;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2"></td>
+                                        <td>{{item.amount}}</td>
+                                    </tr>
+                                </table>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="border-top: unset; border-left: unset;">ASSETS GRAND TOTAL</td>
+                            <td style="border-top: unset;">{{balancesheetData[0].assetTotal}}</td>
+                        </tr>
+
                     </table>
-                   
+
                 </div>
                 <div>Net Total : {{balancesheetData[0].netTotal}}</div>
-                          <!-- <div   *ngFor="let item of balancesheetData[0].bsitemDtos">
-                                    <div>{{item.termName}}</div>
-                                        <div *ngFor="let row of item.bsitemIDtos">
-                                            <div>{{row.name}}</div>
-                                            <div>{{row.amount}}</div>
+      
+
+            </div> -->
+
+
+
+            <div *ngIf="balancesheetData !=null">
+                
+
+
+                <section>
+                    <div class="container mt-4">
+                        <div class="section mt-1 d-flex justify-content-between" >
+                            <div class="storename">
+                                <span class="heading">Store Name:</span>
+                                <span style="margin-left: 10px;">{{balancesheetData[0].storeName}}</span>
+                            </div>
+                            <div class="month">
+                                <!-- <span class="heading">Period:</span> -->
+                                <span>From Date : {{this.fromDate}} To Date: {{this.toDate}} </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                <div class="main_box">
+                                    <div class="box_hedding">
+                                        <h4 class="text-center">Liability</h4>
+            
+                                        <div class="currnt_assets my-3"  *ngFor="let item of balancesheetData[0].bsitemDtos.bsitemLiabilitiesDtos">
+                                            <h3>{{item.termName}}</h3>
+                                            <div class="currnt_iner" *ngFor="let row of item.bsitemIDtos">
+                                                <p style="margin-left: 10px;">{{row.name}}</p>
+                                                <span>{{row.amount}}</span>
+                                            </div>
+                                            <span style="display: block;text-align: right;" ><strong> TOTAL : {{item.amount}}</strong></span>
                                         </div>
-                                </div> -->
-                                
+                                        
+                                    </div>
                                 </div>
-        </div>
+                            </div>
+                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                <div class="main_box">
+                                    <div class="box_hedding">
+                                        <h4 class="text-center">Assets</h4>
+            
+                                        <div class="currnt_assets my-3" *ngFor="let item of balancesheetData[0].bsitemDtos.bsitemAssetsDtos">
+                                            <h3>{{item.termName}}</h3>
+                                            <div class="currnt_iner" *ngFor="let row of item.bsitemIDtos">
+                                                <p style="margin-left: 10px;">{{row.name}}</p>
+                                                <span>{{row.amount}}</span>
+                                            </div>
+                                            <span style="display: block;text-align: right;" ><strong> TOTAL : {{item.amount}}</strong></span>
+                                        </div>
+                                     
+                                      
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                        <div class="Total">
+                            <p> Liability GRAND TOTAL</p>
+                             <span>{{balancesheetData[0].liabilityTotal}}</span>
+                         </div>
+                            </div>
+                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                        <div class="Total">
+                            <p> ASSETS GRAND TOTAL</p>
+                             <span>{{balancesheetData[0].assetTotal}}</span>
+                         </div>
+                        </div>
+                        </div>
+                        <div>Net Total : {{balancesheetData[0].netTotal}}</div>
+                    </div>
+                </section>
+
+
+                <!-- <div class="row justify-content-between" style="border: 1px solid #000000; padding: 10px;">
+                    <div class="col-md-6">
+                        <h3> Liability</h3>
+                        <div *ngFor="let item of balancesheetData[0].bsitemDtos.bsitemLiabilitiesDtos">
+                            <span>{{item.termName}}</span>
+                            <div *ngFor="let row of item.bsitemIDtos">
+                                <span>{{row.name}}</span> <span>{{row.amount}}</span>
+                            </div>
+                        </div>
+                        <span>LIABILITIES GRAND TOTAL : {{balancesheetData[0].liabilityTotal}}</span>
+
+                    </div>
+                    <div  class="col-md-6">
+                        <h3> Assets</h3>
+
+                        <div *ngFor="let item of balancesheetData[0].bsitemDtos.bsitemAssetsDtos">
+                            <span>{{item.termName}}</span>
+                            <div *ngFor="let row of item.bsitemIDtos">
+                                <span>{{row.name}}</span> <span>{{row.amount}}</span>
+                            </div>
+                        </div>
+                        <span>ASSETS GRAND TOTAL : {{balancesheetData[0].assetTotal}}</span>
+
+                    </div>
+                </div> -->
+                
+
+
+            </div>
+        </div>  
     </div>
 </div>

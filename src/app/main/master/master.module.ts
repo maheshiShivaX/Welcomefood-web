@@ -12,6 +12,7 @@ import { CreditcardComponent } from './creditcard/creditcard.component';
 import { ManagelotteryComponent } from './managelottery/managelottery.component';
 import { ManagebstermComponent } from './managebsterm/managebsterm.component';
 import { TestpageComponent } from './testpage/testpage.component';
+import { TaxtypeComponent } from './taxtype/taxtype.component';
 
 const routes: Routes = [
   { path: 'productcategory', component: ProductcategoryComponent },
@@ -43,8 +44,10 @@ const routes: Routes = [
   ,
   {
     path: 'testpage', component: TestpageComponent
+  },
+  {
+    path: 'taxtype', component: TaxtypeComponent
   }
-
   
   
 ]
@@ -59,7 +62,8 @@ const routes: Routes = [
     CreditcardComponent,
     ManagelotteryComponent,
     ManagebstermComponent,
-    TestpageComponent
+    TestpageComponent,
+    TaxtypeComponent
   ],
   imports: [
     CommonModule,

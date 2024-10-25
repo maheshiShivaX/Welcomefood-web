@@ -6,153 +6,7 @@
         </div>
     </div>
 
-    <div class="expensescategory mx-0" style="display: none;">
 
-        <owl-carousel-o [options]="videoslide" style="width: 100%!important;">
-            <ng-container class="custom-slide" *ngFor="let item of expensegrouplist  let i = index">
-                <ng-template carouselSlide [id]="item.expenseGroupId" class="custom-slide">
-                    <div class="expensesdata d-flex"
-                        (click)="showexpensesData(item.expenseGroupId,'Expense'); activeIndex = i"
-                        [style.border]="activeIndex === i ? '2px solid #FB5B83': null"
-                        [style.border-radius.px]="activeIndex === i ? 12 : null"
-                        [style.padding.px]="activeIndex === i ? 8 : null"
-                        [style.background]="activeIndex === i ? '#ed6c3c1a' : null"
-                        [style.box-shadow]="activeIndex ===i ? 'rgba(237, 108, 60, 0.15) 0px 20px 40px 0px' : null">
-                        <div class="gcategoryicon categoryicon">
-                            <img src="./assets/images/creditcard.png" alt="cash" />
-                        </div>
-                        <div class="productcontent">
-                            <p class="mb-0">{{item.expenseGroupName}}</p>
-                        </div>
-                    </div>
-                </ng-template>
-            </ng-container>
-
-            <ng-container class="custom-slide">
-                <ng-template class="" carouselSlide class="custom-slide">
-                    <div class="expensesdata d-flex" (click)="showexpensesData(1,'Payroll'); activeIndex = 1"
-                        [style.border]="activeIndex === 1 ? '2px solid #FB5B83': null"
-                        [style.border-radius.px]="activeIndex === 1 ? 12 : null"
-                        [style.padding.px]="activeIndex === 1 ? 8 : null"
-                        [style.background]="activeIndex === 1 ? '#ed6c3c1a' : null"
-                        [style.box-shadow]="activeIndex === 1 ? 'rgba(237, 108, 60, 0.15) 0px 20px 40px 0px' : null">
-                        <div class="gcategoryicon categoryicon">
-                            <img src="./assets/images/storeexpense.png" alt="cash" />
-                        </div>
-                        <div class="productcontent">
-                            <p class="mb-0">Payroll</p>
-                        </div>
-                    </div>
-                </ng-template>
-            </ng-container>
-
-            <!-- <ng-container class="custom-slide">
-                    <ng-template class="" carouselSlide class="custom-slide">
-                        <div class="expensesdata d-flex" (click)="showexpensesData(1); activeIndex = 1"
-                            [style.border]="activeIndex === 1 ? '2px solid #FB5B83': null"
-                            [style.border-radius.px]="activeIndex === 1 ? 12 : null"
-                            [style.padding.px]="activeIndex === 1 ? 8 : null"
-                            [style.background]="activeIndex === 1 ? '#ed6c3c1a' : null"
-                            [style.box-shadow]="activeIndex === 1 ? 'rgba(237, 108, 60, 0.15) 0px 20px 40px 0px' : null">
-                            <div class="gcategoryicon categoryicon">
-                                <img src="./assets/images/storeexpense.png" alt="cash" />
-                            </div>
-                            <div class="productcontent">
-                                <p class="mb-0">Store Expense</p>
-                            </div>
-                        </div>
-                    </ng-template>
-                </ng-container> -->
-            <!-- <ng-container class="custom-slide">
-                    <ng-template class="" carouselSlide class="custom-slide">
-                        <div class="expensesdata d-flex" (click)="showexpensesData(1); activeIndex = 1"
-                            [style.border]="activeIndex === 1 ? '2px solid #FB5B83': null"
-                            [style.border-radius.px]="activeIndex === 1 ? 12 : null"
-                            [style.padding.px]="activeIndex === 1 ? 8 : null"
-                            [style.background]="activeIndex === 1 ? '#ed6c3c1a' : null"
-                            [style.box-shadow]="activeIndex === 1 ? 'rgba(237, 108, 60, 0.15) 0px 20px 40px 0px' : null">
-                            <div class="gcategoryicon categoryicon">
-                                <img src="./assets/images/storeexpense.png" alt="cash" />
-                            </div>
-                            <div class="productcontent">
-                                <p class="mb-0">Store Expense</p>
-                            </div>
-                        </div>
-                    </ng-template>
-                </ng-container>
-                <ng-container class="custom-slide">
-                    <ng-template class="" carouselSlide class="custom-slide">
-                        <div class="expensesdata d-flex" (click)="showexpensesData(2); activeIndex = 2"
-                            [style.border]="activeIndex === 2 ? '2px solid #FB5B83': null"
-                            [style.border-radius.px]="activeIndex === 2 ? 12 : null"
-                            [style.padding.px]="activeIndex === 2 ? 8 : null"
-                            [style.background]="activeIndex === 2 ? '#ed6c3c1a' : null"
-                            [style.box-shadow]="activeIndex === 2 ? 'rgba(237, 108, 60, 0.15) 0px 20px 40px 0px' : null">
-                            <div class="gcategoryicon categoryicon">
-                                <img src="./assets/images/lotterypayout.png" alt="cash" />
-                            </div>
-                            <div class="productcontent">
-                                <p class="mb-0">Lottery Payout</p>
-                            </div>
-                        </div>
-                    </ng-template>
-                </ng-container>
-                <ng-container class="custom-slide">
-                    <ng-template class="" carouselSlide class="custom-slide">
-                        <div class="expensesdata d-flex" (click)="showexpensesData(3); activeIndex = 3"
-                            [style.border]="activeIndex === 3 ? '2px solid #FB5B83': null"
-                            [style.border-radius.px]="activeIndex === 3 ? 12 : null"
-                            [style.padding.px]="activeIndex === 3 ? 8 : null"
-                            [style.background]="activeIndex === 3 ? '#ed6c3c1a' : null"
-                            [style.box-shadow]="activeIndex === 3 ? 'rgba(237, 108, 60, 0.15) 0px 20px 40px 0px' : null">
-                            <div class="gcategoryicon categoryicon">
-                                <img src="./assets/images/lotterypayout.png" alt="cash" />
-                            </div>
-                            <div class="productcontent">
-                                <p class="mb-0">Arcade Payout</p>
-                            </div>
-                        </div>
-                    </ng-template>
-                </ng-container>
-                <ng-container class="custom-slide">
-                    <ng-template class="" carouselSlide class="custom-slide">
-                        <div class="expensesdata d-flex" (click)="showexpensesData(4); activeIndex = 4"
-                            [style.border]="activeIndex === 4 ? '2px solid #FB5B83': null"
-                            [style.border-radius.px]="activeIndex === 4 ? 12 : null"
-                            [style.padding.px]="activeIndex === 4 ? 8 : null"
-                            [style.background]="activeIndex === 4 ? '#ed6c3c1a' : null"
-                            [style.box-shadow]="activeIndex === 4 ? 'rgba(237, 108, 60, 0.15) 0px 20px 40px 0px' : null">
-                            <div class="gcategoryicon categoryicon">
-                                <img src="./assets/images/otherpayout.png" alt="cash" />
-                            </div>
-                            <div class="productcontent">
-                                <p class="mb-0">Other Payout</p>
-                            </div>
-                        </div>
-                    </ng-template>
-                </ng-container>
-                <ng-container class="custom-slide">
-                    <ng-template class="" carouselSlide class="custom-slide">
-                        <div class="expensesdata d-flex" (click)="showexpensesData(5); activeIndex = 5"
-                            [style.border]="activeIndex === 5 ? '2px solid #FB5B83': null"
-                            [style.border-radius.px]="activeIndex === 5 ? 12 : null"
-                            [style.padding.px]="activeIndex === 5 ? 8 : null"
-                            [style.background]="activeIndex === 5 ? '#ed6c3c1a' : null"
-                            [style.box-shadow]="activeIndex === 5 ? 'rgba(237, 108, 60, 0.15) 0px 20px 40px 0px' : null">
-                            <div class="gcategoryicon categoryicon">
-                                <img src="./assets/images/payroll.png" alt="cash" />
-                            </div>
-                            <div class="productcontent">
-                                <p class="mb-0">Payroll</p>
-                            </div>
-                        </div>
-                    </ng-template>
-                </ng-container> -->
-        </owl-carousel-o>
-
-
-
-    </div>
 
 
     <div class="gasinventory storeformdata pt-2">
@@ -183,7 +37,7 @@
                 <div class="mb-2 col-xl-2 col-lg-6">
                     <label for="FormControlInput1" class="form-label">Amount</label>
                     <input type="text" class="form-control" formControlName="amount" id="amount"
-                        (keypress)="validateNumber($event)" (input)="validateDecimalPlaces($event)" placeholder="$">
+                        (keypress)="validateNumber($event)" (input)="validateDecimalPlaces($event)" placeholder="$0.00">
                 </div>
                 <div class="mb-3 col-xl-3 col-lg-6" *ngIf="this.selectedOption=='2'">
                     <label for="FormControlInput1" class="form-label">Cheque Number</label>
@@ -192,7 +46,7 @@
                 <div class="submit-btn col-12">
                     <div class="allbtn d-flex">
                         <div class="resetbtn">
-                            <button type="button">
+                            <button type="button" (click)="onReset()">
                                 Reset
                             </button>
                         </div>
@@ -219,6 +73,7 @@
                             <th>Pay Type</th>
                             <th>Amount</th>
                             <th>Cheque No</th>
+                            <th>Amount Date</th>
                             <th>Entry Date</th>
                             <th colspan="2">Action</th>
                         </tr>
@@ -232,6 +87,7 @@
                             <td>{{row.payModeName}}</td>
                             <td>{{row.amount}}</td>
                             <td>{{row.chequeNo}}</td>
+                            <td>{{row.amountDate | date : 'dd-MM-yyyy'}}</td>
                             <td>{{row.createdDate | date : 'dd-MM-yyyy hh:mm:ss'}}</td>
                             <td class="action">
                                 <button type="button" (click)="onedit(row.expenseItemId)" class="editbtn">

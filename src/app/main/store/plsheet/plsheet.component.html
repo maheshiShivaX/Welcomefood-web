@@ -3,23 +3,24 @@
         <div class="summaryheading">
             <h4>Store P&L Sheet</h4>
             <form class="row align-items-end px-0 col-12 justify-content-between" [formGroup]="form">
-                <div class="col-xl-4 col-lg-6">
+                <div class="col-xl-4 col-lg-12">
                     <label for="FormControlInput1" class="form-label">Store Name<span class="required">*</span></label>
                     <ng-select formControlName="storeId" id="storeId" #SelectSizeDefault [items]="storeList"
                         [searchable]="true" bindLabel="storeName" bindValue="storeId">
                     </ng-select>
                 </div>
-                <div class="dateformet">
-                    <label class="date form-label">From Date :</label><br>
-                    <input type="date" id="entrydate" formControlName="fromDate" [(ngModel)]="fromDate">
-                </div>
-                <div class="dateformet">
-                    <label class="date form-label">To Date :</label><br>
-                    <input type="date" id="toDate" formControlName="toDate" [(ngModel)]="toDate">
-                </div>
-                <div class="reportbutton">
+                <div class="col-xl-2 col-lg-12">
+                    <label class="date form-label">Month</label><br>
+                    <ng-select formControlName="month" id="month" #SelectSizeDefault
+                    [items]="paymentOptions" bindLabel="label" bindValue="label">
+                </ng-select>
+                        </div>
+                <div class="col-xl-4 col-lg-12 reportbutton">
+            
                     <button type="button" (click)="onGetReport()">Get Report</button>
+              
                 </div>
+        
             </form>
             <div class="row mt-4">
                 <div class="reportbtn col-2">
@@ -28,7 +29,7 @@
                     <button type="button" (click)="onChange('purchasecash')">Cash Purchase</button>
                     <button type="button" (click)="onChange('purchasecheque')">Cheque Purchase</button>
                     <button type="button" (click)="onChange('expensedata')">Cash Expense</button>
-                    
+
                     <!-- <button type="button">Expense Detail</button>
                     <button type="button">Monthly Inside Sale</button>
                   
@@ -40,6 +41,16 @@
                 </div>
 
                 <div class="col-10" *ngIf="this.storedetail!=null">
+                    <div class="section mt-1 d-flex justify-content-between">
+                        <div class="storename">
+                            <span class="heading">Store Name:</span>
+                            <span>{{this.storename}}</span>
+                        </div>
+                        <div class="month">
+                            <!-- <span class="heading">Duration:</span> -->
+                            <span>From Date : {{this.fromDate}} To Date: {{this.toDate}} </span>
+                        </div>
+                    </div>
                     <div class="pagedatatable d-flex" *ngIf="this.reporttype=='plreport'">
                         <div class="datasheet">
                             <div class="tsheet w-100">
@@ -49,16 +60,7 @@
                                 <div class="title">
                                     Monthly P&L Sheet
                                 </div>
-                                <div class="section mt-1 d-flex justify-content-between">
-                                    <div class="storename">
-                                        <span class="heading">Store Name:</span>
-                                        <span>{{this.storename}}</span>
-                                    </div>
-                                    <div class="month">
-                                        <span class="heading">Month:</span>
-                                        <span>From Date : {{this.fromDate}} To Date: {{this.toDate}} </span>
-                                    </div>
-                                </div>
+                             
                                 <div class="section">
                                     <div class="section-title text-center">Grocery</div>
                                     <table>
@@ -154,10 +156,19 @@
                                                 <td>{{this.storedetail.totalStoreGesAmount}}</td>
                                             </tr>
 
-                                            <tr><td class="text-left">Gas Total Profit</td><td>{{this.storedetail.gesProfitAmount}}</td></tr>
+                                            <tr>
+                                                <td class="text-left">Gas Total Profit</td>
+                                                <td>{{this.storedetail.gesProfitAmount}}</td>
+                                            </tr>
 
-                                            <tr><td class="text-left">Total Gallon</td><td>{{this.storedetail.gesSaleQuantity }}</td></tr>
-                                            <tr><td class="text-left">Gas Margin for the Month</td><td>{{this.storedetail.gesMargin}}</td></tr>
+                                            <tr>
+                                                <td class="text-left">Total Gallon</td>
+                                                <td>{{this.storedetail.gesSaleQuantity }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left">Gas Margin for the Month</td>
+                                                <td>{{this.storedetail.gesMargin}}</td>
+                                            </tr>
                                         </table>
 
                                         <table>
@@ -224,7 +235,7 @@
                                 <div class="title">
                                     Gas Profit Calculation Sheet
                                 </div>
-                                <div class="section mt-1 d-flex justify-content-between">
+                                <!-- <div class="section mt-1 d-flex justify-content-between">
                                     <div class="storename">
                                         <span class="heading">Store Name:</span>
                                         <span>{{this.storename}}</span>
@@ -233,11 +244,11 @@
                                         <span class="heading">Month:</span>
                                         <span>From Date : {{this.fromDate}} To Date: {{this.toDate}} </span>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="section">
                                     <div class="section-title">Closing Inventory Report</div>
                                     <table>
-                                        <tr>	  	  	 
+                                        <tr>
                                             <th class="text-left">Fuel Type</th>
                                             <th>Gallons</th>
                                             <th>Cost (from last delivery invoice)</th>
@@ -249,7 +260,7 @@
                                             <td>{{item.gesRate}}</td>
                                             <td>{{item.gesAmount}}</td>
                                         </tr>
-                                      
+
                                         <tr class="highlight">
                                             <td class="text-left">Total</td>
                                             <td>{{this.storedetail.currentStockGes }}</td>
@@ -279,7 +290,7 @@
                                         </tr>
                                         <tr class="">
                                             <td class="text-left">Total Cost of Gas (Total Purchase+Beg Inventory)</td>
-                                          
+
                                             <td>{{this.storedetail.totalStockGes }}</td>
                                             <td class="text-left"></td>
                                             <td>{{this.storedetail.totalStockAmount}}</td>
@@ -314,7 +325,7 @@
                                             <td></td>
                                             <td class="text-left"></td>
                                             <td>{{this.storedetail.gesMargin}}</td>
-                                        </tr>             
+                                        </tr>
                                     </table>
                                 </div>
                             </div>
@@ -331,7 +342,7 @@
                                 <div class="title">
                                     Purchase by Case
                                 </div>
-                                <div class="section mt-1 d-flex justify-content-between">
+                                <!-- <div class="section mt-1 d-flex justify-content-between">
                                     <div class="storename">
                                         <span class="heading">Store Name:</span>
                                         <span>{{this.storename}}</span>
@@ -340,40 +351,44 @@
                                         <span class="heading">Month:</span>
                                         <span>From Date : {{this.fromDate}} To Date: {{this.toDate}} </span>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="section">
                                     <div class="section-title">Closing Inventory Report</div>
                                     <table *ngIf="categories!=null">
-                        <thead>
-                            <tr class="text-center">
-                              <th colspan="8" class="headbackcolor">Purchases (CASH)</th>
-                            </tr>
-                            <tr>  <th>Date</th>
-                              <th>Vendor Name</th>
-                              <th *ngFor="let category of categories">{{ category }}</th>
-                              <th>Total</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr *ngFor="let item of vendorCategoryAmountscase" class="purchasetext">
-                                    <td>{{item.amountDate  | date : 'dd-MM-yyyy'}}</td>
-                              <td>{{ item.vendorName }}</td>
-                              <td *ngFor="let category of categories">{{ item.amounts[category] || 0 }}</td>
-                              <td class="total">{{ getTotalAmountForVendor(item) }}</td>
-                            </tr>
-                            <tr class="purchasetext">
-                                <td class="total"></td>
-                              <td class="total">Total</td>
-                              <td *ngFor="let category of categories" class="total">{{ totalAmounts[category] || 0 }}</td>
-                              <td class="total">{{this.totalamountpurchasecash }}</td>
-                            </tr>
-                          </tbody>
-                        </table></div>
+                                        <thead>
+                                            <tr class="text-center">
+                                                <th [attr.colspan]="categories.length + 3" class="headbackcolor">Purchases (CASH)</th>
+                                            </tr>
+                                            <tr>
+                                                <th>Date</th>
+                                                <th>Vendor Name</th>
+                                                <th *ngFor="let category of categories">{{ category }}</th>
+                                                <th>Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let item of vendorCategoryAmountscase" class="purchasetext">
+                                                <td>{{item.amountDate | date : 'dd-MM-yyyy'}}</td>
+                                                <td>{{ item.vendorName }}</td>
+                                                <td *ngFor="let category of categories">{{ item.amounts[category] || 0
+                                                    }}</td>
+                                                <td class="total">{{ getTotalAmountForVendor(item) }}</td>
+                                            </tr>
+                                            <tr class="purchasetext">
+                                                <td class="total"></td>
+                                                <td class="total">Total</td>
+                                                <td *ngFor="let category of categories" class="total">{{
+                                                    totalAmounts[category] || 0 }}</td>
+                                                <td class="total">{{this.totalamountpurchasecash }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
 
                     </div>
-                
+
                     <div class="pagedatatable d-flex" *ngIf="this.reporttype=='purchasecheque'">
                         <div class="datasheet">
                             <div class="tsheet w-100">
@@ -383,7 +398,7 @@
                                 <div class="title">
                                     Purchase by Cheque
                                 </div>
-                                <div class="section mt-1 d-flex justify-content-between">
+                                <!-- <div class="section mt-1 d-flex justify-content-between">
                                     <div class="storename">
                                         <span class="heading">Store Name:</span>
                                         <span>{{this.storename}}</span>
@@ -392,34 +407,39 @@
                                         <span class="heading">Month:</span>
                                         <span>From Date : {{this.fromDate}} To Date: {{this.toDate}} </span>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="section">
                                     <div class="section-title">Closing Inventory Report</div>
                                     <table *ngIf="categories!=null">
-                        <thead>
-                            <tr class="text-center">
-                              <th colspan="8" class="headbackcolor">Purchases (CASH)</th>
-                            </tr>
-                            <tr><th>Date</th>
-                              <th>Vendor Name</th>
-                              <th *ngFor="let category of categories">{{ category }}</th>
-                              <th>Total</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr *ngFor="let item of vendorCategoryAmountscheque" class="purchasetext">
-                                <td>{{item.amountDate | date : 'dd-MM-yyyy'}}</td>
-                              <td>{{ item.vendorName }}</td>
-                              <td *ngFor="let category of categories">{{ item.amounts[category] || 0 }}</td>
-                              <td class="total">{{ getTotalAmountForVendor(item) }}</td>
-                            </tr>
-                            <tr class="purchasetext"> <td class="total"></td>
-                              <td class="total">Total</td>
-                              <td *ngFor="let category of categories" class="total">{{ totalAmountscheque[category] || 0 }}</td>
-                              <td class="total">{{this.totalamountpurchasecheque }}</td>
-                            </tr>
-                          </tbody>
-                        </table></div>
+                                        <thead>
+                                            <tr class="text-center">
+                                                <th [attr.colspan]="categories.length + 3"  class="headbackcolor">Purchases (CASH)</th>
+                                            </tr>
+                                            <tr>
+                                                <th>Date</th>
+                                                <th>Vendor Name</th>
+                                                <th *ngFor="let category of categories">{{ category }}</th>
+                                                <th>Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let item of vendorCategoryAmountscheque" class="purchasetext">
+                                                <td>{{item.amountDate | date : 'dd-MM-yyyy'}}</td>
+                                                <td>{{ item.vendorName }}</td>
+                                                <td *ngFor="let category of categories">{{ item.amounts[category] || 0
+                                                    }}</td>
+                                                <td class="total">{{ getTotalAmountForVendor(item) }}</td>
+                                            </tr>
+                                            <tr class="purchasetext">
+                                                <td class="total"></td>
+                                                <td class="total">Total</td>
+                                                <td *ngFor="let category of categories" class="total">{{
+                                                    totalAmountscheque[category] || 0 }}</td>
+                                                <td class="total">{{this.totalamountpurchasecheque }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
 
@@ -432,9 +452,9 @@
                                     <img src="logo.png" alt="Welcome Foods Logo">
                                 </div> -->
                                 <div class="title">
-                                   Cash Expenses
+                                    Cash Expenses
                                 </div>
-                                <div class="section mt-1 d-flex justify-content-between">
+                                <!-- <div class="section mt-1 d-flex justify-content-between">
                                     <div class="storename">
                                         <span class="heading">Store Name:</span>
                                         <span>{{this.storename}}</span>
@@ -443,31 +463,35 @@
                                         <span class="heading">Month:</span>
                                         <span>From Date : {{this.fromDate}} To Date: {{this.toDate}} </span>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="section">
                                     <div class="section-title">Closing Inventory Report</div>
                                     <table *ngIf="categories!=null">
-                        <thead>
-                          
-                            <tr><th>Date</th>
-                              <th>Cost Head</th>
-                              <th>Amount</th>
-                          
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr *ngFor="let item of this.storedetail.expenseData" class="expensedata">
-                                <td>{{item.amountDate | date : 'dd-MM-yyyy'}}</td>
-                              <td>{{ item.expenseName }}</td>
-                              <td>{{item.expenseAmount}}</td>
-                            
-                            </tr>
-                            <tr>
-                                <td></td><td>Total</td><td>{{this.storedetail.totalExpenseData}}</td>
-                            </tr>
-                            
-                          </tbody>
-                        </table></div>
+                                        <thead>
+
+                                            <tr>
+                                                <th>Date</th>
+                                                <th>Cost Head</th>
+                                                <th>Amount</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let item of this.storedetail.expenseData" class="expensedata">
+                                                <td>{{item.amountDate | date : 'dd-MM-yyyy'}}</td>
+                                                <td>{{ item.expenseName }}</td>
+                                                <td>{{item.expenseAmount}}</td>
+
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td>Total</td>
+                                                <td>{{this.storedetail.totalExpenseData}}</td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
 

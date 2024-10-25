@@ -14,6 +14,7 @@ import { OnboardstoreComponent } from './onboardstore/onboardstore.component';
 import { AdminComponent } from './admin/admin.component';
 import { ProfileComponent } from './profile/profile.component';
 import { PackageComponent } from './package/package.component';
+import { StoreemployeeComponent } from './storeemployee/storeemployee.component';
 
 
 const routes: Routes = [
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: '', component: AdminComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'package', component: PackageComponent },
+  { path: 'storeemployee', component: StoreemployeeComponent },
   
 ]
 
@@ -46,6 +48,7 @@ const routes: Routes = [
     AdminComponent,
     ProfileComponent,
     PackageComponent,
+    StoreemployeeComponent,
 
   ],
   imports: [

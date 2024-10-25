@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -13,6 +13,8 @@ import { environment } from 'src/app/environments/environment.prod';
 })
 export class PurchseregisterComponent {
 
+  @Input() storesdata: { storeid: string; fromdate: string, todate :string }[] = [];
+
 
   public formpurchase = new FormGroup({
     itemPurchaseId: new FormControl(0),
@@ -20,7 +22,7 @@ export class PurchseregisterComponent {
     productCategoryId: new FormControl(0, Validators.required),
     productId: new FormControl(0, Validators.required),
 
-    payMode: new FormControl(1, Validators.required),
+    payMode: new FormControl(0, Validators.required),
     amount: new FormControl('', Validators.required),
     amountDate: new FormControl('2024-05-08', Validators.required),
     isActive: new FormControl(true),
@@ -39,7 +41,7 @@ export class PurchseregisterComponent {
       productCategoryId: 0,
       productId: 0,
 
-      payMode: 1,
+      payMode: 0,
       amount: '',
       amountDate: '',
       isActive: true,
@@ -86,13 +88,43 @@ export class PurchseregisterComponent {
   }
 
   ngOnInit() {
-    this.storeId = this.route.snapshot.params["storeId"];
+
+      // alert('asdf');
+      this.storeId =this.storesdata[0].storeid;// localStorage.getItem("storeid");
+      //this.tstoreid =this.storesdata[0].storeid;// localStorage.getItem("tStoreId");
+      this.entryDate = this.storesdata[0].fromdate; //localStorage.getItem("tfromdate");
+      //this.ttodate =this.storesdata[0].todate;
+  
+
+
+    //this.storeId = this.route.snapshot.params["storeId"];
     localStorage.setItem("storeid",this.storeId);
+    this.  GetPayMode();
 this.  GetVendorDetail();
     this.GetProductCategoryByGroupId(this.storeId, 1);
     this.GetItemPurchaseByDatestoreId();
 
   }
+
+  paymode:any;
+  GetPayMode() {
+
+    this.http.getAll(environment.GetPayMode  ).subscribe((result: any) => {
+      if (result.isSuccess == 1) {
+        console.log(result.data)
+        this.paymode = result.data;
+ 
+      }
+      else {
+        this.paymode = null;
+      }
+    })
+  }
+  onPaymodechange(id:any)
+  {console.log(id);
+this.selectedOption=id;
+  }
+
   GetItemPurchaseByDatestoreId() {
     this.http.getAll(environment.GetItemPurchaseByDatestoreId + "?pAmountDate=" + this.entryDate + "&pStoreid=" + this.storeId).subscribe((result: any) => {
       if (result.isSuccess == 1) {
@@ -128,7 +160,7 @@ this.  GetVendorDetail();
 
       storeId: +this.storeId,
       amountDate: this.entryDate,
-      chequeNo: this.selectedOption=="1" ? "" : this.formpurchase.value.chequeNo
+      chequeNo: this.selectedOption=="2" ? this.formpurchase.value.chequeNo : ""
     })
 
     if (this.formpurchase.value.amount == '' || this.formpurchase.value.amount == '0') {

@@ -73,8 +73,14 @@ GetLotteryTypeStoreIdDate() {
       this.lotterytype = result.data;
 
 
-      this.lotteryamount  = this.lotterytype.reduce((acc: any, item: { lotteryAmount: any; }) => acc + (item.lotteryAmount || 0), 0);
+//       this.lotteryamount  = this.lotterytype.reduce((acc: any, item: { lotteryAmount: any; }) => acc + (item.lotteryAmount || 0), 0);
+// alert(this.lotteryamount);
 
+this.lotteryamount = (this.lotterytype.reduce((acc: number, item: { lotteryAmount: string }) => {
+  // Convert the lotteryAmount to a number, defaulting to 0 if it's not a valid number
+  const amount = parseFloat(item.lotteryAmount) || 0; 
+  return acc + amount;
+}, 0)).toFixed(2);
 
     }
     else {
@@ -89,8 +95,13 @@ GetLotteryExpenseStoreIdDate() {
       this.lotterytypeExpense = result.data;
 
 
-      this.lotteryamountExpense  = this.lotterytypeExpense.reduce((acc: any, item: { lotteryAmount: any; }) => acc + (item.lotteryAmount || 0), 0);
+      //this.lotteryamountExpense  = this.lotterytypeExpense.reduce((acc: any, item: { lotteryAmount: any; }) => acc + (item.lotteryAmount || 0), 0);
 
+      this.lotteryamountExpense = (this.lotterytypeExpense.reduce((acc: number, item: { lotteryAmount: string }) => {
+        // Convert the lotteryAmount to a number, defaulting to 0 if it's not a valid number
+        const amount = parseFloat(item.lotteryAmount) || 0; 
+        return acc + amount;
+      }, 0)).toFixed(2);
 
     }
     else {

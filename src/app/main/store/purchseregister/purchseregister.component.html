@@ -4,20 +4,7 @@
     </div>
     <div class="gasinventory storeformdata pt-2">
         <form class="" [formGroup]="formpurchase" (submit)="onSubmitPurchase()">
-            <div class="paytype">
-                <label class="paytype-option">
-                    <input type="radio" name="payMode" formControlName="payMode" [(ngModel)]="selectedOption"
-                        (ngModelChange)="onPayModeChange()" value="1" class="radio-input" />
-                    <span class="custom-radio"></span>
-                    Cash
-                </label>
-                <label class="paytype-option">
-                    <input type="radio" name="payMode" formControlName="payMode" [(ngModel)]="selectedOption"
-                        (ngModelChange)="onPayModeChange()" value="2" class="radio-input" />
-                    <span class="custom-radio"></span>
-                    Cheque
-                </label>
-            </div>
+          
             <div class="row">
                 <div class="mb-3 col-xl-3 col-lg-6">
                     <label for="FormControlInput1" class="form-label">Vendor Name</label>
@@ -25,7 +12,7 @@
                         [searchable]="true" bindLabel="vendorName" bindValue="vendorId">
                     </ng-select>
                 </div>
-                <div class="mb-3 col-xl-3 col-lg-6">
+                <div class="mb-2 col-xl-2 col-lg-6">
                     <label for="FormControlInput1" class="form-label">Product Category</label>
                     <ng-select formControlName="productCategoryId" id="productCategoryId" #SelectSizeDefault
                         [items]="productcategorylist" [searchable]="true" bindLabel="productCategoryName"
@@ -38,10 +25,16 @@
                         bindLabel="productName" bindValue="productId">
                     </ng-select>
                 </div>
-                <div class="mb-3 col-xl-3 col-lg-6">
+                <div class="mb-2 col-xl-2 col-lg-6">
+                    <label for="FormControlInput1" class="form-label">Pay Modes </label>
+                    <ng-select formControlName="payMode" id="payModeId" (ngModelChange)="onPaymodechange($event)"
+                        #SelectSizeDefault [items]="paymode" bindLabel="payModeName" bindValue="payModeId">
+                    </ng-select>
+                </div>
+                <div class="mb-2 col-xl-2 col-lg-6">
                     <label for="FormControlInput1" class="form-label">Amount</label>
                     <input type="text" class="form-control" formControlName="amount" id="amount"
-                        (keypress)="validateNumber($event)" (input)="validateDecimalPlaces($event)" placeholder="$">
+                        (keypress)="validateNumber($event)" (input)="validateDecimalPlaces($event)" placeholder="$0.00">
                 </div>
                 <div class="mb-3 col-xl-3 col-lg-6" *ngIf="this.selectedOption=='2'">
                     <label for="FormControlInput1" class="form-label">Cheque Number</label>
@@ -51,7 +44,7 @@
                 <div class="submit-btn col-12">
                     <div class="allbtn d-flex">
                         <div class="resetbtn">
-                            <button type="button">
+                            <button type="button" (click)="onResetPurchase()">
                                 Reset
                             </button>
                         </div>

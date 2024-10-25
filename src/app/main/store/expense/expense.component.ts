@@ -65,7 +65,7 @@ export class ExpenseComponent {
 
   public formExpense = new FormGroup({
 
-    payMode: new FormControl(1),
+    payMode: new FormControl(0),
     storeId: new FormControl(1),
     amountDate: new FormControl(1),
     itemDetailDtos: new FormArray(this.selectedRowsitems),
@@ -76,10 +76,10 @@ export class ExpenseComponent {
     expenseItemId: new FormControl(0),
     expenseGroupId: new FormControl(0),
     expenseCategoryId: new FormControl(0),
-    payModeId: new FormControl(1),
+    payModeId: new FormControl(0),
     storeId: new FormControl(1),
     amountDate: new FormControl(''),
-    amount: new FormControl(0),
+    amount: new FormControl(''),
     description: new FormControl(''),
     isActive: new FormControl(true),
     createdBy: new FormControl(0),
@@ -92,7 +92,7 @@ export class ExpenseComponent {
   expense: any;
 
   onedit(pid: any) {
-    this.expense = this.expenseiteslist.filter((x: { expenseItemId: any; }) => x.expenseItemId == pid);
+    this.expense = this.expenseitemlist.filter((x: { expenseItemId: any; }) => x.expenseItemId == pid);
 
     this.formcradit.patchValue({
       storeId: this.storeid,
@@ -154,73 +154,7 @@ export class ExpenseComponent {
   }
 
 
-  videoslide1: any = {
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    loop: false,
-    autoplay: false,
-    center: false,
-    dots: false,
-    autoHeight: false,
-    autoWidth: false,
-    navSpeed: 700,
-    navText: ['<', '>'],
-    responsive: {
-      0: {
-        items: 1
-      },
-      400: {
-        items: 2
-      },
-      640: {
-        items: 3
-      },
-      768: {
-        items: 3
-      },
-      992: {
-        items: 4
-      },
-      1200: {
-        items: 5
-      },
-      1400: {
-        items: 6
-      }
 
-    },
-    nav: false,
-    innerWidth: 200,
-  }
-
-  videoslide: any = {
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    loop: false,
-    autoplay: false,
-    center: false,
-    dots: false,
-    autoHeight: false,
-    autoWidth: false,
-    navSpeed: 700,
-    navText: ['<', '>'],
-    responsive: {
-      0: {
-        items: 4
-      },
-      1200: {
-        items: 5
-      },
-      1400: {
-        items: 6
-      }
-
-    },
-    nav: false,
-    innerWidth: 200,
-  }
 
   showtopData(pid: any) {
     // alert(pid)
@@ -286,7 +220,7 @@ export class ExpenseComponent {
      // payModeId: 1,
       amountDate: this.entryDate,
     });
-    if (this.formcradit.value.amount == 0) {
+    if (this.formcradit.value.amount == '') {
 
       this.toastr.error('Please enter valid amount')
       return;
@@ -322,8 +256,9 @@ export class ExpenseComponent {
       payModeId: 0,
       amountDate: '',
       description: '',
-      amount: 0,
-      chequeNo:''
+      amount: '',
+      chequeNo:'',
+      expenseItemId:0
     });
   }
   expensegrouplist: any;

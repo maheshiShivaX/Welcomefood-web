@@ -35,9 +35,9 @@ public form = new FormGroup({
   storeId: new FormControl(0),
   invoiceNo: new FormControl(''),
   invoiceDate: new FormControl(''),
-  totalAmount: new FormControl(0),
-  totalGes: new FormControl(0),
-  avgAmount: new FormControl(0),
+  totalAmount: new FormControl('0.00'),
+  totalGes: new FormControl('0.00'),
+  avgAmount: new FormControl('0.00'),
   isActive: new FormControl(true),
   createdBy: new FormControl(0)
 });
@@ -73,6 +73,7 @@ ngOnInit() {
     this.http.getAll(environment.DeleteGesInvoiceById + "?pGesInvoiceId=" + pGesInvoiceId ).subscribe((result: any) => {
       if (result.isSuccess == 1) {
         this.GetGesInvoiceByStoreIdDate(this.storeid, this.entryDate);
+        this.toastr.success(result.message);
       }
       else {
         this.invoicedata = null;
@@ -107,7 +108,7 @@ ngOnInit() {
     this.form.patchValue({
       storeId: this.storeid,
     });
-    if (this.form.value.totalAmount == 0) {
+    if (this.form.value.totalAmount == '0.00') {
 
       this.toastr.error('Please enter valid amount')
       return;
@@ -139,9 +140,9 @@ ngOnInit() {
       storeId: 0,
       invoiceNo: '',
       invoiceDate:'',
-      totalAmount:0,
-      totalGes: 0,
-      avgAmount:0,
+      totalAmount:'0.00',
+      totalGes: '0.00',
+      avgAmount:'0.00',
       isActive:true
     });
   }

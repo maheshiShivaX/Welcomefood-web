@@ -28,7 +28,8 @@
                                 <td>
                                     <div class="forminput ">
                                         <div class="inputfield px-2 mx-3 d-flex align-items-center" style="background-color: #f0f0f0">
-                                            <input type="text" readonly  [(ngModel)]="item.openStock" 
+                                            <input type="text"   [(ngModel)]="item.openStock"    (keypress)="validateNumber($event)"
+                                            (input)="validateDecimalPlaces($event)" (input)="updateTotals(item)"
                                                   class="form-control">
                                         </div>
                                     </div>
@@ -36,49 +37,56 @@
                                 <td>
                                     <div class="forminput">
                                         <div class="inputfield px-2 mx-3 d-flex align-items-center">
-                                            <input type="text" [(ngModel)]="item.purchases"  class="form-control"  (input)="updateTotals(item)">
+                                            <input type="text" [(ngModel)]="item.purchases"  class="form-control"     (keypress)="validateNumber($event)"
+                                            (input)="validateDecimalPlaces($event)" (input)="updateTotals(item)">
                                         </div>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="forminput">
                                         <div class="inputfield px-2 mx-3 d-flex align-items-center">
-                                            <input type="text" [(ngModel)]="item.purchasesRate"  class="form-control">
+                                            <input type="text" [(ngModel)]="item.purchasesRate"    (keypress)="validateNumber($event)"
+                                            (input)="validateDecimalPlaces($event)"  class="form-control">
                                         </div>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="forminput">
                                         <div class="inputfield px-2 mx-3 d-flex align-items-center">
-                                            <input type="text" [(ngModel)]="item.sales"  class="form-control"  (input)="updateTotals(item)">
+                                            <input type="text" [(ngModel)]="item.sales"  class="form-control"     (keypress)="validateNumber($event)"
+                                            (input)="validateDecimalPlaces($event)" (input)="updateTotals(item)">
                                         </div>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="forminput">
                                         <div class="inputfield px-2 mx-3 d-flex align-items-center">
-                                            <input type="text" [(ngModel)]="item.salesRate"  class="form-control">
+                                            <input type="text" [(ngModel)]="item.salesRate"    (keypress)="validateNumber($event)"
+                                            (input)="validateDecimalPlaces($event)"  class="form-control">
                                         </div>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="forminput">
                                         <div class="inputfield px-2 mx-3 d-flex align-items-center" style="background-color: #f0f0f0">
-                                            <input type="text" readonly [(ngModel)]="item.closingStock"  class="form-control"  (input)="updateTotals(item)">
+                                            <input type="text" readonly [(ngModel)]="item.closingStock"    (keypress)="validateNumber($event)"
+                                            (input)="validateDecimalPlaces($event)"  class="form-control"  (input)="updateTotals(item)">
                                         </div>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="forminput">
                                         <div class="inputfield px-2 mx-3 d-flex align-items-center">
-                                            <input type="text" [(ngModel)]="item.physicalStock"  class="form-control"  (input)="updateTotals(item)">
+                                            <input type="text" [(ngModel)]="item.physicalStock"    (keypress)="validateNumber($event)"
+                                            (input)="validateDecimalPlaces($event)"  class="form-control"  (input)="updateTotals(item)">
                                         </div>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="forminput">
                                         <div class="inputfield px-2 mx-3 d-flex align-items-center" style="background-color: #f0f0f0">
-                                            <input type="text" readonly [(ngModel)]="item.overShort"  class="form-control">
+                                            <input type="text" readonly [(ngModel)]="item.overShort"     (keypress)="validateNumber($event)"
+                                            (input)="validateDecimalPlaces($event)" class="form-control">
                                         </div>
                                     </div>
                                 </td>

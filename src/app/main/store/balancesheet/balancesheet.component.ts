@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/_services/auth.service';
 import { HttpService } from 'src/app/_services/http.service';
+import { MonthService } from 'src/app/_services/month.service';
 import { environment } from 'src/app/environments/environment.prod';
 
 @Component({
@@ -22,7 +23,7 @@ export class BalancesheetComponent {
   fromDate:any;
   toDate:any;
   storeList:any;
-  constructor(private router: Router, private authService: AuthService, private route: ActivatedRoute,
+  constructor(private router: Router, private authService: AuthService, private route: ActivatedRoute,private monthService: MonthService,
     private http: HttpService, private toastr: ToastrService
   ) {
     this.authService.currentUser.subscribe((user) => {
@@ -47,18 +48,29 @@ export class BalancesheetComponent {
     storeId: new FormControl(0),
     fromDate: new FormControl(''),
     toDate: new FormControl(''),
+    month:new FormControl('')
   });
 
 
    // =============================================================================
    ngOnInit() {
   
-
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    console.log(yyyy);
+    //const year = 2024; // You can change this dynamically or make it user-input
+    this.paymentOptions = this.monthService.getPaymentOptions(yyyy);
     this.GetEmployeeStoreByUserId();
    // this.route.snapshot.params["storeId"];
     
 
+
+
   }
+
+  paymentOptions: { label: string; fromdate: string; todate: string; }[]=[] ;
+
+
 
   balancesheetData:any;
 
@@ -104,9 +116,20 @@ export class BalancesheetComponent {
       }
     })
   }
-  
+  datelist:any;
   onGetReport()
   {
+    this.datelist=this.paymentOptions.filter(x=>x.label==this.form.value.month)[0]
+    this.form.patchValue({
+    
+      fromDate: this.datelist.fromdate,
+      toDate:this.datelist.todate
+    });
+
+    this.fromDate =this.datelist.fromdate;
+this.toDate=this.datelist.todate
+
+
     this.GetBalanceSheetByStoreId(this.form.value.storeId, this.form.value.fromDate, this.form.value.toDate)
   }
 

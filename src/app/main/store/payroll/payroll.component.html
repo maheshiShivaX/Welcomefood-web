@@ -13,7 +13,7 @@
                 <div class="mb-3 col-xl-3 col-lg-6">
                     <label for="FormControlInput1" class="form-label">Employee Name </label>
                     <ng-select formControlName="employeeId" id="employeeId" #SelectSizeDefault
-                        [items]="employeeList" bindLabel="employeeName" bindValue="employeeId">
+                        [items]="employeeList" bindLabel="name" bindValue="employeeId">
                     </ng-select>
                 </div>
 
@@ -32,14 +32,14 @@
                     <input type="text" class="form-control" formControlName="amount" id="amount"
                         (keypress)="validateNumber($event)" (input)="validateDecimalPlaces($event)" placeholder="$">
                 </div>
-                <!-- <div class="mb-3 col-xl-3 col-lg-6" *ngIf="this.selectedOption=='2'">
+                <div class="mb-3 col-xl-3 col-lg-6" *ngIf="this.selectedOption=='2'">
                     <label for="FormControlInput1" class="form-label">Cheque Number</label>
                     <input type="text" class="form-control" formControlName="chequeNo" id="chequeNo" placeholder="#">
-                </div> -->
+                </div>
                 <div class="submit-btn col-12">
                     <div class="allbtn d-flex">
                         <div class="resetbtn">
-                            <button type="button">
+                            <button type="button" (click)="onReset()">
                                 Reset
                             </button>
                         </div>
@@ -77,7 +77,7 @@
                             <td>{{row.payModeName}}</td>
                             <td>{{row.amount}}</td>
                             <td>{{row.chequeNo}}</td>
-                            <td>{{row.amountDate  | date : 'dd-MM-yyyy hh:mm:ss'}}</td>
+                            <td>{{row.amountDate  | date : 'dd-MM-yyyy'}}</td>
                             <td>{{row.createdDate | date : 'dd-MM-yyyy hh:mm:ss'}}</td>
                             <td class="action">
                                 <button type="button" (click)="onedit(row.salaryTransactionId)" class="editbtn">
