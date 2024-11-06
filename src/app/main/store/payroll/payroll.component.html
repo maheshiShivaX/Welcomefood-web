@@ -12,13 +12,17 @@
 
                 <div class="mb-3 col-xl-3 col-lg-6">
                     <label for="FormControlInput1" class="form-label">Employee Name </label>
-                    <ng-select formControlName="employeeId" id="employeeId" #SelectSizeDefault
-                        [items]="employeeList" bindLabel="name" bindValue="employeeId">
+                    <ng-select formControlName="employeeId" id="employeeId" #SelectSizeDefault [items]="employeeList"
+                        bindLabel="name" bindValue="employeeId">
                     </ng-select>
                 </div>
 
-              
 
+                <div class="mb-2 col-xl-2 col-lg-6">
+                    <label for="FormControlInput1" class="form-label">Description</label>
+                    <input type="text" class="form-control" formControlName="description" id="description"
+                        placeholder="Description">
+                </div>
                 <div class="mb-2 col-xl-2 col-lg-6">
                     <label for="FormControlInput1" class="form-label">Pay Modes </label>
                     <ng-select formControlName="payModeId" id="payModeId" (ngModelChange)="onPaymodechange($event)"
@@ -30,7 +34,7 @@
                 <div class="mb-2 col-xl-2 col-lg-6">
                     <label for="FormControlInput1" class="form-label">Amount</label>
                     <input type="text" class="form-control" formControlName="amount" id="amount"
-                        (keypress)="validateNumber($event)" (input)="validateDecimalPlaces($event)" placeholder="$">
+                        (keypress)="validateNumber($event)" (input)="validateDecimalPlaces($event)" placeholder="$0.00">
                 </div>
                 <div class="mb-3 col-xl-3 col-lg-6" *ngIf="this.selectedOption=='2'">
                     <label for="FormControlInput1" class="form-label">Cheque Number</label>
@@ -60,6 +64,7 @@
                         <tr>
                             <th>Sr.No</th>
                             <th>Employee Name</th>
+                            <th>Description</th>
                             <th>Pay Type</th>
                             <th>Amount</th>
                             <th>Cheque No</th>
@@ -71,13 +76,13 @@
                     <tbody>
                         <tr *ngFor="let row of salarytransaction ;let idx =index">
                             <td class="tablefirstdata text-center">{{idx + 1}}</td>
-    
+
                             <td>{{row.employeeName}}</td>
-                         
+                            <td>{{row.description}}</td>
                             <td>{{row.payModeName}}</td>
-                            <td>{{row.amount}}</td>
+                            <td>{{row.amount.toFixed(2)}}</td>
                             <td>{{row.chequeNo}}</td>
-                            <td>{{row.amountDate  | date : 'dd-MM-yyyy'}}</td>
+                            <td>{{row.amountDate | date : 'dd-MM-yyyy'}}</td>
                             <td>{{row.createdDate | date : 'dd-MM-yyyy hh:mm:ss'}}</td>
                             <td class="action">
                                 <button type="button" (click)="onedit(row.salaryTransactionId)" class="editbtn">
@@ -97,7 +102,8 @@
                                 </button>
                             </td>
                             <td class="action">
-                                <button type="button"  (click)="onDeleteSalaryTransactionById(row.salaryTransactionId)"  class="deletebtn">
+                                <button type="button" (click)="onDeleteSalaryTransactionById(row.salaryTransactionId)"
+                                    class="deletebtn">
                                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <rect width="40" height="40" rx="12" fill="#FFF0F1" />
@@ -121,7 +127,7 @@
                                 </button>
                             </td>
                         </tr>
-    
+
                     </tbody>
                 </table>
             </div>

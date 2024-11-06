@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/_services/auth.service';
 import { HttpService } from 'src/app/_services/http.service';
+import { TriggerdailyService } from 'src/app/_services/triggerdaily.service';
 import { environment } from 'src/app/environments/environment.prod';
 
 @Component({
@@ -12,6 +14,10 @@ import { environment } from 'src/app/environments/environment.prod';
   styleUrls: ['./creditcard.component.scss']
 })
 export class CreditcardComponent {
+
+  @Input() storesdata: { storeid: string; fromdate: string, todate :string }[] = [];
+
+  
   validateNumber(event: KeyboardEvent) {
     const charCode = event.which ? event.which : event.keyCode;
     const inputChar = String.fromCharCode(charCode);
@@ -31,16 +37,31 @@ export class CreditcardComponent {
     }
   }
 
-  entryDate: string | undefined;
-  dated:any;
+  entryDate: any;
+  dated:any;  private dataChangeSubscription: Subscription;
   constructor(private router: Router, private authService: AuthService, private route: ActivatedRoute,
-    private http: HttpService, private toastr: ToastrService) {
+    private http: HttpService, private toastr: ToastrService, private dataService: TriggerdailyService,) {
     this.entryDate = new Date().toISOString().split('T')[0];
 
  
 
 
     this.dated = this.entryDate;
+
+    this.dataChangeSubscription = this.dataService.dataChange$.subscribe((menutype: any) => {
+      console.log('Menu type changed to:', menutype);
+      if(menutype=='10')
+      {
+        this.storeId =localStorage.getItem("storeid");
+        this.entryDate =localStorage.getItem("tentrydate") ;
+  this.storeId =this.storesdata[0].storeid;// localStorage.getItem("storeid");
+  this.entryDate = this.storesdata[0].fromdate; //localStorage.getItem("tfromdate");
+ localStorage.setItem("storeid",this.storeId);
+ this.dated = this.entryDate;
+this.  GetCreditCardByStoreIdDate();
+      }
+      
+    });
 
     // this.storesdata[0].storeid = this.storeId;
     // this.storesdata[0].fromdate = this.dated;
@@ -49,7 +70,16 @@ export class CreditcardComponent {
   }
   storeId:any;
   ngOnInit() {
-    this.storeId = this.route.snapshot.params["storeId"];
+
+     // alert('asdf');
+     this.storeId =this.storesdata[0].storeid;// localStorage.getItem("storeid");
+     //this.tstoreid =this.storesdata[0].storeid;// localStorage.getItem("tStoreId");
+     this.entryDate = this.storesdata[0].fromdate; //localStorage.getItem("tfromdate");
+     //this
+
+
+
+    //this.storeId = this.route.snapshot.params["storeId"];
     localStorage.setItem("storeid",this.storeId);
 
     this.dated = this.entryDate;
@@ -66,7 +96,14 @@ GetCreditCardByStoreIdDate() {
       console.log(result.data)
       this.creditcardlist = result.data;
 
-      this.creditcardamount  = this.creditcardlist.reduce((acc: any, item: { amount: any; }) => acc + (item.amount || 0), 0);
+      //this.creditcardamount  =this.creditcardlist.reduce((acc: any, item: { amount: any; }) => acc + (item.amount || 0), 0);
+
+      this.creditcardamount = (this.creditcardlist.reduce((acc: number, item: { amount: string }) => {
+        // Convert the lotteryAmount to a number, defaulting to 0 if it's not a valid number
+        const amount = parseFloat(item.amount) || 0; 
+        return acc + amount;
+      }, 0)).toFixed(2);
+
 
 
     }

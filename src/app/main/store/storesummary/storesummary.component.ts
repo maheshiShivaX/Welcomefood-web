@@ -1,8 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/_services/auth.service';
 import { HttpService } from 'src/app/_services/http.service';
+import { TriggerdailyService } from 'src/app/_services/triggerdaily.service';
 
 
 import { environment } from 'src/app/environments/environment.prod';
@@ -23,6 +25,8 @@ export class StoresummaryComponent {
   totalinsideamount: any;
   vendorCategoryAmountscase: any;
   vendorCategoryAmountscheque: any;
+  vendorCategoryAmountseft: any;
+  vendorCategoryAmountsache: any;
   categories: any;
   expenseiteslist: any;
   totalinputcase: number = 0;
@@ -30,19 +34,25 @@ export class StoresummaryComponent {
   totaldiffrence: number = 0;
   overshortamount: number = 0;
   otherList:any;
+  private dataChangeSubscription: Subscription;
   constructor(private router: Router, private authService: AuthService, private route: ActivatedRoute,
-    private http: HttpService, private toastr: ToastrService) {
+    private http: HttpService, private toastr: ToastrService, private dataService: TriggerdailyService,) {
     this.entryDate = new Date().toISOString().split('T')[0];
 
-    // if(this.storesdata!=null && )
-    // {
-    //    // alert('asdf');
-    //    this.storeid =this.storesdata[0].storeid;// localStorage.getItem("storeid");
-    //    //this.tstoreid =this.storesdata[0].storeid;// localStorage.getItem("tStoreId");
-    //    this.tfromdate = this.storesdata[0].fromdate; //localStorage.getItem("tfromdate");
-    //    this.ttodate =this.storesdata[0].todate;
+    this.dataChangeSubscription = this.dataService.dataChange$.subscribe((menutype: any) => {
+      console.log('Menu type changed to:', menutype);
+      if(menutype=='6')
+      {
+        this.storeid =localStorage.getItem("storeid");
+        this.entryDate =localStorage.getItem("tentrydate") 
 
-    // }  
+    this.tfromdate =localStorage.getItem("tentrydate") //localStorage.getItem("tfromdate");
+    this.ttodate =localStorage.getItem("tentrydate") 
+
+    this.GetStoreSummary(this.storeid,this.tfromdate, this.ttodate) ;
+      }
+      
+    });  
   }
   tstoreid:any;
   tfromdate:any;
@@ -56,20 +66,8 @@ export class StoresummaryComponent {
     this.tfromdate = this.storesdata[0].fromdate; //localStorage.getItem("tfromdate");
     this.ttodate =this.storesdata[0].todate;
 
-
-//alert('asd');
     this.GetStoreSummary(this.storeid,this.tfromdate, this.ttodate) ;
-    // this.GetItemSaleByStoreCategoryByStoreId(1)
-    // // this.GetExpenseItemsByAmountDate();
-    // this.GetStoreOpeningCashByStoreId();
-    // // this.GetItemPurchaseByStoreIdcase(1);
-    // // this.GetItemPurchaseByStoreIdcheqe(2);
-    // this.GetExpenseItemsById(2);
-    // this.GetGesdetailByDateStoreId();
-    // this.GetAmountByGroupId();
-    // this.GetExpenseItemsByStoreDateId();
-    // this.GetGetStoreClosingByStoreId()
-    // this.GetOtherSale(this.storeid, 1, this.entryDate);
+
 
 
   }
@@ -94,6 +92,21 @@ export class StoresummaryComponent {
           this.categories = Object.keys(this.vendorCategoryAmountscheque[0].amounts);
         }
         this.calculateTotalAmountscheck();
+
+
+        this.vendorCategoryAmountseft = this.storedetail.purchaseEFT;
+        if (this.vendorCategoryAmountseft.length > 0) {
+          this.categories = Object.keys(this.vendorCategoryAmountseft[0].amounts);
+        }
+        this.calculateTotalAmountsEFT();
+
+        this.vendorCategoryAmountsache = this.storedetail.purchaseACH;
+        if (this.vendorCategoryAmountsache.length > 0) {
+          this.categories = Object.keys(this.vendorCategoryAmountsache[0].amounts);
+        }
+        this.calculateTotalAmountsACH();
+
+
 
       }
       else {
@@ -140,8 +153,12 @@ lotteryamountsale:any;
   }
   totalAmounts: { [key: string]: number } = {};
   totalAmountscheque: { [key: string]: number } = {};
+  totalAmountseft: { [key: string]: number } = {};
+  totalAmountsach: { [key: string]: number } = {};
   totalamountpurchasecash: number = 0;
   totalamountpurchasecheque: number = 0;
+  totalamountpurchaseeft: number = 0;
+  totalamountpurchaseach: number = 0;
   calculateTotalAmounts(): void {
     this.totalAmounts = {};
     for (let category of this.categories) {
@@ -154,6 +171,22 @@ lotteryamountsale:any;
     for (let category of this.categories) {
       this.totalAmountscheque[category] = this.vendorCategoryAmountscheque.reduce((sum: any, item: { amounts: { [x: string]: any; }; }) => sum + (item.amounts[category] || 0), 0);
       this.totalamountpurchasecheque = this.totalamountpurchasecheque + (+this.totalAmountscheque[category]);
+    }
+  }
+
+  calculateTotalAmountsEFT(): void {
+    this.totalAmountseft = {};
+    for (let category of this.categories) {
+      this.totalAmountseft[category] = this.vendorCategoryAmountseft.reduce((sum: any, item: { amounts: { [x: string]: any; }; }) => sum + (item.amounts[category] || 0), 0);
+      this.totalamountpurchaseeft = this.totalamountpurchaseeft + (+this.totalAmountseft[category]);
+    }
+  }
+
+  calculateTotalAmountsACH(): void {
+    this.totalAmountsach = {};
+    for (let category of this.categories) {
+      this.totalAmountsach[category] = this.vendorCategoryAmountsache.reduce((sum: any, item: { amounts: { [x: string]: any; }; }) => sum + (item.amounts[category] || 0), 0);
+      this.totalamountpurchaseach = this.totalamountpurchaseach + (+this.totalAmountsach[category]);
     }
   }
 

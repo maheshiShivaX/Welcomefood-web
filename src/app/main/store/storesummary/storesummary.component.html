@@ -25,12 +25,12 @@
               <td>{{this.storedetail.openingBalance.toFixed(2)}}</td>
             </tr>
             <tr class="tabledatasort productcategory">
-              <td class="text-left">Coin-Up</td>
-              <td>{{this.storedetail.totalCoamInAmount}}</td>
+              <td class="text-left">Arcade In</td>
+              <td>{{this.storedetail.totalCoamInAmount.toFixed(2)}}</td>
             </tr>
             <tr class="tabledatasort productcategory">
               <td class="text-left">OTHER AMOUNT Inward</td>
-              <td>{{this.storedetail.totalInwardAmount}}</td>
+              <td>{{this.storedetail.totalInwardAmount.toFixed(2)}}</td>
             </tr>
             <tr class="tabledatasort productcategory">
               <td class="text-left">Lottery</td>
@@ -38,11 +38,11 @@
             </tr>
             <tr class="tabledatasort productcategory">
               <td class="text-left">Tax Amount</td>
-              <td>{{this.storedetail.totalTaxAmount}}</td>
+              <td>{{this.storedetail.totalTaxAmount.toFixed(2)}}</td>
             </tr>
             <tr class="tabledatasort productcategory">
               <td class="text-left">Gas Sales Amount</td>
-              <td>{{this.storedetail.gesSaleAmount.toFixed(2)}}</td>
+              <td>{{this.storedetail.totalGasSaleAmount.toFixed(2)}}</td>
             </tr>
             <tr class=" total productcategory">
               <td class="text-left">Total IN </td>
@@ -62,8 +62,8 @@
               <td>{{this.totalamountpurchasecash.toFixed(2)}}</td>
             </tr>
             <tr class="productcategory">
-              <td class="text-left">Coin-Up </td>
-           <td>{{this.storedetail.totalCoamOutAmount}}</td>
+              <td class="text-left">Arcade Out </td>
+           <td>{{this.storedetail.totalCoamOutAmount.toFixed(2)}}</td>
             </tr>
             <tr class="productcategory">
               <td class="text-left">PAYROLL </td>
@@ -71,7 +71,7 @@
             </tr>
             <tr class="productcategory">
               <td class="text-left">OTHER AMOUNT </td>
-              <td>{{this.storedetail.totalOutwardAmount}}</td>
+              <td>{{this.storedetail.totalOutwardAmount.toFixed(2)}}</td>
             </tr>
             <tr class="productcategory">
               <td class="text-left">CREDIT CARD </td>
@@ -166,6 +166,9 @@
                   <td class="total">{{this.totalamountpurchasecash.toFixed(2) }}</td>
                 </tr>
               </tbody>
+
+
+
               <thead>
                 <tr class="text-center">
                   <th  [attr.colspan]="categories!=null ? categories.length + 3 : 3" class="headbackcolor">Purchases (Cheque)</th>
@@ -190,6 +193,59 @@
                   <td class="total">{{this.totalamountpurchasecheque.toFixed(2) }}</td>
                 </tr>
               </tbody>
+
+              <thead>
+                <tr class="text-center">
+                  <th  [attr.colspan]="categories!=null ? categories.length + 3 : 3" class="headbackcolor">Purchases (EFT)</th>
+                </tr>
+                <tr>
+                  <th>Date</th>
+                  <th>Vendor Name</th>
+                  <th *ngFor="let category of categories">{{ category }}</th>
+                  <th class="text-left">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of vendorCategoryAmountseft" class="purchasetext">
+                  <td>{{item.amountDate | date :'dd-MM-yyyy'}}</td>
+                  <td>{{ item.vendorName }}</td>
+                  <td *ngFor="let category of categories">{{ (item.amounts[category]).toFixed(2) || 0 }}</td>
+                  <td class="total">{{ getTotalAmountForVendor(item).toFixed(2) }}</td>
+                </tr>
+                <tr class="purchasetext"><td></td>
+                  <td class="total text-left">Total</td>
+                  <td *ngFor="let category of categories" class="total">{{( totalAmountseft[category]).toFixed(2) || 0 }}</td>
+                  <td class="total">{{this.totalamountpurchaseeft.toFixed(2) }}</td>
+                </tr>
+              </tbody>
+
+
+              <thead>
+                <tr class="text-center">
+                  <th  [attr.colspan]="categories!=null ? categories.length + 3 : 3" class="headbackcolor">Purchases (ACH)</th>
+                </tr>
+                <tr>
+                  <th>Date</th>
+                  <th>Vendor Name</th>
+                  <th *ngFor="let category of categories">{{ category }}</th>
+                  <th class="text-left">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of vendorCategoryAmountsache" class="purchasetext">
+                  <td>{{item.amountDate | date :'dd-MM-yyyy'}}</td>
+                  <td>{{ item.vendorName }}</td>
+                  <td *ngFor="let category of categories">{{ (item.amounts[category]).toFixed(2) || 0 }}</td>
+                  <td class="total">{{ getTotalAmountForVendor(item).toFixed(2) }}</td>
+                </tr>
+                <tr class="purchasetext"><td></td>
+                  <td class="total text-left">Total</td>
+                  <td *ngFor="let category of categories" class="total">{{( totalAmountsach[category]).toFixed(2) || 0 }}</td>
+                  <td class="total">{{this.totalamountpurchaseach.toFixed(2) }}</td>
+                </tr>
+              </tbody>
+
+
             </table>
           </div>
           <div class="mt-3 d-flex">

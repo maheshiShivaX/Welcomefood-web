@@ -14,14 +14,22 @@ export class HeaderComponent {
       const currentUser = user;
       this.username = currentUser.name;
       this.rolename = currentUser.roleName;
+      this.roleid = currentUser.roleId;
     });
 
 
   }
-  username:any;
-  rolename:any;
-  
- 
+  roleid: any;
+  username: any;
+  rolename: any;
+
+  myAccount() {
+    if (this.roleid == 1) {
+      this.router.navigateByUrl('/admin/profile');
+    } else if (this.roleid == 3) {
+      this.router.navigateByUrl('/store/profile');
+    }
+  }
   openPopup() {
     const popupContainer = document.getElementById('termpopupContainer');
     if (popupContainer) {

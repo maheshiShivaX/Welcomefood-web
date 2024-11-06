@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/_services/auth.service';
 import { HttpService } from 'src/app/_services/http.service';
+import { TriggerdailyService } from 'src/app/_services/triggerdaily.service';
 import { environment } from 'src/app/environments/environment.prod';
 
 @Component({
@@ -12,11 +14,23 @@ import { environment } from 'src/app/environments/environment.prod';
   styleUrls: ['./lottery.component.scss']
 })
 export class LotteryComponent {
-
+  @Input() storesdata: { storeid: string; fromdate: string, todate :string }[] = [];
   entryDate:any;
   selectedOption:any;
   companyId:any;
   storeId:any;
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log('s');
+    if (changes['storesdata']) {
+      console.log('Stores data has been updated:', this.storesdata);
+      // Additional logic to handle the new data can go here
+    }
+  }
+
+
+
+ 
 
 
   validateNumber(event: KeyboardEvent) {
@@ -37,9 +51,9 @@ export class LotteryComponent {
       inputElement.value = value.substring(0, value.length - 1);
     }
   }
-
+  private dataChangeSubscription: Subscription;
   constructor(private router: Router, private authService: AuthService, private route: ActivatedRoute,
-    private http: HttpService, private toastr: ToastrService) {
+    private http: HttpService, private toastr: ToastrService, private dataService: TriggerdailyService,) {
     this.entryDate = new Date().toISOString().split('T')[0];
     this.selectedOption = 1;
 
@@ -49,15 +63,42 @@ export class LotteryComponent {
       this.companyId = currentUser.companyId;
      
     });
+
+ 
+
+    this.dataChangeSubscription = this.dataService.dataChange$.subscribe((menutype: any) => {
+      console.log('Menu type changed to:', menutype);
+      if(menutype=='8')
+      {
+        this.storeId =localStorage.getItem("storeid");
+        this.entryDate =localStorage.getItem("tentrydate") 
+       this.GetLotteryTypeStoreIdDate();
+       this.GetLotteryExpenseStoreIdDate();
+      }
+      
+    });
+
+
   }
   storeid:any;
 
   ngOnInit() {
- 
-    this.storeId = localStorage.getItem("storeid");
+   
+  
+
+    this.storeId =this.storesdata[0].storeid;// localStorage.getItem("storeid");
+    //this.tstoreid =this.storesdata[0].storeid;// localStorage.getItem("tStoreId");
+    this.entryDate = this.storesdata[0].fromdate; //localStorage.getItem("tfromdate");
+  console.log(this.entryDate);
+
+    //this.storeId = localStorage.getItem("storeid");
     
    this.GetLotteryTypeStoreIdDate();
    this.GetLotteryExpenseStoreIdDate();
+  }
+  drawNumbers()
+  {
+    alert('ds');
   }
 
   

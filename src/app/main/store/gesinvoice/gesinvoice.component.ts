@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/_services/auth.service';
 import { HttpService } from 'src/app/_services/http.service';
+import { TriggerdailyService } from 'src/app/_services/triggerdaily.service';
 import { environment } from 'src/app/environments/environment.prod';
 
 @Component({
@@ -12,14 +14,14 @@ import { environment } from 'src/app/environments/environment.prod';
   styleUrls: ['./gesinvoice.component.scss']
 })
 export class GesinvoiceComponent {
-
-
+  private dataChangeSubscription: Subscription;
+  @Input() storesdata: { storeid: string; fromdate: string, todate :string }[] = [];
   entryDate:any;
   selectedOption:any;
   companyId:any;
 
   constructor(private router: Router, private authService: AuthService, private route: ActivatedRoute,
-    private http: HttpService, private toastr: ToastrService) {
+    private http: HttpService, private toastr: ToastrService, private dataService: TriggerdailyService,) {
     this.entryDate = new Date().toISOString().split('T')[0];
     this.selectedOption = 1;
 
@@ -27,6 +29,17 @@ export class GesinvoiceComponent {
       const currentUser = user;
       // this.formExpense.value.createdBy = currentUser.loginId;
       this.companyId = currentUser.companyId;
+    });
+
+    this.dataChangeSubscription = this.dataService.dataChange$.subscribe((menutype: any) => {
+      console.log('Menu type changed to:', menutype);
+      if(menutype=='1')
+      {
+        this.storeid =localStorage.getItem("storeid");
+        this.entryDate =localStorage.getItem("tentrydate") 
+        this.GetGesInvoiceByStoreIdDate(this.storeid, this.entryDate);
+      }
+      
     });
   }
 
@@ -50,7 +63,9 @@ storeid:any;
 employeeList:any
 
 ngOnInit() {
-  this.storeid = localStorage.getItem("storeid");
+    this.storeid =this.storesdata[0].storeid;// localStorage.getItem("storeid");
+
+    this.entryDate = this.storesdata[0].fromdate; //localStorage.getItem("tfromdate");
   this.GetGesInvoiceByStoreIdDate(this.storeid, this.entryDate);
 }
 

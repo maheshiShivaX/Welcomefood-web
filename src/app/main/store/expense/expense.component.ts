@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/_services/auth.service';
 import { HttpService } from 'src/app/_services/http.service';
+import { TriggerdailyService } from 'src/app/_services/triggerdaily.service';
 import { environment } from 'src/app/environments/environment.prod';
 
 
@@ -13,7 +15,7 @@ import { environment } from 'src/app/environments/environment.prod';
   styleUrls: ['./expense.component.scss']
 })
 export class ExpenseComponent {
-
+  @Input() storesdata: { storeid: string; fromdate: string, todate :string }[] = [];
   validateNumber(event: KeyboardEvent) {
     const charCode = event.which ? event.which : event.keyCode;
     const inputChar = String.fromCharCode(charCode);
@@ -50,8 +52,9 @@ export class ExpenseComponent {
   expenseitem: any;
   expenseitemdetail: any;
   selectedRowsitems: any[] = [];
+  private dataChangeSubscription: Subscription;
   constructor(private router: Router, private authService: AuthService, private route: ActivatedRoute,
-    private http: HttpService, private toastr: ToastrService) {
+    private http: HttpService, private toastr: ToastrService,private dataService: TriggerdailyService,) {
     this.entryDate = new Date().toISOString().split('T')[0];
     this.selectedOption = 1;
 
@@ -61,6 +64,21 @@ export class ExpenseComponent {
       this.companyId = currentUser.companyId;
      
     });
+
+    this.dataChangeSubscription = this.dataService.dataChange$.subscribe((menutype: any) => {
+      console.log('Menu type changed to:', menutype);
+      if(menutype=='3')
+      {
+        this.storeid =localStorage.getItem("storeid");
+        this.entryDate =localStorage.getItem("tentrydate") 
+
+     this.GetPayMode();this. GetExpenseGroupByCompanyId();
+  
+
+      }
+      
+    });
+
   }
 
   public formExpense = new FormGroup({
@@ -147,7 +165,14 @@ export class ExpenseComponent {
 
   ngOnInit() {
  
-    this.storeid = localStorage.getItem("storeid");
+    
+       // alert('asdf');
+       this.storeid =this.storesdata[0].storeid;// localStorage.getItem("storeid");
+       //this.tstoreid =this.storesdata[0].storeid;// localStorage.getItem("tStoreId");
+       this.entryDate = this.storesdata[0].fromdate; //localStorage.getItem("tfromdate");
+       //this
+
+   // this.storeid = localStorage.getItem("storeid");
     this.GetPayMode();this. GetExpenseGroupByCompanyId();
    // this.showexpensesData(0,'Expense')
    

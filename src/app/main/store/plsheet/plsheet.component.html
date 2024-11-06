@@ -66,21 +66,21 @@
                                     <table>
                                         <tr>
                                             <td class="text-left">Opening Stock</td>
-                                            <td><span>$</span>{{this.storedetail.openingStock}}</td>
+                                            <td><span>$</span>{{this.storedetail.openingStock.toFixed(2)}}</td>
                                             <td class="text-left">Monthly Inside Sales</td>
-                                            <td><span>$</span>{{this.storedetail.insideSale}}</td>
+                                            <td><span>$</span>{{this.storedetail.insideSale.toFixed(2)}}</td>
                                         </tr>
                                         <tr>
                                             <td class="text-left">Cash Purchase</td>
-                                            <td><span>$</span>{{this.storedetail.cashPurchase}}</td>
+                                            <td><span>$</span>{{this.storedetail.cashPurchase.toFixed(2)}}</td>
                                             <td class="text-left"></td>
                                             <td></td>
                                         </tr>
                                         <tr>
                                             <td class="text-left">Chq Purchase</td>
-                                            <td><span>$</span>{{this.storedetail.checkPurchase}}</td>
+                                            <td><span>$</span>{{this.storedetail.checkPurchase.toFixed(2)}}</td>
                                             <td class="text-left">Closing Stock</td>
-                                            <td><span>$</span>{{this.storedetail.closingStock}}</td>
+                                            <td><span>$</span>{{this.storedetail.closingStock.toFixed(2)}}</td>
                                         </tr>
                                         <tr>
                                             <td class="text-left">Credit Eby brown bank</td>
@@ -90,19 +90,19 @@
                                         </tr>
                                         <tr class="highlight">
                                             <td class="text-left">Total</td>
-                                            <td><span>$</span>{{this.storedetail.totalBalance }}</td>
+                                            <td><span>$</span>{{this.storedetail.totalBalance.toFixed(2) }}</td>
                                             <td class="text-left">Total</td>
-                                            <td><span>$</span>{{this.storedetail.totalSaleBalance}}</td>
+                                            <td><span>$</span>{{this.storedetail.totalSaleBalance.toFixed(2)}}</td>
                                         </tr>
                                         <tr>
                                             <td class="text-left">Inside Gross Profit</td>
-                                            <td><span>$</span>{{this.storedetail.insideGrossProfit }}</td>
+                                            <td><span>$</span>{{this.storedetail.insideGrossProfit.toFixed(2) }}</td>
                                             <td class="text-left">% Margin</td>
                                             <td><span>$</span>{{this.storedetail.margin}}</td>
                                         </tr>
                                         <tr class="total">
                                             <td class="text-left">Inside Total Gross</td>
-                                            <td><span>$</span>{{this.storedetail.insideGrossProfit}}</td>
+                                            <td><span>$</span>{{this.storedetail.insideGrossProfit.toFixed(2)}}</td>
                                             <td class="text-left"></td>
                                             <td></td>
                                         </tr>
@@ -120,15 +120,15 @@
                                             <tr
                                                 *ngIf="this.storedetail.payrolAmount!=null && this.storedetail.payrolAmount>0">
                                                 <td class="text-left">Payroll</td>
-                                                <td>{{this.storedetail.payrolAmount}}</td>
+                                                <td>{{this.storedetail.payrolAmount.toFixed(2)}}</td>
                                             </tr>
                                             <tr *ngFor="let item of  this.storedetail.fixedExpenseDtos">
                                                 <td class="text-left">{{item.expenseName}}</td>
-                                                <td>{{item.expenseAmount}}</td>
+                                                <td>{{item.expenseAmount.toFixed(2)}}</td>
                                             </tr>
                                             <tr>
                                                 <td class="text-left">Total Fixed Expenses</td>
-                                                <td>{{this.storedetail.fixedExpenceAmount}}</td>
+                                                <td>{{this.storedetail.fixedExpenceAmount.toFixed(2)}}</td>
                                             </tr>
 
                                             <tr>
@@ -136,20 +136,20 @@
                                             </tr>
                                             <tr *ngFor="let item of  this.storedetail.variableExpenseDtos">
                                                 <td class="text-left">{{item.expenseName}}</td>
-                                                <td>{{item.expenseAmount}}</td>
+                                                <td>{{item.expenseAmount.toFixed(2)}}</td>
                                             </tr>
                                             <tr>
                                                 <td class="text-left">Total Variable Expenses</td>
-                                                <td>{{this.storedetail.variableExpenseAmount}}</td>
+                                                <td>{{this.storedetail.variableExpenseAmount.toFixed(2)}}</td>
                                             </tr>
 
                                             <tr>
                                                 <td class="text-left">Total Expense</td>
-                                                <td>{{this.storedetail.totalExpenseAmount}}</td>
+                                                <td>{{this.storedetail.totalExpenseAmount.toFixed(2)}}</td>
                                             </tr>
                                             <tr>
                                                 <td class="text-left"> Net Income</td>
-                                                <td>{{this.storedetail.netIncomeAmount}}</td>
+                                                <td>{{this.storedetail.netIncomeAmount.toFixed(2)}}</td>
                                             </tr>
                                             <tr>
                                                 <td class="text-left">Total Store Sales (Inside+Gas ($) Sales)</td>
@@ -158,16 +158,16 @@
 
                                             <tr>
                                                 <td class="text-left">Gas Total Profit</td>
-                                                <td>{{this.storedetail.gesProfitAmount}}</td>
+                                                <td>{{this.storedetail.gesProfitAmount.toFixed(2)}}</td>
                                             </tr>
 
                                             <tr>
                                                 <td class="text-left">Total Gallon</td>
-                                                <td>{{this.storedetail.gesSaleQuantity }}</td>
+                                                <td>{{this.storedetail.gesSaleQuantity.toFixed(2) }}</td>
                                             </tr>
                                             <tr>
                                                 <td class="text-left">Gas Margin for the Month</td>
-                                                <td>{{this.storedetail.gesMargin}}</td>
+                                                <td>{{this.storedetail.gesMargin.toFixed(2)}}</td>
                                             </tr>
                                         </table>
 
@@ -177,11 +177,11 @@
                                             </tr>
                                             <tr>
                                                 <td class="text-left">Inside Gross</td>
-                                                <td>{{this.storedetail.insideGrossProfit}}</td>
+                                                <td>{{this.storedetail.insideGrossProfit.toFixed(2)}}</td>
                                             </tr>
                                             <tr>
                                                 <td class="text-left">Gas Profit</td>
-                                                <td>{{this.storedetail.gesProfitAmount}}</td>
+                                                <td>{{this.storedetail.gesProfitAmount.toFixed(2)}}</td>
                                             </tr>
                                             <!-- <tr>
                                                 <td class="text-left">Lotto Commission</td>
@@ -213,11 +213,11 @@
                                             </tr> -->
                                             <tr *ngFor="let item of this.storedetail.otherIncomeDtos">
                                                 <td class="text-left">{{item.incomeTypeName}}</td>
-                                                <td>{{item.amount}}</td>
+                                                <td>{{item.amount.toFixed(2)}}</td>
                                             </tr>
                                             <tr>
                                                 <td class="text-left">Total</td>
-                                                <td>{{this.storedetail.totalIncome}}</td>
+                                                <td>{{this.storedetail.totalIncome.toFixed(2)}}</td>
                                             </tr>
                                         </table>
                                     </div>
@@ -256,75 +256,75 @@
                                         </tr>
                                         <tr *ngFor="let item of storedetail.closingGesStock">
                                             <td class="text-left">{{item.gesTypeName}}</td>
-                                            <td>{{item.gesQuantity}}</td>
-                                            <td>{{item.gesRate}}</td>
-                                            <td>{{item.gesAmount}}</td>
+                                            <td>{{item.gesQuantity.toFixed(2)}}</td>
+                                            <td>{{item.gesRate.toFixed(2)}}</td>
+                                            <td>{{item.gesAmount.toFixed(2)}}</td>
                                         </tr>
 
                                         <tr class="highlight">
                                             <td class="text-left">Total</td>
-                                            <td>{{this.storedetail.currentStockGes }}</td>
+                                            <td>{{this.storedetail.currentStockGes.toFixed(2) }}</td>
                                             <td class="text-left"></td>
-                                            <td>{{this.storedetail.currentStockAmount}}</td>
+                                            <td>{{this.storedetail.currentStockAmount.toFixed(2)}}</td>
                                         </tr>
                                         <tr class="total">
                                             <td colspan="4" class="text-center">Purchase Invoices</td>
                                         </tr>
                                         <tr *ngFor="let item of storedetail.gesPurchaseInvoice">
                                             <td class="text-left">{{item.invoiceNo}} {{item.invoiceDate}}</td>
-                                            <td>{{item.totalGes}}</td>
-                                            <td>{{item.avgAmount}}</td>
-                                            <td>{{item.totalAmount}}</td>
+                                            <td>{{item.totalGes.toFixed(2)}}</td>
+                                            <td>{{item.avgAmount.toFixed(2)}}</td>
+                                            <td>{{item.totalAmount.toFixed(2)}}</td>
                                         </tr>
                                         <tr class="highlight">
                                             <td class="text-left">Total</td>
-                                            <td>{{this.storedetail.purchaseInvoiceGesGallan }}</td>
+                                            <td>{{this.storedetail.purchaseInvoiceGesGallan.toFixed(2) }}</td>
                                             <td class="text-left"></td>
-                                            <td>{{this.storedetail.purchaseInvoiceAmount}}</td>
+                                            <td>{{this.storedetail.purchaseInvoiceAmount.toFixed(2)}}</td>
                                         </tr>
                                         <tr class="">
                                             <td class="text-left"> Beginning Inventory from Previous Montd</td>
-                                            <td>{{this.storedetail.previousStockGes }}</td>
+                                            <td>{{this.storedetail.previousStockGes.toFixed(2) }}</td>
                                             <td class="text-left"></td>
-                                            <td>{{this.storedetail.previousStockAmount}}</td>
+                                            <td>{{this.storedetail.previousStockAmount.toFixed(2)}}</td>
                                         </tr>
                                         <tr class="">
                                             <td class="text-left">Total Cost of Gas (Total Purchase+Beg Inventory)</td>
 
-                                            <td>{{this.storedetail.totalStockGes }}</td>
+                                            <td>{{this.storedetail.totalStockGes.toFixed(2) }}</td>
                                             <td class="text-left"></td>
-                                            <td>{{this.storedetail.totalStockAmount}}</td>
+                                            <td>{{this.storedetail.totalStockAmount.toFixed(2)}}</td>
 
                                         </tr>
                                         <tr class="">
                                             <td class="text-left">Less : Closing Inventory</td>
-                                            <td>{{this.storedetail.currentStockGes }}</td>
+                                            <td>{{this.storedetail.currentStockGes.toFixed(2) }}</td>
                                             <td class="text-left"></td>
-                                            <td>{{this.storedetail.currentStockAmount}}</td>
+                                            <td>{{this.storedetail.currentStockAmount.toFixed(2)}}</td>
                                         </tr>
                                         <tr class="">
                                             <td class="text-left">Net Sold Cost</td>
-                                            <td>{{this.storedetail.netSoldGes }}</td>
+                                            <td>{{this.storedetail.netSoldGes.toFixed(2) }}</td>
                                             <td class="text-left"></td>
-                                            <td>{{this.storedetail.netSoldAmount}}</td>
+                                            <td>{{this.storedetail.netSoldAmount.toFixed(2)}}</td>
                                         </tr>
                                         <tr class="">
                                             <td class="text-left">Sales</td>
-                                            <td>{{this.storedetail.gesSaleQuantity }}</td>
+                                            <td>{{this.storedetail.gesSaleQuantity.toFixed(2) }}</td>
                                             <td class="text-left"></td>
-                                            <td>{{this.storedetail.gesSaleAmount}}</td>
+                                            <td>{{this.storedetail.gesSaleAmount.toFixed(2)}}</td>
                                         </tr>
                                         <tr class="">
                                             <td class="text-left">Profit</td>
-                                            <td>{{this.storedetail.gesProfitQuantity }}</td>
+                                            <td>{{this.storedetail.gesProfitQuantity.toFixed(2) }}</td>
                                             <td class="text-left"></td>
-                                            <td>{{this.storedetail.gesProfitAmount}}</td>
+                                            <td>{{this.storedetail.gesProfitAmount.toFixed(2)}}</td>
                                         </tr>
                                         <tr class="">
                                             <td class="text-left">Margin</td>
                                             <td></td>
                                             <td class="text-left"></td>
-                                            <td>{{this.storedetail.gesMargin}}</td>
+                                            <td>{{this.storedetail.gesMargin.toFixed(2)}}</td>
                                         </tr>
                                     </table>
                                 </div>
@@ -370,16 +370,16 @@
                                             <tr *ngFor="let item of vendorCategoryAmountscase" class="purchasetext">
                                                 <td>{{item.amountDate | date : 'dd-MM-yyyy'}}</td>
                                                 <td>{{ item.vendorName }}</td>
-                                                <td *ngFor="let category of categories">{{ item.amounts[category] || 0
+                                                <td *ngFor="let category of categories">{{ (item.amounts[category]).toFixed(2) || 0
                                                     }}</td>
-                                                <td class="total">{{ getTotalAmountForVendor(item) }}</td>
+                                                <td class="total">{{ (getTotalAmountForVendor(item)).toFixed(2) }}</td>
                                             </tr>
                                             <tr class="purchasetext">
                                                 <td class="total"></td>
                                                 <td class="total">Total</td>
                                                 <td *ngFor="let category of categories" class="total">{{
-                                                    totalAmounts[category] || 0 }}</td>
-                                                <td class="total">{{this.totalamountpurchasecash }}</td>
+                                                   ( totalAmounts[category] ).toFixed(2) || 0 }}</td>
+                                                <td class="total">{{this.totalamountpurchasecash.toFixed(2) }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -428,14 +428,14 @@
                                                 <td>{{ item.vendorName }}</td>
                                                 <td *ngFor="let category of categories">{{ item.amounts[category] || 0
                                                     }}</td>
-                                                <td class="total">{{ getTotalAmountForVendor(item) }}</td>
+                                                <td class="total">{{ (getTotalAmountForVendor(item)).toFixed(2) }}</td>
                                             </tr>
                                             <tr class="purchasetext">
                                                 <td class="total"></td>
                                                 <td class="total">Total</td>
                                                 <td *ngFor="let category of categories" class="total">{{
-                                                    totalAmountscheque[category] || 0 }}</td>
-                                                <td class="total">{{this.totalamountpurchasecheque }}</td>
+                                                   ( totalAmountscheque[category] ).toFixed(2) || 0.00 }}</td>
+                                                <td class="total">{{this.totalamountpurchasecheque.toFixed(2) }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -472,6 +472,7 @@
                                             <tr>
                                                 <th>Date</th>
                                                 <th>Cost Head</th>
+                                                <th>Description</th>
                                                 <th>Amount</th>
 
                                             </tr>
@@ -480,13 +481,14 @@
                                             <tr *ngFor="let item of this.storedetail.expenseData" class="expensedata">
                                                 <td>{{item.amountDate | date : 'dd-MM-yyyy'}}</td>
                                                 <td>{{ item.expenseName }}</td>
-                                                <td>{{item.expenseAmount}}</td>
+                                                <td>{{item.description}}</td>
+                                                <td>{{item.expenseAmount.toFixed(2)}}</td>
 
                                             </tr>
                                             <tr>
                                                 <td></td>
                                                 <td>Total</td>
-                                                <td>{{this.storedetail.totalExpenseData}}</td>
+                                                <td>{{this.storedetail.totalExpenseData.toFixed(2)}}</td>
                                             </tr>
 
                                         </tbody>

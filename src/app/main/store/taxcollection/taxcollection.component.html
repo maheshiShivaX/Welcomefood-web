@@ -68,7 +68,7 @@
                             <th>Description</th>
                             <th>Pay Type</th>
                             <th>Amount</th>
-                            <th>Cheque No</th>
+                            <!-- <th>Cheque No</th> -->
                             <th>Amount Date</th>
                             <th>Entry Date</th>
                             <th colspan="2">Action</th>
@@ -82,8 +82,8 @@
                             <td>{{row.description}}</td>
                             
                             <td>{{row.payModeType}}</td>
-                            <td>{{row.amount}}</td>
-                            <td>{{row.chequeNo}}</td>
+                            <td>{{row.amount.toFixed(2)}}</td>
+                            <!-- <td>{{row.chequeNo}}</td> -->
                             <td>{{row.amountDate  | date : 'dd-MM-yyyy'}}</td>
                             <td>{{row.createdDate | date : 'dd-MM-yyyy hh:mm:ss'}}</td>
                             <td class="action">

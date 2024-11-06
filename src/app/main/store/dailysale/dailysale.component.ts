@@ -1,10 +1,13 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, SimpleChanges, ViewChild } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/_services/auth.service';
 import { HttpService } from 'src/app/_services/http.service';
 import { environment } from 'src/app/environments/environment.prod';
+import { LotteryComponent } from '../lottery/lottery.component';
+import { TriggerdailyService } from 'src/app/_services/triggerdaily.service';
+import { Subscription } from 'rxjs';
 
 interface InventoryItem {
   name: string;
@@ -26,6 +29,8 @@ export class DailysaleComponent {
   storesdata = [
     { storeid: 'Job', fromdate: 'fdg', todate:'dfg' }
   ];
+
+
 
 
 
@@ -52,7 +57,7 @@ export class DailysaleComponent {
   //today: string;
   insideList: any
   storeId: any;
-  entryDate: string | undefined;
+  entryDate: any;
   otherList: any;
   storedata: any;
   insidesaleamount: any = 0;
@@ -70,21 +75,32 @@ export class DailysaleComponent {
   productlist: any;
   productcategorylist: any;
   purchaseitemlist: any;
-  constructor(private router: Router, private authService: AuthService, private route: ActivatedRoute,
-    private http: HttpService, private toastr: ToastrService) {
+  private dataChangeSubscription: Subscription;
+  constructor(private router: Router, private authService: AuthService, private route: ActivatedRoute,  private dataService: TriggerdailyService,
+    private http: HttpService, private toastr: ToastrService ,  ) {
     this.entryDate = new Date().toISOString().split('T')[0];
-
- 
-
 
     this.dated = this.entryDate;
 
-    // this.storesdata[0].storeid = this.storeId;
-    // this.storesdata[0].fromdate = this.dated;
-    // this.storesdata[0].todate=this.dated
+ 
+    this.dataChangeSubscription = this.dataService.dataChange$.subscribe((menutype: any) => {
+      console.log('Menu type changed to:', menutype);
+      if(menutype=='0')
+      {
+           this.storeId =localStorage.getItem("storeid");
+    this.entryDate =localStorage.getItem("tentrydate") 
+    this.dated = this.entryDate;
+    this.GetStoreDetailAll(this.storeId) 
+    this.GetInsideSale(this.storeId, 1, this.entryDate);
+    this.GetOtherSale(this.storeId, 1, this.entryDate);
+
+    this.GetAmountByGroupId(this.storeId, this.entryDate)
+      }
+      
+    });
 
   }
-
+showtaps:boolean=false;
 
   onDateChange(event :any)
   {
@@ -96,14 +112,11 @@ console.log('Selected Date:', this.entryDate);
 
 this.storeId = this.route.snapshot.params["storeId"];
 localStorage.setItem("storeid",this.storeId);
-
+localStorage.setItem("tentrydate",this.entryDate);
+this.dataService.triggerDataChange(this.activetab);
 this.dated = this.entryDate;
-this.GetStoreDetailAll(this.storeId) 
-this.GetInsideSale(this.storeId, 1, this.entryDate);
-this.GetOtherSale(this.storeId, 1, this.entryDate);
-this. GetGetStoreClosingByStoreId(this.storeId, this.entryDate) ;
-this.GetAmountByGroupId(this.storeId, this.entryDate)
-this.  GetCreditCardByStoreIdDate();
+this.showData(this.activetab);
+
   }
 
   storedetail: any;
@@ -504,8 +517,19 @@ showTaxCollection:boolean = false;
 showArcade:boolean = false
   showlottery:boolean=false;
 showOtherincome :boolean=false;
+activetab:any=0;
+
+
+ngOnChanges(changes: SimpleChanges) {
+  if (changes['storesdata']) {
+    console.log('Stores data has been updated:', this.storesdata);
+    // Additional logic to handle the new data can go here
+  }
+}
   showData(pid: any) {
+   this.activetab=pid;
      //alert(pid)
+     this.activetab=pid;
     this.showDailysaleInput = false;
     this.showGasInput = false;
     this.showPurchasesInput = false;
@@ -527,7 +551,9 @@ this.showArcade=false;
     this.storesdata[0].fromdate = this.dated;
     this.storesdata[0].todate=this.dated
 
+    console.log(this.storesdata[0]);
 
+this.showtaps=true;
     
     if (pid == 0) {
       this.showDailysaleInput = true;
@@ -560,7 +586,17 @@ this.showArcade=false;
       this.showrebate = true;
     }
     else if (pid == 8) {
-      this.showlottery = true;
+
+      if(this.showlottery== false)
+      {
+        this.showlottery= true;
+      }else
+      {
+        this.showlottery = false;
+      }
+    
+      
+    
     } else if (pid == 9) {
       this.showClosingInput = true;
 

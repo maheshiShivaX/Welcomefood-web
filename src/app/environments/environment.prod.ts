@@ -8,12 +8,12 @@ export const environment = {
     apiUrlsms: "http://sms.ishivax.in/api/",
     // apiUrl1:"https://anutechinfra.com/anutechAPI/"
     // apiUrl:"https://anutechinfra.com/anutechAPI/api/"
-   //apiUrl: 'https://localhost:7025/api/'
+  // apiUrl: 'https://localhost:7025/api/'
     //apiUrl:'https://www.indianfilms.in/eBuilderAPI/api/'
   },
 
 
-  siteurl: "https://anutechinfra.com/anutechAPI/",
+  siteurl: "https://www.indianfilms.in/wfapi/",
   appVersion: 'v1.0.0',
   USERDATA_KEY: 'authf649fc9a5f55',
   isMockEnabled: true,
@@ -228,7 +228,14 @@ GetStoreEmployeeByCompanyId:"StoreEmployee/GetStoreEmployeeByCompanyId",
 GetStoreEmployeeByStoreId:"StoreEmployee/GetStoreEmployeeByStoreId",
 SaveArcadeDetail:"ArcadeDetail/SaveArcadeDetail",
 GetArcadeDetailByStoreDate:"ArcadeDetail/GetArcadeDetailByStoreDate",
-DeleteArcadeDetailByStoreIdPayId:"ArcadeDetail/DeleteArcadeDetailByStoreIdPayId"
-
+DeleteArcadeDetailByStoreIdPayId:"ArcadeDetail/DeleteArcadeDetailByStoreIdPayId",
+DailySaleReportDatewise:"PLReport/DailySaleReportDatewise",
+SaveGasSale:"GasSale/SaveGasSale",
+GetGasSaleByStoreDate:"GasSale/GetGasSaleByStoreDate",
+GetCashReconsilType:"CashReconsilType/GetCashReconsilType",
+DeleteGasSaleByStoreIdDate:"GasSale/DeleteGasSaleByStoreIdDate",
+SaveCashReconsilType:"CashReconsilType/SaveCashReconsilType",
+DeleteCashReconsilTypeById:"CashReconsilType/DeleteCashReconsilTypeById",
+DeleteItemPurchaseById:"ItemPurchase/DeleteItemPurchaseById",
 };
 

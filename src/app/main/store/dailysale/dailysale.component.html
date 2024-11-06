@@ -18,19 +18,17 @@
                         <div class="navbarTabBar_menu">
                             <nav>
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                    <button class="nav-link active" id="daily_sales-tab" data-bs-toggle="tab"
+                                    <button [ngClass]="this.activetab==0 ? 'nav-link active' : 'nav-link'" id="daily_sales-tab" data-bs-toggle="tab"
                                         (click)="showData(0)" data-bs-target="#daily_sales " type="button" role="tab"
                                         aria-controls="daily_sales" aria-selected="true"><svg
                                             _ngcontent-ng-c1357113999="" width="16" height="16" viewBox="0 0 19 19"
                                             fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path _ngcontent-ng-c1357113999=""
                                                 d="M18.2202 17.6513H17.5976V5.5664H18.1469C18.3464 5.5664 18.5304 5.458 18.6276 5.28315C18.675 5.19737 18.6987 5.10044 18.696 5.00244C18.6934 4.90444 18.6645 4.80893 18.6125 4.72584L15.8659 0.240673C15.6653 -0.0802147 15.1354 -0.0802147 14.9347 0.240673L12.1881 4.72584C12.1361 4.80893 12.1072 4.90445 12.1046 5.00245C12.102 5.10046 12.1256 5.19739 12.1731 5.28315C12.2207 5.36895 12.2904 5.44046 12.3749 5.49027C12.4594 5.54007 12.5557 5.56636 12.6538 5.5664H13.2031V17.6513H12.1045V8.31297C12.1045 8.00946 11.8587 7.76366 11.5552 7.76366H8.25926C7.95566 7.76366 7.70995 8.00946 7.70995 8.31297V17.6513H6.61132V11.6089C6.61132 11.3053 6.36552 11.0595 6.062 11.0595H2.76611C2.46251 11.0595 2.21679 11.3053 2.21679 11.6089V17.6513H0.568847C0.265244 17.6513 0.0195312 17.8971 0.0195312 18.2006C0.0195312 18.5043 0.265244 18.75 0.568847 18.75H18.2202C18.5237 18.75 18.7695 18.5043 18.7695 18.2006C18.7695 17.8971 18.5237 17.6513 18.2202 17.6513ZM1.66748 4.46776C1.97052 4.46776 2.21679 4.71403 2.21679 5.01708C2.21679 5.32024 1.97052 5.5664 1.66748 5.5664C1.57091 5.56629 1.47607 5.5408 1.39245 5.4925C1.30883 5.44419 1.23938 5.37475 1.19105 5.29115C1.03976 5.02886 0.703436 4.93719 0.440673 5.09111C0.178261 5.24299 0.088203 5.57876 0.240517 5.84164C0.438154 6.18383 0.755614 6.4279 1.11816 6.5578V7.17028C1.11816 7.474 1.36387 7.71959 1.66748 7.71959C1.97099 7.71959 2.21679 7.474 2.21679 7.17028V6.56375C2.85479 6.33635 3.31542 5.73233 3.31542 5.01708C3.31542 4.10841 2.57615 3.36913 1.66748 3.36913C1.36431 3.36913 1.11816 3.12298 1.11816 2.81982C1.11816 2.51677 1.36431 2.2705 1.66748 2.2705C1.76402 2.27064 1.85884 2.29613 1.94243 2.34444C2.02603 2.39275 2.09546 2.46217 2.14378 2.54575C2.29461 2.80757 2.62935 2.89763 2.89428 2.7459C3.15658 2.59403 3.24675 2.25826 3.09432 1.99526C2.89668 1.65307 2.57922 1.409 2.21679 1.27925V0.549315C2.21679 0.2458 1.97099 0 1.66748 0C1.36387 0 1.11816 0.2458 1.11816 0.549315V1.27303C0.480165 1.50067 0.0195312 2.10457 0.0195312 2.81982C0.0195312 3.72849 0.758807 4.46776 1.66748 4.46776Z"
-                                                fill="#fff"></path>
+                                                fill=""></path>
                                         </svg> Daily Sales </button>
-                                        
 
-
-                                        <button class="nav-link " id="gas_inventory-tab" data-bs-toggle="tab"
+                                        <button [ngClass]="this.activetab==8 ? 'nav-link active' : 'nav-link'" id="gas_inventory-tab" data-bs-toggle="tab"
                                         (click)="showData(8)" data-bs-target="#gas_inventory" type="button" role="tab"
                                         aria-controls="gas_inventory" aria-selected="false"><svg
                                             _ngcontent-ng-c1357113999="" width="16" height="18" viewBox="0 0 18 20"
@@ -41,7 +39,7 @@
                                         </svg> Lottery </button>
 
 
-                                    <button class="nav-link " id="gas_inventory-tab" data-bs-toggle="tab"
+                                    <button [ngClass]="this.activetab ==1 ? 'nav-link active' : 'nav-link'" id="gas_inventory-tab" data-bs-toggle="tab"
                                         (click)="showData(1)" data-bs-target="#gas_inventory" type="button" role="tab"
                                         aria-controls="gas_inventory" aria-selected="false"><svg
                                             _ngcontent-ng-c1357113999="" width="16" height="18" viewBox="0 0 18 20"
@@ -51,7 +49,7 @@
                                                 fill=""></path>
                                         </svg> Gas Inventory </button>
 
-                                    <button class="nav-link" id="purchases-tab" data-bs-toggle="tab"
+                                    <button [ngClass]="this.activetab ==2 ? 'nav-link active' : 'nav-link'" id="purchases-tab" data-bs-toggle="tab"
                                         (click)="showData(2)" data-bs-target="#purchases" type="button" role="tab"
                                         aria-controls="purchases" aria-selected="false"> <svg
                                             _ngcontent-ng-c1357113999="" width="18" height="18" viewBox="0 0 20 20"
@@ -61,7 +59,7 @@
                                                 fill=""></path>
                                         </svg> Purchases </button>
 
-                                    <button class="nav-link" id="expenses-tab" data-bs-toggle="tab"
+                                    <button [ngClass]="this.activetab ==3 ? 'nav-link active' : 'nav-link'" id="expenses-tab" data-bs-toggle="tab"
                                         (click)="showData(3)" data-bs-target="#expenses" type="button" role="tab"
                                         aria-controls="expenses" aria-selected="false"><svg _ngcontent-ng-c1357113999=""
                                             width="18" height="18" viewBox="0 0 20 20" fill="none"
@@ -71,7 +69,7 @@
                                                 fill=""></path>
                                         </svg> Expenses </button>
 
-                                        <button class="nav-link" id="expenses-tab" data-bs-toggle="tab"
+                                        <button [ngClass]="this.activetab ==10 ? 'nav-link active' : 'nav-link'" id="expenses-tab" data-bs-toggle="tab"
                                         (click)="showData(10)" data-bs-target="#expenses" type="button" role="tab"
                                         aria-controls="expenses" aria-selected="false"><svg _ngcontent-ng-c1357113999=""
                                             width="18" height="18" viewBox="0 0 20 20" fill="none"
@@ -81,7 +79,7 @@
                                                 fill=""></path>
                                         </svg> Credit Card </button>
 
-                                    <button class="nav-link" id="payroll-tab" data-bs-toggle="tab" (click)="showData(4)"
+                                    <button [ngClass]="this.activetab ==4 ? 'nav-link active' : 'nav-link'" id="payroll-tab" data-bs-toggle="tab" (click)="showData(4)"
                                         data-bs-target="#payroll" type="button" role="tab" aria-controls="payroll"
                                         aria-selected="false"> <svg _ngcontent-ng-c1357113999="" width="18" height="18"
                                             viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -91,7 +89,7 @@
                                         </svg> Payroll
                                     </button>
 
-                                    <button class="nav-link" id="other_income-tab" data-bs-toggle="tab"
+                                    <button [ngClass]="this.activetab ==5 ? 'nav-link active' : 'nav-link'" id="other_income-tab" data-bs-toggle="tab"
                                         (click)="showData(5)" data-bs-target="#other_income" type="button" role="tab"
                                         aria-controls="other_income" aria-selected="false"> <svg
                                             _ngcontent-ng-c1357113999="" width="18" height="18" viewBox="0 0 20 20"
@@ -103,7 +101,7 @@
 
 
                                         
-                                    <button class="nav-link" id="other_income-tab" data-bs-toggle="tab"
+                                    <button [ngClass]="this.activetab ==11 ? 'nav-link active' : 'nav-link'" id="other_income-tab" data-bs-toggle="tab"
                                     (click)="showData(11)" data-bs-target="#other_income" type="button" role="tab"
                                     aria-controls="other_income" aria-selected="false"> <svg
                                         _ngcontent-ng-c1357113999="" width="18" height="18" viewBox="0 0 20 20"
@@ -114,7 +112,7 @@
                                     </svg> Other Cash Adjustment</button>
 
                                     
-                                    <button class="nav-link" id="other_income-tab" data-bs-toggle="tab"
+                                    <button [ngClass]="this.activetab ==12 ? 'nav-link active' : 'nav-link'" id="other_income-tab" data-bs-toggle="tab"
                                     (click)="showData(12)" data-bs-target="#other_income" type="button" role="tab"
                                     aria-controls="other_income" aria-selected="false"> <svg
                                         _ngcontent-ng-c1357113999="" width="18" height="18" viewBox="0 0 20 20"
@@ -126,7 +124,7 @@
 
 
 
-                                    <button class="nav-link" id="other_income-tab" data-bs-toggle="tab"
+                                    <button [ngClass]="this.activetab ==13 ? 'nav-link active' : 'nav-link'" id="other_income-tab" data-bs-toggle="tab"
                                     (click)="showData(13)" data-bs-target="#other_income" type="button" role="tab"
                                     aria-controls="other_income" aria-selected="false"> <svg
                                         _ngcontent-ng-c1357113999="" width="18" height="18" viewBox="0 0 20 20"
@@ -137,7 +135,7 @@
                                     </svg> Arcade</button>
 
 
-                                        <button class="nav-link" id="other_income-tab" data-bs-toggle="tab"
+                                        <button [ngClass]="this.activetab ==9 ? 'nav-link active' : 'nav-link'" id="other_income-tab" data-bs-toggle="tab"
                                         (click)="showData(9)" data-bs-target="#other_income" type="button" role="tab"
                                         aria-controls="other_income" aria-selected="false"> <svg
                                             _ngcontent-ng-c1357113999="" width="18" height="18" viewBox="0 0 20 20"
@@ -148,7 +146,7 @@
                                         </svg> Closing Cash/Stock </button>
 
 
-                                    <button class="nav-link" id="store_summary-tab" data-bs-toggle="tab"
+                                    <button [ngClass]="this.activetab ==6 ? 'nav-link active' : 'nav-link'" id="store_summary-tab" data-bs-toggle="tab"
                                         (click)="showData(6)" data-bs-target="#store_summary" type="button" role="tab"
                                         aria-controls="store_summary" aria-selected="false"> <svg
                                             _ngcontent-ng-c1357113999="" width="18" height="18" viewBox="0 0 20 20"
@@ -164,7 +162,7 @@
                                     max="2018-12-31" /> -->
                             <input type="date" (change)="onDateChange($event)"  [value]="entryDate | date:'yyyy-MM-dd'" />
                         </div>
-                        <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-content" id="nav-tabContent" >
                             <div *ngIf="showDailysaleInput">
                                 <div class="dailysales-contain mt-4" >
                                     <div class="d-flex justify-content-between align-items-center">
@@ -210,77 +208,8 @@
 
 
 
-                                        <div class="mt-4" style="display: none;">
-                                            <div class="dailyform">
-                                                <div class="columncountsection">
-                                                    <ng-container *ngFor="let item of creditcardlist">
-                                                        <div class="category ">
-
-                                                            <div class="form">
-
-                                                                <div class="form-group row mx-1">
-                                                                    <label for="inputPassword"
-                                                                        class="col-xl-3 col-md-4 px-2 col-form-label"><b
-                                                                            style="font-weight:600">{{item.cardName}}</b></label>
-                                                                    <div
-                                                                        class="inputfield col-xl-9 col-md-8 d-flex align-items-center">
-                                                                        <span>$</span>
-                                                                        <input type="text" class="form-control"
-                                                                            [(ngModel)]="item.amount"
-                                                                            (keypress)="validateNumber($event)"
-                                                                            (input)="validateDecimalPlaces($event)"
-                                                                            (blur)="onTextboxCreditLeave($event,item )"
-                                                                            id="grocery" placeholder="">
-                                                                    </div>
-                                                                </div>
-
-                                                            </div>
-                                                        </div>
-                                                    </ng-container>
-                                                </div>
-                                                <div class="totalamount d-flex justify-content-end">
-                                                    <span>Total Credit Card Amount :
-                                                        <b>${{this.creditcardamount}}</b></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mt-4" style="display: none;">
-                                            <div class="dailyform">
-                                                <div class="columncountsection Closing-cash">
-                                                    <div class="category ">
-
-                                                        <div class="form">
-                                                    <div class="form-group row mx-1">
-                                                        <label for="inputPassword"
-                                                            class="col-xl-3 col-md-4 px-2 col-form-label"><b
-                                                                style="font-weight:600">Closing Cash</b></label>
-                                                        <div
-                                                            class="inputfield col-xl-9 col-md-8 d-flex align-items-center">
-                                                            <span>$</span>
-                                                            <input type="text" class="form-control"
-                                                                [(ngModel)]="this.storeclosingcash"
-                                                                (keypress)="validateNumber($event)"
-                                                                (input)="validateDecimalPlaces($event)"
-                                                                (blur)="onTextboxLeaveClosing($event )" id="grocery"
-                                                                placeholder="">
-                                                        </div>
-                                                    </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="totalamount d-flex justify-content-end">
-                                                    <span>Total Physical Closing Cash : <b>${{this.storeclosingcash}}</b></span>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
-                                    <!-- <div class="fixed-button col-xl-10 col-lg-9 col-md-8">
-                                        <div class="d-flex justify-content-end w-100">
-                                            <div class="next-submitbtn">
-                                                <button type="button" (click)="showData(1);">NEXT</button>
-                                            </div>
-                                        </div>
-                                    </div> -->
+                                   
 
 
 
@@ -292,7 +221,7 @@
                             <div >
                             
                                 <div class="dailysalesexpenses" *ngIf=" this.showGasInput== true">
-                                    <app-gesinvoice ></app-gesinvoice>
+                                    <app-gesinvoice  [storesdata]="storesdata"></app-gesinvoice>
                                     <!-- <div class="fixed-button col-xl-10 col-lg-9 col-md-8">
                                         <div class="d-flex justify-content-between w-100">
                                             <div class="back-submitbtn">
@@ -327,7 +256,7 @@
                             </div>
 
                             <div  class="dailysalesexpenses"  *ngIf=" this.showExpensesnewInput== true">
-                                <app-expense></app-expense>
+                                <app-expense [storesdata]="storesdata"></app-expense>
                                 <!-- <div class="fixed-button col-xl-10 col-lg-9 col-md-8">
                                     <div class="d-flex justify-content-between w-100">
                                         <div class="back-submitbtn">
@@ -340,7 +269,7 @@
                                 </div> -->
                             </div>
                             <div  class="dailysalesexpenses"  *ngIf=" this.showCreditcardinput== true">
-                                <app-creditcard></app-creditcard>
+                                <app-creditcard [storesdata]="storesdata"></app-creditcard>
                                 <!-- <div class="fixed-button col-xl-10 col-lg-9 col-md-8">
                                     <div class="d-flex justify-content-between w-100">
                                         <div class="back-submitbtn">
@@ -353,7 +282,7 @@
                                 </div> -->
                             </div>
                             <div  class="dailysalesexpenses"  *ngIf=" this.showpayroll== true">
-                                <app-payroll></app-payroll>
+                                <app-payroll [storesdata]="storesdata"></app-payroll>
                                 <!-- <div class="fixed-button col-xl-10 col-lg-9 col-md-8">
                                     <div class="d-flex justify-content-between w-100">
                                         <div class="back-submitbtn">
@@ -367,7 +296,7 @@
                             </div>
 
                             <div  class="dailysalesexpenses"  *ngIf=" this.showOtherincome== true">
-                                <app-otherincome></app-otherincome>
+                                <app-otherincome [storesdata]="storesdata" ></app-otherincome>
 
                                 <!-- <div class="fixed-button col-xl-10 col-lg-9 col-md-8">
                                     <div class="d-flex justify-content-between w-100">

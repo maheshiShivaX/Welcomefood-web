@@ -1,0 +1,110 @@
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 mb-3">
+        <div class="summaryheading">
+            <div class="d-flex justify-content-between">
+                <h4>DAILY SALES REPORTING SHEET</h4>
+              
+            </div>
+            <form class="row align-items-end px-0 col-12 justify-content-between" [formGroup]="form">
+                <div class="col-xl-4 col-lg-12">
+                    <label for="FormControlInput1" class="form-label">Store Name<span class="required">*</span></label>
+                    <ng-select formControlName="storeId" id="storeId" #SelectSizeDefault [items]="storeList"
+                        [searchable]="true" bindLabel="storeName" bindValue="storeId">
+                    </ng-select>
+                </div>
+                <div class="col-xl-2 col-lg-12">
+                    <label class="date form-label">Month</label><br>
+                    <ng-select formControlName="month" id="month" #SelectSizeDefault [items]="paymentOptions"
+                        bindLabel="label" bindValue="label">
+                    </ng-select>
+                </div>
+                <div class="col-xl-4 col-lg-12 reportbutton">
+
+                    <button type="button" (click)="onGetReport()">Get Report</button>
+
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <div class="col-lg-12 col-md-12 col-sm-12 mb-3">
+        <div class="summaryheading">
+
+    <div class="pagedatatable d-flex" *ngIf="this.dailydata!=null">
+        <div class="datasheet">
+            <div class="tsheet w-100">
+             
+               
+                <div class="section">
+                    <div class="section-title" style="text-align: center;">DAILY SALES REPORTING SHEET</div>
+                    <table *ngIf="dailydata!=null">
+                        <thead>
+
+                            <tr>
+                                <th>Date</th>
+                                <th>Inside Sale</th>
+                                <th>Sale Tax</th>
+                                <th>Gas Gallon</th>
+                                <th>Gas Amount</th>
+                                <th>Lottery Total</th>
+                                <th>Credit Card</th>
+                                <th>Coam In</th>
+                                <th>Coam Out</th>
+                                <th>Net Coam</th>
+                               
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of this.dailydata" class="expensedata">
+                                <td>{{item.date }}</td>
+                                <td>{{item.insideSale }}</td>
+                                <td>{{item.saleTax}}</td>
+                                <td>{{item.gasGallon}}</td>
+                                <td>{{item.gasAmount}}</td>
+                               
+                                <td>{{item.lotteryTotal}}</td>
+                                <td>{{item.creditCard}}</td>
+                                <td>{{item.coamIn}}</td>
+                                <td>{{item.coamOut}}</td>
+                                <td>{{item.netCoam}}</td>
+
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <th>Inside Sale</th>
+                                <th>Sale Tax</th>
+                                <th>Gas Gallon</th>
+                                <th>Gas Amount</th>
+                                <th>Lottery Total</th>
+                                <th>Credit Card</th>
+                                <th>Coam In</th>
+                                <th>Coam Out</th>
+                                <th>Net Coam</th>
+                            </tr>
+                            <tr>
+                               
+                                <td>Total</td>
+                                <td>{{this.tinsideSale}}</td>
+                                <td>{{this.tsaleTax}}</td>
+                                <td>{{this.tgasGallon}}</td>
+                                <td>{{this.tgasAmount}}</td>
+                               
+                                <td>{{this.tlotteryTotal}}</td>
+                                <td>{{this.tcreditCard}}</td>
+                                <td>{{this.tcoamIn}}</td>
+                                <td>{{this.tcoamOut}}</td>
+                                <td>{{this.tnetCoam}}</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+        </div>
+    </div>
+</div>

@@ -13,6 +13,7 @@ import { ManagelotteryComponent } from './managelottery/managelottery.component'
 import { ManagebstermComponent } from './managebsterm/managebsterm.component';
 import { TestpageComponent } from './testpage/testpage.component';
 import { TaxtypeComponent } from './taxtype/taxtype.component';
+import { ReconsiletypeComponent } from './reconsiletype/reconsiletype.component';
 
 const routes: Routes = [
   { path: 'productcategory', component: ProductcategoryComponent },
@@ -48,8 +49,12 @@ const routes: Routes = [
   {
     path: 'taxtype', component: TaxtypeComponent
   }
-  
-  
+  ,
+  {
+    path: 'reconsiletype', component: ReconsiletypeComponent
+  }
+
+
 ]
 
 @NgModule({
@@ -63,7 +68,8 @@ const routes: Routes = [
     ManagelotteryComponent,
     ManagebstermComponent,
     TestpageComponent,
-    TaxtypeComponent
+    TaxtypeComponent,
+    ReconsiletypeComponent
   ],
   imports: [
     CommonModule,

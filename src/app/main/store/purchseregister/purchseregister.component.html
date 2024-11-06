@@ -41,6 +41,16 @@
                     <input type="text" class="form-control" formControlName="chequeNo" id="chequeNo"
                         placeholder="#">
                 </div>
+
+                <div class="mb-3 col-xl-3 col-lg-6" >
+                    <label for="FormControlInput1" class="form-label">Upload Invoice</label>
+                    <input formControlName="invoicePath" type="file" accept="image/*" id="formFile" class="form-control"
+                      placeholder="Photo" name="formFile" (change)="onFileChange($event)" />
+                </div>
+
+                
+              
+
                 <div class="submit-btn col-12">
                     <div class="allbtn d-flex">
                         <div class="resetbtn">
@@ -70,6 +80,7 @@
                             <th>Pay Type</th>
                             <th>Amount</th>
                             <th>Cheque No</th>
+                            <th>Invoice</th>
                             <th>Entry Date</th>
                             <th colspan="2">Action</th>
                         </tr>
@@ -83,6 +94,17 @@
                             <td>{{row.payModeType}}</td>
                             <td>{{row.amount}}</td>
                             <td>{{row.chequeNo}}</td>
+                            <td class="action">
+                                <button type="button" (click)="onView(row.invoicePath)" class="editbtn">
+                                    <svg
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                    class="feather feather-eye">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                  </svg>
+                                </button>
+                            </td>
                             <td>{{row.createdDate | date : 'dd-MM-yyyy hh:mm:ss'}}</td>
                             <td class="action">
                                 <button type="button" (click)="onEditpurchase(row.itemPurchaseId)" class="editbtn">
@@ -102,7 +124,7 @@
                                 </button>
                             </td>
                             <td class="action">
-                                <button type="button" class="deletebtn">
+                                <button type="button" class="deletebtn" (click)="ondeletepurchase(row.itemPurchaseId)">
                                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <rect width="40" height="40" rx="12" fill="#FFF0F1" />

@@ -2,8 +2,10 @@ import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/_services/auth.service';
 import { HttpService } from 'src/app/_services/http.service';
+import { TriggerdailyService } from 'src/app/_services/triggerdaily.service';
 import { environment } from 'src/app/environments/environment.prod';
 
 
@@ -42,9 +44,9 @@ export class ArcadeComponent {
       inputElement.value = value.substring(0, value.length - 1);
     }
   }
-
+  private dataChangeSubscription: Subscription;
   constructor(private router: Router, private authService: AuthService, private route: ActivatedRoute,
-    private http: HttpService, private toastr: ToastrService) {
+    private http: HttpService, private toastr: ToastrService,private dataService: TriggerdailyService,) {
     this.entryDate = new Date().toISOString().split('T')[0];
     this.selectedOption = 1;
 
@@ -54,6 +56,20 @@ export class ArcadeComponent {
       this.companyId = currentUser.companyId;
 
     });
+
+    this.dataChangeSubscription = this.dataService.dataChange$.subscribe((menutype: any) => {
+      console.log('Menu type changed to:', menutype);
+      if(menutype=='13')
+      {
+        this.storeid =localStorage.getItem("storeid");
+        this.entryDate =localStorage.getItem("tentrydate") 
+
+        this.GetArcadeDetailByStoreDate();
+
+      }
+      
+    });
+
   }
   storeid: any;
 
@@ -87,12 +103,12 @@ export class ArcadeComponent {
 
         var res1 = this.arcatedata.filter((x: { payType: number; }) => x.payType == 1)
         if (res1 != null && res1.length > 0) {
-          this.inamount = res1[0].amount;
+          this.inamount = res1[0].amount.toFixed(2);
         }
         var res2 = this.arcatedata.filter((x: { payType: number; }) => x.payType == 2)
 
         if (res2 != null && res2.length > 0) {
-          this.outamount = res2[0].amount;
+          this.outamount = res2[0].amount.toFixed(2);
         }
         //  this.inamount = this.arcatedata.filter((x: { payType: number; }) => x.payType == 1)[0].amount
         //  this.outamount = this.arcatedata.filter((x: { payType: number; }) => x.payType == 2)[0].amount

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from './_services/auth.service';
 import { HttpService } from './_services/http.service';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,9 @@ export class AppComponent {
     private http: HttpService,
   ) {
 
+
+   
+
     this.authService.currentUser.subscribe((user) => {
       const currentUser = user;
  
@@ -26,9 +30,22 @@ export class AppComponent {
 
   }
 
-
+  currentUrl:any;
 
   ngOnInit() {
+
+    this.router.events.pipe(
+      filter((event): event is NavigationEnd => event instanceof NavigationEnd)
+    ).subscribe((event: NavigationEnd) => {
+      this.currentUrl = event.url;
+     // alert(this.currentUrl);
+
+      if (this.currentUrl.includes("/auth/logindetail")) {
+        this.roleId=0;
+      } else {
+      }
+    });
+    
 
     this.authService.currentUser.subscribe((user) => {
 

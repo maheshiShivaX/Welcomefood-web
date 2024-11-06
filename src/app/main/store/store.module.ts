@@ -29,6 +29,8 @@ import { CreditcardComponent } from './creditcard/creditcard.component';
 import { CashreconcilComponent } from './cashreconcil/cashreconcil.component';
 import { TaxcollectionComponent } from './taxcollection/taxcollection.component';
 import { ArcadeComponent } from './arcade/arcade.component';
+import { DailysalereportComponent } from './dailysalereport/dailysalereport.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 const routes: Routes = [
@@ -60,9 +62,15 @@ const routes: Routes = [
   ,
   {
     path: 'managebsterm', component: ManagebstermComponent
-  },
+  }
   
-   
+  ,
+  {
+    path: 'dailysalereport', component: DailysalereportComponent
+  },
+  {
+    path: 'profile', component: ProfileComponent
+  },
 
   
 ]
@@ -92,6 +100,8 @@ const routes: Routes = [
     CashreconcilComponent,
     TaxcollectionComponent,
     ArcadeComponent,
+    DailysalereportComponent,
+    ProfileComponent,
     
   
   ],

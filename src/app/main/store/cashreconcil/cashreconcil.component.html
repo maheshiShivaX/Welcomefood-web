@@ -12,10 +12,15 @@
         <form class="" [formGroup]="form" (submit)="onSubmitCredit()">
             <div class="row">
 
-             
+                <div class="mb-3 col-xl-3 col-lg-6 form-group">
+                    <label for="FormControlInput1" class="form-label">Type</label>
+                    <ng-select formControlName="cashReconsilTypeId" id="CashReconsilTypeId" #SelectSizeDefault
+                        [items]="caserecouciltype" bindLabel="name" bindValue="cashReconsilTypeId">
+                    </ng-select>
+                </div>
 
                 <div class="mb-3 col-xl-3 col-lg-6 form-group mb-0">
-                    <label for="FormControlInput1" class="form-label">Recipient Name</label>
+                    <label for="FormControlInput1" class="form-label">Description</label>
                     <input type="text" class="form-control" id="description" formControlName="recipient"
                         placeholder="Enter Description">
                 </div>
@@ -25,7 +30,7 @@
                     <select formControlName="paymentType" class="form-control">
                         <option value="" disabled>Select an option</option>
                         <option *ngFor="let option of paymentOptions" [value]="option.value">{{ option.label }}</option>
-                      </select>
+                    </select>
                 </div>
 
                 <div class="mb-2 col-xl-2 col-lg-6">
@@ -34,7 +39,7 @@
                         (keypress)="validateNumber($event)" (input)="validateDecimalPlaces($event)" placeholder="$0.00">
                 </div>
 
-              
+
                 <div class="submit-btn col-12">
                     <div class="allbtn d-flex">
                         <div class="resetbtn">
@@ -59,7 +64,8 @@
                     <thead class="text-white">
                         <tr>
                             <th>Sr.No</th>
-                            <th>Recipient</th>
+                            <th>Type</th>
+                            <th>Description</th>
                             <th>Pay Type</th>
                             <th>Amount</th>
                             <th> Date</th>
@@ -69,10 +75,10 @@
                     <tbody>
                         <tr *ngFor="let row of casereconcil ;let idx =index">
                             <td class="tablefirstdata text-center">{{idx + 1}}</td>
-    
+                            <td>{{row.reconsilTypeName}}</td>
                             <td>{{row.recipient}}</td>
                             <td>{{row.paymentType==1 ? "Inward" : "Outward"}}</td>
-                            <td>{{row.amount}}</td>
+                            <td>{{row.amount.toFixed(2)}}</td>
                             <td>{{row.amountDate | date : 'dd-MM-yyyy'}}</td>
                             <td class="action">
                                 <button type="button" (click)="onedit(row.cashReconcilId)" class="editbtn">
@@ -116,7 +122,7 @@
                                 </button>
                             </td>
                         </tr>
-    
+
                     </tbody>
                 </table>
             </div>

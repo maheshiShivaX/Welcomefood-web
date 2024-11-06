@@ -2,8 +2,10 @@ import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/_services/auth.service';
 import { HttpService } from 'src/app/_services/http.service';
+import { TriggerdailyService } from 'src/app/_services/triggerdaily.service';
 import { environment } from 'src/app/environments/environment.prod';
 
 
@@ -18,9 +20,9 @@ export class TaxcollectionComponent {
   entryDate:any;
   selectedOption:any;
   companyId:any;
-
+  private dataChangeSubscription: Subscription;
   constructor(private router: Router, private authService: AuthService, private route: ActivatedRoute,
-    private http: HttpService, private toastr: ToastrService) {
+    private http: HttpService, private toastr: ToastrService, private dataService: TriggerdailyService) {
     this.entryDate = new Date().toISOString().split('T')[0];
     this.selectedOption = 1;
 
@@ -29,6 +31,26 @@ export class TaxcollectionComponent {
       // this.formExpense.value.createdBy = currentUser.loginId;
       this.companyId = currentUser.companyId;
     });
+
+    this.dataChangeSubscription = this.dataService.dataChange$.subscribe((menutype: any) => {
+      console.log('Menu type changed to:', menutype);
+      if(menutype=='12')
+      {
+        this.storeid =localStorage.getItem("storeid");
+        this.entryDate =localStorage.getItem("tentrydate") 
+
+      
+     
+ this. GetPayMode() ;
+ this.GetOtherIncomebyStoreId(this.storeid, this.entryDate);
+ this.GetIncomeTypeByCompanyId(this.companyId);
+  
+
+      }
+      
+    });
+
+
   }
 
 public form = new FormGroup({
@@ -38,7 +60,7 @@ public form = new FormGroup({
   description:new FormControl(''),
   payModeId: new FormControl(0),
   amountDate: new FormControl(''),
-  amount: new FormControl(0),
+  amount: new FormControl('0.00'),
   isActive: new FormControl(true),
   createdBy: new FormControl(0),
   chequeNo: new FormControl(''),
@@ -154,7 +176,7 @@ this.selectedOption=id;
       storeId: this.storeid,
       amountDate: this.entryDate,
     });
-    if (this.form.value.amount == 0) {
+    if (this.form.value.amount == '0.00' || this.form.value.amount == '') {
 
       this.toastr.error('Please enter valid amount')
       return;
@@ -188,7 +210,7 @@ this.selectedOption=id;
       description:'',
       payModeId: 0,
       amountDate:'',
-      amount: 0,
+      amount: '0.00',
       isActive:true,
       chequeNo:''
     });
@@ -205,7 +227,7 @@ salaryList:any;
       taxDetailId: this.salaryList[0].taxDetailId,
       payModeId: this.salaryList[0].payModeId,
       amountDate: this.salaryList[0].amountDate,
-      amount: this.salaryList[0].amount,
+      amount: this.salaryList[0].amount.toFixed(2),
       isActive:this.salaryList[0].isActive,
       chequeNo:this.salaryList[0].chequeNo,
       description:this.salaryList[0].description,

@@ -2,8 +2,10 @@ import { Component, Input } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/_services/auth.service';
 import { HttpService } from 'src/app/_services/http.service';
+import { TriggerdailyService } from 'src/app/_services/triggerdaily.service';
 import { environment } from 'src/app/environments/environment.prod';
 
 
@@ -49,9 +51,9 @@ export class CashreconcilComponent {
   entryDate: any;
   expenseitem: any;
   expenseitemdetail: any;
-  selectedRowsitems: any[] = [];
+  selectedRowsitems: any[] = [];  private dataChangeSubscription: Subscription;
   constructor(private router: Router, private authService: AuthService, private route: ActivatedRoute,
-    private http: HttpService, private toastr: ToastrService) {
+    private http: HttpService, private toastr: ToastrService,private dataService: TriggerdailyService,) {
     this.entryDate = new Date().toISOString().split('T')[0];
     this.selectedOption = 1;
 
@@ -60,6 +62,20 @@ export class CashreconcilComponent {
       // this.formExpense.value.createdBy = currentUser.loginId;
       this.companyId = currentUser.companyId;
      
+    });
+
+    this.dataChangeSubscription = this.dataService.dataChange$.subscribe((menutype: any) => {
+      console.log('Menu type changed to:', menutype);
+      if(menutype=='11')
+      {
+        this.storeid =localStorage.getItem("storeid");
+        this.entryDate =localStorage.getItem("tentrydate") 
+
+     
+        this.  GetCashReconcilByStoreId();
+
+      }
+      
     });
   }
 
@@ -75,6 +91,7 @@ export class CashreconcilComponent {
     amountDate: new FormControl(''),
     isActive: new FormControl(true),
     createdBy: new FormControl(0),
+    cashReconsilTypeId: new FormControl(0),
   });
 
   paymentOptions: { label: string; value: number }[] = [
@@ -94,8 +111,8 @@ export class CashreconcilComponent {
       recipient: this.expense[0].recipient,
       paymentType: this.expense[0].paymentType,
       amountDate: this.expense[0].amountDate,
-      amount: this.expense[0].amount,
-     
+      amount: this.expense[0].amount.toFixed(2),
+      cashReconsilTypeId: this.expense[0].cashReconsilTypeId,
     });
   }
 
@@ -154,12 +171,26 @@ export class CashreconcilComponent {
     this.storeid =this.storesdata[0].storeid;// localStorage.getItem("storeid");
     //this.tstoreid =this.storesdata[0].storeid;// localStorage.getItem("tStoreId");
     this.entryDate = this.storesdata[0].fromdate; //localStorage.getItem("tfromdate");
+    this.GetCashReconsilType() ;
     this.  GetCashReconcilByStoreId();
    // this.showexpensesData(0,'Expense')
    
   }
 
+  caserecouciltype:any;
 
+  GetCashReconsilType() {
+    this.http.getAll(environment.GetCashReconsilType).subscribe((result: any) => {
+      if (result.isSuccess == 1) {
+        console.log(result.data)
+        this.caserecouciltype = result.data;
+
+      }
+      else {
+        this.caserecouciltype = null;
+      }
+    })
+  }
 
 
   showtopData(pid: any) {

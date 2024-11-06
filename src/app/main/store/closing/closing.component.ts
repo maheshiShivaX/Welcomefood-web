@@ -2,8 +2,10 @@ import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/_services/auth.service';
 import { HttpService } from 'src/app/_services/http.service';
+import { TriggerdailyService } from 'src/app/_services/triggerdaily.service';
 import { environment } from 'src/app/environments/environment.prod';
 
 @Component({
@@ -29,7 +31,7 @@ export class ClosingComponent {
   isLoading:boolean=false;
   storeId:any;
   dated:any;
-  entryDate: string | undefined;
+  entryDate: any;
   validateDecimalPlaces(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     const value = inputElement.value;
@@ -38,12 +40,31 @@ export class ClosingComponent {
       inputElement.value = value.substring(0, value.length - 1);
     }
   }
-
+  private dataChangeSubscription: Subscription;
   constructor(private router: Router, private authService: AuthService, private route: ActivatedRoute,
-    private http: HttpService, private toastr: ToastrService) {
+    private http: HttpService, private toastr: ToastrService,private dataService: TriggerdailyService,) {
     this.entryDate = new Date().toISOString().split('T')[0];
 
     this.dated = this.entryDate;
+
+    this.dataChangeSubscription = this.dataService.dataChange$.subscribe((menutype: any) => {
+      console.log('Menu type changed to:', menutype);
+      if(menutype=='9')
+      {
+        this.storeId =localStorage.getItem("storeid");
+        this.entryDate =localStorage.getItem("tentrydate") 
+  
+       
+    //this.storeId = this.route.snapshot.params["storeId"];
+    localStorage.setItem("storeid",this.storeId);
+
+    this.dated = this.entryDate;
+    this.GetStoreSummary(this.storeId, this.entryDate,this.entryDate);
+    this. GetGetStoreClosingByStoreId(this.storeId, this.entryDate) ;
+      }
+      
+    });
+
   }
 
   ngOnInit() {

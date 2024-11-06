@@ -2,8 +2,10 @@ import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/_services/auth.service';
 import { HttpService } from 'src/app/_services/http.service';
+import { TriggerdailyService } from 'src/app/_services/triggerdaily.service';
 import { environment } from 'src/app/environments/environment.prod';
 
 @Component({
@@ -30,6 +32,8 @@ export class PurchseregisterComponent {
     storeId: new FormControl(0),
     chequeNo: new FormControl(''),
     description: new FormControl(''),
+    file: new FormControl(''),
+    invoicePath:new FormControl('')
   });
 
 
@@ -49,19 +53,53 @@ export class PurchseregisterComponent {
       storeId: 0,
       chequeNo: '',
       description: '',
+      file:'',
+      invoicePath:'',
 
     })
   }
   isLoading: boolean = false;
   submitted: boolean = false;
   entryDate:any;
-
+  private dataChangeSubscription: Subscription;
   constructor(private router: Router, private authService: AuthService, private route: ActivatedRoute,
-    private http: HttpService, private toastr: ToastrService) {
+    private http: HttpService, private toastr: ToastrService, private dataService: TriggerdailyService,) {
     this.entryDate = new Date().toISOString().split('T')[0];
 
     this.selectedOption = "1";
+
+    this.dataChangeSubscription = this.dataService.dataChange$.subscribe((menutype: any) => {
+      console.log('Menu type changed to:', menutype);
+      if(menutype=='2')
+      {
+        this.storeId =localStorage.getItem("storeid");
+        this.entryDate =localStorage.getItem("tentrydate") 
+    localStorage.setItem("storeid",this.storeId);
+    this.  GetPayMode();
+this.  GetVendorDetail();
+    this.GetProductCategoryByGroupId(this.storeId, 1);
+    this.GetItemPurchaseByDatestoreId();
+      }
+      
+    });
+
+
   }
+  fileName:any;
+  inspectionImage:any;
+  onFileChange(event: any) {
+
+    this.fileName = event.target.files[0];
+    console.log(this.fileName);
+    var reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]);
+    reader.onload = (_event: any) => {
+      this.inspectionImage = reader.result;
+
+    };
+
+  }
+
 
   selectedOption: string | undefined;
   storeId :any;
@@ -89,15 +127,11 @@ export class PurchseregisterComponent {
 
   ngOnInit() {
 
-      // alert('asdf');
+
       this.storeId =this.storesdata[0].storeid;// localStorage.getItem("storeid");
-      //this.tstoreid =this.storesdata[0].storeid;// localStorage.getItem("tStoreId");
+
       this.entryDate = this.storesdata[0].fromdate; //localStorage.getItem("tfromdate");
-      //this.ttodate =this.storesdata[0].todate;
   
-
-
-    //this.storeId = this.route.snapshot.params["storeId"];
     localStorage.setItem("storeid",this.storeId);
     this.  GetPayMode();
 this.  GetVendorDetail();
@@ -135,6 +169,11 @@ this.selectedOption=id;
         this.purchaseitemlist = null;
       }
     })
+  }
+  onView(path:any)
+  {
+    let url = environment.siteurl+ path ;//"\\abc.COM\\docs\\prj_active";
+    window.open(url, '_blank');
   }
 
   GetVendorDetail() {
@@ -175,7 +214,22 @@ this.selectedOption=id;
       return;
     }
 
-    this.http.post(environment.SaveItemPurchase, this.formpurchase.value).subscribe((result: any) => {
+    const formData = new FormData();
+    Object.keys(this.formpurchase.value).forEach(key => {
+      const _key = key as keyof typeof this.formpurchase.value;
+      formData.append(key, (this.formpurchase.value[_key]) as any);
+    });
+    formData.append('file', this.fileName);
+
+    if (this.formpurchase.invalid) {
+      console.log(this.formpurchase.value);
+      this.isLoading = false;
+      return;
+    }
+
+
+
+    this.http.post(environment.SaveItemPurchase, formData).subscribe((result: any) => {
       if (result.isSuccess == 1) {
 
         this.isLoading = false;
@@ -224,7 +278,20 @@ this.selectedOption=id;
     //alert( this.formpurchase.value.payMode);
 
   }
+  ondeletepurchase(pid:any)
+  {
 
+    this.http.getAll(environment.DeleteItemPurchaseById + "?pItemPurchaseId=" + pid ).subscribe((result: any) => {
+
+      if (result.isSuccess == 1) {
+        this.GetItemPurchaseByDatestoreId();
+      }
+      else {
+        this.productcategorylist = null;
+      }
+    })
+
+  }
   onPayModeChange() {
     // alert(this.selectedOption);
   }

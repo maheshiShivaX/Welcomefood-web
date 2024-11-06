@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/_services/auth.service';
 import { HttpService } from 'src/app/_services/http.service';
+import { TriggerdailyService } from 'src/app/_services/triggerdaily.service';
 import { environment } from 'src/app/environments/environment.prod';
 
 @Component({
@@ -13,12 +15,13 @@ import { environment } from 'src/app/environments/environment.prod';
 })
 export class PayrollComponent {
 
+  @Input() storesdata: { storeid: string; fromdate: string, todate :string }[] = [];
   entryDate:any;
   selectedOption:any;
   companyId:any;
-
+  private dataChangeSubscription: Subscription;
   constructor(private router: Router, private authService: AuthService, private route: ActivatedRoute,
-    private http: HttpService, private toastr: ToastrService) {
+    private http: HttpService, private toastr: ToastrService, private dataService: TriggerdailyService) {
     this.entryDate = new Date().toISOString().split('T')[0];
     this.selectedOption = 1;
 
@@ -26,6 +29,20 @@ export class PayrollComponent {
       const currentUser = user;
       // this.formExpense.value.createdBy = currentUser.loginId;
       this.companyId = currentUser.companyId;
+    });
+
+    this.dataChangeSubscription = this.dataService.dataChange$.subscribe((menutype: any) => {
+      console.log('Menu type changed to:', menutype);
+      if(menutype=='4')
+      {
+        this.storeid =localStorage.getItem("storeid")?.toString();
+        this.entryDate =localStorage.getItem("tentrydate") ;
+       
+      this. GetPayMode() ;
+       this.GetEmployeeByStoreId( this.storeid)
+       this.GetSalaryTransactionByStoreId(this.storeid, this.entryDate);
+      }
+      
     });
   }
 
@@ -35,17 +52,26 @@ public form = new FormGroup({
   storeId: new FormControl(0),
   payModeId: new FormControl(0),
   amountDate: new FormControl(''),
-  amount: new FormControl(0),
+  amount: new FormControl('0.00'),
   isActive: new FormControl(true),
   createdBy: new FormControl(0),
   chequeNo: new FormControl(''),
+  description:new FormControl(''),
 });
 
 storeid:any;
 employeeList:any
 
 ngOnInit() {
-  this.storeid = localStorage.getItem("storeid");
+
+   // alert('asdf');
+   this.storeid =this.storesdata[0].storeid;// localStorage.getItem("storeid");
+   //this.tstoreid =this.storesdata[0].storeid;// localStorage.getItem("tStoreId");
+   this.entryDate = this.storesdata[0].fromdate; //localStorage.getItem("tfromdate");
+   
+
+
+
  this. GetPayMode() ;
   this.GetEmployeeByStoreId( this.storeid)
   this.GetSalaryTransactionByStoreId(this.storeid, this.entryDate);
@@ -139,7 +165,7 @@ this.selectedOption=id;
       storeId: this.storeid,
       amountDate: this.entryDate,
     });
-    if (this.form.value.amount == 0) {
+    if (this.form.value.amount == '0.00' || this.form.value.amount == '') {
 
       this.toastr.error('Please enter valid amount')
       return;
@@ -172,9 +198,10 @@ this.selectedOption=id;
       employeeId: 0,
       payModeId: 0,
       amountDate:'',
-      amount: 0,
+      amount: '0.00',
       isActive:true,
-      chequeNo:''
+      chequeNo:'',
+      description:''
     });
   }
 salaryList:any;
@@ -191,7 +218,8 @@ salaryList:any;
       amountDate: this.salaryList[0].amountDate,
       amount: this.salaryList[0].amount,
       isActive:this.salaryList[0].isActive,
-      chequeNo:this.salaryList[0].chequeNo
+      chequeNo:this.salaryList[0].chequeNo,
+      description:this.salaryList[0].description
     });
   
   }
