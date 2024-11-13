@@ -41,6 +41,18 @@ export class PlsheetComponent {
 
   }
 
+  name = 'Angular';
+  modelDate!: Date;
+
+  onOpenCalendar(container:any) {
+    container.monthSelectHandler = (event: any): void => {
+      container._store.dispatch(container._actions.select(event.date));
+   
+    };     
+    container.setViewMode('month');
+  
+  }
+
   public form = new FormGroup({
     storeId: new FormControl(0),
     fromDate: new FormControl(''),
@@ -153,17 +165,45 @@ export class PlsheetComponent {
   storename:any;
 
   datelist:any;
+
+  formatDateToYYYYMMDD(date:Date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Get month (1-based)
+    const day = String(date.getDate()).padStart(2, '0'); // Get day (with leading zero if needed)
+    
+    // Return formatted date in yyyy-MM-dd
+    return `${year}-${month}-${day}`;
+}
+
   onGetReport()
   {
 
-    this.datelist=this.paymentOptions.filter(x=>x.label==this.form.value.month)[0]
+console.log(this.modelDate);
+
+const year = this.modelDate.getFullYear();
+const month = this.modelDate.getMonth(); // getMonth() gives 0-based month (0 for Jan, 11 for Dec)
+
+// First date of the month (set to the 1st day of the month)
+const firstDate = new Date(year, month, 1);
+
+// Last date of the month (set to the last day of the month)
+// Set the date to the 1st day of the next month and subtract one day
+const lastDate = new Date(year, month + 1, 0);
+
+    //this.datelist=this.paymentOptions.filter(x=>x.label==this.form.value.month)[0]
 this.form.patchValue({
 
-  fromDate: this.datelist.fromdate,
-  toDate:this.datelist.todate
+  fromDate: this.formatDateToYYYYMMDD(firstDate),
+  toDate:this.formatDateToYYYYMMDD(lastDate),
 });
-this.fromDate =this.datelist.fromdate;
-this.toDate=this.datelist.todate
+
+this.fromDate =this.formatDateToYYYYMMDD(firstDate),
+this.toDate=this.formatDateToYYYYMMDD(lastDate)
+
+
+
+
+
 
 
     console.log(this.form.value);
@@ -180,5 +220,52 @@ this.storename = this.storeList.filter((x: { storeId: number | null | undefined;
 
   this.reporttype=reporttype;
 }
+
+
+  
+downloadExcel(id:any) {
+  // let element = document.getElementById('tabellistcs');
+  // const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+  // const wb: XLSX.WorkBook = XLSX.utils.book_new();
+  // XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+  // XLSX.writeFile(wb, 'table_data.xlsx');
+
+
+  var data = '';
+  data = document.getElementById('reportpl')!.innerHTML;
+  //const data = document.getElementById('pdfTable')!.innerHTML;
+  const dataType = 'data:application/vnd.ms-excel';
+  const tableHTML = encodeURIComponent(data);
+
+  // Create download link element
+  const downloadLink = document.createElement("a");
+  document.body.appendChild(downloadLink);
+
+  // Create a link to the file
+  downloadLink.href = `${dataType}, ${tableHTML}`;
+
+  // Setting the file name
+  downloadLink.download = 'p&lsheet' + '.xls';
+
+  //triggering the function
+  downloadLink.click();
+
+  // Remove the download link after downloading
+  document.body.removeChild(downloadLink);
+
+
+  // let element = document.getElementById('tblUnit'); 
+  // const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+
+  // /* generate workbook and add the worksheet */
+  // const wb: XLSX.WorkBook = XLSX.utils.book_new();
+  // XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+  // /* save to file */
+  // XLSX.writeFile(wb, "UnitType.xlsx");
+}
+
   }
 
+
+  

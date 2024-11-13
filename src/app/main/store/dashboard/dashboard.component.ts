@@ -22,9 +22,10 @@ export class DashboardComponent {
     });
    }
 
-  removeInlineStyle() {
+  removeInlineStyle() {                                       
     const elements = this.el.nativeElement.querySelectorAll('.canvasjs-chart-credit');
     elements.forEach((element: HTMLElement) => {
+    //  this.renderer.setStyle(elements, 'display', 'block');
       this.renderer.removeStyle(element, 'position'); // Remove position style
       this.renderer.removeStyle(element, 'top'); // Remove top style (or any other styles you want)
       // Add more styles to remove as needed
@@ -135,8 +136,14 @@ this.fdailysaledata = [...this.dailysaledata].sort((a: { amountDate: string | nu
     {
       if (item!=null && item.length < 2) {
         return 0; // or handle this case as needed
+      }else
+      {
+        if(item[0].y!=0 && item[1].y!=0)
+        {
+          return ((item[0].y - item[1].y) / item[0].y) * 100;
+        }
       }
-      return ((item[0].y - item[1].y) / item[0].y) * 100;
+      return 0;
 
     }else
     {
@@ -154,7 +161,7 @@ this.fdailysaledata = [...this.dailysaledata].sort((a: { amountDate: string | nu
     
     setTimeout(() => {
       this.removeInlineStyle();
-    }, 100); // Adjust the delay if necessary
+    }, 300); // Adjust the delay if necessary
   }
   onSelectChange(event: any) {
     this.ddailysale(this.loginId,event);
@@ -170,7 +177,6 @@ this.fdailysaledata = [...this.dailysaledata].sort((a: { amountDate: string | nu
       if (result.isSuccess == 1) {
         console.log(result.data)
         this.storedetail = result.data;
-        
       }
       else { this.storedetail = null;
       }

@@ -595,10 +595,56 @@ body::-webkit-scrollbar-thumb {
   padding-right: 0px;
 }
 
-.purchases .ng-select .ng-select-container {
+.ng-select .ng-select-container {
   height: 35px !important;
   border-radius: 4px !important;
-  border: 1px solid #ECF1F5 !important;
+  border: 1px solid #D3E3FD !important;
+  
+}
+
+form input {
+  height: 35px;
+  border-radius: 4px !important;
+  border: 1px solid #D3E3FD !important;;
+}
+
+.inputfield {
+  height: 35px;
+  border-radius: 4px !important;
+  border: 1px solid #D3E3FD !important;;
+  overflow: hidden;
+}
+.inputfield input{
+  border: none;
+}
+
+
+
+.ng-select .ng-select-container .ng-value-container .ng-input > input {
+  box-sizing: content-box;
+  background: none transparent;
+  border: 0 none!important;
+  box-shadow: none;
+  outline: none;
+  padding: 0;
+  cursor: default;
+  width: 100%;
+}
+
+
+.form-control::file-selector-button {
+  padding: .375rem .75rem;
+  margin: -.375rem -.75rem;
+  margin-inline-end: .75rem;
+  color: #212529;
+  background-color: #e9ecef;
+  pointer-events: none;
+  border-color: inherit;
+  border-style: solid;
+  border-width: 0;
+  border-inline-end-width: 1px;
+  border-radius: 0;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
 /*small tables */

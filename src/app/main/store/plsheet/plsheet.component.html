@@ -11,10 +11,16 @@
                 </div>
                 <div class="col-xl-2 col-lg-12">
                     <label class="date form-label">Month</label><br>
-                    <ng-select formControlName="month" id="month" #SelectSizeDefault
+                    <!-- <ng-select formControlName="month" id="month" #SelectSizeDefault
                     [items]="paymentOptions" bindLabel="label" bindValue="label">
-                </ng-select>
+                </ng-select> -->
+                <input [(ngModel)]="modelDate" autocomplete="off" [ngModelOptions]="{standalone: true}" class="form-control" name="date" bsDatepicker [bsConfig]="{dateInputFormat: 'MM/YYYY'}" (onShown)="onOpenCalendar($event)">
+                        
+
                         </div>
+
+
+                       
                 <div class="col-xl-4 col-lg-12 reportbutton">
             
                     <button type="button" (click)="onGetReport()">Get Report</button>
@@ -23,22 +29,7 @@
         
             </form>
             <div class="row mt-4">
-                <div class="reportbtn col-2">
-                    <button type="button" (click)="onChange('plreport')">P & L Report</button>
-                    <button type="button" (click)="onChange('gesreport')">GAS</button>
-                    <button type="button" (click)="onChange('purchasecash')">Cash Purchase</button>
-                    <button type="button" (click)="onChange('purchasecheque')">Cheque Purchase</button>
-                    <button type="button" (click)="onChange('expensedata')">Cash Expense</button>
-
-                    <!-- <button type="button">Expense Detail</button>
-                    <button type="button">Monthly Inside Sale</button>
-                  
-                    <button type="button">Cash Purchase</button>
-                    <button type="button">Cheque Purchase</button>
-                    <button type="button">Cash Expense</button>
-                    <button type="button">Store Report</button>
-                    <button type="button">Balance Sheet</button> -->
-                </div>
+                
 
                 <div class="col-10" *ngIf="this.storedetail!=null">
                     <div class="section mt-1 d-flex justify-content-between">
@@ -48,7 +39,7 @@
                         </div>
                         <div class="month">
                             <!-- <span class="heading">Duration:</span> -->
-                            <span>From Date : {{this.fromDate}} To Date: {{this.toDate}} </span>
+                            <span>From Date : {{this.fromDate| date : 'MM-dd-yyyy' }} To Date: {{this.toDate| date : 'MM-dd-yyyy'}} </span>
                         </div>
                     </div>
                     <div class="pagedatatable d-flex" *ngIf="this.reporttype=='plreport'">
@@ -58,12 +49,16 @@
                                     <img src="logo.png" alt="Welcome Foods Logo">
                                 </div> -->
                                 <div class="title">
-                                    Monthly P&L Sheet
+                                    Monthly P&L Sheet   <span style="float: right;"  (click)="downloadExcel('reportpl')"><svg id="Layer_1" enable-background="new 0 0 24 24" height="30" viewBox="0 0 24 24" width="30" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs"><g width="100%" height="100%" transform="matrix(1,0,0,1,0,0)"><path d="m18 24h-12c-3.3 0-6-2.7-6-6v-12c0-3.3 2.7-6 6-6h12c3.3 0 6 2.7 6 6v12c0 3.3-2.7 6-6 6z" fill="#006db8" fill-opacity="1" data-original-color="#00adffff" stroke="none" stroke-opacity="1"/><path d="m8.2 19.3c-2.8-.2-4.8-2.6-4.6-5.4.2-1.6 1-3 2.3-3.8.5-3.4 3.5-5.8 6.9-5.3 2.8.4 5 2.5 5.3 5.3 2.3 1.5 3.1 4.5 1.6 6.9-.8 1.4-2.3 2.2-3.8 2.3zm4.6-6.9v-3.1h-1.5v3.1h-2.3l3.1 3.8 3.1-3.8z" fill="#ffffff" fill-opacity="1" data-original-color="#ffffffff" stroke="none" stroke-opacity="1"/></g></svg></span> 
+                 
                                 </div>
                              
                                 <div class="section">
-                                    <div class="section-title text-center">Grocery</div>
+                                    <!-- <div class="section-title text-center" style="background-color: #ffcc99;color: #000;">Grocery</div> -->
                                     <table>
+                                        <tr>
+                                            <td colspan="4"  class="section-title text-center" style="background-color: #ffcc99;color: #000;"> Grocery</td>
+                                        </tr>
                                         <tr>
                                             <td class="text-left">Opening Stock</td>
                                             <td><span>$</span>{{this.storedetail.openingStock.toFixed(2)}}</td>
@@ -98,7 +93,7 @@
                                             <td class="text-left">Inside Gross Profit</td>
                                             <td><span>$</span>{{this.storedetail.insideGrossProfit.toFixed(2) }}</td>
                                             <td class="text-left">% Margin</td>
-                                            <td><span>$</span>{{this.storedetail.margin}}</td>
+                                            <td><span>$</span>{{this.storedetail.margin.toFixed(2)}}</td>
                                         </tr>
                                         <tr class="total">
                                             <td class="text-left">Inside Total Gross</td>
@@ -109,13 +104,13 @@
                                     </table>
                                 </div>
                                 <div class="section">
-                                    <div class="d-flex" style="gap: 10px;">
-                                        <table>
-                                            <tr>
-                                                <th colspan="2" class="text-center"> Expenses </th>
+                                    <div class="row" >
+                                        <div class="col-6">  <table >
+                                            <tr >
+                                                <th colspan="2" class="text-center" style="background-color: #ffcc99;">  Expenses </th>
                                             </tr>
-                                            <tr>
-                                                <td colspan="2" class="text-center">Fixed Expenses</td>
+                                            <tr class="total">
+                                                <td colspan="2" class="text-center" style="background-color: #00b0f0;">Fixed Expenses</td>
                                             </tr>
                                             <tr
                                                 *ngIf="this.storedetail.payrolAmount!=null && this.storedetail.payrolAmount>0">
@@ -126,27 +121,30 @@
                                                 <td class="text-left">{{item.expenseName}}</td>
                                                 <td>{{item.expenseAmount.toFixed(2)}}</td>
                                             </tr>
-                                            <tr>
+                                            <tr class="total">
                                                 <td class="text-left">Total Fixed Expenses</td>
                                                 <td>{{this.storedetail.fixedExpenceAmount.toFixed(2)}}</td>
                                             </tr>
 
-                                            <tr>
-                                                <td colspan="2" class="text-left">Other Expenses Variable</td>
+                                            <tr class="total">
+                                                <td colspan="2" class="text-center" style="background-color: #00b0f0;" >Variable Expenses</td>
                                             </tr>
                                             <tr *ngFor="let item of  this.storedetail.variableExpenseDtos">
                                                 <td class="text-left">{{item.expenseName}}</td>
                                                 <td>{{item.expenseAmount.toFixed(2)}}</td>
                                             </tr>
-                                            <tr>
+                                            <tr class="total">
                                                 <td class="text-left">Total Variable Expenses</td>
                                                 <td>{{this.storedetail.variableExpenseAmount.toFixed(2)}}</td>
                                             </tr>
 
-                                            <tr>
-                                                <td class="text-left">Total Expense</td>
+                                            <tr class="total">
+                                                <td class="text-left">Total Expense(Fixed + Variable)</td>
                                                 <td>{{this.storedetail.totalExpenseAmount.toFixed(2)}}</td>
                                             </tr>
+<tr>
+    <td colspan="2"></td>
+</tr>
                                             <tr>
                                                 <td class="text-left"> Net Income</td>
                                                 <td>{{this.storedetail.netIncomeAmount.toFixed(2)}}</td>
@@ -169,11 +167,11 @@
                                                 <td class="text-left">Gas Margin for the Month</td>
                                                 <td>{{this.storedetail.gesMargin.toFixed(2)}}</td>
                                             </tr>
-                                        </table>
-
-                                        <table>
+                                        </table></div>
+                                      <div  class="col-6">
+                                        <table >
                                             <tr>
-                                                <th colspan="2" class="text-center"> Income </th>
+                                                <th colspan="2" class="text-center" style="background-color: #ffcc99;"> Income </th>
                                             </tr>
                                             <tr>
                                                 <td class="text-left">Inside Gross</td>
@@ -183,323 +181,181 @@
                                                 <td class="text-left">Gas Profit</td>
                                                 <td>{{this.storedetail.gesProfitAmount.toFixed(2)}}</td>
                                             </tr>
-                                            <!-- <tr>
-                                                <td class="text-left">Lotto Commission</td>
-                                                <td>{{this.storedetail.lotteryProfit}}</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left">COAM Commission</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left">ATM Commission</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left">Others</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left">Money Order Commission</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left">Payroll Taxes Withhold</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left">HRA</td>
-                                                <td></td>
-                                            </tr> -->
+                                           
                                             <tr *ngFor="let item of this.storedetail.otherIncomeDtos">
                                                 <td class="text-left">{{item.incomeTypeName}}</td>
                                                 <td>{{item.amount.toFixed(2)}}</td>
                                             </tr>
-                                            <tr>
-                                                <td class="text-left">Total</td>
+                                            <tr class="total">
+                                                <td class="text-left">Total Income</td>
                                                 <td>{{this.storedetail.totalIncome.toFixed(2)}}</td>
                                             </tr>
                                         </table>
+                                      </div>
+
+                                      
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="pagedatatable d-flex" *ngIf="this.reporttype=='gesreport'">
-                        <div class="datasheet">
-                            <div class="tsheet w-100">
-                                <!-- <div class="header">
-                                    <img src="logo.png" alt="Welcome Foods Logo">
-                                </div> -->
-                                <div class="title">
-                                    Gas Profit Calculation Sheet
-                                </div>
-                                <!-- <div class="section mt-1 d-flex justify-content-between">
-                                    <div class="storename">
-                                        <span class="heading">Store Name:</span>
-                                        <span>{{this.storename}}</span>
-                                    </div>
-                                    <div class="month">
-                                        <span class="heading">Month:</span>
-                                        <span>From Date : {{this.fromDate}} To Date: {{this.toDate}} </span>
-                                    </div>
-                                </div> -->
-                                <div class="section">
-                                    <div class="section-title">Closing Inventory Report</div>
-                                    <table>
-                                        <tr>
-                                            <th class="text-left">Fuel Type</th>
-                                            <th>Gallons</th>
-                                            <th>Cost (from last delivery invoice)</th>
-                                            <th>Amount</th>
-                                        </tr>
-                                        <tr *ngFor="let item of storedetail.closingGesStock">
-                                            <td class="text-left">{{item.gesTypeName}}</td>
-                                            <td>{{item.gesQuantity.toFixed(2)}}</td>
-                                            <td>{{item.gesRate.toFixed(2)}}</td>
-                                            <td>{{item.gesAmount.toFixed(2)}}</td>
-                                        </tr>
-
-                                        <tr class="highlight">
-                                            <td class="text-left">Total</td>
-                                            <td>{{this.storedetail.currentStockGes.toFixed(2) }}</td>
-                                            <td class="text-left"></td>
-                                            <td>{{this.storedetail.currentStockAmount.toFixed(2)}}</td>
-                                        </tr>
-                                        <tr class="total">
-                                            <td colspan="4" class="text-center">Purchase Invoices</td>
-                                        </tr>
-                                        <tr *ngFor="let item of storedetail.gesPurchaseInvoice">
-                                            <td class="text-left">{{item.invoiceNo}} {{item.invoiceDate}}</td>
-                                            <td>{{item.totalGes.toFixed(2)}}</td>
-                                            <td>{{item.avgAmount.toFixed(2)}}</td>
-                                            <td>{{item.totalAmount.toFixed(2)}}</td>
-                                        </tr>
-                                        <tr class="highlight">
-                                            <td class="text-left">Total</td>
-                                            <td>{{this.storedetail.purchaseInvoiceGesGallan.toFixed(2) }}</td>
-                                            <td class="text-left"></td>
-                                            <td>{{this.storedetail.purchaseInvoiceAmount.toFixed(2)}}</td>
-                                        </tr>
-                                        <tr class="">
-                                            <td class="text-left"> Beginning Inventory from Previous Montd</td>
-                                            <td>{{this.storedetail.previousStockGes.toFixed(2) }}</td>
-                                            <td class="text-left"></td>
-                                            <td>{{this.storedetail.previousStockAmount.toFixed(2)}}</td>
-                                        </tr>
-                                        <tr class="">
-                                            <td class="text-left">Total Cost of Gas (Total Purchase+Beg Inventory)</td>
-
-                                            <td>{{this.storedetail.totalStockGes.toFixed(2) }}</td>
-                                            <td class="text-left"></td>
-                                            <td>{{this.storedetail.totalStockAmount.toFixed(2)}}</td>
-
-                                        </tr>
-                                        <tr class="">
-                                            <td class="text-left">Less : Closing Inventory</td>
-                                            <td>{{this.storedetail.currentStockGes.toFixed(2) }}</td>
-                                            <td class="text-left"></td>
-                                            <td>{{this.storedetail.currentStockAmount.toFixed(2)}}</td>
-                                        </tr>
-                                        <tr class="">
-                                            <td class="text-left">Net Sold Cost</td>
-                                            <td>{{this.storedetail.netSoldGes.toFixed(2) }}</td>
-                                            <td class="text-left"></td>
-                                            <td>{{this.storedetail.netSoldAmount.toFixed(2)}}</td>
-                                        </tr>
-                                        <tr class="">
-                                            <td class="text-left">Sales</td>
-                                            <td>{{this.storedetail.gesSaleQuantity.toFixed(2) }}</td>
-                                            <td class="text-left"></td>
-                                            <td>{{this.storedetail.gesSaleAmount.toFixed(2)}}</td>
-                                        </tr>
-                                        <tr class="">
-                                            <td class="text-left">Profit</td>
-                                            <td>{{this.storedetail.gesProfitQuantity.toFixed(2) }}</td>
-                                            <td class="text-left"></td>
-                                            <td>{{this.storedetail.gesProfitAmount.toFixed(2)}}</td>
-                                        </tr>
-                                        <tr class="">
-                                            <td class="text-left">Margin</td>
-                                            <td></td>
-                                            <td class="text-left"></td>
-                                            <td>{{this.storedetail.gesMargin.toFixed(2)}}</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="pagedatatable d-flex" *ngIf="this.reporttype=='purchasecash'">
-                        <div class="datasheet">
-                            <div class="tsheet w-100">
-                                <!-- <div class="header">
-                                    <img src="logo.png" alt="Welcome Foods Logo">
-                                </div> -->
-                                <div class="title">
-                                    Purchase by Case
-                                </div>
-                                <!-- <div class="section mt-1 d-flex justify-content-between">
-                                    <div class="storename">
-                                        <span class="heading">Store Name:</span>
-                                        <span>{{this.storename}}</span>
-                                    </div>
-                                    <div class="month">
-                                        <span class="heading">Month:</span>
-                                        <span>From Date : {{this.fromDate}} To Date: {{this.toDate}} </span>
-                                    </div>
-                                </div> -->
-                                <div class="section">
-                                    <div class="section-title">Closing Inventory Report</div>
-                                    <table *ngIf="categories!=null">
-                                        <thead>
-                                            <tr class="text-center">
-                                                <th [attr.colspan]="categories.length + 3" class="headbackcolor">Purchases (CASH)</th>
-                                            </tr>
-                                            <tr>
-                                                <th>Date</th>
-                                                <th>Vendor Name</th>
-                                                <th *ngFor="let category of categories">{{ category }}</th>
-                                                <th>Total</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr *ngFor="let item of vendorCategoryAmountscase" class="purchasetext">
-                                                <td>{{item.amountDate | date : 'dd-MM-yyyy'}}</td>
-                                                <td>{{ item.vendorName }}</td>
-                                                <td *ngFor="let category of categories">{{ (item.amounts[category]).toFixed(2) || 0
-                                                    }}</td>
-                                                <td class="total">{{ (getTotalAmountForVendor(item)).toFixed(2) }}</td>
-                                            </tr>
-                                            <tr class="purchasetext">
-                                                <td class="total"></td>
-                                                <td class="total">Total</td>
-                                                <td *ngFor="let category of categories" class="total">{{
-                                                   ( totalAmounts[category] ).toFixed(2) || 0 }}</td>
-                                                <td class="total">{{this.totalamountpurchasecash.toFixed(2) }}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="pagedatatable d-flex" *ngIf="this.reporttype=='purchasecheque'">
-                        <div class="datasheet">
-                            <div class="tsheet w-100">
-                                <!-- <div class="header">
-                                    <img src="logo.png" alt="Welcome Foods Logo">
-                                </div> -->
-                                <div class="title">
-                                    Purchase by Cheque
-                                </div>
-                                <!-- <div class="section mt-1 d-flex justify-content-between">
-                                    <div class="storename">
-                                        <span class="heading">Store Name:</span>
-                                        <span>{{this.storename}}</span>
-                                    </div>
-                                    <div class="month">
-                                        <span class="heading">Month:</span>
-                                        <span>From Date : {{this.fromDate}} To Date: {{this.toDate}} </span>
-                                    </div>
-                                </div> -->
-                                <div class="section">
-                                    <div class="section-title">Closing Inventory Report</div>
-                                    <table *ngIf="categories!=null">
-                                        <thead>
-                                            <tr class="text-center">
-                                                <th [attr.colspan]="categories.length + 3"  class="headbackcolor">Purchases (CASH)</th>
-                                            </tr>
-                                            <tr>
-                                                <th>Date</th>
-                                                <th>Vendor Name</th>
-                                                <th *ngFor="let category of categories">{{ category }}</th>
-                                                <th>Total</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr *ngFor="let item of vendorCategoryAmountscheque" class="purchasetext">
-                                                <td>{{item.amountDate | date : 'dd-MM-yyyy'}}</td>
-                                                <td>{{ item.vendorName }}</td>
-                                                <td *ngFor="let category of categories">{{ item.amounts[category] || 0
-                                                    }}</td>
-                                                <td class="total">{{ (getTotalAmountForVendor(item)).toFixed(2) }}</td>
-                                            </tr>
-                                            <tr class="purchasetext">
-                                                <td class="total"></td>
-                                                <td class="total">Total</td>
-                                                <td *ngFor="let category of categories" class="total">{{
-                                                   ( totalAmountscheque[category] ).toFixed(2) || 0.00 }}</td>
-                                                <td class="total">{{this.totalamountpurchasecheque.toFixed(2) }}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="pagedatatable d-flex" *ngIf="this.reporttype=='expensedata'">
-                        <div class="datasheet">
-                            <div class="tsheet w-100">
-                                <!-- <div class="header">
-                                    <img src="logo.png" alt="Welcome Foods Logo">
-                                </div> -->
-                                <div class="title">
-                                    Cash Expenses
-                                </div>
-                                <!-- <div class="section mt-1 d-flex justify-content-between">
-                                    <div class="storename">
-                                        <span class="heading">Store Name:</span>
-                                        <span>{{this.storename}}</span>
-                                    </div>
-                                    <div class="month">
-                                        <span class="heading">Month:</span>
-                                        <span>From Date : {{this.fromDate}} To Date: {{this.toDate}} </span>
-                                    </div>
-                                </div> -->
-                                <div class="section">
-                                    <div class="section-title">Closing Inventory Report</div>
-                                    <table *ngIf="categories!=null">
-                                        <thead>
-
-                                            <tr>
-                                                <th>Date</th>
-                                                <th>Cost Head</th>
-                                                <th>Description</th>
-                                                <th>Amount</th>
-
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr *ngFor="let item of this.storedetail.expenseData" class="expensedata">
-                                                <td>{{item.amountDate | date : 'dd-MM-yyyy'}}</td>
-                                                <td>{{ item.expenseName }}</td>
-                                                <td>{{item.description}}</td>
-                                                <td>{{item.expenseAmount.toFixed(2)}}</td>
-
-                                            </tr>
-                                            <tr>
-                                                <td></td>
-                                                <td>Total</td>
-                                                <td>{{this.storedetail.totalExpenseData.toFixed(2)}}</td>
-                                            </tr>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
+             
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="reportpl"  *ngIf="this.storedetail!=null" style="display:none;">
+        <div class="section">
+            <!-- <div class="section-title text-center">Grocery</div> -->
+            <table style=" display: flex;justify-content: center;margin:60; border-color: gray!important; border-width: 1px!important ; ">
+                <tr>
+                    <td colspan="4" style="background-color: #b6c8e3; text-align: center;font-size:22px ; font-weight: bold;" >Monthly P&L Sheet</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="padding:5px;font-size:18px; border: 1px solid gray; background-color: #b6c8e3;" >Store Name : {{this.storename}}</td>
+
+<td colspan="2" style="padding:5px;font-size:18px; border: 1px solid gray; background-color: #b6c8e3;"> From Date : {{this.fromDate| date : 'MM-dd-yyyy' }} To Date: {{this.toDate| date : 'MM-dd-yyyy'}}</td>              
+  </tr>
+                <tr>
+                    <td class="text-left" style="font-size: 14px; border: 1px solid gray;">Opening Stock</td>
+                    <td style="font-size: 14px; border: 1px solid gray;"><span>$</span>{{this.storedetail.openingStock.toFixed(2)}}</td>
+                    <td class="text-left" style="font-size: 14px; border: 1px solid gray;" >Monthly Inside Sales</td>
+                    <td style="font-size: 14px; border: 1px solid gray;"><span>$</span>{{this.storedetail.insideSale.toFixed(2)}}</td>
+                </tr>
+                <tr>
+                    <td style="font-size: 14px; border: 1px solid gray;"  class="text-left">Cash Purchase</td>
+                    <td style="font-size: 14px; border: 1px solid gray;" ><span>$</span>{{this.storedetail.cashPurchase.toFixed(2)}}</td>
+                    <td style="font-size: 14px; border: 1px solid gray;"  class="text-left"></td>
+                    <td style="font-size: 14px; border: 1px solid gray;" ></td>
+                </tr>
+                <tr>
+                    <td style="font-size: 14px; border: 1px solid gray;"  class="text-left">Chq Purchase</td>
+                    <td style="font-size: 14px; border: 1px solid gray;" ><span>$</span>{{this.storedetail.checkPurchase.toFixed(2)}}</td>
+                    <td style="font-size: 14px; border: 1px solid gray;"  class="text-left">Closing Stock</td>
+                    <td style="font-size: 14px; border: 1px solid gray;" ><span>$</span>{{this.storedetail.closingStock.toFixed(2)}}</td>
+                </tr>
+                <tr>
+                    <td style="font-size: 14px; border: 1px solid gray;"  class="text-left">Credit Eby brown bank</td>
+                    <td style="font-size: 14px; border: 1px solid gray;" >-</td>
+                    <td style="font-size: 14px; border: 1px solid gray;"  class="text-left"></td>
+                    <td style="font-size: 14px; border: 1px solid gray;" ></td>
+                </tr>
+                <tr class="highlight">
+                    <td style="font-size: 14px; border: 1px solid gray;"  class="text-left">Total</td>
+                    <td style="font-size: 14px; border: 1px solid gray;" ><span>$</span>{{this.storedetail.totalBalance.toFixed(2) }}</td>
+                    <td style="font-size: 14px; border: 1px solid gray;"  class="text-left">Total</td>
+                    <td style="font-size: 14px; border: 1px solid gray;" ><span>$</span>{{this.storedetail.totalSaleBalance.toFixed(2)}}</td>
+                </tr>
+                <tr>
+                    <td style="font-size: 14px; border: 1px solid gray;"  class="text-left">Inside Gross Profit</td>
+                    <td style="font-size: 14px; border: 1px solid gray;" ><span>$</span>{{this.storedetail.insideGrossProfit.toFixed(2) }}</td>
+                    <td style="font-size: 14px; border: 1px solid gray;"  class="text-left">% Margin</td>
+                    <td style="font-size: 14px; border: 1px solid gray;" ><span>$</span>{{this.storedetail.margin.toFixed(2)}}</td>
+                </tr>
+                <tr class="total">
+                    <td style="font-size: 14px; border: 1px solid gray;"  class="text-left">Inside Total Gross</td>
+                    <td style="font-size: 14px; border: 1px solid gray;" ><span>$</span>{{this.storedetail.insideGrossProfit.toFixed(2)}}</td>
+                    <td style="font-size: 14px; border: 1px solid gray;"  class="text-left"></td>
+                    <td style="font-size: 14px; border: 1px solid gray;" ></td>
+                </tr>
+            </table>
+        </div>
+        <div class="section">
+            <div class="d-flex" style="gap: 10px;">
+                <table>
+                    <tr>
+                        <td><table>
+                            <tr>
+                                <th colspan="2" style="font-size: 14px; border: 1px solid gray; background-color: #f8cbac;" class="text-center"> Expenses </th>
+                            </tr>
+                            <tr class="total">
+                                <td colspan="2" style="font-size: 14px; border: 1px solid gray;background-color: #00b0f0;" class="text-center">Fixed Expenses</td>
+                            </tr>
+                            <tr
+                                *ngIf="this.storedetail.payrolAmount!=null && this.storedetail.payrolAmount>0">
+                                <td class="text-left" style="font-size: 14px; border: 1px solid gray;">Payroll</td>
+                                <td style="font-size: 14px; border: 1px solid gray;">{{this.storedetail.payrolAmount.toFixed(2)}}</td>
+                            </tr>
+                            <tr *ngFor="let item of  this.storedetail.fixedExpenseDtos">
+                                <td style="font-size: 14px; border: 1px solid gray;" class="text-left">{{item.expenseName}}</td>
+                                <td style="font-size: 14px; border: 1px solid gray;">{{item.expenseAmount.toFixed(2)}}</td>
+                            </tr>
+                            <tr class="total">
+                                <td style="font-size: 14px; border: 1px solid gray; background-color: #bfbfbf;" class="text-left">Total Fixed Expenses</td>
+                                <td style="font-size: 14px; border: 1px solid gray;" > {{this.storedetail.fixedExpenceAmount.toFixed(2)}}</td>
+                            </tr>
+        
+                            <tr class="total">
+                                <td  style="font-size: 14px; border: 1px solid gray; background-color: #00b0f0;" colspan="2" class="text-center">Variable Expenses</td>
+                            </tr>
+                            <tr *ngFor="let item of  this.storedetail.variableExpenseDtos">
+                                <td style="font-size: 14px; border: 1px solid gray;" class="text-left">{{item.expenseName}}</td>
+                                <td style="font-size: 14px; border: 1px solid gray;" >{{item.expenseAmount.toFixed(2)}}</td>
+                            </tr>
+                            <tr class="total">
+                                <td style="font-size: 14px; border: 1px solid gray; background-color: #bfbfbf;" class="text-left">Total Variable Expenses</td>
+                                <td style="font-size: 14px; border: 1px solid gray;">{{this.storedetail.variableExpenseAmount.toFixed(2)}}</td>
+                            </tr>
+        
+                            <tr class="total">
+                                <td style="font-size: 14px; border: 1px solid gray; background-color: #b6c8e3;"  class="text-left">Total Expense(Fixed + Variable)</td>
+                                <td style="font-size: 14px; border: 1px solid gray; background-color: #b6c8e3;">{{this.storedetail.totalExpenseAmount.toFixed(2)}}</td>
+                            </tr>
+        <tr>
+        <td style="font-size: 14px; border: 1px solid gray;" colspan="2"></td>
+        </tr>
+                            <tr>
+                                <td style="font-size: 14px; border: 1px solid rgb(102, 45, 45);"  class="text-left"> Net Income(Total Income -Total Expense)</td>
+                                <td style="font-size: 14px; border: 1px solid gray;" >{{this.storedetail.netIncomeAmount.toFixed(2)}}</td>
+                            </tr>
+                            <tr>
+                                <td style="font-size: 14px; border: 1px solid gray;"  class="text-left">Total Store Sales (Inside+Gas ($) Sales)</td>
+                                <td style="font-size: 14px; border: 1px solid gray;" >{{this.storedetail.totalStoreGesAmount}}</td>
+                            </tr>
+        
+                            <tr>
+                                <td style="font-size: 14px; border: 1px solid gray;"  class="text-left">Gas Total Profit</td>
+                                <td style="font-size: 14px; border: 1px solid gray;" >{{this.storedetail.gesProfitAmount.toFixed(2)}}</td>
+                            </tr>
+        
+                            <tr>
+                                <td style="font-size: 14px; border: 1px solid gray;"  class="text-left">Total Gallon</td>
+                                <td style="font-size: 14px; border: 1px solid gray;" >{{this.storedetail.gesSaleQuantity.toFixed(2) }}</td>
+                            </tr>
+                            <tr>
+                                <td style="font-size: 14px; border: 1px solid gray;"  class="text-left">Gas Margin for the Month</td>
+                                <td style="font-size: 14px; border: 1px solid gray;" >{{this.storedetail.gesMargin.toFixed(2)}}</td>
+                            </tr>
+                        </table></td>
+                        <td><table>
+                            <tr>
+                                <th colspan="2" style="font-size: 14px; border: 1px solid gray; background-color: #f8cbac;" class="text-center"> Income </th>
+                            </tr>
+                            <tr>
+                                <td style="font-size: 14px; border: 1px solid gray;" class="text-left">Inside Gross</td>
+                                <td style="font-size: 14px; border: 1px solid gray;">{{this.storedetail.insideGrossProfit.toFixed(2)}}</td>
+                            </tr>
+                            <tr>
+                                <td style="font-size: 14px; border: 1px solid gray;" class="text-left">Gas Profit</td>
+                                <td style="font-size: 14px; border: 1px solid gray;">{{this.storedetail.gesProfitAmount.toFixed(2)}}</td>
+                            </tr>
+                           
+                            <tr *ngFor="let item of this.storedetail.otherIncomeDtos">
+                                <td style="font-size: 14px; border: 1px solid gray;" class="text-left">{{item.incomeTypeName}}</td>
+                                <td style="font-size: 14px; border: 1px solid gray;">{{item.amount.toFixed(2)}}</td>
+                            </tr>
+                            <tr class="total">
+                                <td style="font-size: 14px; border: 1px solid gray; background-color: #b6c8e3;" class="text-left">Total Income</td>
+                                <td style="font-size: 14px; border: 1px solid gray; background-color: #b6c8e3;">{{this.storedetail.totalIncome.toFixed(2)}}</td>
+                            </tr>
+                        </table></td>
+                    </tr>
+                </table>
+                
+
+                
             </div>
         </div>
     </div>

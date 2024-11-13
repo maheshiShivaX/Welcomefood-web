@@ -14,9 +14,8 @@
                 </div>
                 <div class="col-xl-2 col-lg-12">
                     <label class="date form-label">Month</label><br>
-                    <ng-select formControlName="month" id="month" #SelectSizeDefault [items]="paymentOptions"
-                        bindLabel="label" bindValue="label">
-                    </ng-select>
+                    <input [(ngModel)]="modelDate" autocomplete="off" [ngModelOptions]="{standalone: true}" class="form-control" name="date" bsDatepicker [bsConfig]="{dateInputFormat: 'MM/YYYY'}" (onShown)="onOpenCalendar($event)">
+                    
                 </div>
                 <div class="col-xl-4 col-lg-12 reportbutton">
 
@@ -36,11 +35,11 @@
             <div class="tsheet w-100">
              
                
-                <div class="section">
-                    <div class="section-title" style="text-align: center;">DAILY SALES REPORTING SHEET</div>
-                    <table *ngIf="dailydata!=null">
+                <div class="section"> 
+                    <span style="float: right;"  (click)="downloadExcel('dailysalereport')"><svg id="Layer_1" enable-background="new 0 0 24 24" height="30" viewBox="0 0 24 24" width="30" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs"><g width="100%" height="100%" transform="matrix(1,0,0,1,0,0)"><path d="m18 24h-12c-3.3 0-6-2.7-6-6v-12c0-3.3 2.7-6 6-6h12c3.3 0 6 2.7 6 6v12c0 3.3-2.7 6-6 6z" fill="#006db8" fill-opacity="1" data-original-color="#00adffff" stroke="none" stroke-opacity="1"/><path d="m8.2 19.3c-2.8-.2-4.8-2.6-4.6-5.4.2-1.6 1-3 2.3-3.8.5-3.4 3.5-5.8 6.9-5.3 2.8.4 5 2.5 5.3 5.3 2.3 1.5 3.1 4.5 1.6 6.9-.8 1.4-2.3 2.2-3.8 2.3zm4.6-6.9v-3.1h-1.5v3.1h-2.3l3.1 3.8 3.1-3.8z" fill="#ffffff" fill-opacity="1" data-original-color="#ffffffff" stroke="none" stroke-opacity="1"/></g></svg></span> 
+                    <div  id="employeeList" class="section-title" style="text-align: center;">DAILY SALES REPORTING SHEET</div>
+                    <table    *ngIf="dailydata!=null">
                         <thead>
-
                             <tr>
                                 <th>Date</th>
                                 <th>Inside Sale</th>
@@ -52,13 +51,11 @@
                                 <th>Coam In</th>
                                 <th>Coam Out</th>
                                 <th>Net Coam</th>
-                               
-
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let item of this.dailydata" class="expensedata">
-                                <td>{{item.date }}</td>
+                                <td>{{  item.date  }}</td>
                                 <td>{{item.insideSale }}</td>
                                 <td>{{item.saleTax}}</td>
                                 <td>{{item.gasGallon}}</td>
@@ -107,4 +104,74 @@
     </div>
         </div>
     </div>
+</div>
+
+<div id="dailysalereport" style="display:none;">
+ 
+    <table  style=" display: flex;justify-content: center;margin:60; border-color: gray!important; border-width: 1px!important ; "  *ngIf="dailydata!=null">
+        <thead>
+            <tr>
+                <td colspan="10" style="background-color: #b6c8e3; text-align: center;font-size:22px ; font-weight: bold;">DAILY SALES REPORTING SHEET</td>
+            </tr>
+            <tr>
+                <td colspan="7" style="padding:5px;font-size:18px; border: 1px solid gray; background-color: #b6c8e3;"  >Store Name : {{storename}}</td>
+                <td colspan="3" style="padding:5px;font-size:18px; border: 1px solid gray; background-color: #b6c8e3;" >From Date : {{this.fromDate| date:'MM-dd-yyyy'}} To Date : {{this.toDate| date:'MM-dd-yyyy'}} </td>
+            </tr>
+            <tr>
+                <th style="padding:5px;font-size:18px; border: 1px solid gray; background-color: #b6c8e3;" >Date</th>
+                <th style="padding:5px;font-size:18px; border: 1px solid gray; background-color: #b6c8e3;" >Inside Sale</th>
+                <th style="padding:5px;font-size:18px; border: 1px solid gray; background-color: #b6c8e3;" >Sale Tax</th>
+                <th style="padding:5px;font-size:18px; border: 1px solid gray; background-color: #b6c8e3;" >Gas Gallon</th>
+                <th style="padding:5px;font-size:18px; border: 1px solid gray; background-color: #b6c8e3;" >Gas Amount</th>
+                <th style="padding:5px;font-size:18px; border: 1px solid gray; background-color: #b6c8e3;" >Lottery Total</th>
+                <th style="padding:5px;font-size:18px; border: 1px solid gray; background-color: #b6c8e3;" >Credit Card</th>
+                <th style="padding:5px;font-size:18px; border: 1px solid gray; background-color: #b6c8e3;" >Coam In</th>
+                <th style="padding:5px;font-size:18px; border: 1px solid gray; background-color: #b6c8e3;" >Coam Out</th>
+                <th style="padding:5px;font-size:18px; border: 1px solid gray; background-color: #b6c8e3;" >Net Coam</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of this.dailydata" class="expensedata">
+                <td style="font-size: 14px; border: 1px solid gray;">{{  item.date  }}</td>
+                <td style="font-size: 14px; border: 1px solid gray;">{{item.insideSale }}</td>
+                <td style="font-size: 14px; border: 1px solid gray;">{{item.saleTax}}</td>
+                <td style="font-size: 14px; border: 1px solid gray;">{{item.gasGallon}}</td>
+                <td style="font-size: 14px; border: 1px solid gray;">{{item.gasAmount}}</td>
+               
+                <td style="font-size: 14px; border: 1px solid gray;">{{item.lotteryTotal}}</td>
+                <td style="font-size: 14px; border: 1px solid gray;">{{item.creditCard}}</td>
+                <td style="font-size: 14px; border: 1px solid gray;">{{item.coamIn}}</td>
+                <td style="font-size: 14px; border: 1px solid gray;">{{item.coamOut}}</td>
+                <td style="font-size: 14px; border: 1px solid gray;">{{item.netCoam}}</td>
+
+            </tr>
+            <tr>
+                <th style="font-size: 16px; border: 1px solid gray;"></th>
+                <th style="font-size: 16px; border: 1px solid gray;">Inside Sale</th>
+                <th style="font-size: 16px; border: 1px solid gray;">Sale Tax</th>
+                <th style="font-size: 16px; border: 1px solid gray;">Gas Gallon</th>
+                <th style="font-size: 16px; border: 1px solid gray;">Gas Amount</th>
+                <th style="font-size: 16px; border: 1px solid gray;">Lottery Total</th>
+                <th style="font-size: 16px; border: 1px solid gray;">Credit Card</th>
+                <th style="font-size: 16px; border: 1px solid gray;">Coam In</th>
+                <th style="font-size: 16px; border: 1px solid gray;">Coam Out</th>
+                <th style="font-size: 16px; border: 1px solid gray;">Net Coam</th>
+            </tr>
+            <tr>
+               
+                <td style="font-size: 14px; border: 1px solid gray;">Total</td>
+                <td style="font-size: 14px; border: 1px solid gray;">{{this.tinsideSale}}</td>
+                <td style="font-size: 14px; border: 1px solid gray;">{{this.tsaleTax}}</td>
+                <td style="font-size: 14px; border: 1px solid gray;">{{this.tgasGallon}}</td>
+                <td style="font-size: 14px; border: 1px solid gray;">{{this.tgasAmount}}</td>
+               
+                <td style="font-size: 14px; border: 1px solid gray;">{{this.tlotteryTotal}}</td>
+                <td style="font-size: 14px; border: 1px solid gray;">{{this.tcreditCard}}</td>
+                <td style="font-size: 14px; border: 1px solid gray;">{{this.tcoamIn}}</td>
+                <td style="font-size: 14px; border: 1px solid gray;">{{this.tcoamOut}}</td>
+                <td style="font-size: 14px; border: 1px solid gray;">{{this.tnetCoam}}</td>
+            </tr>
+
+        </tbody>
+    </table>
 </div>

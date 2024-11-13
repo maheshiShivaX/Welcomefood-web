@@ -25,7 +25,7 @@ export class LogindetailComponent {
   });
 str:any;
   constructor(private http: HttpService, private router: Router,private authService: AuthService) {
-   debugger;
+
     // let a= localStorage.getItem('currentUser');
   
     // if(a!=null)
@@ -52,7 +52,7 @@ str:any;
 
 
 
-  onLogin() {
+  onLogin1() {
     this.isLoading = true;
     this.submitted = true;
     if (this.form.invalid) {
@@ -66,6 +66,33 @@ str:any;
         this.isLoading = false;
         this.submitted = false;
       
+        localStorage.setItem('currentUser', JSON.stringify(result.data[0]));
+        this.authService.setLoggedInUser(result.data[0]);
+      }
+      else {
+        this.isLoading = false;
+        this.submitted = false;
+      }
+    });
+  }
+
+
+
+  onLogin() {
+
+    this.isLoading = true;
+    this.submitted = true;
+    if (this.form.invalid) {
+      this.isLoading = false;
+      return;
+    }
+    this.http.post(environment.login , this.form.value).subscribe((result: any) => {
+      if (result.isSuccess == 1) {
+        debugger;
+      
+        this.isLoading = false;
+        this.submitted = false;
+        console.log(result);
         localStorage.setItem('currentUser', JSON.stringify(result.data[0]));
         this.authService.setLoggedInUser(result.data[0]);
       }

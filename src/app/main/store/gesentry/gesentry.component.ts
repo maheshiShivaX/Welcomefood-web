@@ -23,7 +23,7 @@ export class GesentryComponent {
   gesdetail: any;
   isLoading: boolean = false;
   submitted: boolean = false;
-  gasamount:any;
+  gasamount:any='0.00';
   private dataChangeSubscription: Subscription;
   constructor(private router: Router, private authService: AuthService, private route: ActivatedRoute,
     private http: HttpService, private toastr: ToastrService,private dataService: TriggerdailyService) {
@@ -48,6 +48,19 @@ export class GesentryComponent {
 
   }
 
+  DeleteGesInvoiceById(payType:any)
+  {
+    this.http.getAll(environment.DeleteGasSaleByStoreIdDate + "?pStoreId=" + this.storeid + "&pAmountDate=" + this.entryDate + "&pAmountType=" + payType ).subscribe((result: any) => {
+      if (result.isSuccess == 1) {
+        console.log(result.data)
+        this.GetGasSaleByStoreDate();
+
+      }
+      else {
+        this.GetGasSaleByStoreDate();
+      }
+    })
+  }
   public form = new FormGroup({
     gasSaleId: new FormControl(0),
     storeId: new FormControl(0, Validators.required),
@@ -55,6 +68,7 @@ export class GesentryComponent {
     amountDate: new FormControl('', Validators.required),
     isActive: new FormControl(true),
     createdBy: new FormControl(0),
+    amountType:new FormControl(''),
   });
 
 
@@ -68,7 +82,7 @@ export class GesentryComponent {
 
     if (inputElement.value == '' || inputElement.value == '0') {
 
-      this.http.getAll(environment.DeleteGasSaleByStoreIdDate + "?pStoreId=" + this.storeid + "&pAmountDate=" + this.entryDate ).subscribe((result: any) => {
+      this.http.getAll(environment.DeleteGasSaleByStoreIdDate + "?pStoreId=" + this.storeid + "&pAmountDate=" + this.entryDate + "&pAmountType=" + paytype ).subscribe((result: any) => {
         if (result.isSuccess == 1) {
           console.log(result.data)
           this.GetGasSaleByStoreDate();
@@ -87,6 +101,7 @@ export class GesentryComponent {
         amount: inputElement.value,
         isActive: true,
         createdBy: 0,
+        amountType:paytype
       })
       this.onSubmit();
     }
@@ -109,18 +124,34 @@ export class GesentryComponent {
       }
     });
   }
+  gasdiscount:any='0.00';
 gasdata:any;
 GetGasSaleByStoreDate() {
     this.http.getAll(environment.GetGasSaleByStoreDate + "?pStoreId=" + this.storeid + "&pAmountDate=" + this.entryDate).subscribe((result: any) => {
       if (result.isSuccess == 1) {
         console.log(result.data)
         this.gasdata = result.data;
-        this.gasamount = this.gasdata[0].amount.toFixed(2);
-       
+
+        var res1 = this.gasdata.filter((x: { amountType: string; }) => x.amountType == "Sale")
+        if (res1 != null && res1.length > 0) {
+          this.gasamount = res1[0].amount.toFixed(2);
+        }else
+        {
+          this.gasamount='0.00';
+        }
+        var res2 = this.gasdata.filter((x: { amountType: string; }) => x.amountType == "Discount")
+
+        if (res2 != null && res2.length > 0) {
+          this.gasdiscount = res2[0].amount.toFixed(2);
+        }else
+        {
+          this.gasdiscount='0.00';
+        }
       }
       else {
         this.gasdata = null;
         this.gasamount='0.00';
+        this.gasdiscount='0.00';
       }
     })
   }
@@ -179,10 +210,10 @@ this.GetGasSaleByStoreDate();
   }
 
   updateTotals(item: any) { 
-    item.sales=((+item.saleCash) + (+item.saleCard))
+   // item.sales=((+item.saleCash) + (+item.saleCard))
     item.closingStock =( (+item.openStock) + (+item.purchases) - (+item.sales)).toFixed(2);
     item.overShort =+( item.physicalStock -item.closingStock).toFixed(2);
-    item.salesRate=(((+item.saleCardRate) + (+item.saleCashRate))/2).toFixed(2);
+   // item.salesRate=(((+item.saleCardRate) + (+item.saleCashRate))/2).toFixed(2);
 
   }
 

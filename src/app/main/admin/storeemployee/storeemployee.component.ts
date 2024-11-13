@@ -14,6 +14,7 @@ interface TableRow {
   mobileNo:string;
   visible: boolean;
   storeName:string;
+  createdDate:string;
 }
 
 

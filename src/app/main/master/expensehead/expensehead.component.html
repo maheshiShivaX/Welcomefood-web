@@ -23,13 +23,10 @@
         
         <form [formGroup]="form" class="row" (submit)="onSubmit()">
             
-            <div class="mb-3 col-12">
+            <!-- <div class="mb-3 col-12">
                 <div class="form-group">
                     <label for="exampleFormControlSelect1">Expense Group</label>
-                    <!-- <select class="form-control" formControlName ="productCategoryId" id="exampleFormControlSelect1">
-                        <option>Please select</option>                 
-                        <option value={{item.productCategoryId}} *ngFor="let item of productcategory">{{item.categoryName}}</option>                 
-                    </select> -->
+                  
 
                     <ng-select class="select-option" formControlName="expenseGroupId" id="expenseGroupId"
                         #SelectSizeDefault [items]="expensegroup" [searchable]="true" bindLabel="expenseGroupName"
@@ -43,7 +40,7 @@
                         required.
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <div class="mb-3 col-12">
                 <label for="FormControlInput1" class="form-label">Expense Category Name</label>
@@ -127,7 +124,7 @@
                 <thead class="text-white">
                     <tr>
                         <th scope="col">S.N.</th>
-                        <th scope="col"> Expense Group Name</th>
+                        <!-- <th scope="col"> Expense Group Name</th> -->
                         <th scope="col"> Expense Category Name</th>
                         <th scope="col">Expense Category Code</th>
                         <th scope="col">Fixed Status</th>
@@ -137,7 +134,7 @@
                 <tbody>
                     <tr *ngFor="let item of visibleRows; let idx=index;" class="whitebg-row" [style.display]="item.visible ? 'table-row' : 'none'" class="whitebg-row">
                         <td class="tablefirstdata">{{(currentPage - 1)*pageSize +idx +1}}</td>
-                        <td>{{item.expenseGroupName}}</td>
+                        <!-- <td>{{item.expenseGroupName}}</td> -->
                         <td>{{item.expanseName}}</td>
                         <td>{{item.expanseCode}}</td>
                         <td>{{item.isFixed== true ? "Yes":"No"}}</td>

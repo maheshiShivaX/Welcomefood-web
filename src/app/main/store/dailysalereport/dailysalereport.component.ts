@@ -6,7 +6,7 @@ import { AuthService } from 'src/app/_services/auth.service';
 import { HttpService } from 'src/app/_services/http.service';
 import { MonthService } from 'src/app/_services/month.service';
 import { environment } from 'src/app/environments/environment.prod';
-
+import * as XLSX from 'xlsx';
 @Component({
   selector: 'app-dailysalereport',
   templateUrl: './dailysalereport.component.html',
@@ -61,17 +61,45 @@ export class DailysalereportComponent {
 
 
   }
+
+
+
+
+
+  formatDateToYYYYMMDD(date:Date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Get month (1-based)
+    const day = String(date.getDate()).padStart(2, '0'); // Get day (with leading zero if needed)
+    
+    // Return formatted date in yyyy-MM-dd
+    return `${year}-${month}-${day}`;
+}
+
   onGetReport()
   {
-    this.datelist=this.paymentOptions.filter(x=>x.label==this.form.value.month)[0]
-    this.form.patchValue({
-    
-      fromDate: this.datelist.fromdate,
-      toDate:this.datelist.todate
-    });
 
-    this.fromDate =this.datelist.fromdate;
-this.toDate=this.datelist.todate
+console.log(this.modelDate);
+
+const year = this.modelDate.getFullYear();
+const month = this.modelDate.getMonth(); // getMonth() gives 0-based month (0 for Jan, 11 for Dec)
+
+// First date of the month (set to the 1st day of the month)
+const firstDate = new Date(year, month, 1);
+
+// Last date of the month (set to the last day of the month)
+// Set the date to the 1st day of the next month and subtract one day
+const lastDate = new Date(year, month + 1, 0);
+
+    //this.datelist=this.paymentOptions.filter(x=>x.label==this.form.value.month)[0]
+this.form.patchValue({
+
+  fromDate: this.formatDateToYYYYMMDD(firstDate),
+  toDate:this.formatDateToYYYYMMDD(lastDate),
+});
+
+this.fromDate =this.formatDateToYYYYMMDD(firstDate),
+this.toDate=this.formatDateToYYYYMMDD(lastDate)
+
 
 this.DailySaleReportDatewise(this.form.value.storeId, this.form.value.fromDate, this.form.value.toDate)
     
@@ -102,7 +130,7 @@ tcoamOut:any;
 tnetCoam:any;
 
 
-
+storename:any;
 
   DailySaleReportDatewise(pStoreId: any, pFromDate: any, pToDate: any) {
 
@@ -113,16 +141,18 @@ tnetCoam:any;
           console.log(result.data)
           this.dailydata = result.data;
 
-          this.tinsideSale= this.dailydata.reduce((acc: any, item: { insideSale: any; }) => acc + (item.insideSale || 0), 0);;
-          this.tsaleTax= this.dailydata.reduce((acc: any, item: { saleTax: any; }) => acc + (item.saleTax || 0), 0);;
-          this.tgasGallon= this.dailydata.reduce((acc: any, item: { gasGallon: any; }) => acc + (item.gasGallon || 0), 0);;
-          this.tgasAmount= this.dailydata.reduce((acc: any, item: { gasAmount: any; }) => acc + (item.gasAmount || 0), 0);;
-          this.tlotteryTotal=this.dailydata.reduce((acc: any, item: { lotteryTotal: any; }) => acc + (item.lotteryTotal || 0), 0);;
-          this.tcreditCard=this.dailydata.reduce((acc: any, item: { creditCard: any; }) => acc + (item.creditCard || 0), 0);;
-          this.tcoamIn=this.dailydata.reduce((acc: any, item: { coamIn: any; }) => acc + (item.coamIn || 0), 0);;
-          this. tcoamOut=this.dailydata.reduce((acc: any, item: { coamOut: any; }) => acc + (item.coamOut || 0), 0);;
-          this.tnetCoam=this.dailydata.reduce((acc: any, item: { netCoam: any; }) => acc + (item.netCoam || 0), 0);;
+        //  this.tinsideSale= this.dailydata.reduce((acc: any, item: { insideSale: number; }) => acc + (item.insideSale || 0), 0);;
+          this.tinsideSale =( this.dailydata.reduce((acc: number, item: { insideSale: string }) => { const insideSaleValue = +item.insideSale || 0; return acc + insideSaleValue;}, 0)).toFixed(2);
+          this.tsaleTax= (this.dailydata.reduce((acc: number, item: { saleTax: string; }) => { const saleTaxValue = +item.saleTax || 0; return acc + saleTaxValue;}, 0)).toFixed(2);
+          this.tgasGallon= (this.dailydata.reduce((acc: number, item: { gasGallon: string; }) => { const gasGallonValue = +item.gasGallon || 0; return acc + gasGallonValue;}, 0)).toFixed(2);
+          this.tgasAmount= (this.dailydata.reduce((acc: number, item: { gasAmount: string; }) => { const gasAmountValue = +item.gasAmount || 0; return acc + gasAmountValue;}, 0)).toFixed(2);
+          this.tlotteryTotal=(this.dailydata.reduce((acc: number, item: { lotteryTotal: string; }) => { const lotteryTotalValue = +item.lotteryTotal || 0; return acc + lotteryTotalValue;}, 0)).toFixed(2);
+          this.tcreditCard=(this.dailydata.reduce((acc: number, item: { creditCard: string; }) => { const creditCardValue = +item.creditCard || 0; return acc + creditCardValue;}, 0)).toFixed(2);
+          this.tcoamIn=(this.dailydata.reduce((acc: number, item: { coamIn: string; }) => { const coamInValue = +item.coamIn || 0; return acc + coamInValue;}, 0)).toFixed(2);
+          this. tcoamOut=(this.dailydata.reduce((acc: number, item: { coamOut: string; }) => { const coamOutValue = +item.coamOut || 0; return acc + coamOutValue;}, 0)).toFixed(2);
+          this.tnetCoam=(this.dailydata.reduce((acc: number, item: { netCoam: string; }) => { const netCoamValue = +item.netCoam || 0; return acc + netCoamValue;}, 0)).toFixed(2);
 
+          this.storename =  this.storeList.filter((x: { storeId: any; })=>x.storeId==pStoreId)[0].storeName;
         }
         else {
           this.dailydata = null;
@@ -132,4 +162,84 @@ tnetCoam:any;
 
     }
   }
+
+  name = 'Angular';
+  modelDate!: Date;
+
+  onOpenCalendar(container:any) {
+    container.monthSelectHandler = (event: any): void => {
+      container._store.dispatch(container._actions.select(event.date));
+   
+    };     
+    container.setViewMode('month');
+  
+  }
+  
+  downloadExcel(id:any) {
+    // let element = document.getElementById('tabellistcs');
+    // const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+    // const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    // XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+    // XLSX.writeFile(wb, 'table_data.xlsx');
+
+
+    var data = '';
+    data = document.getElementById('dailysalereport')!.innerHTML;
+    //const data = document.getElementById('pdfTable')!.innerHTML;
+    const dataType = 'data:application/vnd.ms-excel';
+    const tableHTML = encodeURIComponent(data);
+
+    // Create download link element
+    const downloadLink = document.createElement("a");
+    document.body.appendChild(downloadLink);
+
+    // Create a link to the file
+    downloadLink.href = `${dataType}, ${tableHTML}`;
+
+    // Setting the file name
+    downloadLink.download = 'dailysalereport' + '.xls';
+
+    //triggering the function
+    downloadLink.click();
+
+    // Remove the download link after downloading
+    document.body.removeChild(downloadLink);
+
+
+    // let element = document.getElementById('tblUnit'); 
+    // const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+
+    // /* generate workbook and add the worksheet */
+    // const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    // XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    // /* save to file */
+    // XLSX.writeFile(wb, "UnitType.xlsx");
+  }
+
+
+  excelDownload(name: any) {
+    let element = document.getElementById(name);
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+
+  //   // Example of manually setting the styles for the header
+  // const headerRange = { s: { r: 0, c: 0 }, e: { r: 0, c: 9 } }; // Range for the first row (header)
+  // ws['!rows'] = [{ hpt: 25 }];
+  // ws['!cols'] = Array(10).fill({ wch: 15 }); // Set column width
+
+  // // Set header row to be bold and center-aligned
+  // for (let col = 0; col <= 9; col++) {
+  //   const cell = ws[XLSX.utils.encode_cell({ r: 0, c: col })];
+  //   if (!cell) continue;
+  //   cell.s = {
+  //     font: { bold: true },
+  //     alignment: { horizontal: 'center', vertical: 'center' }
+  //   };
+  // }
+
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+    XLSX.writeFile(wb, name + '.xlsx');
+  }
+
 }

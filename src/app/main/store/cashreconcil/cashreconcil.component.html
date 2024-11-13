@@ -27,10 +27,14 @@
 
                 <div class="mb-2 col-xl-2 col-lg-6">
                     <label for="FormControlInput1" class="form-label">Type</label>
-                    <select formControlName="paymentType" class="form-control">
+                    <ng-select formControlName="paymentType" id="paymentType" 
+                    #SelectSizeDefault [items]="paymentOptions" bindLabel="label" bindValue="value">
+                </ng-select>
+
+                    <!-- <select formControlName="paymentType" class="form-control">
                         <option value="" disabled>Select an option</option>
                         <option *ngFor="let option of paymentOptions" [value]="option.value">{{ option.label }}</option>
-                    </select>
+                    </select> -->
                 </div>
 
                 <div class="mb-2 col-xl-2 col-lg-6">
@@ -68,7 +72,8 @@
                             <th>Description</th>
                             <th>Pay Type</th>
                             <th>Amount</th>
-                            <th> Date</th>
+                            <th> Amount Date</th>
+                            <th> Entry Date</th>
                             <th colspan="2">Action</th>
                         </tr>
                     </thead>
@@ -79,7 +84,8 @@
                             <td>{{row.recipient}}</td>
                             <td>{{row.paymentType==1 ? "Inward" : "Outward"}}</td>
                             <td>{{row.amount.toFixed(2)}}</td>
-                            <td>{{row.amountDate | date : 'dd-MM-yyyy'}}</td>
+                            <td>{{row.amountDate | date : 'MM-dd-yyyy'}}</td>
+                            <td>{{row.createdDate | date : 'MM-dd-yyyy hh:mm:ss'}}</td>
                             <td class="action">
                                 <button type="button" (click)="onedit(row.cashReconcilId)" class="editbtn">
                                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none"

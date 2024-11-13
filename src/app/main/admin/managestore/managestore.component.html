@@ -116,7 +116,7 @@
                         <td>{{item.storeCode}}</td>
                         <td>{{item.storeMailId}}</td>
                         <td>{{item.storeContactNo}}</td>
-                        <td>{{item.storeOpeningDate | date :'dd-MM-yyyy'}}</td>
+                        <td>{{item.storeOpeningDate | date :'MM-dd-yyyy'}}</td>
                         <td>{{item.address}}</td>
                         <td class="action">
                             <button type="button" title="Edit" (click)="onEdit(item.storeId)" class="editbtn">

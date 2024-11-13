@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { HttpClient, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../environments/environment.prod';
 //import { environment } from 'environments/environment.prod';
@@ -19,7 +19,16 @@ export class HttpService {
     this.actionUrlsms = environment.config.apiUrlsms;
   }
 
+  public getAllwithtoken<T>(apiUrl: string,token: string): Observable<T> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    }); 
+    return this.http.get<T>(this.actionUrl + apiUrl,{headers});
+  }
+
+
   public getAll<T>(apiUrl: string): Observable<T> {
+
     return this.http.get<T>(this.actionUrl + apiUrl);
   }
   public getAllOther<T>(apiUrl: string): Observable<T> {

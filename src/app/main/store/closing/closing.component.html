@@ -11,6 +11,9 @@
 
             <div class="pagedatatable d-flex" *ngIf="storedetail !=null">
               <div class="col-6">
+                <div class="store-heading">
+                  <h5 class="">Closing Cash</h5>
+                </div>
                 <table class="w-100">
                   <tr class="text-left">
                     <th>Description
@@ -116,35 +119,43 @@
 
                 </table>
               </div>
-            </div>
-            <!-- <div class="form-group row mx-1" *ngIf="storedetail !=null">
-                            <label for="inputPassword"
-                                class="col-xl-3 col-md-4 px-2 col-form-label"><b
-                                    style="font-weight:600">Calculated Closing Cash </b></label>
-                            <div
-                                class="inputfield col-xl-9 col-md-8 d-flex align-items-center">
-                                <span>$</span>
-                                {{this.storedetail.totalDiffCase.toFixed(2)}}
-                            </div>
-                        </div> -->
+              <div class="col-6">
+                <div class="store-heading">
+                  <h5 class="">Closing Stock</h5>
+                </div>
+                <table class="w-100">
+                  <tr class="text-left">
+                    <th>Description
+                    </th>
+                    <th>Amount</th>
+                  </tr>
+                  <tr class="productcategory">
+                    <td class="text-left">Opening Stock</td>
+                    <td>{{this.storedetail.openingStock.toFixed(2)}}</td>
+                  </tr>
+                  <tr class="productcategory">
+                    <td class="text-left">Total Purchase</td>
+                    <td>{{this.storedetail.purchaseAmount.toFixed(2)}}</td>
+                  </tr>
+                  <tr class="tabledatasort productcategory">
+                    <td class="text-left">Total Sale</td>
+                    <td>{{this.storedetail.saleAmount.toFixed(2)}}</td>
+                  </tr>
+                  <tr class="tabledatasort productcategory">
+                    <td class="text-left">Closing Stock</td>
+                    <td>{{this.storedetail.closingStock.toFixed(2)}}</td>
+                  </tr>
+                 
 
 
-            <!-- <div class="form-group row mx-1">
-              <label for="inputPassword" class="col-xl-3 col-md-4 px-2 col-form-label"><b
-                  style="font-weight:600">Physical Closing Cash</b></label>
-              <div class="inputfield col-xl-9 col-md-8 d-flex align-items-center">
-                <span>$</span>
-                <input type="text" class="form-control" [(ngModel)]="this.storeclosingcash"
-                  (keypress)="validateNumber($event)" (input)="validateDecimalPlaces($event)"
-                  (blur)="onTextboxLeaveClosing($event )" id="grocery" placeholder="0.00">
+                </table>
               </div>
-            </div> -->
+            </div>
+        
           </div>
         </div>
       </div>
-      <!-- <div class="totalamount d-flex justify-content-end">
-        <span>Total Physical Closing Cash : <b>${{this.storeclosingcash}}</b></span>
-      </div> -->
+    
     </div>
   </div>
 </div>

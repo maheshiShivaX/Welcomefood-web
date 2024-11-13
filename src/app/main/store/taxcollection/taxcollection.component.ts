@@ -58,7 +58,7 @@ public form = new FormGroup({
   taxTypeId: new FormControl(0),
   storeId: new FormControl(0),
   description:new FormControl(''),
-  payModeId: new FormControl(0),
+  payModeId: new FormControl(1),
   amountDate: new FormControl(''),
   amount: new FormControl('0.00'),
   isActive: new FormControl(true),
@@ -175,6 +175,7 @@ this.selectedOption=id;
     this.form.patchValue({
       storeId: this.storeid,
       amountDate: this.entryDate,
+      payModeId:1,
     });
     if (this.form.value.amount == '0.00' || this.form.value.amount == '') {
 
@@ -208,7 +209,7 @@ this.selectedOption=id;
       storeId: 0,
       taxTypeId: 0,
       description:'',
-      payModeId: 0,
+      payModeId: 1,
       amountDate:'',
       amount: '0.00',
       isActive:true,

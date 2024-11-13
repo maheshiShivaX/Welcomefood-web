@@ -115,6 +115,7 @@
                         <th scope="col"> Employee Name</th>
                         <th scope="col"> Email Id</th>
                         <th scope="col"> Mobile No</th>
+                        <th scope="col"> Entry Date</th>
                         <th scope="col" colspan="2">Action</th>
                     </tr>
                 </thead>
@@ -125,6 +126,7 @@
                         <td>{{item.name}}</td>
                         <td>{{item.mobileNo}}</td>
                         <td>{{item.emailId}}</td>
+                        <td>{{item.createdDate | date : 'MM-dd-yyyy hh:mm:ss'}}</td>
                         <td class="action">
                             <button type="button" (click)="onEdit(item.employeeId)" class="editbtn">
                                 <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">

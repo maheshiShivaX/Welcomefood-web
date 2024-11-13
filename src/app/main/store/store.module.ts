@@ -31,7 +31,12 @@ import { TaxcollectionComponent } from './taxcollection/taxcollection.component'
 import { ArcadeComponent } from './arcade/arcade.component';
 import { DailysalereportComponent } from './dailysalereport/dailysalereport.component';
 import { ProfileComponent } from './profile/profile.component';
-
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { setTheme } from 'ngx-bootstrap/utils';
+import { GasreportComponent } from './gasreport/gasreport.component';
+import { PurchasereportComponent } from './purchasereport/purchasereport.component';
+import { ExpensereportComponent } from './expensereport/expensereport.component';
+setTheme('bs4'); // or 'bs4'
 
 const routes: Routes = [
   { path: 'moneyin/:storeId', component: MoneyinComponent },
@@ -72,7 +77,15 @@ const routes: Routes = [
     path: 'profile', component: ProfileComponent
   },
 
-  
+  {
+    path: 'gasreport', component: GasreportComponent
+  },
+  {
+    path: 'purchasereport', component: PurchasereportComponent
+  },
+  {
+    path: 'expensereport', component: ExpensereportComponent
+  },
 ]
 
 @NgModule({
@@ -102,12 +115,15 @@ const routes: Routes = [
     ArcadeComponent,
     DailysalereportComponent,
     ProfileComponent,
+    GasreportComponent,
+    PurchasereportComponent,
+    ExpensereportComponent,
     
   
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes), NgSelectModule, ReactiveFormsModule,
+    RouterModule.forChild(routes), NgSelectModule, ReactiveFormsModule,BsDatepickerModule,
     FormsModule, CarouselModule],
   exports: [
     DailysalesexpensesComponent

@@ -14,6 +14,8 @@ interface TableRow {
   emailId: string;
   address: string;
   visible: boolean;
+  storeName:string;
+  createdDate:string;
 }
 
 
@@ -51,6 +53,7 @@ export class VendorComponent {
     isActive: new FormControl(true),
     createdBy: new FormControl(0),
     companyId:new FormControl(0),
+    storeId:new FormControl(0)
   });
 
 
@@ -77,6 +80,7 @@ export class VendorComponent {
       const currentUser = user;
       this.form.value.createdBy = currentUser.loginId;
       this.companyId= currentUser.companyId;
+      this.loginId =currentUser.loginId;
       // Update menu based on user authentication state
     });
   }
@@ -92,7 +96,181 @@ filterValue: string = '';
 //      row.visible = txtValue.includes(filter);
 //    });
 //  }
+loginId:any;
+storeDetail:any
+GetEmployeeStoreByUserId() {
 
+  this.http.getAll(environment.GetEmployeeStoreByUserId +"?pUserId=" + this.loginId ).subscribe((result: any) => {
+    if (result.isSuccess == 1) {
+      console.log(result.data)
+      this.storeDetail = result.data;
+    
+    }
+    else { this.storeDetail = null;
+    }
+  })
+}
+
+
+
+
+  ngOnInit() {
+
+    this.GetVendorDetail();
+    this.GetEmployeeStoreByUserId();
+  }
+
+  onSubmit() {
+
+    this.isLoading = true;
+    this.submitted = true;
+
+    console.log(this.form.value);
+    if (this.form.invalid) {
+      this.isLoading = false;
+      return;
+    }
+this.form.value.companyId=this.companyId;
+
+    this.http.post(environment.SaveVendorDetail, this.form.value).subscribe((result: any) => {
+      if (result.isSuccess == 1) {
+        this.closeDrawer();
+        this.isLoading = false;
+        this.submitted = false;
+        this.onReset();
+        this.GetVendorDetail();
+        this.toastr.success(result.message);
+        this.closeDrawer();
+      }
+      else {
+        this.isLoading = false;
+        this.submitted = false;
+        console.log(result);
+        this.toastr.error(result.message);
+      }
+    });
+  }
+
+  get f() {
+    return this.form.controls;
+  }
+
+  GetVendorDetail() {
+    this.http.getAll(environment.GetVendorDetailByLoginId+"?pLoginId="+this.loginId).subscribe((result: any) => {
+      if (result.isSuccess == 1) {
+        console.log(result.data)
+        this.datalist = result.data;
+        this.datalist = this.datalist.map(item => {
+          return { ...item, visible: true };
+        });
+        console.log(this.datalist)
+      }
+      else { this.datalist = [];
+      }
+    })
+  }
+
+  
+
+  onReset() {
+    this.form.patchValue({
+     
+      isActive: true,
+      createdBy: 0,
+      vendorId: 0,
+      vendorCode: '',
+      vendorName: '',
+      contactNo: '',
+      emailId: '',
+      address: '',
+    });
+  }
+
+  
+
+
+  onEdit(pId:any)
+  {
+    this.openDrawer()
+    this.vendorlist = this.datalist.filter(((x: { vendorId: any; }) => x.vendorId == pId));
+
+    this.form.patchValue({
+      vendorId: this.vendorlist[0].vendorId,
+      vendorName:  this.vendorlist[0].vendorName,
+      vendorCode:  this.vendorlist[0].vendorCode,
+      contactNo:  this.vendorlist[0].contactNo,
+      address:  this.vendorlist[0].address,
+      emailId:  this.vendorlist[0].emailId,
+  
+      isActive: this.vendorlist[0].isActive,
+      createdBy: this.vendorlist[0].createdBy,
+      storeId:this.vendorlist[0].storeId,
+      
+    });
+  }
+
+  // onUser(item:any)
+  // {
+  //   this.GetRole();
+  //   this.formLogin.patchValue({
+  //     employeeId: item.employeeId,
+  //     userId: item.emailId,
+  //   });
+  // }
+
+  openPopup(item:any) {
+    const popupContainer = document.getElementById('termpopupContainer');
+    if (popupContainer) {
+      popupContainer.style.display = 'block';
+    }
+    
+    this.formLogin.patchValue({
+      employeeId: item.employeeId,
+      userId: item.emailId,
+    });
+  }
+
+  useropenPopup(item:any) {
+    const popupContainer = document.getElementById('userpopupContainer');
+    if (popupContainer) {
+      popupContainer.style.display = 'block';
+    }
+  
+    this.formLogin.patchValue({
+      employeeId: item.employeeId,
+      userId: item.emailId,
+    });
+  }
+  
+
+
+
+
+  closePopup() {
+    const popupContainer = document.getElementById('userpopupContainer');
+    if (popupContainer) {
+      popupContainer.style.display = 'none';
+    }
+  }
+
+
+  onDelete(pId:any)
+  {
+
+      this.http.getAll(environment.DeleteVendorDetailById+ "?pVendorDetailId=" + pId ).subscribe((result: any) => {
+        if (result.isSuccess == 1) {
+          console.log(result.data)
+          this.toastr.error(result.message);
+        
+          this.GetVendorDetail()
+        }
+        else {
+        }
+      })
+    }
+
+
+  
 applyFilter() {
   const filter = this.filterValue.toUpperCase();
   this.datalist.forEach(row => {
@@ -258,162 +436,6 @@ sortList(property: keyof TableRow, direction: 'asc' | 'desc') {
   closeDrawer() {
     this.isOpen = false;
   }
-
-  ngOnInit() {
-
-    this.GetVendorDetail();
-  }
-
-  onSubmit() {
-
-    this.isLoading = true;
-    this.submitted = true;
-
-    console.log(this.form.value);
-    if (this.form.invalid) {
-      this.isLoading = false;
-      return;
-    }
-this.form.value.companyId=this.companyId;
-
-    this.http.post(environment.SaveVendorDetail, this.form.value).subscribe((result: any) => {
-      if (result.isSuccess == 1) {
-        this.closeDrawer();
-        this.isLoading = false;
-        this.submitted = false;
-        this.onReset();
-        this.GetVendorDetail();
-        this.toastr.success(result.message);
-        this.closeDrawer();
-      }
-      else {
-        this.isLoading = false;
-        this.submitted = false;
-        console.log(result);
-        this.toastr.error(result.message);
-      }
-    });
-  }
-
-  get f() {
-    return this.form.controls;
-  }
-
-  GetVendorDetail() {
-    this.http.getAll(environment.GetVendorDetailByComapnyId+"?pCompanyId="+this.companyId).subscribe((result: any) => {
-      if (result.isSuccess == 1) {
-        console.log(result.data)
-        this.datalist = result.data;
-        this.datalist = this.datalist.map(item => {
-          return { ...item, visible: true };
-        });
-        console.log(this.datalist)
-      }
-      else { this.datalist = [];
-      }
-    })
-  }
-
-  
-
-  onReset() {
-    this.form.patchValue({
-     
-      isActive: true,
-      createdBy: 0,
-      vendorId: 0,
-      vendorCode: '',
-      vendorName: '',
-      contactNo: '',
-      emailId: '',
-      address: '',
-    });
-  }
-
-  
-
-
-  onEdit(pId:any)
-  {
-    this.openDrawer()
-    this.vendorlist = this.datalist.filter(((x: { vendorId: any; }) => x.vendorId == pId));
-
-    this.form.patchValue({
-      vendorId: this.vendorlist[0].vendorId,
-      vendorName:  this.vendorlist[0].vendorName,
-      vendorCode:  this.vendorlist[0].vendorCode,
-      contactNo:  this.vendorlist[0].contactNo,
-      address:  this.vendorlist[0].address,
-      emailId:  this.vendorlist[0].emailId,
-  
-      isActive: this.vendorlist[0].isActive,
-      createdBy: this.vendorlist[0].createdBy,
-      
-    });
-  }
-
-  // onUser(item:any)
-  // {
-  //   this.GetRole();
-  //   this.formLogin.patchValue({
-  //     employeeId: item.employeeId,
-  //     userId: item.emailId,
-  //   });
-  // }
-
-  openPopup(item:any) {
-    const popupContainer = document.getElementById('termpopupContainer');
-    if (popupContainer) {
-      popupContainer.style.display = 'block';
-    }
-    
-    this.formLogin.patchValue({
-      employeeId: item.employeeId,
-      userId: item.emailId,
-    });
-  }
-
-  useropenPopup(item:any) {
-    const popupContainer = document.getElementById('userpopupContainer');
-    if (popupContainer) {
-      popupContainer.style.display = 'block';
-    }
-  
-    this.formLogin.patchValue({
-      employeeId: item.employeeId,
-      userId: item.emailId,
-    });
-  }
-  
-
-
-
-
-  closePopup() {
-    const popupContainer = document.getElementById('userpopupContainer');
-    if (popupContainer) {
-      popupContainer.style.display = 'none';
-    }
-  }
-
-
-  onDelete(pId:any)
-  {
-
-      this.http.getAll(environment.DeleteVendorDetailById+ "?pVendorDetailId=" + pId ).subscribe((result: any) => {
-        if (result.isSuccess == 1) {
-          console.log(result.data)
-          this.toastr.error(result.message);
-        
-          this.GetVendorDetail()
-        }
-        else {
-        }
-      })
-    }
-
-
-  
 
 }
 

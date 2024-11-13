@@ -80,6 +80,25 @@ export class LotteryComponent {
 
 
   }
+
+  onDelete()
+  {
+ 
+      this.http.getAll(environment.DeleteLotteryPayDetailByStoreDateId + "?pStoreId=" + this.storeId  + "&pAmountDate=" + this.entryDate).subscribe((result: any) => {
+        if (result.isSuccess == 1) {
+          console.log(result.data)
+         // this.lotterytype = result.data;
+
+         this.GetLotteryTypeStoreIdDate();
+         this.GetLotteryExpenseStoreIdDate();
+        }
+        else {
+          this.lotterytype = null;
+        }
+      })
+  }
+
+
   storeid:any;
 
   ngOnInit() {

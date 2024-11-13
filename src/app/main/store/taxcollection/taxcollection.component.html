@@ -18,17 +18,17 @@
                 </div>
 
                 <div class="mb-2 col-xl-2 col-lg-6">
-                    <label for="FormControlInput1" class="form-label">Decription</label>
+                    <label for="FormControlInput1" class="form-label">Description</label>
                     <input type="text" class="form-control" formControlName="description" id="amount"
-                        placeholder="Decription">
+                        placeholder="Description">
                 </div>
 
-                <div class="mb-2 col-xl-2 col-lg-6">
+                <!-- <div class="mb-2 col-xl-2 col-lg-6">
                     <label for="FormControlInput1" class="form-label">Pay Modes </label>
                     <ng-select formControlName="payModeId" id="payModeId" (ngModelChange)="onPaymodechange($event)"
                         #SelectSizeDefault [items]="paymode" bindLabel="payModeName" bindValue="payModeId">
                     </ng-select>
-                </div>
+                </div> -->
 
 
                 <div class="mb-2 col-xl-2 col-lg-6">
@@ -66,7 +66,7 @@
                             <th>Sr.No</th>
                             <th>Tax Type Name</th>
                             <th>Description</th>
-                            <th>Pay Type</th>
+                            <!-- <th>Pay Type</th> -->
                             <th>Amount</th>
                             <!-- <th>Cheque No</th> -->
                             <th>Amount Date</th>
@@ -81,11 +81,11 @@
                             <td>{{row.taxTypeName}}</td>
                             <td>{{row.description}}</td>
                             
-                            <td>{{row.payModeType}}</td>
+                            <!-- <td>{{row.payModeType}}</td> -->
                             <td>{{row.amount.toFixed(2)}}</td>
                             <!-- <td>{{row.chequeNo}}</td> -->
-                            <td>{{row.amountDate  | date : 'dd-MM-yyyy'}}</td>
-                            <td>{{row.createdDate | date : 'dd-MM-yyyy hh:mm:ss'}}</td>
+                            <td>{{row.amountDate  | date : 'MM-dd-yyyy'}}</td>
+                            <td>{{row.createdDate | date : 'MM-dd-yyyy hh:mm:ss'}}</td>
                             <td class="action">
                                 <button type="button" (click)="onedit(row.taxDetailId)" class="editbtn">
                                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none"

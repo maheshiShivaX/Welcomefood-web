@@ -82,8 +82,8 @@
                             <td>{{row.payModeName}}</td>
                             <td>{{row.amount.toFixed(2)}}</td>
                             <td>{{row.chequeNo}}</td>
-                            <td>{{row.amountDate | date : 'dd-MM-yyyy'}}</td>
-                            <td>{{row.createdDate | date : 'dd-MM-yyyy hh:mm:ss'}}</td>
+                            <td>{{row.amountDate | date : 'MM-dd-yyyy'}}</td>
+                            <td>{{row.createdDate | date : 'MM-dd-yyyy hh:mm:ss'}}</td>
                             <td class="action">
                                 <button type="button" (click)="onedit(row.salaryTransactionId)" class="editbtn">
                                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none"

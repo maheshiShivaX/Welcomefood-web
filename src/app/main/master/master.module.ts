@@ -14,6 +14,7 @@ import { ManagebstermComponent } from './managebsterm/managebsterm.component';
 import { TestpageComponent } from './testpage/testpage.component';
 import { TaxtypeComponent } from './taxtype/taxtype.component';
 import { ReconsiletypeComponent } from './reconsiletype/reconsiletype.component';
+import { DocumenttypeComponent } from './documenttype/documenttype.component';
 
 const routes: Routes = [
   { path: 'productcategory', component: ProductcategoryComponent },
@@ -53,8 +54,11 @@ const routes: Routes = [
   {
     path: 'reconsiletype', component: ReconsiletypeComponent
   }
-
-
+  ,
+  {
+    path: 'documenttype', component: DocumenttypeComponent
+  }
+  
 ]
 
 @NgModule({
@@ -69,7 +73,8 @@ const routes: Routes = [
     ManagebstermComponent,
     TestpageComponent,
     TaxtypeComponent,
-    ReconsiletypeComponent
+    ReconsiletypeComponent,
+    DocumenttypeComponent
   ],
   imports: [
     CommonModule,

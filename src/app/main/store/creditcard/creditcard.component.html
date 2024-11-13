@@ -31,7 +31,10 @@
                                 </div>
                             </ng-container>
                         </div>
-                        <div class="totalamount d-flex justify-content-end">
+                        <div class="totalamount d-flex justify-content-between">
+                            <div class="resetbutton">
+                                <button type="button" (click)="onDelete()"  >Reset</button>
+                            </div> 
                             <span>Total Credit Card Amount :
                                 <b>${{this.creditcardamount}}</b></span>
                         </div>

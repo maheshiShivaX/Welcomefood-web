@@ -42,7 +42,7 @@
                         <td>{{item.name}}</td>
                         <td>{{item.emailId}}</td>
                         <td>{{item.mobileNo}}</td>
-                        <td>{{item.createdDate | date : 'dd-MM-yyyy :hh.mm.ss'}}</td>
+                        <td>{{item.createdDate | date : 'MM-dd-yyyy :hh.mm.ss'}}</td>
                         <td [ngClass]="item.isApproved ? 'approvebtn' : 'approvebtnna'">
                         <!-- <td class="approvebtn"> -->
                             <button type="button"

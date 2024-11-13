@@ -8,7 +8,7 @@ export const environment = {
     apiUrlsms: "http://sms.ishivax.in/api/",
     // apiUrl1:"https://anutechinfra.com/anutechAPI/"
     // apiUrl:"https://anutechinfra.com/anutechAPI/api/"
-  // apiUrl: 'https://localhost:7025/api/'
+   //apiUrl: 'https://localhost:7025/api/'
     //apiUrl:'https://www.indianfilms.in/eBuilderAPI/api/'
   },
 
@@ -109,6 +109,7 @@ export const environment = {
   GetVendorDetail: "VendorDetail/GetVendorDetail",
   DeleteVendorDetailById: "VendorDetail/DeleteVendorDetailById",
   GetVendorDetailByComapnyId: "VendorDetail/GetVendorDetailByComapnyId",
+  GetVendorDetailByLoginId:"VendorDetail/GetVendorDetailByLoginId",
 
   SaveExpenseHead: "ExpenseHead/SaveExpenseHead",
   GetExpenseHead: "ExpenseHead/GetExpenseHead",
@@ -120,7 +121,7 @@ export const environment = {
 
   GetPayMode: "PayMode/GetPayMode",
 
-
+  GetExpenseItemsByStoreDatewiseIdByPayType:"ExpenseItem/GetExpenseItemsByStoreDatewiseIdByPayType",
   SaveExpenseItem: "ExpenseItem/SaveExpenseItem",
   GetExpenseItemsById: "ExpenseItem/GetExpenseItemsById",
 
@@ -237,5 +238,15 @@ DeleteGasSaleByStoreIdDate:"GasSale/DeleteGasSaleByStoreIdDate",
 SaveCashReconsilType:"CashReconsilType/SaveCashReconsilType",
 DeleteCashReconsilTypeById:"CashReconsilType/DeleteCashReconsilTypeById",
 DeleteItemPurchaseById:"ItemPurchase/DeleteItemPurchaseById",
+DeleteLotteryPayDetailByStoreDateId:"LotteryPayDetail/DeleteLotteryPayDetailByStoreDateId",
+DeleteCreditCardByStoreDateId:"CreditCardDetail/DeleteCreditCardByStoreDateId",
+GetDocumentType:"DocumentType/GetDocumentType",
+SaveDocumentType:"DocumentType/SaveDocumentType",
+SaveStoreDocument:"StoreDocument/SaveStoreDocument",
+GetStoreDocumentByCompanyId:"StoreDocument/GetStoreDocumentByCompanyId",
+DeleteStoreDocumentById:"StoreDocument/DeleteStoreDocumentById",
+DeleteDocumentTypeById:"DocumentType/DeleteDocumentTypeById",
+login:"LoginDetail/login",
+GetItemPurchaseByStoreIdDateWise:"ItemPurchase/GetItemPurchaseByStoreIdDateWise",
 };
 

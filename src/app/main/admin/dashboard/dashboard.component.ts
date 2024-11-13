@@ -158,7 +158,7 @@ this.fdailysaledata = [...this.dailysaledata].sort((a: { amountDate: string | nu
     
     setTimeout(() => {
       this.removeInlineStyle();
-    }, 100); // Adjust the delay if necessary
+    }, 300); // Adjust the delay if necessary
   }
   onSelectChange(event: any) {
     this.ddailysale(this.companyId,event);

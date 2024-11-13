@@ -87,6 +87,25 @@ this.  GetCreditCardByStoreIdDate();
 this.  GetCreditCardByStoreIdDate();
   }
 
+
+  onDelete()
+  {
+
+      this.http.getAll(environment.DeleteCreditCardByStoreDateId + "?pStoreId=" + this.storeId  + "&pAmountDate=" + this.entryDate).subscribe((result: any) => {
+        if (result.isSuccess == 1) {
+          console.log(result.data)
+         // this.lotterytype = result.data;
+
+         this.  GetCreditCardByStoreIdDate();
+        }
+        else {
+          this.creditcarddata = null;
+        }
+      })
+  }
+
+
+
 creditcardamount:any;
 creditcardlist:any;
 GetCreditCardByStoreIdDate() {

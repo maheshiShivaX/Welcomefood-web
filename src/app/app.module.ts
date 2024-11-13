@@ -14,7 +14,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
-
+import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 
 
 const appRoutes: Routes = [
@@ -66,6 +66,7 @@ const routerOptions: ExtraOptions = {
     CarouselModule,
     CanvasJSAngularChartsModule,
     NgxChartsModule,
+    BsDatepickerModule
 
      
   ],

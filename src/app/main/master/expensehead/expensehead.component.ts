@@ -56,7 +56,7 @@ export class ExpenseheadComponent {
   public form = new FormGroup({
     isFixed:new FormControl(false),
     expenseCategoryId: new FormControl(0),
-    expenseGroupId:new FormControl(0),
+    expenseGroupId:new FormControl(2),
     expanseName: new FormControl('', Validators.required),
     expanseCode: new FormControl('', Validators.required),
     isActive: new FormControl(true),
@@ -276,7 +276,8 @@ this.GetExpenseGroupByCompanyId(this.companyid);
     this.submitted = true;
 
     this.form.patchValue({
-isFixed :this.selectedOption=="1" ? true : false
+isFixed :this.selectedOption=="1" ? true : false,
+expenseGroupId:2,
 
     })
 

@@ -15,6 +15,7 @@ import { AdminComponent } from './admin/admin.component';
 import { ProfileComponent } from './profile/profile.component';
 import { PackageComponent } from './package/package.component';
 import { StoreemployeeComponent } from './storeemployee/storeemployee.component';
+import { StoredocumentComponent } from './storedocument/storedocument.component';
 
 
 const routes: Routes = [
@@ -32,7 +33,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'package', component: PackageComponent },
   { path: 'storeemployee', component: StoreemployeeComponent },
-  
+  { path: 'storedocument', component: StoredocumentComponent },
 ]
 
 @NgModule({
@@ -49,6 +50,7 @@ const routes: Routes = [
     ProfileComponent,
     PackageComponent,
     StoreemployeeComponent,
+    StoredocumentComponent,
 
   ],
   imports: [

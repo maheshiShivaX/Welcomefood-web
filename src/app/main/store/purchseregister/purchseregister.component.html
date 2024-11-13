@@ -25,6 +25,11 @@
                         bindLabel="productName" bindValue="productId">
                     </ng-select>
                 </div>
+                <div class="mb-3 col-xl-3 col-lg-6" >
+                    <label for="FormControlInput1" class="form-label">Description</label>
+                    <input type="text" class="form-control" formControlName="description" id="description"
+                        placeholder="description">
+                </div>
                 <div class="mb-2 col-xl-2 col-lg-6">
                     <label for="FormControlInput1" class="form-label">Pay Modes </label>
                     <ng-select formControlName="payMode" id="payModeId" (ngModelChange)="onPaymodechange($event)"
@@ -41,7 +46,7 @@
                     <input type="text" class="form-control" formControlName="chequeNo" id="chequeNo"
                         placeholder="#">
                 </div>
-
+               
                 <div class="mb-3 col-xl-3 col-lg-6" >
                     <label for="FormControlInput1" class="form-label">Upload Invoice</label>
                     <input formControlName="invoicePath" type="file" accept="image/*" id="formFile" class="form-control"
@@ -77,6 +82,7 @@
                             <th>Vendor Name</th>
                             <th>Product Category</th>
                             <th>Sub Category</th>
+                            <th>Descrption</th>
                             <th>Pay Type</th>
                             <th>Amount</th>
                             <th>Cheque No</th>
@@ -91,6 +97,7 @@
                             <td>{{row.vendorName}}</td>
                             <td>{{row.categoryName}}</td>
                             <td>{{row.producName}}</td>
+                            <td>{{row.description}}</td>
                             <td>{{row.payModeType}}</td>
                             <td>{{row.amount}}</td>
                             <td>{{row.chequeNo}}</td>
@@ -105,7 +112,7 @@
                                   </svg>
                                 </button>
                             </td>
-                            <td>{{row.createdDate | date : 'dd-MM-yyyy hh:mm:ss'}}</td>
+                            <td>{{row.createdDate | date : 'MM-dd-yyyy hh:mm:ss'}}</td>
                             <td class="action">
                                 <button type="button" (click)="onEditpurchase(row.itemPurchaseId)" class="editbtn">
                                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none"

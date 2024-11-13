@@ -6,9 +6,114 @@
     </div>
     <div class="gasinventory-container gasinventory">
 
+ 
 
+<div class="mt-4">
+    <div class="dailyform">
+        <div class="">
+        
+                <div class=" row">
+                  
+                    <div class="form col-6">
+                     
+                        <div class="form-group row ">
+                            <label for="inputPassword"
+                                class="col-xl-3 col-md-4 px-2 col-form-label"><b
+                                    style="font-weight:600">Gas Sale</b></label>
+                            <div
+                                class="inputfield col-xl-9 col-md-8 d-flex align-items-center">
+                                <span>$</span>
+                                <input type="text" class="form-control"
+                                  [value]="gasamount"
+                                    (keypress)="validateNumber($event)"
+                                    (input)="validateDecimalPlaces($event)"
+                                    (blur)="onTextboxLeave($event,'Sale')"
+                                    id="grocery" placeholder="0.00">
+                            </div>
+                        </div>
+                        <div class="totalamount d-flex justify-content-end">
+                            <span>Total Gas Sale Amount :
+                                <b>${{this.gasamount}}</b></span>
+                                <button type="button"  (click)="DeleteGesInvoiceById('Sale')"  class="deletebtn">
+                                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="40" height="40" rx="12" fill="#FFF0F1" />
+                                        <path
+                                            d="M27.5 14.9833C24.725 14.7083 21.9333 14.5667 19.15 14.5667C17.5 14.5667 15.85 14.65 14.2 14.8167L12.5 14.9833"
+                                            stroke="#C82D31" stroke-width="1.5" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                        <path
+                                            d="M17.0834 14.1416L17.2667 13.05C17.4 12.2583 17.5 11.6666 18.9084 11.6666H21.0917C22.5 11.6666 22.6084 12.2916 22.7334 13.0583L22.9167 14.1416"
+                                            stroke="#C82D31" stroke-width="1.5" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                        <path
+                                            d="M25.7083 17.6167L25.1666 26.0084C25.075 27.3167 25 28.3334 22.675 28.3334H17.325C15 28.3334 14.925 27.3167 14.8333 26.0084L14.2916 17.6167"
+                                            stroke="#C82D31" stroke-width="1.5" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                        <path d="M18.6083 23.75H21.3833" stroke="#C82D31" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M17.9166 20.4166H22.0833" stroke="#C82D31" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </button>
+                        </div>
+                       
+                    </div>
+                    <div class="form  col-6" >
+                        
+                        <div class="form-group row ">
+                            <label for="inputPassword"
+                                class="col-xl-3 col-md-4 px-2 col-form-label"><b
+                                    style="font-weight:600">Gas Discount</b></label>
+                            <div
+                                class="inputfield col-xl-9 col-md-8 d-flex align-items-center">
+                                <span>$</span>
+                                <input type="text" class="form-control"
+                                [value]="gasdiscount"
+                                    (keypress)="validateNumber($event)"
+                                    (input)="validateDecimalPlaces($event)"
+                                    (blur)="onTextboxLeave($event,'Discount')"
+                                    id="grocery" placeholder="">
+                            </div>
+                        </div>
+                        <div class="totalamount d-flex justify-content-end">
+                            <span>Total Gas Discount  :
+                                <b>${{this.gasdiscount}}</b></span>
+                                <button type="button"  (click)="DeleteGesInvoiceById('Discount')"  class="deletebtn">
+                                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="40" height="40" rx="12" fill="#FFF0F1" />
+                                        <path
+                                            d="M27.5 14.9833C24.725 14.7083 21.9333 14.5667 19.15 14.5667C17.5 14.5667 15.85 14.65 14.2 14.8167L12.5 14.9833"
+                                            stroke="#C82D31" stroke-width="1.5" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                        <path
+                                            d="M17.0834 14.1416L17.2667 13.05C17.4 12.2583 17.5 11.6666 18.9084 11.6666H21.0917C22.5 11.6666 22.6084 12.2916 22.7334 13.0583L22.9167 14.1416"
+                                            stroke="#C82D31" stroke-width="1.5" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                        <path
+                                            d="M25.7083 17.6167L25.1666 26.0084C25.075 27.3167 25 28.3334 22.675 28.3334H17.325C15 28.3334 14.925 27.3167 14.8333 26.0084L14.2916 17.6167"
+                                            stroke="#C82D31" stroke-width="1.5" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                        <path d="M18.6083 23.75H21.3833" stroke="#C82D31" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M17.9166 20.4166H22.0833" stroke="#C82D31" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </button>
+                        </div>
+
+                    </div>
+                </div>
+        </div>
+        
+    </div>
+</div>
+
+
+    
       
-            <div class="dailyform">
+            <!-- <div class="dailyform">
                 <div class="columncountsection">
                 
                         <div class="category ">
@@ -39,7 +144,7 @@
                 </div>
               
             </div>
-   
+    -->
 
 
 
@@ -49,19 +154,19 @@
                     <table>
                         <thead>
                             <tr class="">
-                                <th class="px-3 pb-2"></th>
+                                <th class="px-3 pb-2">Type</th>
                                 <th class="px-3 pb-2">Open Stock</th>
-                                <th class="px-3 pb-2">Purchases</th>
-                                <th class="px-3 pb-2">Purchases Rate</th>
+                                <th class="px-3 pb-2">Purchase Gallons</th>
+                                <!-- <th class="px-3 pb-2">Purchases Rate</th>
                                 
                                 <th class="px-3 pb-2">Sales Cash</th>
                                 <th class="px-3 pb-2">Sales Cash Rate</th>
                                 
                                 <th class="px-3 pb-2">Sales Card</th>
-                                <th class="px-3 pb-2">Sales Card Rate</th>
-                                <!-- <th class="px-3 pb-2">Total Sales</th>
-                                <th class="px-3 pb-2">Avg Sales Rate</th>
-                         -->
+                                <th class="px-3 pb-2">Sales Card Rate</th> -->
+                                <th class="px-3 pb-2">Sale Gallons</th>
+                                <th class="px-3 pb-2">Sales Amount</th>
+                        
                                 <th class="px-3 pb-2">Closing Stock</th>
                                 <th class="px-3 pb-2">Physical Stock</th>
                                 <th class="px-3 pb-2">Over Short</th>
@@ -87,15 +192,15 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td>
+                                <!-- <td>
                                     <div class="forminput">
                                         <div class="inputfield px-2 mx-3 d-flex align-items-center">
                                             <input type="text" [(ngModel)]="item.purchasesRate"    (keypress)="validateNumber($event)"
                                             (input)="validateDecimalPlaces($event)"   class="form-control">
                                         </div>
                                     </div>
-                                </td>
-                                <td>
+                                </td> -->
+                                <!-- <td>
                                     <div class="forminput">
                                         <div class="inputfield px-2 mx-3 d-flex align-items-center">
                                             <input type="text" [(ngModel)]="item.saleCash"    (keypress)="validateNumber($event)"
@@ -126,9 +231,9 @@
                                             (input)="validateDecimalPlaces($event)" >
                                         </div>
                                     </div>
-                                </td>
+                                </td> -->
                               
-                                <!-- <td>
+                                <td>
                                     <div class="forminput">
                                         <div class="inputfield px-2 mx-3 d-flex align-items-center">
                                             <input type="text" [(ngModel)]="item.sales"  class="form-control"     (keypress)="validateNumber($event)"
@@ -137,6 +242,17 @@
                                     </div>
                                 </td>
                                 <td>
+                                    <div class="forminput">
+                                        <div class="inputfield px-2 mx-3 d-flex align-items-center">
+                                            <input type="text" [(ngModel)]="item.saleAmount"  class="form-control"     (keypress)="validateNumber($event)"
+                                            (input)="validateDecimalPlaces($event)" (input)="updateTotals(item)">
+                                        </div>
+                                    </div>
+                                </td>
+
+
+                                
+                                <!-- <td>
                                     <div class="forminput">
                                         <div class="inputfield px-2 mx-3 d-flex align-items-center">
                                             <input type="text" [(ngModel)]="item.salesRate"    (keypress)="validateNumber($event)"

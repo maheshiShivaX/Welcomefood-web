@@ -11,6 +11,28 @@
             style="z-index: 9999;">
             <a href="javascript:void(0)" class="closebtn" (click)="closeDrawer()">&times;</a>
             <form [formGroup]="form" class="row" (submit)="onSubmit()">
+
+
+
+
+
+                <div class="mb-3 col-12">
+                    <label for="FormControlInput1" class="form-label">Store Name<span class="required">*</span></label>
+                    <ng-select formControlName="storeId" id="storeId" #SelectSizeDefault [items]="storeDetail"
+                    [searchable]="true" bindLabel="storeName" bindValue="storeId">
+                </ng-select>
+                    <div *ngIf="f['storeId'].errors && ( submitted)" class="invalid-feedback">
+                        <div class="text-red-600" *ngIf="f['storeId'].errors?.['required']">Store Name is
+                            required.
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            
+
                 <div class="mb-3 col-12">
                     <label for="FormControlInput1" class="form-label">Vendor Name<span class="required">*</span></label>
                     <input type="text" class="form-control" formControlName="vendorName" id="FormControlInput1"
@@ -31,7 +53,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="mb-3 col-12">
+                <!-- <div class="mb-3 col-12">
                     <label for="FormControlInput1" class="form-label">Vendor Email</label>
                     <input type="email" class="form-control" formControlName="emailId" id="FormControlInput1"
                         placeholder="Enter Employee Email">
@@ -47,7 +69,7 @@
                     <input type="text" class="form-control" maxlength="10" formControlName="contactNo" id="FormControlInput1"
                         placeholder="Enter Mobile No">
                    
-                </div>
+                </div> -->
                 <div class="mb-3 col-12">
                     <label for="FormControlInput1" class="form-label">Address</label>
                     <input type="text" class="form-control" formControlName="address" id="FormControlInput1"
@@ -98,23 +120,26 @@
                     <thead class="text-white">
                         <tr>
                             <th scope="col">S.N.</th>
+                            <th scope="col">Store Name</th>
                             <th scope="col">Name</th>
                             <th scope="col">Code</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Contact No</th>
+                            <!-- <th scope="col">Email</th>
+                            <th scope="col">Contact No</th> -->
                             <th scope="col">Address</th>
+                            <th scope="col">Entry Date</th>
                             <th scope="col" colspan="2">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr class="whitebg-row" *ngFor="let item of visibleRows; let idx=index;" [style.display]="item.visible ? 'table-row' : 'none'">
                             <td class="tablefirstdata">{{(currentPage - 1)*pageSize +idx +1}}</td>
+                            <td>{{item.storeName}}</td>
                             <td>{{item.vendorName}}</td>
                             <td>{{item.vendorCode}}</td>
-                            <td>{{item.emailId}}</td>
-                            <td>{{item.contactNo}}</td>
+                            <!-- <td>{{item.emailId}}</td>
+                            <td>{{item.contactNo}}</td> -->
                             <td>{{item.address}}</td>
-                           
+                            <td>{{item.createdDate | date : 'MM-dd-yyyy hh:mm:ss'}}</td>
                             <td class="action">
                                 <button type="button" (click)="onEdit(item.vendorId)" class="editbtn">
                                     <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">

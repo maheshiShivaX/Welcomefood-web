@@ -34,6 +34,9 @@
                 </div>
         </div>
         <div class="totalamount d-flex justify-content-end">
+          
+               
+          
             <span>Total Lottery Amount :
                 <b>${{this.lotteryamount}}</b></span>
         </div>
@@ -70,7 +73,11 @@
                 </div>
             
         </div>
-        <div class="totalamount d-flex justify-content-end">
+        <div class="totalamount d-flex justify-content-between">
+            <div class="resetbutton">
+                <button type="button" (click)="onDelete()"  >Reset</button>
+            </div>
+          
             <span>Total Lottery Expense Amount :
                 <b>${{this.lotteryamountExpense}}</b></span>
         </div>
