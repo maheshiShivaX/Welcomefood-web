@@ -12,13 +12,13 @@
 
                 </div>
                 <div class="dateformet">
-                    <label class="date form-label">From Date :</label><br>
-                    <input type="date" id="entrydate" formControlName="fromDate" [(ngModel)]="fromDate">
+                    <label class="date form-label"> Date :</label><br>
+                    <input type="text"  [bsConfig]="{ showWeekNumbers: false }" bsDaterangepicker [formControl]="control" />
                 </div>
-                <div class="dateformet">
-                    <label class="date form-label">To Date :</label><br>
-                    <input type="date" id="toDate" formControlName="toDate" [(ngModel)]="toDate">
-                </div>
+
+         
+                  
+
                 <div class="reportbutton">
                     <button type="button" (click)="onGetReport()">Get Report</button>
                 </div>

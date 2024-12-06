@@ -40,7 +40,7 @@ export class SidebarComponent {
 
     // this.dataChangeSubscription = this.menuService.dataChange$.subscribe(() => {
     //   const currentUser = this.authService.currentUserValue;
-    //   console.log(currentUser);
+
     //   if (currentUser != null) {
     //     this.getmenu(1, currentUser.roleId);
     //     this.username=currentUser.name;

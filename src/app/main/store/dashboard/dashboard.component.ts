@@ -15,7 +15,7 @@ export class DashboardComponent {
   loginId:any;
   constructor(private http: HttpService,private el: ElementRef, private renderer: Renderer2, private authService: AuthService,) { 
     this.authService.currentUser.subscribe((user) => {
-      console.log(user);
+     
       const currentUser = user;
       this.loginId=currentUser.loginId;
       // Update menu based on user authentication state
@@ -59,7 +59,7 @@ graphData :any;
 
     this.http.getAll(environment.ddailysale + "?pUserId=" + pUserId + "&pFromDate=" + "df" +"&pToDate="+ "asd" + "&pDate="+ "sd" + "&StoreId="+ pStoreId  ).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
 
         this.dailysaledata = result.data.dailySaleData;
         this.gasSaleData = result.data.gasSaleData;
@@ -166,7 +166,7 @@ this.fdailysaledata = [...this.dailysaledata].sort((a: { amountDate: string | nu
   onSelectChange(event: any) {
     this.ddailysale(this.loginId,event);
 
-    //console.log('Selected value:', event); // Log the selected value
+  
     // You can perform additional actions based on the selected value here
   }
   storedetail:any;
@@ -175,7 +175,7 @@ this.fdailysaledata = [...this.dailysaledata].sort((a: { amountDate: string | nu
 
     this.http.getAll(environment.GetEmployeeStoreByUserId +"?pUserId=" + this.loginId ).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.storedetail = result.data;
       }
       else { this.storedetail = null;

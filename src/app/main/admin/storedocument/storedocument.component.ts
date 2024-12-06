@@ -9,12 +9,14 @@ import { environment } from 'src/app/environments/environment.prod';
 interface TableRow {
   storeDocumentId: number;
   storeId: number;
-  storeName:string
+  storeName: string
   documentTypeId: number;
   discription: string;
-  docPath:string;
+  docPath: string;
   visible: boolean;
-  documentTypeName:string;
+  documentTypeName: string;
+  fromDate: string;
+  toDate: string;
 }
 
 
@@ -37,36 +39,45 @@ export class StoredocumentComponent {
   submitted: boolean = false;
   public form = new FormGroup({
     storeDocumentId: new FormControl(0),
-    documentTypeId:new FormControl(0),
+    documentTypeId: new FormControl(0),
     storeId: new FormControl(0),
     docPath: new FormControl('', Validators.required),
     discription: new FormControl('', Validators.required),
     isActive: new FormControl(true),
     createdBy: new FormControl(0),
-    file:new FormControl('')
+    file: new FormControl(''),
+    fromDate: new FormControl(''),
+    toDate: new FormControl(''),
   });
 
-  companyId:any;
-loginId:any;
+  companyId: any;
+  loginId: any;
   constructor(private router: Router, private authService: AuthService,
     private http: HttpService, private toastr: ToastrService,
   ) {
     this.authService.currentUser.subscribe((user) => {
       const currentUser = user;
       this.form.value.createdBy = currentUser.loginId;
-this.companyId= currentUser.companyId;
-this.loginId= currentUser.loginId;
+      this.companyId = currentUser.companyId;
+      this.loginId = currentUser.loginId;
       // Update menu based on user authentication state
     });
   }
 
+  isExpire: any = 0;
+  ondocumenttypechange(event: any) {
+  
+    if (this.documenttype != null) {
+      this.isExpire = this.documenttype.filter((x: { documentTypeId: any; }) => x.documentTypeId == event)[0].isExpiredDocument;
+    }
 
-  fileName:any;
-  inspectionImage:any;
+  }
+  fileName: any;
+  inspectionImage: any;
   onFileChange(event: any) {
 
     this.fileName = event.target.files[0];
-    console.log(this.fileName);
+  
     var reader = new FileReader();
     reader.readAsDataURL(event.target.files[0]);
     reader.onload = (_event: any) => {
@@ -102,9 +113,8 @@ this.loginId= currentUser.loginId;
       }
     });
   }
-  onView(path:any)
-  {
-    let url = environment.siteurl+ path ;//"\\abc.COM\\docs\\prj_active";
+  onView(path: any) {
+    let url = environment.siteurl + path;//"\\abc.COM\\docs\\prj_active";
     window.open(url, '_blank');
   }
 
@@ -177,7 +187,7 @@ this.loginId= currentUser.loginId;
   }
 
   // onPageSizeChange(pageSize: any) {
-  //   console.log(pageSize.target.value)
+  //
 
   //   pageSize = pageSize.target.value;
   //   if (pageSize !== null && pageSize !== undefined) {
@@ -251,24 +261,24 @@ this.loginId= currentUser.loginId;
 
 
   ngOnInit() {
-   this. GetEmployeeStoreByUserId();
-this.  GetStoreDocumentByCompanyId();
-this.GetDocumentType() ;
+    this.GetEmployeeStoreByUserId();
+    this.GetStoreDocumentByCompanyId();
+    this.GetDocumentType();
     this.GetProductGroup();
   }
-  storedetail:any;
+  storedetail: any;
 
 
 
   GetStoreDocumentByCompanyId() {
-    this.http.getAll(environment.GetStoreDocumentByCompanyId  + "?pCompanyId="+this.companyId).subscribe((result: any) => {
+    this.http.getAll(environment.GetStoreDocumentByLoginId + "?pLoginId=" + this.loginId).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+      
         this.datalist = result.data;
         this.datalist = this.datalist.map(item => {
           return { ...item, visible: true };
         });
-        console.log(this.datalist)
+    
       }
       else {
         // this.datalist = null;
@@ -279,9 +289,9 @@ this.GetDocumentType() ;
 
 
   GetStoreDetail() {
-    this.http.getAll(environment.GetStoreDetailbyCompanyId  + "?pCompanyId="+this.companyId ).subscribe((result: any) => {
+    this.http.getAll(environment.GetStoreDetailbyCompanyId + "?pCompanyId=" + this.companyId).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+       
         this.storedetail = result.data;
       }
       else {
@@ -290,11 +300,11 @@ this.GetDocumentType() ;
     })
   }
 
-documenttype:any;
+  documenttype: any;
   GetDocumentType() {
-    this.http.getAll(environment.GetDocumentType  ).subscribe((result: any) => {
+    this.http.getAll(environment.GetDocumentType).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+ 
         this.documenttype = result.data;
       }
       else {
@@ -303,14 +313,13 @@ documenttype:any;
     })
   }
 
-  
 
-  openPopup(status:any) {
 
-    if(status=='New')
-      {
-        this.onReset();
-      }
+  openPopup(status: any) {
+
+    if (status == 'New') {
+      this.onReset();
+    }
     const popupContainer = document.getElementById('productpopupContainer');
     if (popupContainer) {
       popupContainer.style.display = 'block';
@@ -352,7 +361,7 @@ documenttype:any;
       else {
         this.isLoading = false;
         this.submitted = false;
-        console.log(result);
+     
         this.toastr.error(result.message);
       }
     });
@@ -365,9 +374,9 @@ documenttype:any;
   GetProductGroup() {
     this.http.getAll(environment.GetProductGroup).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+      
         this.productgrouplist = result.data;
-        console.log(this.productgrouplist)
+        
       }
       else {
         // this.datalist = null;
@@ -380,32 +389,36 @@ documenttype:any;
   onReset() {
     this.form.patchValue({
       storeDocumentId: 0,
-      documentTypeId:0,
+      documentTypeId: 0,
       docPath: '',
       discription: '',
       isActive: true,
       createdBy: 0,
       storeId: 0,
-      file:''
+      file: '',
+      fromDate: '',
+      toDate: ''
     });
   }
 
- 
+
 
 
   onEdit(pId: any) {
 
     this.productcategory = this.datalist.filter(((x: { storeDocumentId: any; }) => x.storeDocumentId == pId));
 
-console.log(this.productcategory);
+   
     this.form.patchValue({
       storeDocumentId: this.productcategory[0].storeDocumentId,
       documentTypeId: this.productcategory[0].documentTypeId,
-    //  docPath: this.productcategory[0].docPath,
-       isActive: this.productcategory[0].isActive,
-       createdBy: this.productcategory[0].createdBy,
-       discription: this.productcategory[0].discription,
-      storeId:this.productcategory[0].storeId,
+      //  docPath: this.productcategory[0].docPath,
+      isActive: this.productcategory[0].isActive,
+      createdBy: this.productcategory[0].createdBy,
+      discription: this.productcategory[0].discription,
+      storeId: this.productcategory[0].storeId,
+      fromDate: this.productcategory[0].fromDate,
+      toDate: this.productcategory[0].toDate,
     });
     this.openPopup('');
   }
@@ -414,7 +427,7 @@ console.log(this.productcategory);
 
     this.http.getAll(environment.GetEmployeeStoreByUserId + "?pUserId=" + this.loginId).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.storedetail = result.data;
 
 
@@ -430,7 +443,7 @@ console.log(this.productcategory);
 
     this.http.getAll(environment.DeleteStoreDocumentById + "?pStoreDocumentId=" + pId).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.toastr.error(result.message);
 
         this.GetStoreDocumentByCompanyId()

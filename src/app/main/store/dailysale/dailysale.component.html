@@ -188,11 +188,12 @@
                                                                         class="inputfield col-xl-9 col-md-8 d-flex align-items-center">
                                                                         <span>$</span>
                                                                         <input type="text" class="form-control"
+                                                                          
                                                                             [(ngModel)]="row.amount"
                                                                             (keypress)="validateNumber($event)"
                                                                             (input)="validateDecimalPlaces($event)"
                                                                             (blur)="onTextboxLeave($event,row)"
-                                                                            id="grocery" placeholder="">
+                                                                            id="grocery" placeholder="0.00">
                                                                     </div>
                                                                 </div>
                                                             </ng-container>
@@ -200,7 +201,7 @@
                                                     </div>
                                                 </ng-container>
                                                 <div class="totalamount d-flex justify-content-end">
-                                                    <span>Total Inside Sales : <b>${{this.insidesaleamount.toFixed(2)}}</b></span>
+                                                    <span>Total Inside Sales : <b>${{this.insidesaleamount}}</b></span>
                                                 </div>
                                             </div>
                                         </div>

@@ -58,7 +58,7 @@ export class ArcadeComponent {
     });
 
     this.dataChangeSubscription = this.dataService.dataChange$.subscribe((menutype: any) => {
-      console.log('Menu type changed to:', menutype);
+    
       if(menutype=='13')
       {
         this.storeid =localStorage.getItem("storeid");
@@ -88,8 +88,12 @@ export class ArcadeComponent {
     this.GetArcadeDetailByStoreDate();
   }
 
-  inamount: any=0.00;
-  outamount: any=0.00;
+  inamount1: any='0.00';
+  outamount1: any='0.00';
+
+
+  inamount: any='';
+  outamount: any='';
   lotterytype: any
   lotteryamount: any;
   lotteryamountExpense: any;
@@ -98,22 +102,31 @@ export class ArcadeComponent {
   GetArcadeDetailByStoreDate() {
     this.http.getAll(environment.GetArcadeDetailByStoreDate + "?pStoreId=" + this.storeId + "&pAmountDate=" + this.entryDate).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.arcatedata = result.data;
 
         var res1 = this.arcatedata.filter((x: { payType: number; }) => x.payType == 1)
         if (res1 != null && res1.length > 0) {
           this.inamount = res1[0].amount.toFixed(2);
+          this.inamount1 = res1[0].amount.toFixed(2);
+        }
+        else{
+          this.inamount1='0.00';
         }
         var res2 = this.arcatedata.filter((x: { payType: number; }) => x.payType == 2)
 
         if (res2 != null && res2.length > 0) {
           this.outamount = res2[0].amount.toFixed(2);
+          this.outamount1= res2[0].amount.toFixed(2);
+        }else{
+          this.outamount1='0.00';
         }
         //  this.inamount = this.arcatedata.filter((x: { payType: number; }) => x.payType == 1)[0].amount
         //  this.outamount = this.arcatedata.filter((x: { payType: number; }) => x.payType == 2)[0].amount
       }
       else {
+        this.inamount1='0.00';
+        this.outamount1='0.00';
         this.lotterytype = null;
       }
     })
@@ -136,13 +149,13 @@ export class ArcadeComponent {
   onTextboxLeave(event: Event, paytype: any): void {
 
     const inputElement = event.target as HTMLInputElement;
-    console.log('Textbox value on leave:', inputElement.value);
+   
 
     if (inputElement.value == '' || inputElement.value == '0') {
 
       this.http.getAll(environment.DeleteArcadeDetailByStoreIdPayId + "?pStoreId=" + this.storeId + "&pAmountDate=" + this.entryDate + "&pPayType=" + paytype).subscribe((result: any) => {
         if (result.isSuccess == 1) {
-          console.log(result.data)
+          
           this.GetArcadeDetailByStoreDate();
 
         }
@@ -179,13 +192,13 @@ export class ArcadeComponent {
     if (this.form.value.amount == '' || this.form.value.amount == '0') {
       return;
     }
-    console.log(this.form.value);
+   ;
 
 
     this.http.post(environment.SaveArcadeDetail, this.form.value).subscribe((result: any) => {
       if (result.isSuccess == 1) {
 
-        console.log(result.data);
+        ;
         this.GetArcadeDetailByStoreDate();
 
 

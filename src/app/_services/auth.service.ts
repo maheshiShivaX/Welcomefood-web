@@ -34,12 +34,12 @@ export class AuthService {
     createdBy:0,
     landingUrl:'/auth/logindetail',
     name:'',
-    companyId:0
+    companyId:0,
     // Add other default values as needed
   };
 
   constructor(private http: HttpService, private https: HttpClient, private router: Router) {
-    debugger;
+  
     let a = localStorage.getItem('currentUser');
     if (a != null) {
       this.str = localStorage.getItem('currentUser');
@@ -74,4 +74,6 @@ export class AuthService {
   getLoggedInUser(): User | null {
     return this.loggedInUser;
   }
+
+
 }

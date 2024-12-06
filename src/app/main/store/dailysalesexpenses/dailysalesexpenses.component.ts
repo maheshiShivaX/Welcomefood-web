@@ -106,7 +106,7 @@ export class DailysalesexpensesComponent {
   GetExpenseItemsByAmountDate(pid: any, pGroupId: any) {
     this.http.getAll(environment.GetExpenseItemsByAmountDate + "?pStoreId=" + this.storeid + "&pExpenseGroupId=" + pGroupId + "&pAmountDate=" + this.entryDate).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.expenseitem = result.data;
         this.onPayModeChange(pid);
       }
@@ -120,7 +120,7 @@ export class DailysalesexpensesComponent {
   GetExpenseItemsById(pGroupId: any) {
     this.http.getAll(environment.GetExpenseItemsById + "?pStoreId=" + this.storeid + "&pExpenseGroupId=" + pGroupId + "&pAmountDate=" + this.entryDate).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.expenseiteslist = result.data;
       }
       else {
@@ -282,20 +282,20 @@ export class DailysalesexpensesComponent {
       payMode: this.selectedOption,
     })
     this.formExpense.value.itemDetailDtos = this.selectedRowsitems;
-    console.log(this.formExpense.value);
+  
     if (this.formExpense.invalid) {
 
       return;
     }
     this.http.post(environment.SaveExpenseItems, this.formExpense.value).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result);
+    
         this.toastr.success(result.message);
         this.GetExpenseItemsByAmountDate(this.selectedOption, this.formExpense.value.itemDetailDtos[0].expenseGroupId);
       }
       else {
 
-        console.log(result);
+    
         this.toastr.error(result.message);
       }
     });
@@ -317,7 +317,7 @@ export class DailysalesexpensesComponent {
       return;
     }
 
-    console.log(this.formcradit.value);
+ 
     if (this.formcradit.invalid) {
 
       return;
@@ -330,7 +330,7 @@ export class DailysalesexpensesComponent {
         this.toastr.success(result.message);
       }
       else {
-        console.log(result);
+    
         this.toastr.error(result.message);
       }
     });
@@ -352,7 +352,7 @@ export class DailysalesexpensesComponent {
       return;
     }
 
-    console.log(this.formcradit.value);
+  
     if (this.formcradit.invalid) {
 
       return;
@@ -365,7 +365,7 @@ export class DailysalesexpensesComponent {
         this.toastr.success(result.message);
       }
       else {
-        console.log(result);
+    
         this.toastr.error(result.message);
       }
     });

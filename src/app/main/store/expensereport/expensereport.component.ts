@@ -26,7 +26,7 @@ export class ExpensereportComponent {
   ) {
     this.authService.currentUser.subscribe((user) => {
 
-      console.log(user);
+     
       const currentUser = user;
       this.loginId = currentUser.loginId;
       // Update menu based on user authentication state
@@ -66,7 +66,7 @@ export class ExpensereportComponent {
   ngOnInit() {
     const today = new Date();
     const yyyy = today.getFullYear();
-    console.log(yyyy);
+
     //const year = 2024; // You can change this dynamically or make it user-input
     this.paymentOptions = this.monthService.getPaymentOptions(yyyy);
 this.GetPayMode();
@@ -116,12 +116,12 @@ totalexpense:any;
 
     this.http.getAll(environment.GetExpenseItemsByStoreDatewiseIdByPayType + "?pStoreId=" + pStoreId + "&pFromDate=" + pFromDate + "&pToDate=" + pToDate).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.storedetail = result.data;
 
        this.title = this.paymode.filter((x: { payModeId: number | null | undefined; })=>x.payModeId==this.form.value.payMode)[0].payModeName + " Expense";
  this.expensedata = this.storedetail.filter((x: { payModeId: any; })=> this.form.value.payMode ==0 ? 1==1 : x.payModeId ==this.form.value.payMode);
-// console.log(this.expensedata);
+
 
 this.totalexpense =  this.expensedata.reduce((acc: any, item: { expenseAmount: any; }) => acc + (item.expenseAmount || 0), 0);
 this.reporttype = 'expensedata';
@@ -141,7 +141,7 @@ this.reporttype = 'expensedata';
 
     this.http.getAll(environment.GetEmployeeStoreByUserId + "?pUserId=" + this.loginId).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.storeList = result.data;
 
 
@@ -156,7 +156,7 @@ this.reporttype = 'expensedata';
   GetStoreDetailAll() {
     this.http.getAll(environment.GetStoreDetail).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.storeList = result.data;
       }
       else {
@@ -179,7 +179,7 @@ this.reporttype = 'expensedata';
 
   onGetReport() {
 
-    console.log(this.modelDate);
+ 
 
     const year = this.modelDate.getFullYear();
     const month = this.modelDate.getMonth(); // getMonth() gives 0-based month (0 for Jan, 11 for Dec)
@@ -207,7 +207,7 @@ this.reporttype = 'expensedata';
 
 
 
-    console.log(this.form.value);
+   ;
 
     this.storename = this.storeList.filter((x: { storeId: number | null | undefined; }) => x.storeId == this.form.value.storeId)[0].storeName
     this.GetPLStoreDetail(this.form.value.storeId, this.form.value.fromDate, this.form.value.toDate)
@@ -225,7 +225,7 @@ this.reporttype = 'expensedata';
 
     this.http.getAll(environment.GetPayMode).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.paymode = result.data;
 
         

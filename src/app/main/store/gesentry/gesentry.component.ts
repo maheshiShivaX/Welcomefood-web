@@ -23,7 +23,8 @@ export class GesentryComponent {
   gesdetail: any;
   isLoading: boolean = false;
   submitted: boolean = false;
-  gasamount:any='0.00';
+  gasamount:any='';
+  gasamount1:any='0.00';
   private dataChangeSubscription: Subscription;
   constructor(private router: Router, private authService: AuthService, private route: ActivatedRoute,
     private http: HttpService, private toastr: ToastrService,private dataService: TriggerdailyService) {
@@ -35,7 +36,7 @@ export class GesentryComponent {
     });
 
     this.dataChangeSubscription = this.dataService.dataChange$.subscribe((menutype: any) => {
-      console.log('Menu type changed to:', menutype);
+   
       if(menutype=='1')
       {
         this.storeid =localStorage.getItem("storeid");
@@ -52,7 +53,7 @@ export class GesentryComponent {
   {
     this.http.getAll(environment.DeleteGasSaleByStoreIdDate + "?pStoreId=" + this.storeid + "&pAmountDate=" + this.entryDate + "&pAmountType=" + payType ).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.GetGasSaleByStoreDate();
 
       }
@@ -78,13 +79,13 @@ export class GesentryComponent {
   onTextboxLeave(event: Event, paytype: any): void {
 
     const inputElement = event.target as HTMLInputElement;
-    console.log('Textbox value on leave:', inputElement.value);
+   
 
     if (inputElement.value == '' || inputElement.value == '0') {
 
       this.http.getAll(environment.DeleteGasSaleByStoreIdDate + "?pStoreId=" + this.storeid + "&pAmountDate=" + this.entryDate + "&pAmountType=" + paytype ).subscribe((result: any) => {
         if (result.isSuccess == 1) {
-          console.log(result.data)
+          
           this.GetGasSaleByStoreDate();
 
         }
@@ -108,50 +109,58 @@ export class GesentryComponent {
   }
 
   onSubmit() {
-    if (this.form.value.amount == '' || this.form.value.amount == '0') {
+    if (this.form.value.amount == '' || this.form.value.amount == '0' || this.form.value.amount == '0.00') {
+
       return;
     }
-    console.log(this.form.value);
+   ;
 
 
     this.http.post(environment.SaveGasSale, this.form.value).subscribe((result: any) => {
       if (result.isSuccess == 1) {
         this.GetGasSaleByStoreDate();
-        console.log(result.data);
+        ;
       }
       else {
         //  this.toastr.error(result.message);
       }
     });
   }
-  gasdiscount:any='0.00';
+  gasdiscount:any='';
+  gasdiscount1:any='0.00'
 gasdata:any;
 GetGasSaleByStoreDate() {
     this.http.getAll(environment.GetGasSaleByStoreDate + "?pStoreId=" + this.storeid + "&pAmountDate=" + this.entryDate).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.gasdata = result.data;
 
         var res1 = this.gasdata.filter((x: { amountType: string; }) => x.amountType == "Sale")
         if (res1 != null && res1.length > 0) {
           this.gasamount = res1[0].amount.toFixed(2);
+          this.gasamount1 = res1[0].amount.toFixed(2);
         }else
         {
-          this.gasamount='0.00';
+          this.gasamount='';
+          this.gasamount1='0.00';
         }
         var res2 = this.gasdata.filter((x: { amountType: string; }) => x.amountType == "Discount")
 
         if (res2 != null && res2.length > 0) {
           this.gasdiscount = res2[0].amount.toFixed(2);
+          this.gasdiscount1 = res2[0].amount.toFixed(2);
         }else
         {
-          this.gasdiscount='0.00';
+          this.gasdiscount='';
+          this.gasdiscount1='0.00'
         }
       }
       else {
         this.gasdata = null;
-        this.gasamount='0.00';
-        this.gasdiscount='0.00';
+        this.gasamount='';
+        this.gasdiscount='';
+        this.gasamount1='0.00';
+        this.gasdiscount1='0.00';
       }
     })
   }
@@ -196,7 +205,7 @@ this.GetGasSaleByStoreDate();
   GetGesTransactionByIdStoreIdDate(pStoreId: any, pAmountDate: any) {
     this.http.getAll(environment.GetGesTransactionByIdStoreIdDate + "?pStoreId=" + this.storeid + "&pEntryDate=" + pAmountDate).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.gesdetail = result.data;
       }
       else {
@@ -236,21 +245,21 @@ this.GetGasSaleByStoreDate();
       createdBy: 0
     })
     this.formGes.value.gesInventoryDtos = this.selectedRowsitems;
-    console.log(this.formGes.value);
+console.log(this.formGes.value);
     if (this.formGes.invalid) {
       this.isLoading = false;
       return;
     }
     this.http.post(environment.SaveGes, this.formGes.value).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result);
+    
         this.toastr.success(result.message);
      
       }
       else {
         this.isLoading = false;
         this.submitted = false;
-        console.log(result);
+    
         this.toastr.error(result.message);
       }
     });

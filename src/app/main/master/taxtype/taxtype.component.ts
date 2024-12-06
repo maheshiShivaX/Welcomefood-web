@@ -152,7 +152,7 @@ export class TaxtypeComponent {
  }
  
  // onPageSizeChange(pageSize: any) {
- //   console.log(pageSize.target.value)
+ //
  
  //   pageSize = pageSize.target.value;
  //   if (pageSize !== null && pageSize !== undefined) {
@@ -271,7 +271,7 @@ export class TaxtypeComponent {
        else {
          this.isLoading = false;
          this.submitted = false;
-         console.log(result);
+     
          this.toastr.error(result.message);
        }
      });
@@ -284,12 +284,12 @@ export class TaxtypeComponent {
    GetExpenseGroupByCompanyId(companyid:any) {
      this.http.getAll(environment.GetTaxTypeByCompanyId+"?pCompanyId="+companyid).subscribe((result: any) => {
        if (result.isSuccess == 1) {
-         console.log(result.data)
+         
          this.datalist = result.data;
          this.datalist = this.datalist.map(item => {
            return { ...item, visible: true };
          });
-         console.log(this.datalist)
+        
        }
        else { 
          // this.products = null;
@@ -334,7 +334,7 @@ export class TaxtypeComponent {
  
        this.http.getAll(environment.DeleteTaxTypeById+ "?pTaxTypeId=" + pId ).subscribe((result: any) => {
          if (result.isSuccess == 1) {
-           console.log(result.data)
+           
            this.toastr.error(result.message);
          
            this.GetExpenseGroupByCompanyId(this.companyId);

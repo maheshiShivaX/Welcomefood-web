@@ -57,7 +57,7 @@ ngOnInit() {
 GetEmployeeByStoreId( pGroupId: any) {
     this.http.getAll(environment.GetEmployeeByStoreId + "?pStoreId=" + this.storeid ).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.employeeList = result.data;
       }
       else {
@@ -69,7 +69,7 @@ GetEmployeeByStoreId( pGroupId: any) {
   GetSalaryTransactionByStoreId( pStoreId: any , pAmountDate:any) {
     this.http.getAll(environment.GetSalaryTransactionByStoreId + "?pStoreId=" + this.storeid+ "&pAmountDate="+ pAmountDate ).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.salarytransaction = result.data;
       }
       else {
@@ -82,7 +82,7 @@ GetEmployeeByStoreId( pGroupId: any) {
   onDeleteSalaryTransactionById( pSalaryTransactionId: any) {
     this.http.getAll(environment.DeleteSalaryTransactionById + "?pSalaryTransactionId=" + pSalaryTransactionId ).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.salarytransaction = result.data;
         this.GetSalaryTransactionByStoreId(this.storeid, this.entryDate);
       }
@@ -98,7 +98,7 @@ GetEmployeeByStoreId( pGroupId: any) {
 
     this.http.getAll(environment.GetPayMode  ).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.paymode = result.data;
  
       }
@@ -146,7 +146,7 @@ this.selectedOption=id;
       return;
     }
 
-    console.log(this.form.value);
+   ;
     if (this.form.invalid) {
 
       return;
@@ -160,7 +160,7 @@ this.selectedOption=id;
         this.toastr.success(result.message);
       }
       else {
-        console.log(result);
+    
         this.toastr.error(result.message);
       }
     });

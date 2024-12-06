@@ -7,36 +7,33 @@ import { HttpService } from 'src/app/_services/http.service';
 import { environment } from 'src/app/environments/environment.prod';
 
 interface TableRow {
-  isFixed:boolean;
-  expenseCategoryId: number;
-  expenseGroupId:number;
-  expanseName: string;
-  expanseCode: string;
-  expenseGroupName:string;
+  expanseName:string;
+  autoExpenseId:number;
+  storeId: number;
+  expenseCategoryId:number;
+  description: string;
+  doe: string;
+  amount:number;
   visible: boolean;
 }
 
 
 
 
-
-
 @Component({
-  selector: 'app-expensehead',
-  templateUrl: './expensehead.component.html',
-  styleUrls: ['./expensehead.component.scss']
+  selector: 'app-onboardexpense',
+  templateUrl: './onboardexpense.component.html',
+  styleUrls: ['./onboardexpense.component.scss']
 })
-export class ExpenseheadComponent {
+export class OnboardexpenseComponent {
 
-  expensegroup:any;
+
+  expensecategory:any;
  
-  GetExpenseGroupByCompanyId(companyid:any) {
-    this.http.getAll(environment.GetExpenseGroupByCompanyId+"?pCompanyId="+companyid).subscribe((result: any) => {
-      if (result.isSuccess == 1) {
-        
-        this.expensegroup = result.data;
-      
-       
+  ExpenseItemDetailByDateCompanyId(companyid:any) {
+    this.http.getAll(environment.ExpenseItemDetailByDateCompanyId+"?pCompanyId="+companyid).subscribe((result: any) => {
+      if (result.isSuccess == 1) {     
+        this.expensecategory = result.data;
       }
       else { 
         // this.products = null;
@@ -54,19 +51,22 @@ export class ExpenseheadComponent {
   pageSize: number = 50;
   currentPage: number = 1;
   public form = new FormGroup({
-    isFixed:new FormControl(false),
-    expenseCategoryId: new FormControl(0),
-    expenseGroupId:new FormControl(2),
-    expanseName: new FormControl('', Validators.required),
-    expanseCode: new FormControl('', Validators.required),
+    autoExpenseId:new FormControl(0),
+    storeId: new FormControl(0),
+    expenseCategoryId:new FormControl(0),
+    description: new FormControl(''),
+    doe: new FormControl('', Validators.required),
+    amount: new FormControl('', Validators.required),
     isActive: new FormControl(true),
     createdBy: new FormControl(0),
-    companyId: new FormControl(0),
   });
 
+
+  
   
 
  
+
   constructor(private router: Router, private authService: AuthService,
     private http: HttpService, private toastr: ToastrService,
   ) {
@@ -76,7 +76,6 @@ export class ExpenseheadComponent {
 this.companyid=currentUser.companyId;
       // Update menu based on user authentication state
     });
-    localStorage.getItem('authtoken')?.toString()
   }
 
   // ================================================================
@@ -266,11 +265,10 @@ sortList(property: keyof TableRow, direction: 'asc' | 'desc') {
       popupContainer.style.display = 'none';
     }
   }
-
-  ngOnInit() {
-    //localStorage.setItem("authtoken",'tyu');
-this.GetExpenseGroupByCompanyId(this.companyid);
-    this.ExpenseItemDetailByDateCompanyId();
+storeid:any;
+  ngOnInit() {this.storeid = localStorage.getItem("storeid");
+this.ExpenseItemDetailByDateCompanyId(this.companyid);
+    this.GetAutoExpenseByStoreId();
   }
 
   
@@ -279,12 +277,9 @@ this.GetExpenseGroupByCompanyId(this.companyid);
     this.isLoading = true;
     this.submitted = true;
 
-    this.form.patchValue({
-isFixed :this.selectedOption=="1" ? true : false,
-expenseGroupId:2,
-companyId:this.companyid
-
-    })
+this.form.patchValue({
+  storeId:this.storeid,
+})
 
     if (this.form.invalid) {
       this.isLoading = false;
@@ -295,12 +290,12 @@ companyId:this.companyid
   //  return;
 
    
-    this.http.post(environment.SaveExpenseCategory, this.form.value).subscribe((result: any) => {
+    this.http.post(environment.SaveAutoExpense, this.form.value).subscribe((result: any) => {
       if (result.isSuccess == 1) {
         this.isLoading = false;
         this.submitted = false;
         this.onReset();
-        this.ExpenseItemDetailByDateCompanyId();
+        this.GetAutoExpenseByStoreId();
         this.toastr.success(result.message);
       }
       else {
@@ -317,8 +312,8 @@ companyId:this.companyid
   }
   companyid:any;
 
-  ExpenseItemDetailByDateCompanyId() {
-    this.http.getAll(environment.ExpenseItemDetailByDateCompanyId + "?pCompanyId="+ this.companyid).subscribe((result: any) => {
+  GetAutoExpenseByStoreId() {
+    this.http.getAll(environment.GetAutoExpenseByStoreId + "?pStoreId="+ this.storeid).subscribe((result: any) => {
       if (result.isSuccess == 1) {
         
         this.datalist = result.data;
@@ -328,7 +323,7 @@ companyId:this.companyid
        
       }
       else { 
-        // this.products = null;
+        this.datalist =[];
       }
     })
   }
@@ -336,15 +331,18 @@ companyId:this.companyid
 
   onReset() {
     this.form.patchValue({
-      expanseCode: '',
-      expanseName: '',
-      expenseCategoryId: 0,
-      expenseGroupId:0,
+      autoExpenseId: 0,
+      description: '',
+      storeId: 0,
+      expenseCategoryId:0,
+      doe:'',
+      amount:'',
       isActive: true,
       createdBy: 0
 
     });
   }
+
 
  
 
@@ -352,16 +350,16 @@ companyId:this.companyid
  
   onEdit(pId:any)
   {
-    this.expensehead = this.datalist.filter(((x: { expenseCategoryId: any; }) => x.expenseCategoryId == pId));
+    this.expensehead = this.datalist.filter(((x: { autoExpenseId: any; }) => x.autoExpenseId == pId));
     this.form.patchValue({
+      autoExpenseId: this.expensehead[0].autoExpenseId,
+      description:  this.expensehead[0].description,
+      storeId:  this.expensehead[0].storeId,
       expenseCategoryId: this.expensehead[0].expenseCategoryId,
-      expanseCode:  this.expensehead[0].expanseCode,
-      expanseName:  this.expensehead[0].expanseName,
-      expenseGroupId: this.expensehead[0].expenseGroupId,
       isActive: this.expensehead[0].isActive,
       createdBy: this.expensehead[0].createdBy,
-      isFixed:this.expensehead[0].isFixed==true?true :false,
-      companyId:this.expensehead[0].companyId
+      doe:this.expensehead[0].doe,
+      amount:this.expensehead[0].amount,
     });
     this.openPopup('');
   }
@@ -372,12 +370,12 @@ companyId:this.companyid
   onDelete(pId:any)
   {
 
-      this.http.getAll(environment.DeleteExpenseCategoryById+ "?pExpenseCategoryId=" + pId ).subscribe((result: any) => {
+      this.http.getAll(environment.DeleteAutoExpenseById+ "?pAutoExpenseId=" + pId ).subscribe((result: any) => {
         if (result.isSuccess == 1) {
           
           this.toastr.error(result.message);
         
-          this.ExpenseItemDetailByDateCompanyId()
+          this.GetAutoExpenseByStoreId()
         }
         else {
         }
@@ -387,6 +385,7 @@ companyId:this.companyid
   
   
 }
+
 
 
 

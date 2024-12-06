@@ -154,7 +154,7 @@ onPageChange(pageNumber: number) {
 }
 
 // onPageSizeChange(pageSize: any) {
-//   console.log(pageSize.target.value)
+//
 
 //   pageSize = pageSize.target.value;
 //   if (pageSize !== null && pageSize !== undefined) {
@@ -270,7 +270,7 @@ sortList(property: keyof TableRow, direction: 'asc' | 'desc') {
       else {
         this.isLoading = false;
         this.submitted = false;
-        console.log(result);
+    
         this.toastr.error(result.message);
       }
     });
@@ -283,7 +283,7 @@ sortList(property: keyof TableRow, direction: 'asc' | 'desc') {
   GetProductCategory() {
     this.http.getAll(environment.GetProductCategory).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.productcategory = result.data;
       }
       else { this.productcategory = null;
@@ -293,12 +293,12 @@ sortList(property: keyof TableRow, direction: 'asc' | 'desc') {
   GetProductDetail() {
     this.http.getAll(environment.GetProductDetail).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.datalist = result.data;
         this.datalist = this.datalist.map(item => {
           return { ...item, visible: true };
         });
-        console.log(this.datalist)
+       
       }
       else { 
         // this.products = null;
@@ -348,7 +348,7 @@ sortList(property: keyof TableRow, direction: 'asc' | 'desc') {
 
       this.http.getAll(environment.DeleteProductDetailById+ "?pProductDetailId=" + pId ).subscribe((result: any) => {
         if (result.isSuccess == 1) {
-          console.log(result.data)
+          
           this.toastr.error(result.message);
         
           this.GetProductDetail()

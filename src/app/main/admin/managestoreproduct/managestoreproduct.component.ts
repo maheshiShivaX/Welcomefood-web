@@ -219,7 +219,7 @@ export class ManagestoreproductComponent {
   GetProductCategory() {
     this.http.getAll(environment.GetProductCategory).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.productcategory = result.data;
       }
       else {
@@ -230,7 +230,7 @@ export class ManagestoreproductComponent {
   GetProductDetailbyCategoryId(pCategoryId: any) {
     this.http.getAll(environment.GetProductDetailbyCategoryId + "?pCategoryId=" + pCategoryId).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.products = result.data;
         this.checkal = false;
         this.form.patchValue({
@@ -263,21 +263,21 @@ export class ManagestoreproductComponent {
 
   isSelected(row: any): boolean {
 
-    //   console.log(row);
+   
     return this.selectedItems.includes(row);
   }
 
   oncheckAllSubCategory(itemList: any) {
 
-    console.log(itemList);
+ 
 
     try {
 
-      debugger;
+      
       this.isSelecteds();
       itemList.forEach((element: any[]) => {
         this.rownew = element;
-        console.log(this.rownew);
+      
         if (this.checkal == false) {
           this.selectedItems = [];
         } else {
@@ -285,12 +285,12 @@ export class ManagestoreproductComponent {
         }
 
       });
-      console.log(this.selectedItems);
+     
       if (this.selectedItems.length > 0) {
-        console.log(this.selectedItems.length);
+       
         const subCategoryIds: number[] = this.selectedItems.map(item => item.productId);
         const commaSeparatedString: string = subCategoryIds.join(',');
-        console.log(commaSeparatedString);
+       
 
         this.form.patchValue(
           {
@@ -311,7 +311,7 @@ export class ManagestoreproductComponent {
   GetStoreDetailAll(storeId: any) {
     this.http.getAll(environment.GetStoreDetail).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+       
         this.storedetail = result.data.filter((x: { storeId: any; }) => x.storeId == storeId);
       }
       else {
@@ -323,7 +323,7 @@ export class ManagestoreproductComponent {
   GetStoreProduct() {
     this.http.getAll(environment.GetStoreProduct).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+       
         this.datalist = result.data.filter((x: { storeId: any; }) => x.storeId == this.storeId);
         this.datalist = this.datalist.map(item => {
           return { ...item, visible: true };
@@ -341,7 +341,7 @@ export class ManagestoreproductComponent {
   onActive(pId: any) {
     this.http.getAll(environment.ActiveStoreProductById + "?pStoreProductId=" + pId).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+      
         this.toastr.success(result.message);
 
         this.GetStoreProduct();
@@ -354,7 +354,7 @@ export class ManagestoreproductComponent {
   onDelete(pId: any) {
     this.http.getAll(environment.DeleteStoreProductById + "?pStoreProductId=" + pId).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+    
         this.toastr.success(result.message);
 
         this.GetStoreProduct();
@@ -371,7 +371,7 @@ export class ManagestoreproductComponent {
     this.isLoading = true;
     this.submitted = true;
     //this.form.value.productId = commaSeparatedString
-    console.log(this.form.value);
+  
     this.form.value.storeId = this.storeId;
   
     if (this.form.invalid) {
@@ -392,7 +392,7 @@ export class ManagestoreproductComponent {
       else {
         this.isLoading = false;
         this.submitted = false;
-        console.log(result);
+       
         this.toastr.error(result.message);
       }
     });

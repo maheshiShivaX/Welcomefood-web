@@ -160,7 +160,7 @@ export class CreditcardComponent {
  }
  
  // onPageSizeChange(pageSize: any) {
- //   console.log(pageSize.target.value)
+ //
  
  //   pageSize = pageSize.target.value;
  //   if (pageSize !== null && pageSize !== undefined) {
@@ -260,7 +260,7 @@ export class CreditcardComponent {
    GetStoreDetailAll() {
     this.http.getAll(environment.GetStoreDetailbyCompanyId  + "?pCompanyId="+this.companyId ).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.storedetail = result.data;
       }
       else {
@@ -289,7 +289,7 @@ export class CreditcardComponent {
        else {
          this.isLoading = false;
          this.submitted = false;
-         console.log(result);
+     
          this.toastr.error(result.message);
        }
      });
@@ -302,12 +302,12 @@ export class CreditcardComponent {
    GetCreditCardByCompanyId(companyid:any) {
      this.http.getAll(environment.GetCreditCardByCompanyId+"?pCompanyId="+companyid).subscribe((result: any) => {
        if (result.isSuccess == 1) {
-         console.log(result.data)
+         
          this.datalist = result.data;
          this.datalist = this.datalist.map(item => {
            return { ...item, visible: true };
          });
-         console.log(this.datalist)
+        
        }
        else { 
         this.datalist = [];
@@ -357,7 +357,7 @@ export class CreditcardComponent {
  
        this.http.getAll(environment.DeleteCreditCardById+ "?pCreditCardId=" + pId ).subscribe((result: any) => {
          if (result.isSuccess == 1) {
-           console.log(result.data)
+           
            this.toastr.error(result.message);
          
            this.GetCreditCardByCompanyId(this.companyId);

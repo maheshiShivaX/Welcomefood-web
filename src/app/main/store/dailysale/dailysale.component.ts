@@ -27,7 +27,7 @@ export class DailysaleComponent {
 
 
   storesdata = [
-    { storeid: 'Job', fromdate: 'fdg', todate:'dfg' }
+    { storeid: 'Job', fromdate: 'fdg', todate: 'dfg' }
   ];
 
 
@@ -42,7 +42,7 @@ export class DailysaleComponent {
     if (!pattern.test(inputChar) && charCode > 31) {
       event.preventDefault();
     }
-  
+
   }
   validateDecimalPlaces(event: Event) {
     const inputElement = event.target as HTMLInputElement;
@@ -53,7 +53,7 @@ export class DailysaleComponent {
     }
   }
 
-  
+
   //today: string;
   insideList: any
   storeId: any;
@@ -63,8 +63,8 @@ export class DailysaleComponent {
   insidesaleamount: any = 0;
   outsidesaleamount: any = 0;
   totalsaleamount: any = 0;
-  showpayroll:boolean=false;
-  showrebate:boolean=false;
+  showpayroll: boolean = false;
+  showrebate: boolean = false;
   showDailysaleInput: boolean = true;
   showClosingInput: boolean = false;
   showGasInput: boolean = false;
@@ -76,46 +76,46 @@ export class DailysaleComponent {
   productcategorylist: any;
   purchaseitemlist: any;
   private dataChangeSubscription: Subscription;
-  constructor(private router: Router, private authService: AuthService, private route: ActivatedRoute,  private dataService: TriggerdailyService,
-    private http: HttpService, private toastr: ToastrService ,  ) {
+  constructor(private router: Router, private authService: AuthService, private route: ActivatedRoute, private dataService: TriggerdailyService,
+    private http: HttpService, private toastr: ToastrService,) {
     this.entryDate = new Date().toISOString().split('T')[0];
 
     this.dated = this.entryDate;
 
- 
-    this.dataChangeSubscription = this.dataService.dataChange$.subscribe((menutype: any) => {
-      console.log('Menu type changed to:', menutype);
-      if(menutype=='0')
-      {
-           this.storeId =localStorage.getItem("storeid");
-    this.entryDate =localStorage.getItem("tentrydate") 
-    this.dated = this.entryDate;
-    this.GetStoreDetailAll(this.storeId) 
-    this.GetInsideSale(this.storeId, 1, this.entryDate);
-    this.GetOtherSale(this.storeId, 1, this.entryDate);
 
-    this.GetAmountByGroupId(this.storeId, this.entryDate)
+    this.dataChangeSubscription = this.dataService.dataChange$.subscribe((menutype: any) => {
+
+      if (menutype == '0') {
+        this.storeId = localStorage.getItem("storeid");
+        this.entryDate = localStorage.getItem("tentrydate")
+        this.dated = this.entryDate;
+        this.GetStoreDetailAll(this.storeId)
+        this.GetInsideSale(this.storeId, 1, this.entryDate);
+        this.GetOtherSale(this.storeId, 1, this.entryDate);
+
+        this.GetAmountByGroupId(this.storeId, this.entryDate)
       }
-      
+
     });
 
   }
-showtaps:boolean=false;
+  showtaps: boolean = false;
 
-  onDateChange(event :any)
-  {
+  onDateChange(event: any) {
 
-const input = event.target as HTMLInputElement;
-//this.dated = new Date(input.value);
-this.entryDate = new Date(input.value).toISOString().split('T')[0];
-console.log('Selected Date:', this.entryDate);
+    const input = event.target as HTMLInputElement;
+    //this.dated = new Date(input.value);
+    this.entryDate = new Date(input.value).toISOString().split('T')[0];
 
-this.storeId = this.route.snapshot.params["storeId"];
-localStorage.setItem("storeid",this.storeId);
-localStorage.setItem("tentrydate",this.entryDate);
-this.dataService.triggerDataChange(this.activetab);
-this.dated = this.entryDate;
-this.showData(this.activetab);
+
+    this.storeId = this.route.snapshot.params["storeId"];
+    localStorage.setItem("storeid", this.storeId);
+    localStorage.setItem("tentrydate", this.entryDate);
+    localStorage.setItem("tlastdate", this.entryDate);
+
+    this.dataService.triggerDataChange(this.activetab);
+    this.dated = this.entryDate;
+    this.showData(this.activetab);
 
   }
 
@@ -123,7 +123,7 @@ this.showData(this.activetab);
   GetStoreDetailAll(storeId: any) {
     this.http.getAll(environment.GetStoreDetail).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+
         this.storedetail = result.data.filter((x: { storeId: any; }) => x.storeId == storeId);
       }
       else {
@@ -132,81 +132,79 @@ this.showData(this.activetab);
     })
   }
 
-  onBack()
-  {
+  onBack() {
     this.router.navigateByUrl('/store/mystore');
   }
 
   ngOnInit() {
     this.storeId = this.route.snapshot.params["storeId"];
-    localStorage.setItem("storeid",this.storeId);
+    localStorage.setItem("storeid", this.storeId);
 
     this.dated = this.entryDate;
-    this.GetStoreDetailAll(this.storeId) 
+    this.GetStoreDetailAll(this.storeId)
     this.GetInsideSale(this.storeId, 1, this.entryDate);
     this.GetOtherSale(this.storeId, 1, this.entryDate);
-    this. GetGetStoreClosingByStoreId(this.storeId, this.entryDate) ;
+    this.GetGetStoreClosingByStoreId(this.storeId, this.entryDate);
     this.GetAmountByGroupId(this.storeId, this.entryDate)
-this.  GetCreditCardByStoreIdDate();
+    this.GetCreditCardByStoreIdDate();
   }
 
 
-  
-
-
-onother()
-{
-  this.isView= false;
-}
-showCreditcardinput:boolean=false;
-lotterytype:any
-lotteryamount:any;
-lotteryamountExpense:any;
-lotterytypeExpense:any;
-
-GetLotteryTypeStoreIdDate() {
-  this.http.getAll(environment.GetLotteryTypeStoreIdDate + "?pStoreId=" + this.storeId  + "&pAmountDate=" + this.entryDate).subscribe((result: any) => {
-    if (result.isSuccess == 1) {
-      console.log(result.data)
-      this.lotterytype = result.data;
-
-
-      this.lotteryamount  = this.lotterytype.reduce((acc: any, item: { lotteryAmount: any; }) => acc + (item.lotteryAmount || 0), 0);
-
-
-    }
-    else {
-      this.lotterytype = null;
-    }
-  })
-}
-GetLotteryExpenseStoreIdDate() {
-  this.http.getAll(environment.GetLotteryExpenseStoreIdDate + "?pStoreId=" + this.storeId  + "&pAmountDate=" + this.entryDate).subscribe((result: any) => {
-    if (result.isSuccess == 1) {
-      console.log(result.data)
-      this.lotterytypeExpense = result.data;
-
-
-      this.lotteryamountExpense  = this.lotterytypeExpense.reduce((acc: any, item: { lotteryAmount: any; }) => acc + (item.lotteryAmount || 0), 0);
-
-
-    }
-    else {
-      this.lotterytype = null;
-    }
-  })
-}
 
 
 
-  
+  onother() {
+    this.isView = false;
+  }
+  showCreditcardinput: boolean = false;
+  lotterytype: any
+  lotteryamount: any;
+  lotteryamountExpense: any;
+  lotterytypeExpense: any;
 
-  expenseitem:any;
+  GetLotteryTypeStoreIdDate() {
+    this.http.getAll(environment.GetLotteryTypeStoreIdDate + "?pStoreId=" + this.storeId + "&pAmountDate=" + this.entryDate).subscribe((result: any) => {
+      if (result.isSuccess == 1) {
+
+        this.lotterytype = result.data;
+
+
+        this.lotteryamount = this.lotterytype.reduce((acc: any, item: { lotteryAmount: any; }) => acc + (item.lotteryAmount || 0), 0);
+
+
+      }
+      else {
+        this.lotterytype = null;
+      }
+    })
+  }
+  GetLotteryExpenseStoreIdDate() {
+    this.http.getAll(environment.GetLotteryExpenseStoreIdDate + "?pStoreId=" + this.storeId + "&pAmountDate=" + this.entryDate).subscribe((result: any) => {
+      if (result.isSuccess == 1) {
+
+        this.lotterytypeExpense = result.data;
+
+
+        this.lotteryamountExpense = this.lotterytypeExpense.reduce((acc: any, item: { lotteryAmount: any; }) => acc + (item.lotteryAmount || 0), 0);
+
+
+      }
+      else {
+        this.lotterytype = null;
+      }
+    })
+  }
+
+
+
+
+
+  expenseitem: any;
 
   GetExpenseItemsByAmountDate() {
-    this.http.getAll(environment.GetExpenseItemsByAmountDate + "?pStoreId=" + this.storeId + "&pExpenseGroupId=" + 2 +"&pAmountDate="+this.entryDate ).subscribe((result: any) => {
+    this.http.getAll(environment.GetExpenseItemsByAmountDate + "?pStoreId=" + this.storeId + "&pExpenseGroupId=" + 2 + "&pAmountDate=" + this.entryDate).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+
         this.expenseitem = result.data;
       }
       else {
@@ -220,29 +218,29 @@ GetLotteryExpenseStoreIdDate() {
 
     this.http.getAll(environment.GetAmountByGroupId + "?pStoreId=" + pStoreId + "&pAmountDate=" + pAmountDate).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+
         this.storedata = result.data;
         this.insidesaleamount = this.storedata.filter((x: { productGroupId: number; }) => x.productGroupId == 1)[0].amount;
         this.outsidesaleamount = this.storedata.filter((x: { productGroupId: number; }) => x.productGroupId != 1).reduce((acc: any, item: { amount: any; }) => acc + (item.amount || 0), 0);
         this.totalsaleamount = this.storedata.reduce((acc: any, item: { amount: any; }) => acc + (item.amount || 0), 0);
       }
       else {
-       // this.insideList = null;
+        // this.insideList = null;
       }
     })
   }
-closingdata:any;
+  closingdata: any;
   GetGetStoreClosingByStoreId(pStoreId: any, pAmountDate: any) {
 
     this.http.getAll(environment.GetStoreClosingByStoreId + "?pStoreId=" + pStoreId + "&pAmountDate=" + pAmountDate).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+
         this.closingdata = result.data;
         this.storeclosingcash = this.closingdata[0].amount;
-        
+
       }
       else {
-       // this.insideList = null;
+        // this.insideList = null;
       }
     })
   }
@@ -254,7 +252,7 @@ closingdata:any;
 
     this.http.getAll(environment.GetInsideSale + "?pStoreId=" + pStoreId + "&pGroupId=" + pGroupId + "&pEntryDate=" + pEntryDate).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+
         this.insideList = result.data;
       }
       else {
@@ -266,7 +264,7 @@ closingdata:any;
 
     this.http.getAll(environment.GetOtherSale + "?pStoreId=" + pStoreId + "&pGroupId=" + pGroupId + "&pEntryDate=" + pEntryDate).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+
         this.otherList = result.data;
       }
       else {
@@ -274,22 +272,23 @@ closingdata:any;
       }
     })
   }
-  isView:boolean=false;
+  isView: boolean = false;
 
   onTextboxLeave(event: Event, row: any): void {
 
 
-    
+
 
 
     const inputElement = event.target as HTMLInputElement;
-    console.log('Textbox value on leave:', inputElement.value);
-
+    if (inputElement.value && !inputElement.value.includes('.')) {
+      inputElement.value = inputElement.value + '.00';
+    }
     if (inputElement.value == '' || inputElement.value == '0') {
 
       this.http.getAll(environment.PDeleteItemSaleById + "?pStoreId=" + this.storeId + "&pAmountDate=" + this.entryDate + "&pProductId=" + row.productId).subscribe((result: any) => {
         if (result.isSuccess == 1) {
-          console.log(result.data)
+
           this.GetAmountByGroupId(this.storeId, this.entryDate);
         }
         else {
@@ -319,63 +318,63 @@ closingdata:any;
   onTextboxCreditLeave(event: Event, row: any): void {
 
 
-    
+
 
 
     const inputElement = event.target as HTMLInputElement;
-    console.log('Textbox value on leave:', inputElement.value);
 
-  
+
+
 
     this.formCreditcard.patchValue({
-        storeId: this.storeId,
-        amountDate: this.entryDate,
-        amount: inputElement.value,
-        creditCardId:row.creditCardId,
-        isActive: true,
-        createdBy: 0,
-      })
+      storeId: this.storeId,
+      amountDate: this.entryDate,
+      amount: inputElement.value,
+      creditCardId: row.creditCardId,
+      isActive: true,
+      createdBy: 0,
+    })
     this.onSubmitCreditCard();
     // Add your logic here
   }
 
 
-  
+
   onTextboxLotteryLeave(event: Event, row: any): void {
 
 
-    
+
 
 
     const inputElement = event.target as HTMLInputElement;
-    console.log('Textbox value on leave:', inputElement.value);
 
-  
+
+
 
     this.formLottery.patchValue({
-        storeId: this.storeId,
-        amountDate: this.entryDate,
-        lotteryAmount: inputElement.value,
-        lotteryTypeId:row.lotteryTypeId,
-        isActive: true,
-        createdBy: 0,
-      })
+      storeId: this.storeId,
+      amountDate: this.entryDate,
+      lotteryAmount: inputElement.value,
+      lotteryTypeId: row.lotteryTypeId,
+      isActive: true,
+      createdBy: 0,
+    })
     this.onSubmitLottery();
     // Add your logic here
   }
 
 
 
-creditcardamount:any;
-  creditcardlist:any;
+  creditcardamount: any;
+  creditcardlist: any;
   GetCreditCardByStoreIdDate() {
 
-    this.http.getAll(environment.GetCreditCardByStoreIdDate+ "?pStoreId=" + this.storeId + "&pAmountDate=" + this.entryDate ).subscribe((result: any) => {
+    this.http.getAll(environment.GetCreditCardByStoreIdDate + "?pStoreId=" + this.storeId + "&pAmountDate=" + this.entryDate).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+
         this.creditcardlist = result.data;
 
-        this.creditcardamount  = this.creditcardlist.reduce((acc: any, item: { amount: any; }) => acc + (item.amount || 0), 0);
+        this.creditcardamount = this.creditcardlist.reduce((acc: any, item: { amount: any; }) => acc + (item.amount || 0), 0);
 
 
       }
@@ -434,7 +433,7 @@ creditcardamount:any;
     if (this.form.value.amount == '' || this.form.value.amount == '0') {
       return;
     }
-    console.log(this.form.value);
+    ;
     if (this.form.invalid) {
       this.isLoading = false;
       return;
@@ -442,11 +441,12 @@ creditcardamount:any;
     this.http.post(environment.SaveItemSale, this.form.value).subscribe((result: any) => {
       if (result.isSuccess == 1) {
 
-        console.log(result.data);
+        ;
         this.storedata = result.data;
         this.insidesaleamount = this.storedata.filter((x: { productGroupId: number; }) => x.productGroupId == 1)[0].amount;
         this.outsidesaleamount = this.storedata.filter((x: { productGroupId: number; }) => x.productGroupId != 1).reduce((acc: any, item: { amount: any; }) => acc + (item.amount || 0), 0);
-
+        // this.GetInsideSale(this.storeId, 1, this.entryDate);
+        // this.GetOtherSale(this.storeId, 1, this.entryDate);
 
         // this.toastr.success(result.message);
       }
@@ -466,33 +466,33 @@ creditcardamount:any;
 
   onTextboxLeaveClosing(event: Event): void {
     const inputElement = event.target as HTMLInputElement;
-    console.log('Textbox value on leave:', inputElement.value);
 
-   
-      this.formClosing.patchValue({
-        storeId: this.storeId,
-        amountDate: this.entryDate,
-        amount: inputElement.value,
-        isActive: true,
-        createdBy: 0,
-      })
-      this.onSubmitClosing();
-    
+
+
+    this.formClosing.patchValue({
+      storeId: this.storeId,
+      amountDate: this.entryDate,
+      amount: inputElement.value,
+      isActive: true,
+      createdBy: 0,
+    })
+    this.onSubmitClosing();
+
 
 
     // Add your logic here
   }
 
-storeclosingdata:any;
-storeclosingcash:any;
-showSummaryInput:boolean=false;
-showCasereconcil:boolean=false;
+  storeclosingdata: any;
+  storeclosingcash: any;
+  showSummaryInput: boolean = false;
+  showCasereconcil: boolean = false;
   onSubmitClosing() {
 
     if (this.formClosing.value.amount == '' || this.formClosing.value.amount == '0') {
       return;
     }
-    console.log(this.formClosing.value);
+
     if (this.formClosing.invalid) {
       this.isLoading = false;
       return;
@@ -500,10 +500,10 @@ showCasereconcil:boolean=false;
     this.http.post(environment.StoreClosing, this.formClosing.value).subscribe((result: any) => {
       if (result.isSuccess == 1) {
 
-        console.log(result.data);
+        ;
         this.storeclosingdata = result.data;
 
-        this. GetGetStoreClosingByStoreId(this.storeId, this.entryDate) ;
+        this.GetGetStoreClosingByStoreId(this.storeId, this.entryDate);
         // this.toastr.success(result.message);
       }
       else {
@@ -512,49 +512,49 @@ showCasereconcil:boolean=false;
     });
   }
 
-  dated:any;
-showTaxCollection:boolean = false;
-showArcade:boolean = false
-  showlottery:boolean=false;
-showOtherincome :boolean=false;
-activetab:any=0;
+  dated: any;
+  showTaxCollection: boolean = false;
+  showArcade: boolean = false
+  showlottery: boolean = false;
+  showOtherincome: boolean = false;
+  activetab: any = 0;
 
 
-ngOnChanges(changes: SimpleChanges) {
-  if (changes['storesdata']) {
-    console.log('Stores data has been updated:', this.storesdata);
-    // Additional logic to handle the new data can go here
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['storesdata']) {
+
+      // Additional logic to handle the new data can go here
+    }
   }
-}
   showData(pid: any) {
-   this.activetab=pid;
-     //alert(pid)
-     this.activetab=pid;
+    this.activetab = pid;
+    //alert(pid)
+    this.activetab = pid;
     this.showDailysaleInput = false;
     this.showGasInput = false;
     this.showPurchasesInput = false;
-    this.showExpensesnewInput =false;
-    this.showSummaryInput= false;
-    this.showpayroll=false;
-    this.showrebate=false;
-    this.isView= false;
-    this.showlottery= false;
-    this.showOtherincome=false;
-    this.showClosingInput=false;
-    this.showCreditcardinput=false;
-    this.showCasereconcil=false;
-this.showTaxCollection=false;
-this.showArcade=false;
+    this.showExpensesnewInput = false;
+    this.showSummaryInput = false;
+    this.showpayroll = false;
+    this.showrebate = false;
+    this.isView = false;
+    this.showlottery = false;
+    this.showOtherincome = false;
+    this.showClosingInput = false;
+    this.showCreditcardinput = false;
+    this.showCasereconcil = false;
+    this.showTaxCollection = false;
+    this.showArcade = false;
     this.dated = this.entryDate;
 
     this.storesdata[0].storeid = this.storeId;
     this.storesdata[0].fromdate = this.dated;
-    this.storesdata[0].todate=this.dated
+    this.storesdata[0].todate = this.dated
 
-    console.log(this.storesdata[0]);
 
-this.showtaps=true;
-    
+
+    this.showtaps = true;
+
     if (pid == 0) {
       this.showDailysaleInput = true;
     }
@@ -565,57 +565,54 @@ this.showtaps=true;
       this.showPurchasesInput = true;
     } else if (pid == 3) {
       this.showExpensesnewInput = true;
-    }  else if (pid == 4) {
+    } else if (pid == 4) {
       this.showpayroll = true;
-    }else if(pid==5)
-    {
+    } else if (pid == 5) {
       this.showOtherincome = true;
     }
     else if (pid == 6) {
       this.showSummaryInput = true;
 
- this.dated = this.entryDate;
+      this.dated = this.entryDate;
 
       this.storesdata[0].storeid = this.storeId;
       this.storesdata[0].fromdate = this.dated;
-      this.storesdata[0].todate=this.dated
+      this.storesdata[0].todate = this.dated
 
     }
-  
+
     else if (pid == 7) {
       this.showrebate = true;
     }
     else if (pid == 8) {
 
-      if(this.showlottery== false)
-      {
-        this.showlottery= true;
-      }else
-      {
+      if (this.showlottery == false) {
+        this.showlottery = true;
+      } else {
         this.showlottery = false;
       }
-    
-      
-    
+
+
+
     } else if (pid == 9) {
       this.showClosingInput = true;
 
-      
- this.dated = this.entryDate;
 
- this.storesdata[0].storeid = this.storeId;
- this.storesdata[0].fromdate = this.dated;
- this.storesdata[0].todate=this.dated
+      this.dated = this.entryDate;
+
+      this.storesdata[0].storeid = this.storeId;
+      this.storesdata[0].fromdate = this.dated;
+      this.storesdata[0].todate = this.dated
     }
-    else if (pid ==10) {
+    else if (pid == 10) {
       this.showCreditcardinput = true;
-    }  else if (pid ==11) {
+    } else if (pid == 11) {
       this.showCasereconcil = true;
     }
-    else if (pid ==12) {
+    else if (pid == 12) {
       this.showTaxCollection = true;
     }
-    else if (pid ==13) {
+    else if (pid == 13) {
       this.showArcade = true;
     }
     else {
@@ -636,26 +633,26 @@ this.showtaps=true;
 
 
 
- 
- 
 
-creditcarddata:any;
+
+
+  creditcarddata: any;
   onSubmitCreditCard() {
 
 
-    if (this.formCreditcard.value.amount== '' || this.formCreditcard.value.amount == '0') {
+    if (this.formCreditcard.value.amount == '' || this.formCreditcard.value.amount == '0') {
       return;
     }
-    console.log(this.formCreditcard.value);
+
 
 
     this.http.post(environment.SaveCreditCardDetail, this.formCreditcard.value).subscribe((result: any) => {
       if (result.isSuccess == 1) {
 
-        console.log(result.data);
+        ;
         this.creditcarddata = result.data;
-        
-        this.  GetCreditCardByStoreIdDate();
+
+        this.GetCreditCardByStoreIdDate();
 
       }
       else {
@@ -668,23 +665,23 @@ creditcarddata:any;
   onSubmitLottery() {
 
 
-    if (this.formLottery.value.lotteryAmount== '' || this.formLottery.value.lotteryAmount == '0') {
+    if (this.formLottery.value.lotteryAmount == '' || this.formLottery.value.lotteryAmount == '0') {
       return;
     }
-    console.log(this.formLottery.value);
+
 
 
     this.http.post(environment.SaveLotteryPayDetail, this.formLottery.value).subscribe((result: any) => {
       if (result.isSuccess == 1) {
 
-        console.log(result.data);
-       // this.lotterytype = result.data;
+        ;
+        // this.lotterytype = result.data;
 
 
-      
-        
-        this.  GetLotteryTypeStoreIdDate();
-        this.  GetLotteryExpenseStoreIdDate();
+
+
+        this.GetLotteryTypeStoreIdDate();
+        this.GetLotteryExpenseStoreIdDate();
 
       }
       else {

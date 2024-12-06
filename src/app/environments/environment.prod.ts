@@ -2,7 +2,7 @@ export const environment = {
   production: true,
   hmr: false,
   config: {
-    apiUrl:"https://www.indianfilms.in/wfapi/api/",
+  apiUrl:"https://www.indianfilms.in/wfapi/api/",
     //apiUrl:"http://stage.ishivaxservices.com/admin_panel/public/api/",
     apiUrlother: "https://anutechinfra.com/anutechAPI/api/",
     apiUrlsms: "http://sms.ishivax.in/api/",
@@ -11,7 +11,6 @@ export const environment = {
    //apiUrl: 'https://localhost:7025/api/'
     //apiUrl:'https://www.indianfilms.in/eBuilderAPI/api/'
   },
-
 
   siteurl: "https://www.indianfilms.in/wfapi/",
   appVersion: 'v1.0.0',
@@ -248,5 +247,17 @@ DeleteStoreDocumentById:"StoreDocument/DeleteStoreDocumentById",
 DeleteDocumentTypeById:"DocumentType/DeleteDocumentTypeById",
 login:"LoginDetail/login",
 GetItemPurchaseByStoreIdDateWise:"ItemPurchase/GetItemPurchaseByStoreIdDateWise",
+
+GetStoreEmployeeByLoginId:"StoreEmployee/GetStoreEmployeeByLoginId",
+SaveClosingStock:"ClosingStock/SaveClosingStock" ,
+GetStoreDocumentByLoginId:"StoreDocument/GetStoreDocumentByLoginId",
+DeleteExpenseItemById:"ExpenseItem/DeleteExpenseItemById",
+GetExpenseItemsBydate:"ExpenseItem/GetExpenseItemsBydate",
+GetCompanyPackageCompanyId:"CompanyPackage/GetCompanyPackageCompanyId",
+
+SaveAutoExpense:"AutoExpense/SaveAutoExpense",
+GetAutoExpenseByStoreId:"AutoExpense/GetAutoExpenseByStoreId",
+DeleteAutoExpenseById:"AutoExpense/DeleteAutoExpenseById",
+DeleteCreditCardByStoreDatecreditId:"CreditCardDetail/DeleteCreditCardByStoreDatecreditId",
 };
 

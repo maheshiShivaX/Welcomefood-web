@@ -15,6 +15,7 @@ import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import { jwtDecode } from 'jwt-decode';
 
 
 const appRoutes: Routes = [
@@ -66,7 +67,7 @@ const routerOptions: ExtraOptions = {
     CarouselModule,
     CanvasJSAngularChartsModule,
     NgxChartsModule,
-    BsDatepickerModule
+    BsDatepickerModule,
 
      
   ],

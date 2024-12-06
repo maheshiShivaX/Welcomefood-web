@@ -10,11 +10,11 @@
 
 
     <div class="gasinventory storeformdata pt-2">
-        <form class="" [formGroup]="formcradit" (submit)="onSubmitCredit()">
+        <form class="" [formGroup]="formcradit" (submit)="SaveExpenseItem()">
             <div class="row">
 
                 <div class="mb-3 col-xl-3 col-lg-6 form-group">
-                    <label for="FormControlInput1" class="form-label">{{this.groupname}} </label>
+                    <label for="FormControlInput1" class="form-label">Expense Category</label>
                     <ng-select formControlName="expenseCategoryId" id="expenseCategoryId" #SelectSizeDefault
                         [items]="expenseitem" bindLabel="expanseName" bindValue="expenseCategoryId">
                     </ng-select>
@@ -107,7 +107,7 @@
                                 </button>
                             </td>
                             <td class="action">
-                                <button type="button" class="deletebtn">
+                                <button type="button" class="deletebtn"  (click)="ondelete(row.expenseItemId)">
                                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <rect width="40" height="40" rx="12" fill="#FFF0F1" />

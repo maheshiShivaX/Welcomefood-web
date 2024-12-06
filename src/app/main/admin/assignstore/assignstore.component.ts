@@ -156,7 +156,7 @@ onPageChange(pageNumber: number) {
 }
 
 // onPageSizeChange(pageSize: any) {
-//   console.log(pageSize.target.value)
+//
 
 //   pageSize = pageSize.target.value;
 //   if (pageSize !== null && pageSize !== undefined) {
@@ -232,7 +232,7 @@ sortList(property: keyof TableRow, direction: 'asc' | 'desc') {
   GetStoreDetailAll() {
     this.http.getAll(environment.GetStoreDetailbyCompanyId  + "?pCompanyId="+this.companyId ).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+     
         this.storedetail = result.data;
       }
       else {
@@ -243,7 +243,7 @@ sortList(property: keyof TableRow, direction: 'asc' | 'desc') {
   GetEmployeeDetail() {
     this.http.getAll(environment.GetLoginDetailByCompanyRole+ "?pRoleId=" + 3  + "&pComapnyId="+this.companyId).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+      
         this.employeedetails = result.data;
       }
       else {
@@ -254,7 +254,7 @@ sortList(property: keyof TableRow, direction: 'asc' | 'desc') {
   GetEmployeeStore() {
     this.http.getAll(environment.GetEmployeeStoreByCompanyId + "?pCompanyId="+this.companyId).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+       
         this.datalist = result.data;
         this.datalist = this.datalist.map(item => {
           return { ...item, visible: true };
@@ -272,7 +272,7 @@ sortList(property: keyof TableRow, direction: 'asc' | 'desc') {
   {
       this.http.getAll(environment.ActiveEmployeeStoreById+ "?pEmployeeStoreId=" + pId ).subscribe((result: any) => {
         if (result.isSuccess == 1) {
-          console.log(result.data)
+         
           this.toastr.success(result.message);
         
           this.GetEmployeeStore();
@@ -286,7 +286,7 @@ sortList(property: keyof TableRow, direction: 'asc' | 'desc') {
   {
       this.http.getAll(environment.DeleteEmployeeStoreById+ "?pEmployeeStoreId=" + pId ).subscribe((result: any) => {
         if (result.isSuccess == 1) {
-          console.log(result.data)
+        
           this.toastr.success(result.message);
         
           this.GetEmployeeStore();
@@ -303,7 +303,7 @@ sortList(property: keyof TableRow, direction: 'asc' | 'desc') {
     this.isLoading = true;
     this.submitted = true;
 
-    console.log(this.form.value);
+
     if (this.form.invalid) {
       this.isLoading = false;
       return;
@@ -323,7 +323,7 @@ sortList(property: keyof TableRow, direction: 'asc' | 'desc') {
       else {
         this.isLoading = false;
         this.submitted = false;
-        console.log(result);
+       
         this.toastr.error(result.message);
       }
     });

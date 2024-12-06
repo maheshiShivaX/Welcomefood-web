@@ -145,7 +145,7 @@ onPageChange(pageNumber: number) {
 }
 
 // onPageSizeChange(pageSize: any) {
-//   console.log(pageSize.target.value)
+
 
 //   pageSize = pageSize.target.value;
 //   if (pageSize !== null && pageSize !== undefined) {
@@ -220,7 +220,7 @@ sortList(property: keyof TableRow, direction: 'asc' | 'desc') {
   GetLoginDetails() {
     this.http.getAll(environment.GetLoginDetailsByCompanyId+"?pCompanyId="+this.companyId).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+   
         this.datalist = result.data;
         this.datalist = this.datalist.map(item => {
           return { ...item, visible: true };
@@ -238,7 +238,7 @@ sortList(property: keyof TableRow, direction: 'asc' | 'desc') {
   
     this.http.getAll(environment.ApprovedLoginDetailById + "?pLoginDetailId=" + pLoginDetailId).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+       
         this.GetLoginDetails();
         this.toastr.success(result.message);
       }
@@ -252,7 +252,7 @@ sortList(property: keyof TableRow, direction: 'asc' | 'desc') {
   LockedLoginDetailById(pLoginDetailId: any) {
     this.http.getAll(environment.LockedLoginDetailById + "?pLoginDetailId=" + pLoginDetailId).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+     
         this.GetLoginDetails();
         this.toastr.success(result.message);
       }
@@ -266,7 +266,7 @@ sortList(property: keyof TableRow, direction: 'asc' | 'desc') {
   ActiveLoginDetailById(pLoginDetailId: any) {
     this.http.getAll(environment.ActiveLoginDetailById + "?pLoginDetailId=" + pLoginDetailId).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+     
         this.GetLoginDetails();
         this.toastr.success(result.message);
       }

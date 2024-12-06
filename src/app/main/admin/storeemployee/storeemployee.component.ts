@@ -53,7 +53,7 @@ export class StoreemployeeComponent {
 
 
 
-  
+   loginId:any;
  
    constructor(private router: Router, private authService: AuthService,
      private http: HttpService, private toastr: ToastrService,
@@ -62,6 +62,7 @@ export class StoreemployeeComponent {
        const currentUser = user;
        this.form.value.createdBy = currentUser.loginId;
  this.companyId=currentUser.companyId;
+ this.loginId= currentUser.loginId;
        // Update menu based on user authentication state
      });
    }
@@ -164,7 +165,7 @@ export class StoreemployeeComponent {
  }
  
  // onPageSizeChange(pageSize: any) {
- //   console.log(pageSize.target.value)
+ //
  
  //   pageSize = pageSize.target.value;
  //   if (pageSize !== null && pageSize !== undefined) {
@@ -261,14 +262,28 @@ export class StoreemployeeComponent {
    storedetail:any;
 
 
-   GetStoreDetailAll() {
-    this.http.getAll(environment.GetStoreDetailbyCompanyId  + "?pCompanyId="+this.companyId ).subscribe((result: any) => {
+  //  GetStoreDetailAll() {
+  //   this.http.getAll(environment.GetStoreDetailbyCompanyId  + "?pCompanyId="+this.companyId ).subscribe((result: any) => {
+  //     if (result.isSuccess == 1) {
+
+  //       this.storedetail = result.data;
+  //     }
+  //     else {
+  //       this.storedetail = null;
+  //     }
+  //   })
+  // }
+
+  GetStoreDetailAll() {
+
+    this.http.getAll(environment.GetEmployeeStoreByUserId +"?pUserId=" + this.loginId ).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.storedetail = result.data;
+     
+       
       }
-      else {
-        this.storedetail = null;
+      else { this.storedetail = null;
       }
     })
   }
@@ -293,7 +308,7 @@ export class StoreemployeeComponent {
        else {
          this.isLoading = false;
          this.submitted = false;
-         console.log(result);
+     
          this.toastr.error(result.message);
        }
      });
@@ -304,14 +319,14 @@ export class StoreemployeeComponent {
    }
  
    GetCreditCardByCompanyId(companyid:any) {
-     this.http.getAll(environment.GetStoreEmployeeByCompanyId+"?pCompanyId="+companyid).subscribe((result: any) => {
+     this.http.getAll(environment.GetStoreEmployeeByLoginId+"?pLoginId="+this.loginId).subscribe((result: any) => {
        if (result.isSuccess == 1) {
-         console.log(result.data)
+         
          this.datalist = result.data;
          this.datalist = this.datalist.map(item => {
            return { ...item, visible: true };
          });
-         console.log(this.datalist)
+        
        }
        else { 
         this.datalist = [];
@@ -364,7 +379,7 @@ export class StoreemployeeComponent {
  
        this.http.getAll(environment.DeleteStoreEmployeeById+ "?pStoreEmployeeId=" + pId ).subscribe((result: any) => {
          if (result.isSuccess == 1) {
-           console.log(result.data)
+           
            this.toastr.error(result.message);
          
            this.GetCreditCardByCompanyId(this.companyId);

@@ -33,7 +33,7 @@ export class TaxcollectionComponent {
     });
 
     this.dataChangeSubscription = this.dataService.dataChange$.subscribe((menutype: any) => {
-      console.log('Menu type changed to:', menutype);
+  
       if(menutype=='12')
       {
         this.storeid =localStorage.getItem("storeid");
@@ -60,7 +60,7 @@ public form = new FormGroup({
   description:new FormControl(''),
   payModeId: new FormControl(1),
   amountDate: new FormControl(''),
-  amount: new FormControl('0.00'),
+  amount: new FormControl(''),
   isActive: new FormControl(true),
   createdBy: new FormControl(0),
   chequeNo: new FormControl(''),
@@ -90,7 +90,7 @@ ngOnInit() {
 GetIncomeTypeByCompanyId(companyid:any) {
   this.http.getAll(environment.GetTaxTypeByCompanyId+"?pCompanyId="+companyid).subscribe((result: any) => {
     if (result.isSuccess == 1) {
-      console.log(result.data)
+      
       this.incometypelist = result.data;
     }
     else { 
@@ -104,7 +104,7 @@ otherincomelist:any;
 GetOtherIncomebyStoreId( pStoreId: any , pAmountDate:any) {
     this.http.getAll(environment.GetTaxDetailByStoreId + "?pStoreId=" + this.storeid+ "&pAmountDate="+ pAmountDate ).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.otherincomelist = result.data;
 
       }
@@ -134,7 +134,7 @@ GetOtherIncomebyStoreId( pStoreId: any , pAmountDate:any) {
 
     this.http.getAll(environment.GetPayMode  ).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.paymode = result.data.filter((x: { payModeId: number; })=>x.payModeId==1);
  
       }
@@ -183,7 +183,7 @@ this.selectedOption=id;
       return;
     }
 
-    console.log(this.form.value);
+   ;
     if (this.form.invalid) {
 
       return;
@@ -197,7 +197,7 @@ this.selectedOption=id;
         this.toastr.success(result.message);
       }
       else {
-        console.log(result);
+    
         this.toastr.error(result.message);
       }
     });

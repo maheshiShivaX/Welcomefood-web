@@ -3,7 +3,7 @@
         <div class="d-flex align-items-center" style="gap: 10px;">
             <span (click)="onBack()">
                 << </span>
-                    <h4 class="mb-0">Store Product : {{this.storedetail[0].storeName}}</h4>
+                    <h4 class="mb-0">Store : {{this.storedetail[0].storeName}}</h4>
         </div>
  
     </div>
@@ -12,24 +12,36 @@
 
     <ng-container *ngFor="let item of storeData">
     <div class="storeformdata pt-2 d-flex justify-content-between align-items-center col-6" >
-        <form [formGroup]="form" (submit)="onSave(item)" class="w-100 d-flex justify-content-between align-items-center">
+       
         <div class="blanceheading"><span>{{item.displayName}}</span> </div>
     <div class="d-flex justify-content-end align-items-center opening blanceheading col-5 px-0">
-        <span *ngIf="item.value!='' && item.modifiedBy==0 " >{{item.value}}</span>
-        <span *ngIf=" item.value==null || item.value=='' || item.modifiedBy==1 " class="w-100">
+      
+        <span lass="w-100">
             <ng-container  *ngIf="item.valueType=='Numeric'">
-                <input type="text" class="form-control"    formControlName="value" (keypress)="validateNumber($event)"
-                (input)="validateDecimalPlaces($event)" >
+                <div class="d-flex justify-content-between align-items-center" style="gap: 5px;;" >
+                <span  >${{item.value}}</span>
+                <input type="text" class="form-control" style="text-align: right;" 
+                (keypress)="validateNumber($event)" (input)="validateDecimalPlaces($event)" [(ngModel)]="item.value"
+                (blur)="onTextboxLeave($event , item.dataId)" id="grocery" placeholder="0.00">
+            </div>
             </ng-container>
             <ng-container  *ngIf="item.valueType=='Date'">
-                <input type="date" class="form-control"   formControlName="value">
+                <div class="d-flex justify-content-between align-items-center"   style="gap: 5px;;" >
+                <span  >{{item.value | date : 'MM-dd-yyyy'}}</span>
+                <input type="date" class="form-control" style="text-align: right;"  [(ngModel)]="item.value" 
+                (blur)="onTextboxLeave($event , item.dataId)" id="grocery" >
+                </div>
             </ng-container>
             <ng-container  *ngIf="item.valueType=='Text'">
-                <input type="text" class="form-control"    formControlName="value">
+                <div class="d-flex justify-content-between align-items-center"  style="gap: 5px;;"  >
+                <span  >{{item.value}}</span>
+                <input type="text" class="form-control" style="text-align: right;"  [(ngModel)]="item.value"
+                (blur)="onTextboxLeave($event, item.dataId )" id="grocery" >
+                </div>
             </ng-container>
          </span>
        
-        <div >
+        <!-- <div >
             <button type="submit" title="On Board Detail"  *ngIf=" item.value==null || item.value=='' ||   item.modifiedBy==1  " class="savebtn" >Save
             </button>
 
@@ -46,11 +58,15 @@
                         stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
             </button>
-        </div>
-    </div></form>
+        </div> -->
+    </div>
 </div>
 
 </ng-container>
+<br>
+<div>
+    <app-onboardexpense></app-onboardexpense>
+</div>
 
 <br>
 <div class="store-heading d-flex align-items-center justify-content-between" *ngIf="storedetail !=null">

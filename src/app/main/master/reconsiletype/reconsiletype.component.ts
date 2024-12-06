@@ -151,7 +151,7 @@ export class ReconsiletypeComponent {
  }
  
  // onPageSizeChange(pageSize: any) {
- //   console.log(pageSize.target.value)
+ //
  
  //   pageSize = pageSize.target.value;
  //   if (pageSize !== null && pageSize !== undefined) {
@@ -268,7 +268,7 @@ export class ReconsiletypeComponent {
        else {
          this.isLoading = false;
          this.submitted = false;
-         console.log(result);
+     
          this.toastr.error(result.message);
        }
      });
@@ -281,12 +281,12 @@ export class ReconsiletypeComponent {
    GetCashReconsilType() {
      this.http.getAll(environment.GetCashReconsilType).subscribe((result: any) => {
        if (result.isSuccess == 1) {
-         console.log(result.data)
+         
          this.datalist = result.data;
          this.datalist = this.datalist.map(item => {
            return { ...item, visible: true };
          });
-         console.log(this.datalist)
+        
        }
        else { 
          // this.products = null;
@@ -330,7 +330,7 @@ export class ReconsiletypeComponent {
 
        this.http.getAll(environment.DeleteCashReconsilTypeById+ "?pCashReconsilTypeId=" + pId ).subscribe((result: any) => {
          if (result.isSuccess == 1) {
-           console.log(result.data)
+           
            this.toastr.error(result.message);
          
            this.GetCashReconsilType();

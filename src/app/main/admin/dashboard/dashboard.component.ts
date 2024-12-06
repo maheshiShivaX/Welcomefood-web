@@ -18,7 +18,7 @@ export class DashboardComponent {
   companyId:any;
   constructor(private http: HttpService,private el: ElementRef, private renderer: Renderer2, private authService: AuthService,) { 
     this.authService.currentUser.subscribe((user) => {
-    //  console.log(user);
+ 
       const currentUser = user;
       this.loginId=currentUser.loginId;
       this.companyId= currentUser.companyId;
@@ -62,7 +62,7 @@ graphData :any;
 
     this.http.getAll(environment.DashboardAdmin + "?pCompanyId=" + pUserId + "&pFromDate=" + "df" +"&pToDate="+ "asd" + "&pDate="+ "sd" + "&StoreId="+ pStoreId  ).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+  
 
         this.dailysaledata = result.data.dailySaleData;
         this.gasSaleData = result.data.gasSaleData;
@@ -139,8 +139,14 @@ this.fdailysaledata = [...this.dailysaledata].sort((a: { amountDate: string | nu
     {
       if (item!=null && item.length < 2) {
         return 0; // or handle this case as needed
+      }else
+      {
+        if(item[0].y!=0 && item[1].y!=0)
+        {
+          return ((item[0].y - item[1].y) / item[0].y) * 100;
+        }
       }
-      return ((item[0].y - item[1].y) / item[0].y) * 100;
+      return 0;
 
     }else
     {
@@ -163,8 +169,7 @@ this.fdailysaledata = [...this.dailysaledata].sort((a: { amountDate: string | nu
   onSelectChange(event: any) {
     this.ddailysale(this.companyId,event);
 
-    //console.log('Selected value:', event); // Log the selected value
-    // You can perform additional actions based on the selected value here
+   
   }
   storedetail:any;
 
@@ -172,7 +177,7 @@ this.fdailysaledata = [...this.dailysaledata].sort((a: { amountDate: string | nu
 
     this.http.getAll(environment.GetStoreByCompanyId +"?pComapnyId=" + this.companyId ).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+      
         this.storedetail = result.data;
         
       }

@@ -155,7 +155,7 @@ export class ManagelotteryComponent {
  }
  
  // onPageSizeChange(pageSize: any) {
- //   console.log(pageSize.target.value)
+ //
  
  //   pageSize = pageSize.target.value;
  //   if (pageSize !== null && pageSize !== undefined) {
@@ -255,7 +255,7 @@ export class ManagelotteryComponent {
    GetStoreDetailAll() {
     this.http.getAll(environment.GetStoreDetailbyCompanyId  + "?pCompanyId="+this.companyId ).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.storedetail = result.data;
       }
       else {
@@ -284,7 +284,7 @@ export class ManagelotteryComponent {
        else {
          this.isLoading = false;
          this.submitted = false;
-         console.log(result);
+     
          this.toastr.error(result.message);
        }
      });
@@ -297,12 +297,12 @@ export class ManagelotteryComponent {
    GetLotteryTypeByCompanyId(companyid:any) {
      this.http.getAll(environment.GetLotteryTypeByCompanyId+"?pCompanyId="+companyid).subscribe((result: any) => {
        if (result.isSuccess == 1) {
-         console.log(result.data)
+         
          this.datalist = result.data;
          this.datalist = this.datalist.map(item => {
            return { ...item, visible: true };
          });
-         console.log(this.datalist)
+        
        }
        else { 
         this.datalist = [];
@@ -355,7 +355,7 @@ export class ManagelotteryComponent {
  
        this.http.getAll(environment.DeleteLotteryTypeById+ "?pLotteryTypeId=" + pId ).subscribe((result: any) => {
          if (result.isSuccess == 1) {
-           console.log(result.data)
+           
            this.toastr.error(result.message);
          
            this.GetLotteryTypeByCompanyId(this.companyId);

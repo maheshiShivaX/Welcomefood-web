@@ -102,7 +102,7 @@ GetEmployeeStoreByUserId() {
 
   this.http.getAll(environment.GetEmployeeStoreByUserId +"?pUserId=" + this.loginId ).subscribe((result: any) => {
     if (result.isSuccess == 1) {
-      console.log(result.data)
+      
       this.storeDetail = result.data;
     
     }
@@ -125,7 +125,7 @@ GetEmployeeStoreByUserId() {
     this.isLoading = true;
     this.submitted = true;
 
-    console.log(this.form.value);
+   ;
     if (this.form.invalid) {
       this.isLoading = false;
       return;
@@ -145,7 +145,7 @@ this.form.value.companyId=this.companyId;
       else {
         this.isLoading = false;
         this.submitted = false;
-        console.log(result);
+    
         this.toastr.error(result.message);
       }
     });
@@ -158,12 +158,12 @@ this.form.value.companyId=this.companyId;
   GetVendorDetail() {
     this.http.getAll(environment.GetVendorDetailByLoginId+"?pLoginId="+this.loginId).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.datalist = result.data;
         this.datalist = this.datalist.map(item => {
           return { ...item, visible: true };
         });
-        console.log(this.datalist)
+       
       }
       else { this.datalist = [];
       }
@@ -183,6 +183,7 @@ this.form.value.companyId=this.companyId;
       contactNo: '',
       emailId: '',
       address: '',
+      storeId:0,
     });
   }
 
@@ -191,7 +192,7 @@ this.form.value.companyId=this.companyId;
 
   onEdit(pId:any)
   {
-    this.openDrawer()
+    this.openDrawer('Edit')
     this.vendorlist = this.datalist.filter(((x: { vendorId: any; }) => x.vendorId == pId));
 
     this.form.patchValue({
@@ -259,7 +260,7 @@ this.form.value.companyId=this.companyId;
 
       this.http.getAll(environment.DeleteVendorDetailById+ "?pVendorDetailId=" + pId ).subscribe((result: any) => {
         if (result.isSuccess == 1) {
-          console.log(result.data)
+          
           this.toastr.error(result.message);
         
           this.GetVendorDetail()
@@ -357,7 +358,7 @@ onPageChange(pageNumber: number) {
 }
 
 // onPageSizeChange(pageSize: any) {
-//   console.log(pageSize.target.value)
+//
 
 //   pageSize = pageSize.target.value;
 //   if (pageSize !== null && pageSize !== undefined) {
@@ -429,7 +430,12 @@ sortList(property: keyof TableRow, direction: 'asc' | 'desc') {
 
 // =============================================================================
 
-  openDrawer() {
+  openDrawer(type:any) {
+    if(type='New')
+    {
+      this.onReset();
+    }
+
     this.isOpen = true;
   }
 

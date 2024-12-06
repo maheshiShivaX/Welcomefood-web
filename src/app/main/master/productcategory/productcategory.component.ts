@@ -150,7 +150,7 @@ export class ProductcategoryComponent {
   }
 
   // onPageSizeChange(pageSize: any) {
-  //   console.log(pageSize.target.value)
+  //
 
   //   pageSize = pageSize.target.value;
   //   if (pageSize !== null && pageSize !== undefined) {
@@ -267,7 +267,7 @@ export class ProductcategoryComponent {
       else {
         this.isLoading = false;
         this.submitted = false;
-        console.log(result);
+    
         this.toastr.error(result.message);
       }
     });
@@ -280,12 +280,12 @@ export class ProductcategoryComponent {
   GetProductCategory() {
     this.http.getAll(environment.GetProductCategory).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.datalist = result.data;
         this.datalist = this.datalist.map(item => {
           return { ...item, visible: true };
         });
-        console.log(this.datalist)
+       
       }
       else {
         // this.datalist = null;
@@ -296,9 +296,9 @@ export class ProductcategoryComponent {
   GetProductGroup() {
     this.http.getAll(environment.GetProductGroup).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.productgrouplist = result.data;
-        console.log(this.productgrouplist)
+   
       }
       else {
         // this.datalist = null;
@@ -341,7 +341,7 @@ export class ProductcategoryComponent {
 
     this.http.getAll(environment.DeleteProductCategoryById + "?pProductCategoryId=" + pId).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.toastr.error(result.message);
 
         this.GetProductCategory()

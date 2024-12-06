@@ -40,14 +40,14 @@ export class StoresummaryComponent {
     this.entryDate = new Date().toISOString().split('T')[0];
 
     this.dataChangeSubscription = this.dataService.dataChange$.subscribe((menutype: any) => {
-      console.log('Menu type changed to:', menutype);
+  
       if(menutype=='6')
       {
         this.storeid =localStorage.getItem("storeid");
         this.entryDate =localStorage.getItem("tentrydate") 
 
     this.tfromdate =localStorage.getItem("tentrydate") //localStorage.getItem("tfromdate");
-    this.ttodate =localStorage.getItem("tentrydate") 
+    this.ttodate =localStorage.getItem("tlastdate") 
 
     this.GetStoreSummary(this.storeid,this.tfromdate, this.ttodate) ;
       }
@@ -77,7 +77,7 @@ export class StoresummaryComponent {
 
     this.http.getAll(environment.StoreSummary + "?pStoreId=" + pStoreId + "&pFromDate=" + pFromDate + "&pToDate=" + pToDate).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.storedetail = result.data;
 
 
@@ -139,7 +139,7 @@ lotteryamountsale:any;
   GetItemPurchaseByStoreIdcheqe(payType: any) {
     this.http.getAll(environment.GetItemPurchaseByStoreId + "?pAmountDate=" + this.entryDate + "&pStoreid=" + this.storeid + "&pPayType=" + 2).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.vendorCategoryAmountscheque = result.data;
         if (result.data.length > 0) {
           this.categories = Object.keys(result.data[0].amounts);
@@ -202,7 +202,7 @@ lotteryamountsale:any;
   GetExpenseItemsById(pGroupId: any) {
     this.http.getAll(environment.GetExpenseItemsById + "?pStoreId=" + this.storeid + "&pExpenseGroupId=" + pGroupId + "&pAmountDate=" + this.entryDate).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.expenseiteslist = result.data;
         this.expensecase = this.expenseiteslist.filter((x: { payModeId: any; }) => x.payModeId == +1)
         this.expanseamountcase = this.expensecase.reduce((acc: any, item: { amount: any; }) => acc + (item.amount || 0), 0);
@@ -219,7 +219,7 @@ lotteryamountsale:any;
   GetGesdetailByDateStoreId() {
     this.http.getAll(environment.GetGesdetailByDateStoreId + "?pAmountDate=" + this.entryDate + "&pStoreId=" + this.storeid).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.gesinventory = result.data;
       }
       else {
@@ -242,7 +242,7 @@ lotteryamountsale:any;
 
     this.http.getAll(environment.GetAmountByGroupId + "?pStoreId=" + this.storeid + "&pAmountDate=" + this.entryDate).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.saledata = result.data;
         this.coninup = this.saledata.filter((x: { productGroupName: string; }) => x.productGroupName == 'Arcade').reduce((acc: any, item: { amount: any; }) => acc + (item.amount || 0), 0);
         this.otheramount = this.saledata.filter((x: { productGroupName: string; }) => x.productGroupName == 'Other Income').reduce((acc: any, item: { amount: any; }) => acc + (item.amount || 0), 0);
@@ -294,7 +294,7 @@ lotteryamountsale:any;
 
     this.http.getAll(environment.GetExpenseItemsByStoreDateId + "?pStoreId=" + this.storeid + "&pAmountDate=" + this.entryDate).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.expenselist = result.data;
         this.creditcardamounts = this.expenselist.filter((x: { expenseGroupName: string; }) => x.expenseGroupName == 'Credit Cards').reduce((acc: any, item: { amount: any; }) => acc + (item.amount || 0), 0);
         this.storeexpenseamounts = this.expenselist.filter((x: { expenseGroupName: string; }) => x.expenseGroupName == 'Store Expenses').reduce((acc: any, item: { amount: any; }) => acc + (item.amount || 0), 0);
@@ -347,7 +347,47 @@ lotteryamountsale:any;
     })
   }
 
+  downloadExcel(id:any) {
+    // let element = document.getElementById('tabellistcs');
+    // const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+    // const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    // XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+    // XLSX.writeFile(wb, 'table_data.xlsx');
 
+
+    var data = '';
+    data = document.getElementById('summaryreport')!.innerHTML;
+    //const data = document.getElementById('pdfTable')!.innerHTML;
+    const dataType = 'data:application/vnd.ms-excel';
+    const tableHTML = encodeURIComponent(data);
+
+    // Create download link element
+    const downloadLink = document.createElement("a");
+    document.body.appendChild(downloadLink);
+
+    // Create a link to the file
+    downloadLink.href = `${dataType}, ${tableHTML}`;
+
+    // Setting the file name
+    downloadLink.download = 'summaryreport' + '.xls';
+
+    //triggering the function
+    downloadLink.click();
+
+    // Remove the download link after downloading
+    document.body.removeChild(downloadLink);
+
+
+    // let element = document.getElementById('tblUnit'); 
+    // const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+
+    // /* generate workbook and add the worksheet */
+    // const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    // XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    // /* save to file */
+    // XLSX.writeFile(wb, "UnitType.xlsx");
+  }
 
 
 }

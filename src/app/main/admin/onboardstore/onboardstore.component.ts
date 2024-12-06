@@ -10,7 +10,7 @@ import { environment } from 'src/app/environments/environment.prod';
 interface TableRow {
 
 
-  storeDataId:number,
+  storeDataId: number,
   value1: string,
   value: string,
   storeId: number,
@@ -31,8 +31,8 @@ export class OnboardstoreComponent {
 
 
 
-  
-  
+
+
   isLoading: boolean = false;
   openingdata: any;
 
@@ -86,11 +86,12 @@ export class OnboardstoreComponent {
 
 
     this.storeId = this.route.snapshot.params["storeId"];
+    localStorage.setItem("storeid",this.storeId);
     this.GetStoreOpeningDetailById(this.storeId);
     this.GetDataDetail();
     this.GetStoreDetailAll(this.storeId);
 
-    this. GetBalanceSheetTerm();
+    this.GetBalanceSheetTerm();
     this.formA.patchValue({
       storeId: this.storeId,
       fromDate: this.fromDate,
@@ -103,7 +104,7 @@ export class OnboardstoreComponent {
   GetStoreDetailAll(storeId: any) {
     this.http.getAll(environment.GetStoreDetail).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+      
         this.storedetail = result.data.filter((x: { storeId: any; }) => x.storeId == storeId);
       }
       else {
@@ -133,7 +134,7 @@ export class OnboardstoreComponent {
     if (this.formClosing.value.amount == '' || this.formClosing.value.amount == '0') {
       return;
     }
-    console.log(this.formClosing.value);
+   
     if (this.formClosing.invalid) {
       this.isLoading = false;
       return;
@@ -143,7 +144,7 @@ export class OnboardstoreComponent {
     this.http.post(environment.SaveOpeningBalance, this.formClosing.value).subscribe((result: any) => {
       if (result.isSuccess == 1) {
 
-        console.log(result.data);
+    
         // this.storeclosingdata = result.data;
         this.reset();
         this.toastr.success(result.message);
@@ -176,7 +177,7 @@ export class OnboardstoreComponent {
 
     this.http.getAll(environment.GetStoreOpeningDetailById + "?pStoreId=" + pStoreId).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.openingdata = result.data;
         this.edit = true;
 
@@ -211,7 +212,7 @@ export class OnboardstoreComponent {
 
     this.http.getAll(environment.GetDataDetailByStoreId + "?pStoreId=" + this.storeId).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log('A',result.data)
+       
         this.storeData = result.data;
       }
       else {
@@ -255,17 +256,28 @@ export class OnboardstoreComponent {
     return this.formatDate(date);
   }
 
-  onSave(item: any) {
-    this.form.value.dataId = item.dataId;
-    this.form.value.storeId = this.storeId;
-    console.log(this.form.value);
+  onTextboxLeave(event: any, dataId: any) {
+    const inputElement = event.target as HTMLInputElement;
 
+    this.form.patchValue({
+      dataId: dataId,
+      storeId: this.storeId,
+      createdBy: 0,
+      isActive: true,
+      value: inputElement.value,
+      value1: ''
+    });
+    this.onSave();
+  }
+
+
+  onSave() {
     this.http.post(environment.SaveStoreOnBoard, this.form.value).subscribe((result: any) => {
       if (result.isSuccess == 1) {
 
-        console.log(result.data);
+      
         // this.storeclosingdata = result.data;
-        this.resetForm();
+     //   this.resetForm();
         this.toastr.success(result.message);
         this.GetDataDetail();
       }
@@ -278,131 +290,127 @@ export class OnboardstoreComponent {
 
   }
   resetForm() {
-  
-      this.form.patchValue({
-        storeId: this.storeId,
-        value: '',
-        value1: '',
-        isActive: true,
-        createdBy: 0,
-      });
 
-    
+    this.form.patchValue({
+      storeId: this.storeId,
+      value: '',
+      value1: '',
+      isActive: true,
+      createdBy: 0,
+    });
+
+
   }
-  
 
-  onEditData(item :any)
-  {
-    console.log(item);
+
+  onEditData(item: any) {
    
-item.modifiedBy = 1;
-//this.form.value.value = item.value;
-this.form.patchValue({
-  value : item.value,
-})
-console.log(this.form.value);
+    item.modifiedBy = 1;
+    //this.form.value.value = item.value;
+    this.form.patchValue({
+      value: item.value,
+    })
+ 
   }
 
 
-  onBack()
-  {
+  onBack() {
     this.router.navigateByUrl('/admin/managestore');
   }
 
 
 
-      ///////////////////////////////
-    
-      public formA = new FormGroup({
-        storeId: new FormControl(0),
-        fromDate: new FormControl(''),
-        toDate: new FormControl(''),
-      });
-      public formB = new FormGroup({
-        storeId: new FormControl(0),
-        periodDateFrom: new FormControl(''),
-        periodDateTo: new FormControl(''),
-    
-        btype: new FormControl(''),
-        bsitemId: new FormControl(0),
-        balanceSheetId: new FormControl(0),
-        termsId: new FormControl(0),
-        name: new FormControl(''),
-        amount: new FormControl(0),
-        entryDate: new FormControl(''),
-        isActive: new FormControl(true),
-        createdBy: new FormControl(0),
-      });
+  ///////////////////////////////
+
+  public formA = new FormGroup({
+    storeId: new FormControl(0),
+    fromDate: new FormControl(''),
+    toDate: new FormControl(''),
+  });
+  public formB = new FormGroup({
+    storeId: new FormControl(0),
+    periodDateFrom: new FormControl(''),
+    periodDateTo: new FormControl(''),
+
+    btype: new FormControl(''),
+    bsitemId: new FormControl(0),
+    balanceSheetId: new FormControl(0),
+    termsId: new FormControl(0),
+    name: new FormControl(''),
+    amount: new FormControl(0),
+    entryDate: new FormControl(''),
+    isActive: new FormControl(true),
+    createdBy: new FormControl(0),
+  });
 
 
-      onSubmit() {
+  onSubmit() {
 
-        this.formA.patchValue({
-          storeId: this.storeId,
-          fromDate: this.fromDate,
-          toDate: this.toDate,
-        });
+    this.formA.patchValue({
+      storeId: this.storeId,
+      fromDate: this.fromDate,
+      toDate: this.toDate,
+    });
 
 
 
-        this.formB.patchValue({
-          storeId: this.storeId,
-          periodDateFrom: this.formA.value.fromDate,
-          periodDateTo: this.formA.value.toDate,
-        });
-        if (this.formB.value.amount == 0) {
-    
-          this.toastr.error('Please enter valid amount')
-          return;
-        }
-    
-        console.log(this.formA.value);
-        console.log(this.formB.value);
-        if (this.formB.invalid) {
-    
-          return;
-        }
-        //return;
-    
-        this.http.post(environment.BalanceSheet, this.formB.value).subscribe((result: any) => {
-          if (result.isSuccess == 1) {
-            // this.GetOtherIncomebyStoreId(this.storeid, this.entryDate);
-            this.GetBalanceSheetByStoreId(this.formA.value.storeId, this.formA.value.fromDate, this.formA.value.toDate);
-            // this.onReset();
-            this.toastr.success(result.message);
-          }
-          else {
-            console.log(result);
-            this.toastr.error(result.message);
-          }
-        });
+    this.formB.patchValue({
+      storeId: this.storeId,
+      periodDateFrom: this.formA.value.fromDate,
+      periodDateTo: this.formA.value.toDate,
+    });
+    if (this.formB.value.amount == 0) {
+
+      this.toastr.error('Please enter valid amount')
+      return;
+    }
+
+
+    if (this.formB.invalid) {
+
+      return;
+    }
+    //return;
+
+    this.http.post(environment.BalanceSheet, this.formB.value).subscribe((result: any) => {
+      if (result.isSuccess == 1) {
+        // this.GetOtherIncomebyStoreId(this.storeid, this.entryDate);
+        this.GetBalanceSheetByStoreId(this.formA.value.storeId, this.formA.value.fromDate, this.formA.value.toDate);
+        // this.onReset();
+        this.toastr.success(result.message);
       }
+      else {
+       
+        this.toastr.error(result.message);
+      }
+    });
+  }
 
-      balancesheetData:any;
-      GetBalanceSheetByStoreId(pStoreId: any, pFromDate: any, pToDate: any) {
- 
-       if (pStoreId != "" && pStoreId != null && pFromDate != "" && pFromDate != null && pToDate != "" && pToDate != null) {
-   
-         this.http.getAll(environment.GetBalanceSheetByStoreId + "?pStoreId=" + pStoreId + "&pFromDate=" + pFromDate + "&pToDate=" + pToDate).subscribe((result: any) => {
-           if (result.isSuccess == 1) {
-             console.log(result.data)
-             this.balancesheetData = result.data;
-   
-   
-           }
-           else {
-             this.balancesheetData = null;
-           }
-         })
-       } else {
-   
-       }
-     }
-     entryDate:any;
+  balancesheetData: any;
+  GetBalanceSheetByStoreId(pStoreId: any, pFromDate: any, pToDate: any) {
 
-     fromDate:any='2024-01-01';
-     toDate:any='2024-01-01';
-     termdetail: any;
+    if (pStoreId != "" && pStoreId != null && pFromDate != "" && pFromDate != null && pToDate != "" && pToDate != null) {
+
+      this.http.getAll(environment.GetBalanceSheetByStoreId + "?pStoreId=" + pStoreId + "&pFromDate=" + pFromDate + "&pToDate=" + pToDate).subscribe((result: any) => {
+        if (result.isSuccess == 1) {
+         
+          this.balancesheetData = result.data;
+
+
+        }
+        else {
+          this.balancesheetData = null;
+        }
+      })
+    } else {
+
+    }
+  }
+  entryDate: any;
+
+  fromDate: any = '2024-01-01';
+  toDate: any = '2024-01-01';
+  termdetail: any;
   ontermschange(pid: any) {
 
 
@@ -413,13 +421,15 @@ console.log(this.form.value);
   GetBalanceSheetTerm() {
     this.http.getAll(environment.GetBalanceSheetTerm).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+      
         this.termslist = result.data;
       }
       else {
         // this.products = null;
       }
     })
-  } 
+  }
+
+
 
 }

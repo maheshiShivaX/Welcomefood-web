@@ -65,7 +65,7 @@ export class CashreconcilComponent {
     });
 
     this.dataChangeSubscription = this.dataService.dataChange$.subscribe((menutype: any) => {
-      console.log('Menu type changed to:', menutype);
+   
       if(menutype=='11')
       {
         this.storeid =localStorage.getItem("storeid");
@@ -120,7 +120,7 @@ export class CashreconcilComponent {
   {
     this.http.getAll(environment.DeleteCashReconcilById + "?pCashReconcilId=" + pid ).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.GetCashReconcilByStoreId()
       }
       else {
@@ -141,7 +141,7 @@ export class CashreconcilComponent {
   GetCashReconcilByStoreId() {
     this.http.getAll(environment.GetCashReconcilByStoreId +"?pStoreId=" + this.storeid + "&pAmountDate=" + this.entryDate  ).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.casereconcil = result.data;
       }
       else {
@@ -154,7 +154,7 @@ export class CashreconcilComponent {
   GetExpenseItemsById(pGroupId: any) {
     this.http.getAll(environment.GetExpenseItemsById + "?pStoreId=" + this.storeid + "&pExpenseGroupId=" + pGroupId + "&pAmountDate=" + this.entryDate).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.expenseiteslist = result.data;
 
       }
@@ -182,7 +182,7 @@ export class CashreconcilComponent {
   GetCashReconsilType() {
     this.http.getAll(environment.GetCashReconsilType).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.caserecouciltype = result.data;
 
       }
@@ -241,7 +241,7 @@ export class CashreconcilComponent {
       return;
     }
 
-    console.log(this.form.value);
+   ;
     if (this.form.invalid) {
 
       return;
@@ -254,7 +254,7 @@ export class CashreconcilComponent {
         this.toastr.success(result.message);
       }
       else {
-        console.log(result);
+    
         this.toastr.error(result.message);
       }
     });

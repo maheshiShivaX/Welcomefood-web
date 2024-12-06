@@ -32,7 +32,7 @@ export class DailysalereportComponent {
   ) {
     this.authService.currentUser.subscribe((user) => {
 
-      console.log(user);
+     
       const currentUser = user;
       this.loginId = currentUser.loginId;
       // Update menu based on user authentication state
@@ -51,7 +51,7 @@ export class DailysalereportComponent {
   
     const today = new Date();
     const yyyy = today.getFullYear();
-    console.log(yyyy);
+ 
     //const year = 2024; // You can change this dynamically or make it user-input
     this.paymentOptions = this.monthService.getPaymentOptions(yyyy);
     this.GetEmployeeStoreByUserId();
@@ -78,7 +78,7 @@ export class DailysalereportComponent {
   onGetReport()
   {
 
-console.log(this.modelDate);
+
 
 const year = this.modelDate.getFullYear();
 const month = this.modelDate.getMonth(); // getMonth() gives 0-based month (0 for Jan, 11 for Dec)
@@ -109,7 +109,7 @@ this.DailySaleReportDatewise(this.form.value.storeId, this.form.value.fromDate, 
 
     this.http.getAll(environment.GetEmployeeStoreByUserId +"?pUserId=" + this.loginId ).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.storeList = result.data;
      
        
@@ -138,7 +138,7 @@ storename:any;
 
       this.http.getAll(environment.DailySaleReportDatewise + "?pStoreId=" + pStoreId + "&pFromDate=" + pFromDate + "&pToDate=" + pToDate).subscribe((result: any) => {
         if (result.isSuccess == 1) {
-          console.log(result.data)
+          
           this.dailydata = result.data;
 
         //  this.tinsideSale= this.dailydata.reduce((acc: any, item: { insideSale: number; }) => acc + (item.insideSale || 0), 0);;

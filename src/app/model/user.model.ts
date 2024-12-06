@@ -34,6 +34,6 @@ export interface User {
     createdBy:number
     landingUrl:string,
     name:string,
-    companyId:number
+    companyId:number,
     // Add other fields as needed
   }

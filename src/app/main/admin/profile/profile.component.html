@@ -12,27 +12,28 @@
     </h4>
     </div>
     <div class="storeformdata pt-2 col-12" *ngIf="companyProfile !=null">
-        <div>
-            <div class="mb-3 col-xl-4 col-lg-6">
-                <label for="FormControlInput1" class="form-label">Company Name</label> : 
+        <div class="row"    >
+            <div class="mb-3 col-xl-6 col-lg-6">
+                <label for="FormControlInput1" class="form-label"><b>Company Name</b></label> : 
                 <label for="FormControlInput1" class="form-label">{{companyProfile[0].comapnyName}}</label>
                
             </div>
-            <div class="mb-3 col-xl-4 col-lg-6">
-                <label for="FormControlInput1" class="form-label">Email Id</label> :
-                <label for="FormControlInput1" class="form-label">{{companyProfile[0].emailid}}</label>
-              
-            </div>
-            <div class="mb-3 col-xl-4 col-lg-6">
-                <label for="FormControlInput1" class="form-label">Mobile No</label> :
-                <label for="FormControlInput1" class="form-label">{{companyProfile[0].contactNo}}</label>
-               
-            </div>
-            <div class="mb-3 col-xl-4 col-lg-6">
-                <label for="FormControlInput1" class="form-label">Address</label> : 
+            <div class="mb-3 col-xl-6 col-lg-6">
+                <label for="FormControlInput1" class="form-label"><b>Address</b></label> : 
                 <label for="FormControlInput1" class="form-label">{{companyProfile[0].address}}</label>
                 
             </div>
+            <div class="mb-3 col-xl-6 col-lg-6">
+                <label for="FormControlInput1" class="form-label"><b>Email Id</b></label> :
+                <label for="FormControlInput1" class="form-label">{{companyProfile[0].emailid}}</label>
+              
+            </div>
+            <div class="mb-3 col-xl-6 col-lg-6">
+                <label for="FormControlInput1" class="form-label"><b>Mobile No</b></label> :
+                <label for="FormControlInput1" class="form-label">{{companyProfile[0].contactNo}}</label>
+               
+            </div>
+           
         </div>
     </div>
 </div>
@@ -48,19 +49,19 @@
         </button></h4>
     </div>
     <div class="storeformdata pt-2 col-12" *ngIf="companyProfile !=null">
-        <div>
+        <div class="row">
           
-            <div class="mb-3 col-xl-4 col-lg-6">
-                <label for="FormControlInput1" class="form-label"> Name</label> : 
+            <div class="mb-3 col-xl-6 col-lg-6">
+                <label for="FormControlInput1" class="form-label"><b> Name</b></label> : 
                 <label for="FormControlInput1" class="form-label">{{companyProfile[0].ownerName}}</label> 
             </div>
-            <div class="mb-3 col-xl-4 col-lg-6">
-                <label for="FormControlInput1" class="form-label">Email Id</label> : 
+            <div class="mb-3 col-xl-6 col-lg-6">
+                <label for="FormControlInput1" class="form-label"><b>Email Id</b></label> : 
                 <label for="FormControlInput1" class="form-label">{{companyProfile[0].ownerEmailId}}</label> 
             </div>
 
-            <div class="mb-3 col-xl-4 col-lg-6">
-                <label for="FormControlInput1" class="form-label">Mobile No</label> : 
+            <div class="mb-3 col-xl-6 col-lg-6">
+                <label for="FormControlInput1" class="form-label"><b>Mobile No</b></label> : 
                 <label for="FormControlInput1" class="form-label">{{companyProfile[0].ownerMobileNo}}</label> 
             </div>
         </div>

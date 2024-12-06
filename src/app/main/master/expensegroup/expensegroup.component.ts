@@ -149,7 +149,7 @@ companyId:any;
  }
  
  // onPageSizeChange(pageSize: any) {
- //   console.log(pageSize.target.value)
+ //
  
  //   pageSize = pageSize.target.value;
  //   if (pageSize !== null && pageSize !== undefined) {
@@ -268,7 +268,7 @@ companyId:any;
        else {
          this.isLoading = false;
          this.submitted = false;
-         console.log(result);
+     
          this.toastr.error(result.message);
        }
      });
@@ -281,12 +281,12 @@ companyId:any;
    GetExpenseGroupByCompanyId(companyid:any) {
      this.http.getAll(environment.GetExpenseGroupByCompanyId+"?pCompanyId="+companyid).subscribe((result: any) => {
        if (result.isSuccess == 1) {
-         console.log(result.data)
+         
          this.datalist = result.data;
          this.datalist = this.datalist.map(item => {
            return { ...item, visible: true };
          });
-         console.log(this.datalist)
+        
        }
        else { 
          // this.products = null;
@@ -331,7 +331,7 @@ companyId:any;
  
        this.http.getAll(environment.DeleteExpenseGroupById+ "?pExpenseGroupId=" + pId ).subscribe((result: any) => {
          if (result.isSuccess == 1) {
-           console.log(result.data)
+           
            this.toastr.error(result.message);
          
            this.GetExpenseGroupByCompanyId(this.companyId);

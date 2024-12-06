@@ -155,7 +155,7 @@ onPageChange(pageNumber: number) {
 }
 
 // onPageSizeChange(pageSize: any) {
-//   console.log(pageSize.target.value)
+//
 
 //   pageSize = pageSize.target.value;
 //   if (pageSize !== null && pageSize !== undefined) {
@@ -243,7 +243,7 @@ sortList(property: keyof TableRow, direction: 'asc' | 'desc') {
 
     this.form.value.comapnyId = this.companyId;
    
-    console.log(this.form.value);
+ 
     //return;
     this.http.post(environment.SaveStoreDetail, this.form.value).subscribe((result: any) => {
       if (result.isSuccess == 1) {
@@ -256,7 +256,7 @@ sortList(property: keyof TableRow, direction: 'asc' | 'desc') {
       else {
         this.isLoading = false;
         this.submitted = false;
-        console.log(result);
+    
         this.toastr.error(result.message);
       }
     });
@@ -269,12 +269,12 @@ sortList(property: keyof TableRow, direction: 'asc' | 'desc') {
   GetStoreDetailbyCompanyId() {
     this.http.getAll(environment.GetStoreDetailbyCompanyId+"?pCompanyId="+this.companyId).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+       
         this.datalist = result.data;
         this.datalist = this.datalist.map(item => {
           return { ...item, visible: true };
         });
-        console.log(this.datalist)
+        
       }
       else { 
         // this.datalist = null;
@@ -332,7 +332,7 @@ sortList(property: keyof TableRow, direction: 'asc' | 'desc') {
 
       this.http.getAll(environment.DeleteStoreDetailById+ "?pStoreDetailId=" + pId ).subscribe((result: any) => {
         if (result.isSuccess == 1) {
-          console.log(result.data)
+          
           this.toastr.error(result.message);
         
           this.GetStoreDetailbyCompanyId()

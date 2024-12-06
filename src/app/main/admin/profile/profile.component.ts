@@ -63,7 +63,7 @@ export class ProfileComponent {
   GetStoreDetailbyCompanyId() {
     this.http.getAll(environment.GetCompanyDetailById + "?pLoginId=" + this.loginId).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+ 
         this.companyProfile = result.data;
       }
       else {
@@ -93,7 +93,7 @@ export class ProfileComponent {
       else {
         this.isLoading = false;
         this.submitted = false;
-        console.log(result);
+      
         this.toastr.error(result.message);
       }
     });
@@ -120,7 +120,7 @@ export class ProfileComponent {
       else {
         this.isLoading = false;
         this.submitted = false;
-        console.log(result);
+      
         this.toastr.error(result.message);
       }
     });

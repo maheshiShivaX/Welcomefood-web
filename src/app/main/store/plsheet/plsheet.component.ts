@@ -26,7 +26,7 @@ export class PlsheetComponent {
   ) {
     this.authService.currentUser.subscribe((user) => {
 
-      console.log(user);
+     
       const currentUser = user;
       this.loginId = currentUser.loginId;
       // Update menu based on user authentication state
@@ -65,7 +65,7 @@ export class PlsheetComponent {
    ngOnInit() {
     const today = new Date();
     const yyyy = today.getFullYear();
-    console.log(yyyy);
+  
     //const year = 2024; // You can change this dynamically or make it user-input
     this.paymentOptions = this.monthService.getPaymentOptions(yyyy);
     
@@ -108,7 +108,7 @@ export class PlsheetComponent {
 
     this.http.getAll(environment.GetPLStoreDetail + "?pStoreId=" + pStoreId + "&pFromDate=" + pFromDate + "&pToDate=" + pToDate).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.storedetail = result.data;
 
 
@@ -140,7 +140,7 @@ export class PlsheetComponent {
 
     this.http.getAll(environment.GetEmployeeStoreByUserId +"?pUserId=" + this.loginId ).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.storeList = result.data;
      
        
@@ -154,7 +154,7 @@ export class PlsheetComponent {
   GetStoreDetailAll() {
     this.http.getAll(environment.GetStoreDetail).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.storeList = result.data;
       }
       else {
@@ -178,7 +178,7 @@ export class PlsheetComponent {
   onGetReport()
   {
 
-console.log(this.modelDate);
+
 
 const year = this.modelDate.getFullYear();
 const month = this.modelDate.getMonth(); // getMonth() gives 0-based month (0 for Jan, 11 for Dec)
@@ -206,7 +206,7 @@ this.toDate=this.formatDateToYYYYMMDD(lastDate)
 
 
 
-    console.log(this.form.value);
+   ;
 
 this.storename = this.storeList.filter((x: { storeId: number | null | undefined; })=>x.storeId==this.form.value.storeId)[0].storeName
     this.GetPLStoreDetail(this.form.value.storeId, this.form.value.fromDate,this.form.value.toDate)

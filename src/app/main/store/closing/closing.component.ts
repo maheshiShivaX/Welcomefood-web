@@ -48,7 +48,7 @@ export class ClosingComponent {
     this.dated = this.entryDate;
 
     this.dataChangeSubscription = this.dataService.dataChange$.subscribe((menutype: any) => {
-      console.log('Menu type changed to:', menutype);
+   
       if(menutype=='9')
       {
         this.storeId =localStorage.getItem("storeid");
@@ -89,7 +89,7 @@ export class ClosingComponent {
 
     this.http.getAll(environment.StoreSummary + "?pStoreId=" + pStoreId + "&pFromDate=" + pFromDate + "&pToDate=" + pToDate).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.storedetail = result.data;
 
 
@@ -102,9 +102,40 @@ export class ClosingComponent {
     })
   }
 
+
+
+  onTextboxLeaveClosingStock(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+
+
+
+    this.formstock.patchValue({
+        physicalStock: inputElement.value,
+        closingStockId:0,
+        totalPurchase:this.storedetail.purchaseAmount,
+        totalSale:this.storedetail.saleAmount,
+        stockPercent:this.storedetail.stockPercent,
+        storeId: this.storeId,
+        amount:this.storedetail.closingStock ,
+        amountDate: this.entryDate,
+        isActive: true,
+        createdBy: 0,
+    });
+
+     
+      this.onSubmitStock();
+    
+
+
+    // Add your logic here
+  }
+
+
+
+
   onTextboxLeaveClosing(event: Event): void {
     const inputElement = event.target as HTMLInputElement;
-    console.log('Textbox value on leave:', inputElement.value);
+
 
    
       this.formClosing.patchValue({
@@ -130,12 +161,58 @@ export class ClosingComponent {
     createdBy: new FormControl(0),
   });
 
+
+  public formstock = new FormGroup({
+    physicalStock: new FormControl(''),
+    closingStockId:new FormControl(0),
+    totalPurchase:new FormControl(0),
+    totalSale:new FormControl(0),
+    stockPercent:new FormControl(0),
+    storeId: new FormControl(0, Validators.required),
+    amount: new FormControl('', Validators.required),
+    amountDate: new FormControl('2024-05-08', Validators.required),
+    isActive: new FormControl(true),
+    createdBy: new FormControl(0),
+  });
+
+
+
+ storeclosingstock:any='0.00'
+  onSubmitStock() {
+
+    if (this.formstock.value.amount == '' || this.formstock.value.amount == '0') {
+      return;
+    }
+
+
+
+    if (this.formstock.invalid) {
+      this.isLoading = false;
+      return;
+    }
+    this.http.post(environment.SaveClosingStock, this.formstock.value).subscribe((result: any) => {
+      if (result.isSuccess == 1) {
+
+        ;
+        this.storeclosingdata = result.data;
+
+        this. GetGetStoreClosingByStoreId(this.storeId, this.entryDate) ;
+        // this.toastr.success(result.message);
+      }
+      else {
+        //  this.toastr.error(result.message);
+      }
+    });
+  }
+  
+
+
   onSubmitClosing() {
 
     if (this.formClosing.value.amount == '' || this.formClosing.value.amount == '0') {
       return;
     }
-    console.log(this.formClosing.value);
+ 
     if (this.formClosing.invalid) {
       this.isLoading = false;
       return;
@@ -143,7 +220,7 @@ export class ClosingComponent {
     this.http.post(environment.StoreClosing, this.formClosing.value).subscribe((result: any) => {
       if (result.isSuccess == 1) {
 
-        console.log(result.data);
+        ;
         this.storeclosingdata = result.data;
 
         this. GetGetStoreClosingByStoreId(this.storeId, this.entryDate) ;
@@ -161,10 +238,10 @@ export class ClosingComponent {
 
     this.http.getAll(environment.GetStoreClosingByStoreId + "?pStoreId=" + pStoreId + "&pAmountDate=" + pAmountDate).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.closingdata = result.data;
         this.storeclosingcash = this.closingdata[0].amount;
-        
+        this.storeclosingstock = this.closingdata[0].physicalCLosingStock;
       }
       else {
        // this.insideList = null;

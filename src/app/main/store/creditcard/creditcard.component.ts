@@ -49,7 +49,7 @@ export class CreditcardComponent {
     this.dated = this.entryDate;
 
     this.dataChangeSubscription = this.dataService.dataChange$.subscribe((menutype: any) => {
-      console.log('Menu type changed to:', menutype);
+    
       if(menutype=='10')
       {
         this.storeId =localStorage.getItem("storeid");
@@ -93,7 +93,23 @@ this.  GetCreditCardByStoreIdDate();
 
       this.http.getAll(environment.DeleteCreditCardByStoreDateId + "?pStoreId=" + this.storeId  + "&pAmountDate=" + this.entryDate).subscribe((result: any) => {
         if (result.isSuccess == 1) {
-          console.log(result.data)
+          
+         // this.lotterytype = result.data;
+
+         this.  GetCreditCardByStoreIdDate();
+        }
+        else {
+          this.creditcarddata = null;
+        }
+      })
+  }
+
+  onDeletebyid(pid:any)
+  {
+
+      this.http.getAll(environment.DeleteCreditCardByStoreDatecreditId + "?pStoreId=" + this.storeId  + "&pAmountDate=" + this.entryDate +"&pCreditcardId="+ pid).subscribe((result: any) => {
+        if (result.isSuccess == 1) {
+          
          // this.lotterytype = result.data;
 
          this.  GetCreditCardByStoreIdDate();
@@ -105,14 +121,13 @@ this.  GetCreditCardByStoreIdDate();
   }
 
 
-
-creditcardamount:any;
+creditcardamount:any='0.00';
 creditcardlist:any;
 GetCreditCardByStoreIdDate() {
 
   this.http.getAll(environment.GetCreditCardByStoreIdDate+ "?pStoreId=" + this.storeId + "&pAmountDate=" + this.entryDate ).subscribe((result: any) => {
     if (result.isSuccess == 1) {
-      console.log(result.data)
+      
       this.creditcardlist = result.data;
 
       //this.creditcardamount  =this.creditcardlist.reduce((acc: any, item: { amount: any; }) => acc + (item.amount || 0), 0);
@@ -153,7 +168,7 @@ onTextboxCreditLeave(event: Event, row: any): void {
 
 
   const inputElement = event.target as HTMLInputElement;
-  console.log('Textbox value on leave:', inputElement.value);
+
 
 
 
@@ -173,16 +188,18 @@ creditcarddata:any;
   onSubmitCreditCard() {
 
 
-    if (this.formCreditcard.value.amount== '' || this.formCreditcard.value.amount == '0') {
+    if (this.formCreditcard.value.amount== '' || this.formCreditcard.value.amount == '0'  || this.formCreditcard.value.amount == '0.00'  ) {
+      
+      this.onDeletebyid(this.formCreditcard.value.creditCardId);
       return;
     }
-    console.log(this.formCreditcard.value);
+  
 
 
     this.http.post(environment.SaveCreditCardDetail, this.formCreditcard.value).subscribe((result: any) => {
       if (result.isSuccess == 1) {
 
-        console.log(result.data);
+        ;
         this.creditcarddata = result.data;
         
         this.  GetCreditCardByStoreIdDate();

@@ -30,7 +30,7 @@ export class NewbalancesheetComponent {
 
       this.http.getAll(environment.GetBalanceSheetByStoreId + "?pStoreId=" + pStoreId + "&pFromDate=" + pFromDate + "&pToDate=" + pToDate).subscribe((result: any) => {
         if (result.isSuccess == 1) {
-          console.log(result.data)
+          
           this.balancesheetData = result.data;
 
 
@@ -55,7 +55,7 @@ export class NewbalancesheetComponent {
 
     this.http.getAll(environment.GetEmployeeStoreByUserId + "?pUserId=" + this.loginId).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.storeList = result.data;
 
 
@@ -90,7 +90,7 @@ export class NewbalancesheetComponent {
   ) {
     this.authService.currentUser.subscribe((user) => {
 
-      console.log(user);
+     
       const currentUser = user;
       this.loginId = currentUser.loginId;
       // Update menu based on user authentication state
@@ -137,7 +137,7 @@ export class NewbalancesheetComponent {
 
     const today = new Date();
     const yyyy = today.getFullYear();
-    console.log(yyyy);
+   
     //const year = 2024; // You can change this dynamically or make it user-input
     this.paymentOptions = this.monthService.getPaymentOptions(yyyy);
 
@@ -159,7 +159,7 @@ export class NewbalancesheetComponent {
   GetBalanceSheetTerm() {
     this.http.getAll(environment.GetBalanceSheetTerm).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.termslist = result.data;
       }
       else {
@@ -170,7 +170,7 @@ export class NewbalancesheetComponent {
 
 onAMount(item:any):any
 {
-  console.log(item);
+
   
 var res= item.bsitemIDtos.reduce((acc: any, item: { amount: any; }) => acc + (item.amount || 0), 0);
 return res;
@@ -212,8 +212,8 @@ onMonthChange(event: any): void {
       return;
     }
 
-    console.log(this.form.value);
-    console.log(this.formB.value);
+   ;
+ 
     if (this.formB.invalid) {
 
       return;
@@ -229,7 +229,7 @@ onMonthChange(event: any): void {
         this.onReset();
       }
       else {
-        console.log(result);
+    
         this.toastr.error(result.message);
       }
     });

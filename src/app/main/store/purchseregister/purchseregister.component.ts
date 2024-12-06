@@ -32,7 +32,7 @@ export class PurchseregisterComponent {
     storeId: new FormControl(0),
     chequeNo: new FormControl(''),
     description: new FormControl(''),
-    file: new FormControl(''),
+  
     invoicePath:new FormControl('')
   });
 
@@ -53,8 +53,7 @@ export class PurchseregisterComponent {
       storeId: 0,
       chequeNo: '',
       description: '',
-      file:'',
-      invoicePath:'',
+    invoicePath:'',
 
     })
   }
@@ -69,7 +68,7 @@ export class PurchseregisterComponent {
     this.selectedOption = "1";
 
     this.dataChangeSubscription = this.dataService.dataChange$.subscribe((menutype: any) => {
-      console.log('Menu type changed to:', menutype);
+
       if(menutype=='2')
       {
         this.storeId =localStorage.getItem("storeid");
@@ -90,7 +89,7 @@ this.  GetVendorDetail();
   onFileChange(event: any) {
 
     this.fileName = event.target.files[0];
-    console.log(this.fileName);
+ 
     var reader = new FileReader();
     reader.readAsDataURL(event.target.files[0]);
     reader.onload = (_event: any) => {
@@ -145,7 +144,7 @@ this.  GetVendorDetail();
 
     this.http.getAll(environment.GetPayMode  ).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.paymode = result.data;
  
       }
@@ -155,14 +154,14 @@ this.  GetVendorDetail();
     })
   }
   onPaymodechange(id:any)
-  {console.log(id);
+  {
 this.selectedOption=id;
   }
 
   GetItemPurchaseByDatestoreId() {
     this.http.getAll(environment.GetItemPurchaseByDatestoreId + "?pAmountDate=" + this.entryDate + "&pStoreid=" + this.storeId).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.purchaseitemlist = result.data;
       }
       else {
@@ -180,7 +179,7 @@ this.selectedOption=id;
 
     this.http.getAll(environment.GetVendorDetail).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.vendorList = result.data;
       }
       else {
@@ -208,7 +207,7 @@ this.selectedOption=id;
       return;
     }
 
-    console.log(this.formpurchase.value);
+ 
     if (this.formpurchase.invalid) {
       this.isLoading = false;
       return;
@@ -222,11 +221,11 @@ this.selectedOption=id;
     formData.append('file', this.fileName);
 
     if (this.formpurchase.invalid) {
-      console.log(this.formpurchase.value);
+    
       this.isLoading = false;
       return;
     }
-
+console.log(formData);
 
 
     this.http.post(environment.SaveItemPurchase, formData).subscribe((result: any) => {
@@ -245,7 +244,7 @@ this.selectedOption=id;
       else {
         this.isLoading = false;
         this.submitted = false;
-        console.log(result);
+    
         this.toastr.error(result.message);
       }
     });
@@ -257,7 +256,6 @@ this.selectedOption=id;
   onEditpurchase(pId: any) {
     this.purchasentry = this.purchaseitemlist.filter((x: { itemPurchaseId: any; }) => x.itemPurchaseId == pId)
 
-    console.log(this.purchasentry);
     this.formpurchase.patchValue({
 
       itemPurchaseId: this.purchasentry[0].itemPurchaseId, 
@@ -301,7 +299,7 @@ this.selectedOption=id;
     this.http.getAll(environment.GetProductCategoryByStoreGroupId + "?pStoreId=" + pStoreId + "&pGroupId=" + pGroupId).subscribe((result: any) => {
 
       if (result.isSuccess == 1) {
-        console.log("category",result.data)
+  
         this.productcategorylist = result.data;
       }
       else {
@@ -314,7 +312,7 @@ this.selectedOption=id;
 
     this.http.getAll(environment.GetProductbyStoreId + "?pStoreId=" + this.storeId + "&pCategoryId=" + pCategoryId).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.productlist = result.data;
       }
       else {

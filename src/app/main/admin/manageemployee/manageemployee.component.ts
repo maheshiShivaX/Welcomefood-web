@@ -173,21 +173,7 @@ export class ManageemployeeComponent {
     }
   }
 
-  // onPageSizeChange(pageSize: any) {
-  //   console.log(pageSize.target.value)
-
-  //   pageSize = pageSize.target.value;
-  //   if (pageSize !== null && pageSize !== undefined) {
-  //     if (pageSize == 'all') {
-  //       this.pageSize = this.datalist.length;
-  //     }
-  //     else {
-  //       this.pageSize = pageSize;
-  //     }
-
-  //     this.currentPage = 1;
-  //   }
-  // }
+ 
 
   onPageSizeChange(pageSize: any) {
     const selectedPageSize = pageSize.target.value;
@@ -264,7 +250,7 @@ export class ManageemployeeComponent {
     this.isLoading = true;
     this.submitted = true;
 
-    console.log(this.form.value);
+   
     if (this.form.invalid) {
       this.isLoading = false;
       return;
@@ -284,7 +270,6 @@ export class ManageemployeeComponent {
       else {
         this.isLoading = false;
         this.submitted = false;
-        console.log(result);
         this.toastr.error(result.message);
       }
     });
@@ -297,12 +282,10 @@ export class ManageemployeeComponent {
   GetEmployeeDetailbyCompanyId() {
     this.http.getAll(environment.GetEmployeeDetailbyCompanyId+"?pCompanyId="+this.companyId).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
         this.datalist = result.data;
         this.datalist = this.datalist.map(item => {
           return { ...item, visible: true };
         });
-        console.log(this.datalist)
       }
       else {
         this.employeedetails = null;
@@ -312,7 +295,6 @@ export class ManageemployeeComponent {
   GetRole() {
     this.http.getAll(environment.GetForAdminRole).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
         this.roles = result.data;
       }
       else {
@@ -406,7 +388,7 @@ export class ManageemployeeComponent {
 
     this.http.getAll(environment.DeleteEmployeeDetailById + "?pEmployeeDetailId=" + pId).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+       
         this.toastr.error(result.message);
 
         this.GetEmployeeDetailbyCompanyId()
@@ -423,7 +405,7 @@ export class ManageemployeeComponent {
     this.isLoadingl = true;
     this.submittedl = true;
 
-    console.log(this.formLogin.value);
+
     if (this.formLogin.invalid) {
       this.isLoadingl = false;
       return;
@@ -443,7 +425,7 @@ export class ManageemployeeComponent {
       else {
         this.isLoadingl = false;
         this.submittedl = false;
-        console.log(result);
+      
         this.toastr.error(result.message);
       }
     });

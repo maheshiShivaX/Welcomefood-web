@@ -27,7 +27,7 @@ export class GasreportComponent {
   ) {
     this.authService.currentUser.subscribe((user) => {
 
-      console.log(user);
+     
       const currentUser = user;
       this.loginId = currentUser.loginId;
       // Update menu based on user authentication state
@@ -66,7 +66,7 @@ export class GasreportComponent {
    ngOnInit() {
     const today = new Date();
     const yyyy = today.getFullYear();
-    console.log(yyyy);
+  
     //const year = 2024; // You can change this dynamically or make it user-input
     this.paymentOptions = this.monthService.getPaymentOptions(yyyy);
     
@@ -109,7 +109,7 @@ export class GasreportComponent {
 
     this.http.getAll(environment.GetPLStoreDetail + "?pStoreId=" + pStoreId + "&pFromDate=" + pFromDate + "&pToDate=" + pToDate).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.storedetail = result.data;
 
 
@@ -141,7 +141,7 @@ export class GasreportComponent {
 
     this.http.getAll(environment.GetEmployeeStoreByUserId +"?pUserId=" + this.loginId ).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.storeList = result.data;
      
        
@@ -155,7 +155,7 @@ export class GasreportComponent {
   GetStoreDetailAll() {
     this.http.getAll(environment.GetStoreDetail).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.storeList = result.data;
       }
       else {
@@ -179,7 +179,7 @@ export class GasreportComponent {
   onGetReport()
   {
 
-console.log(this.modelDate);
+
 
 const year = this.modelDate.getFullYear();
 const month = this.modelDate.getMonth(); // getMonth() gives 0-based month (0 for Jan, 11 for Dec)
@@ -207,12 +207,12 @@ this.toDate=this.formatDateToYYYYMMDD(lastDate)
 
 
 
-    console.log(this.form.value);
+   ;
 
 this.storename = this.storeList.filter((x: { storeId: number | null | undefined; })=>x.storeId==this.form.value.storeId)[0].storeName
     this.GetPLStoreDetail(this.form.value.storeId, this.form.value.fromDate,this.form.value.toDate)
 
-    this.reporttype='plreport';
+    this.reporttype='gesreport';
   }
 
   reporttype:any;
@@ -220,6 +220,48 @@ this.storename = this.storeList.filter((x: { storeId: number | null | undefined;
   {
 
   this.reporttype=reporttype;
+}
+
+downloadExcel(id:any) {
+  // let element = document.getElementById('tabellistcs');
+  // const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+  // const wb: XLSX.WorkBook = XLSX.utils.book_new();
+  // XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+  // XLSX.writeFile(wb, 'table_data.xlsx');
+
+
+  var data = '';
+  data = document.getElementById('gasreport')!.innerHTML;
+  //const data = document.getElementById('pdfTable')!.innerHTML;
+  const dataType = 'data:application/vnd.ms-excel';
+  const tableHTML = encodeURIComponent(data);
+
+  // Create download link element
+  const downloadLink = document.createElement("a");
+  document.body.appendChild(downloadLink);
+
+  // Create a link to the file
+  downloadLink.href = `${dataType}, ${tableHTML}`;
+
+  // Setting the file name
+  downloadLink.download = 'gasreport' + '.xls';
+
+  //triggering the function
+  downloadLink.click();
+
+  // Remove the download link after downloading
+  document.body.removeChild(downloadLink);
+
+
+  // let element = document.getElementById('tblUnit'); 
+  // const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+
+  // /* generate workbook and add the worksheet */
+  // const wb: XLSX.WorkBook = XLSX.utils.book_new();
+  // XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+  // /* save to file */
+  // XLSX.writeFile(wb, "UnitType.xlsx");
 }
   }
 

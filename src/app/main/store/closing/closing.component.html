@@ -97,7 +97,7 @@
                     <td class="d-flex justify-content-end py-1" style="border: none;"> 
                       <div class="inputfield col-xl-5 col-md-7 d-flex align-items-center">
                       <span>$</span>
-                      <input type="text" class="form-control" [(ngModel)]="this.storeclosingcash"
+                      <input type="text" class="form-control" style="text-align: right;" [(ngModel)]="this.storeclosingcash"
                         (keypress)="validateNumber($event)" (input)="validateDecimalPlaces($event)"
                         (blur)="onTextboxLeaveClosing($event )" id="grocery" placeholder="0.00">
                     </div></td>
@@ -145,8 +145,17 @@
                     <td class="text-left">Closing Stock</td>
                     <td>{{this.storedetail.closingStock.toFixed(2)}}</td>
                   </tr>
-                 
-
+                  <tr class="productcategory">
+                    <td class="text-left">Physical Closing Stock</td>
+                    <td class="d-flex justify-content-end py-1" style="border: none;"> 
+                      <div class="inputfield col-xl-5 col-md-7 d-flex align-items-center">
+                      <span>$</span>
+                      <input type="text" class="form-control" style="text-align: right;" [(ngModel)]="this.storedetail.physicalCLosingStock"
+                        (keypress)="validateNumber($event)" (input)="validateDecimalPlaces($event)"
+                        (blur)="onTextboxLeaveClosingStock($event )" id="grocery" placeholder="0.00">
+                    </div></td>
+                  </tr>
+               
 
                 </table>
               </div>

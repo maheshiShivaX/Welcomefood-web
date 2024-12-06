@@ -21,9 +21,9 @@ export class LotteryComponent {
   storeId:any;
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('s');
+
     if (changes['storesdata']) {
-      console.log('Stores data has been updated:', this.storesdata);
+   
       // Additional logic to handle the new data can go here
     }
   }
@@ -67,7 +67,7 @@ export class LotteryComponent {
  
 
     this.dataChangeSubscription = this.dataService.dataChange$.subscribe((menutype: any) => {
-      console.log('Menu type changed to:', menutype);
+     
       if(menutype=='8')
       {
         this.storeId =localStorage.getItem("storeid");
@@ -86,7 +86,7 @@ export class LotteryComponent {
  
       this.http.getAll(environment.DeleteLotteryPayDetailByStoreDateId + "?pStoreId=" + this.storeId  + "&pAmountDate=" + this.entryDate).subscribe((result: any) => {
         if (result.isSuccess == 1) {
-          console.log(result.data)
+          
          // this.lotterytype = result.data;
 
          this.GetLotteryTypeStoreIdDate();
@@ -108,7 +108,7 @@ export class LotteryComponent {
     this.storeId =this.storesdata[0].storeid;// localStorage.getItem("storeid");
     //this.tstoreid =this.storesdata[0].storeid;// localStorage.getItem("tStoreId");
     this.entryDate = this.storesdata[0].fromdate; //localStorage.getItem("tfromdate");
-  console.log(this.entryDate);
+
 
     //this.storeId = localStorage.getItem("storeid");
     
@@ -129,7 +129,7 @@ lotterytypeExpense:any;
 GetLotteryTypeStoreIdDate() {
   this.http.getAll(environment.GetLotteryTypeStoreIdDate + "?pStoreId=" + this.storeId  + "&pAmountDate=" + this.entryDate).subscribe((result: any) => {
     if (result.isSuccess == 1) {
-      console.log(result.data)
+      
       this.lotterytype = result.data;
 
 
@@ -151,7 +151,7 @@ this.lotteryamount = (this.lotterytype.reduce((acc: number, item: { lotteryAmoun
 GetLotteryExpenseStoreIdDate() {
   this.http.getAll(environment.GetLotteryExpenseStoreIdDate + "?pStoreId=" + this.storeId  + "&pAmountDate=" + this.entryDate).subscribe((result: any) => {
     if (result.isSuccess == 1) {
-      console.log(result.data)
+      
       this.lotterytypeExpense = result.data;
 
 
@@ -186,9 +186,11 @@ onTextboxLotteryLeave(event: Event, row: any): void {
 
 
   const inputElement = event.target as HTMLInputElement;
-  console.log('Textbox value on leave:', inputElement.value);
+  
 
-
+  if (inputElement.value && !inputElement.value.includes('.')) {
+    inputElement.value = inputElement.value + '.00';
+  }
 
   this.formLottery.patchValue({
       storeId: this.storeId,
@@ -205,28 +207,89 @@ onSubmitLottery() {
 
 
   if (this.formLottery.value.lotteryAmount== '' || this.formLottery.value.lotteryAmount == '0') {
+
+    this.http.getAll(environment.DeleteLotteryPayDetailByStoreDateId + "?pStoreId=" + this.storeId  + "&pAmountDate=" + this.entryDate).subscribe((result: any) => {
+      if (result.isSuccess == 1) {
+        
+       // this.lotterytype = result.data;
+
+       this.GetLotteryTypeStoreIdDate1();
+       this.GetLotteryExpenseStoreIdDate1();
+      }
+      else {
+        this.lotterytype = null;
+      }
+    })
+
+
     return;
   }
-  console.log(this.formLottery.value);
+
 
 
   this.http.post(environment.SaveLotteryPayDetail, this.formLottery.value).subscribe((result: any) => {
     if (result.isSuccess == 1) {
 
-      console.log(result.data);
+      ;
      // this.lotterytype = result.data;
 
-
+     this.GetLotteryTypeStoreIdDate1();
+     this.GetLotteryExpenseStoreIdDate1();
     
       
-      this.  GetLotteryTypeStoreIdDate();
-      this.  GetLotteryExpenseStoreIdDate();
+      // this.  GetLotteryTypeStoreIdDate();
+      // this.  GetLotteryExpenseStoreIdDate();
 
     }
     else {
       //  this.toastr.error(result.message);
     }
   });
+}
+
+lotterytype1:any;
+GetLotteryTypeStoreIdDate1() {
+  this.http.getAll(environment.GetLotteryTypeStoreIdDate + "?pStoreId=" + this.storeId  + "&pAmountDate=" + this.entryDate).subscribe((result: any) => {
+    if (result.isSuccess == 1) {
+      
+      this.lotterytype1 = result.data;
+
+
+//       this.lotteryamount  = this.lotterytype.reduce((acc: any, item: { lotteryAmount: any; }) => acc + (item.lotteryAmount || 0), 0);
+// alert(this.lotteryamount);
+
+this.lotteryamount = (this.lotterytype1.reduce((acc: number, item: { lotteryAmount: string }) => {
+  // Convert the lotteryAmount to a number, defaulting to 0 if it's not a valid number
+  const amount = parseFloat(item.lotteryAmount) || 0; 
+  return acc + amount;
+}, 0)).toFixed(2);
+
+    }
+    else {
+      this.lotterytype = null;
+    }
+  })
+}lotterytypeExpense1:any;
+GetLotteryExpenseStoreIdDate1() {
+  this.http.getAll(environment.GetLotteryExpenseStoreIdDate + "?pStoreId=" + this.storeId  + "&pAmountDate=" + this.entryDate).subscribe((result: any) => {
+    if (result.isSuccess == 1) {
+      
+      this.lotterytypeExpense1 = result.data;
+
+
+      //this.lotteryamountExpense  = this.lotterytypeExpense.reduce((acc: any, item: { lotteryAmount: any; }) => acc + (item.lotteryAmount || 0), 0);
+
+      this.lotteryamountExpense = (this.lotterytypeExpense1.reduce((acc: number, item: { lotteryAmount: string }) => {
+        // Convert the lotteryAmount to a number, defaulting to 0 if it's not a valid number
+        const amount = parseFloat(item.lotteryAmount) || 0; 
+        return acc + amount;
+      }, 0)).toFixed(2);
+
+    }
+    else {
+      this.lotterytype = null;
+    }
+  })
 }
  
 }

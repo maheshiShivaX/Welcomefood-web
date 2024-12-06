@@ -55,7 +55,7 @@ export class MoneyinComponent {
   ) {
     this.authService.currentUser.subscribe((user) => {
 
-      console.log(user);
+     
       const currentUser = user;
       this.loginId = currentUser.loginId;
       // Update menu based on user authentication state
@@ -89,7 +89,7 @@ export class MoneyinComponent {
     let dateString = newDate.target.value;
     let dateObject = new Date(dateString);
     this.previousDateFromSelected = this.calculatePreviousDate(dateObject);
-    console.log("Date changed to:", newDate.target.value);
+   
     this.GetProductGroup(this.storeid, newDate.target.value);
     this.GetTotalCashinhandByDate(this.storeid, this.previousDateFromSelected);
     // You can add more logic here to handle the change
@@ -193,7 +193,7 @@ export class MoneyinComponent {
   }
 
   // onPageSizeChange(pageSize: any) {
-  //   console.log(pageSize.target.value)
+  //
 
   //   pageSize = pageSize.target.value;
   //   if (pageSize !== null && pageSize !== undefined) {
@@ -277,7 +277,7 @@ export class MoneyinComponent {
 
     this.http.getAll(environment.GetTotalCashinhandByDate + "?pStoreId=" + pStoreId + "&pAmountDate=" + pAmountDate).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.previousAmount = result.data;
         this.previousdayAmount = this.previousAmount[0].amount
 
@@ -294,7 +294,7 @@ export class MoneyinComponent {
 
     this.http.getAll(environment.GetStoreProductByStoreId + "?pStoreId=" + pStoreId + "&pAmountDate=" + pAmountDate).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.productgrouplist = result.data;
         this.storename = this.productgrouplist[0].storeName;
         this.GetProductCategoryByGroupId(this.storeid, this.productgrouplist[0].groupId);
@@ -309,12 +309,12 @@ export class MoneyinComponent {
 
     this.http.getAll(environment.GetItemSalebyCategoryid + "?pProductGroupId=" + pProductGroupId + "&pStoreId=" + pStoreId + "&pAmountDate=" + pAmountDate).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.datalist = result.data;
         this.datalist = this.datalist.map(item => {
           return { ...item, visible: true };
         });
-        console.log(this.datalist)
+       
       }
       else {
         this.datalist = [];
@@ -326,7 +326,7 @@ export class MoneyinComponent {
 
     this.http.getAll(environment.GetProductCategoryByStoreGroupId + "?pStoreId=" + pStoreId + "&pGroupId=" + pGroupId).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.productcategorylist = result.data;
 
         this.GetItemSalebyCategoryid(pGroupId, this.storeid, this.entryDate)
@@ -340,7 +340,7 @@ export class MoneyinComponent {
   }
 
   onGroup(pid: any, i:any) {
-    console.log(pid);
+ 
     this.GetProductCategoryByGroupId(this.storeid, pid);
     this.toggleActive(i);
   }
@@ -350,7 +350,7 @@ export class MoneyinComponent {
 
     this.http.getAll(environment.GetProductbyStoreId + "?pStoreId=" + this.storeid + "&pCategoryId=" + pCategoryId).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.productlist = result.data;
       }
       else {
@@ -382,7 +382,7 @@ export class MoneyinComponent {
       return;
     }
 
-    console.log(this.form.value);
+   ;
     if (this.form.invalid) {
       this.isLoading = false;
       return;
@@ -402,7 +402,7 @@ export class MoneyinComponent {
       else {
         this.isLoading = false;
         this.submitted = false;
-        console.log(result);
+    
         this.toastr.error(result.message);
       }
     });

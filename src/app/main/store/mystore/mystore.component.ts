@@ -32,7 +32,7 @@ export class MystoreComponent {
   ) {
     this.authService.currentUser.subscribe((user) => {
 
-      console.log(user);
+     
       const currentUser = user;
       this.loginId=currentUser.loginId;
       // Update menu based on user authentication state
@@ -137,7 +137,7 @@ export class MystoreComponent {
     }
     
     // onPageSizeChange(pageSize: any) {
-    //   console.log(pageSize.target.value)
+    //
     
     //   pageSize = pageSize.target.value;
     //   if (pageSize !== null && pageSize !== undefined) {
@@ -221,12 +221,12 @@ export class MystoreComponent {
 
     this.http.getAll(environment.GetEmployeeStoreByUserId +"?pUserId=" + this.loginId ).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.datalist = result.data;
         this.datalist = this.datalist.map(item => {
           return { ...item, visible: true };
         });
-        console.log(this.datalist)
+       
       }
       else { this.storeList = null;
       }

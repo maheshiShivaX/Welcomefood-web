@@ -28,7 +28,7 @@ export class BalancesheetComponent {
   ) {
     this.authService.currentUser.subscribe((user) => {
 
-      console.log(user);
+  
       const currentUser = user;
       this.loginId = currentUser.loginId;
       // Update menu based on user authentication state
@@ -57,7 +57,7 @@ export class BalancesheetComponent {
   
     const today = new Date();
     const yyyy = today.getFullYear();
-    console.log(yyyy);
+ 
     //const year = 2024; // You can change this dynamically or make it user-input
     this.paymentOptions = this.monthService.getPaymentOptions(yyyy);
     this.GetEmployeeStoreByUserId();
@@ -80,7 +80,7 @@ export class BalancesheetComponent {
 
       this.http.getAll(environment.GetBalanceSheetByStoreId + "?pStoreId=" + pStoreId + "&pFromDate=" + pFromDate + "&pToDate=" + pToDate).subscribe((result: any) => {
         if (result.isSuccess == 1) {
-          console.log(result.data)
+          
           this.balancesheetData = result.data;
 
 
@@ -97,7 +97,7 @@ export class BalancesheetComponent {
 
   onAMount(item:any):any
   {
-    console.log(item);
+
     
   var res= item.bsitemIDtos.reduce((acc: any, item: { amount: any; }) => acc + (item.amount || 0), 0);
   return res;
@@ -107,7 +107,7 @@ export class BalancesheetComponent {
 
     this.http.getAll(environment.GetEmployeeStoreByUserId +"?pUserId=" + this.loginId ).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.storeList = result.data;
      
        

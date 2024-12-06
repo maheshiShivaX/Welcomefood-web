@@ -16,6 +16,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { PackageComponent } from './package/package.component';
 import { StoreemployeeComponent } from './storeemployee/storeemployee.component';
 import { StoredocumentComponent } from './storedocument/storedocument.component';
+import { OnboardexpenseComponent } from './onboardexpense/onboardexpense.component';
 
 
 const routes: Routes = [
@@ -34,6 +35,8 @@ const routes: Routes = [
   { path: 'package', component: PackageComponent },
   { path: 'storeemployee', component: StoreemployeeComponent },
   { path: 'storedocument', component: StoredocumentComponent },
+  { path: 'onboardexpense', component: OnboardexpenseComponent },
+  
 ]
 
 @NgModule({
@@ -51,6 +54,7 @@ const routes: Routes = [
     PackageComponent,
     StoreemployeeComponent,
     StoredocumentComponent,
+    OnboardexpenseComponent,
 
   ],
   imports: [

@@ -32,7 +32,7 @@ export class GesinvoiceComponent {
     });
 
     this.dataChangeSubscription = this.dataService.dataChange$.subscribe((menutype: any) => {
-      console.log('Menu type changed to:', menutype);
+   
       if(menutype=='1')
       {
         this.storeid =localStorage.getItem("storeid");
@@ -48,15 +48,31 @@ public form = new FormGroup({
   storeId: new FormControl(0),
   invoiceNo: new FormControl(''),
   invoiceDate: new FormControl(''),
-  totalAmount: new FormControl('0.00'),
-  totalGes: new FormControl('0.00'),
-  avgAmount: new FormControl('0.00'),
+  totalAmount: new FormControl(''),
+  totalGes: new FormControl(''),
+  avgAmount: new FormControl(''),
   isActive: new FormControl(true),
-  createdBy: new FormControl(0)
+  createdBy: new FormControl(0),
+  file:new FormControl(''),
+  invoicePath:new FormControl(''),
+
 });
 
 
+fileName:any;
+inspectionImage:any;
+onFileChange(event: any) {
 
+  this.fileName = event.target.files[0];
+
+  var reader = new FileReader();
+  reader.readAsDataURL(event.target.files[0]);
+  reader.onload = (_event: any) => {
+    this.inspectionImage = reader.result;
+
+  };
+
+}
 
 
 storeid:any;
@@ -74,7 +90,7 @@ ngOnInit() {
   GetGesInvoiceByStoreIdDate( pStoreId: any , pAmountDate:any) {
     this.http.getAll(environment.GetGesInvoiceByStoreIdDate + "?pStoreId=" + this.storeid+ "&pInvoiceDate="+ pAmountDate ).subscribe((result: any) => {
       if (result.isSuccess == 1) {
-        console.log(result.data)
+        
         this.invoicedata = result.data;
       }
       else {
@@ -116,6 +132,11 @@ ngOnInit() {
     }
   }
 
+  onView(path:any)
+  {
+    let url = environment.siteurl+ path ;//"\\abc.COM\\docs\\prj_active";
+    window.open(url, '_blank');
+  }
 
   onSubmit() {
 
@@ -129,13 +150,21 @@ ngOnInit() {
       return;
     }
 
-    console.log(this.form.value);
+   ;
     if (this.form.invalid) {
 
       return;
     }
 
-    this.http.post(environment.SaveGesInvoice, this.form.value).subscribe((result: any) => {
+    const formData = new FormData();
+    Object.keys(this.form.value).forEach(key => {
+      const _key = key as keyof typeof this.form.value;
+      formData.append(key, (this.form.value[_key]) as any);
+    });
+    formData.append('file', this.fileName);
+
+
+    this.http.post(environment.SaveGesInvoice, formData).subscribe((result: any) => {
       if (result.isSuccess == 1) {
         this.GetGesInvoiceByStoreIdDate(this.storeid, this.entryDate);
         
@@ -143,7 +172,7 @@ ngOnInit() {
         this.toastr.success(result.message);
       }
       else {
-        console.log(result);
+    
         this.toastr.error(result.message);
       }
     });

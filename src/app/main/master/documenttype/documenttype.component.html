@@ -26,7 +26,7 @@
             <div class="mb-3 col-12">
                 <label for="FormControlInput1" class="form-label">Document Type Name</label>
                 <input type="text" class="form-control" formControlName="documentTypeName" id="FormControlInput1"
-                    placeholder="Enter Tax Type">
+                    placeholder="Enter Document Type">
                 <div *ngIf="f['documentTypeName'].errors && ( submitted)"
                     class="invalid-feedback">
                     <div class="text-red-600" *ngIf="f['documentTypeName'].errors?.['required']">Document Type Name is
@@ -34,6 +34,16 @@
                     </div>
                 </div>
             </div>
+            <div class="mb-3 col-12">
+                <input  type="checkbox" [value]="this.isExpire" [(ngModel)]="isExpire" (change)="onCheckboxChange($event, isExpire)"   [ngModelOptions]="{standalone: true}" /> Is Required Document Date Validity  
+            </div>
+
+         
+
+ 
+            
+
+
            
             <div class="submit-btn col-12 d-flex justify-content-sm-end justify-content-between">
                 <div class="resetbtn">
